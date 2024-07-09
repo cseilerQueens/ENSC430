@@ -1,0 +1,49 @@
+--- 
+# title: "Applied Climate Science: Mitigation, Modeling, and Analysis (ENSC 430)"
+# author: "Christian Seiler"
+# date: "`r Sys.Date()`"
+site: bookdown::bookdown_site
+output: bookdown::gitbook
+documentclass: book
+# bibliography: [book.bib, packages.bib]
+biblio-style: apalike
+link-citations: yes
+# github-repo: rstudio/bookdown-demo
+description: "This is a minimal example of using the bookdown package to write a book. The output format for this example is bookdown::gitbook."
+---
+
+# ENSC 430 Overview
+
+Welcome to ENSC 430 Honours Project in Environmental Sustainability - ENSC 430. In this course you will:
+
+* Evaluate effectiveness of different climate change mitigation measures
+* Monitor current trends, evaluate model performance, assess future projections
+* Evaluate climate change impacts
+* Use AI to imporve models
+
+The skills you will learn will prepare you for your future job in government, academia, or the private sector. For more information, please download the [syllabus](https://drive.google.com/file/d/1vUuUg12YwXrV9h7bQcze_E3fofkN1ZZK/view?usp=sharing).
+
+## Schedule and slides
+The following Table provides an overview of the topic and reading assignments for each class. Each class consists of a lecture, in-class exercises, and discussions.
+
+|Week | Date | Topic | R-package | Supporting Lit.| 
+|:-|:---|:--------|:---|:---|
+|1 | Fri, Sep 6 | [Introduction](https://) | Ch. 1, 2 | - |
+|2 | Fri, Sep 13 | [Programming Basics](https://) | Ch. 3, 4 | - |
+|3 | Fri, Sep 20 | [Socioeconomic Drivers](https://) | Ch. 5 | - |
+|4 | Fri, Sep 24 | [Climate Data Analysis](https://) | Ch. 6 | - |
+|5 | Fri, Oct 4 | [Global Earth Observations](https://) | Ch. 7, 8 | - |
+|6 | Fri, Oct 11 | [Climate Modeling](https://) | Ch. 9, 10 | - |
+|7 | Fri, Oct 18 | Reading Week | - | - |
+|8 | Fri, Oct 25 | [Climate Model Performance](https://) | - | - |
+|9 | Fri, Nov 1 | [Climate Model Projections](https://) | Ch. 11, 12 | - |
+|10 | Fri, Nov 8 | [Climate Change Impact Modeling](https://climate4R) |  climate4R |-|
+|11 | Fri, Nov 15 | [Tuning models using AI](https://) | - | -|
+|12 | Fri, Nov 22 | [Emulating models using AI](https://) |- |  emulator|
+|13 | Fri, Nov 28 | [Synthesis and Reflection](https://) | - |-|
+
+##  Assessments
+Exam (Individual, 50%)
+Research Plan (Group, 10%)
+Progress Report Presentations (Group, 10%)
+Project Presentation (Group, 30%)

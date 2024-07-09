@@ -1,0 +1,10 @@
+ensc-430-overview
+schedule-and-slides
+assessments
+r-basics
+create-a-new-project
+set-up-your-computational-environment
+syntax
+objects
+generating-data
+plot-data

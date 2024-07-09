@@ -1,0 +1,187 @@
+# R Basics
+* In this course you will be using the programming language R.
+* R is a command line driven program. The user enters commands at the prompt and each command is executed one at a time.
+* RStudio is a Graphic User Interface for R.
+* For this course, you will first need to install R and then RStudio
+* If you already have R or RStudio installed, please install them again to ensure you have the most recent version
+* Install R from [here](https://posit.co/download/rstudio-desktop)
+* Install RStudio from [here](https://posit.co/download/rstudio-desktop)
+* Once R and RStudio are installed, open RStudio and learn the basic R syntax following the exercises below.
+
+## Create a new Project
+* Open RStudio
+* Click on ```File``` in the upper-left corner
+* From the drop-down list choose ```New Project ...```, ```New Directory```, ```Browse...``` and choose a directory of your project. For instance, in my case this will be ```C:\Users\seile\Documents\queensu\teaching\classes\ENSC430\tutorials\ENSC430```. Important: make sure your directory does not include white space or special characters.
+* Go to your new directory and create a new folder called ```renv```. This is where you will store your packages, as explained next.
+
+## Set up your computational environment
+* In the lower-left panel you find your console where you can execute commands. 
+* Your first task is to set up your computational environment using the command ```.libPaths()```
+* In the Console, type the command below using the directory of your project. Note that you need to use ```/``` rather than ```\```.
+```{r, evaluate = FALSE}
+# Set your working directory:
+setwd("C:/Users/seile/Documents/queensu/teaching/classes/ENSC430/tutorials/ENSC430")
+
+# Tell R where to store your packages:
+.libPaths("C:/Users/seile/Documents/queensu/teaching/classes/ENSC430/tutorials/ENSC430/renv")
+```
+
+* You can check if all went well by typing ```.libPaths()```. Does it return your directory? If yes, then continue.
+* Next you will install your first package called ```renv```
+```{r, eval = FALSE}
+install.packages("renv")
+renv::init()
+```
+
+* Next, install ```rmarkdown```:
+```{r, eval = FALSE}
+install.packages("rmarkdown")
+```
+
+* R Markdown allows you to integrate code, figures, and text. You will write your report in R Markdown.
+
+```{r, eval = FALSE}
+install.packages("bookdown")
+```
+
+## Syntax
+
+* In R, you use the following syntax to to assign a value to a variable.
+
+```
+x <- 1
+print(x)
+```
+
+* The variable x used above is an example of an R object. The ```print``` statement prints the value of the object x.
+* Once you assign values to R objects, you can use the following arithmetic operators to perform calculations.
+
+```
+a <- 2
+b <- 3
+
+# Addition
+c <- a+b
+print(c)
+
+# Subtraction
+c <- a-b
+print(c)
+
+# Multiplication
+c <- a*b
+print(c)
+
+# Division
+c <- a/b
+print(c)
+
+# Exponentiation
+c <- a^b
+print(c)
+```
+* Note that anything after the # symbol is ignored.
+
+```{r, eval = FALSE}
+a <- 2
+b <- 3
+c <- a + b
+# c <- (a + b)^2
+print(c)
+```
+* This way you can add comments into your code that to explain what you are doing
+
+## Objects
+
+* All objects have two intrinsic attributes: mode and length. 
+* The mode is the basic type of the elements of the object. 
+* There are four main modes: numeric, character, complex, and logical (FALSE or TRUE). 
+
+```{r, eval = FALSE}
+a <- 5
+class(a)
+
+a <- "apple"
+class(a)
+
+a <- 1 + 2i
+class(a)
+
+a <- TRUE
+class(a)
+```
+* The length of an object is the number of elements of the object.
+
+```{r, exercise = FALSE, eval = TRUE}
+a <- 2
+length(a)
+
+a <- c(2,7,5)
+length(a)
+```
+* Next to mode and length, there are different types of objects, namely vector, factor, array, matrix, data frame, and list
+
+```{r, eval = FALSE}
+# Vector with one element
+a <- 2
+print(a)
+
+# Vector with four elements
+b <- c(7,5,2,9)
+print(b)
+
+# Data frame
+x <- c(3,7,2,4)
+y <- c(42,67,21,33)
+df <- data.frame(x, y)
+print(df)
+
+# Matrix: in R, a matrix has 2 dimensions only)
+x <- c(1,2,3,4,5,6,7,8,9,10)
+a <- matrix(x, nrow = 2)
+print(a)
+
+# Array: an array has more than 2 dimensions
+x <- c(1,2,3,4,5,6,7,8,9)
+a <- array(data = x, dim = c(3,3,3))
+print(a)
+
+# List
+a <- c(3,2,5,6)
+b <- c(TRUE, FALSE)
+c <- c("apples", "pears", "plums")
+d <- 5
+
+l <- list(a,b,c,d)
+print(l)
+```
+
+## Generating data
+
+```{r, eval = FALSE}
+# Sequence from 1 to 10 with step size 1
+x <- 1:10
+print(x)
+
+# Sequence from 1 to 10 with step size 0.5
+x <- seq(1, 10, 0.5)
+print(x)
+
+# Vector that repeats the value one for ten times
+x <- rep(1, 10)
+print(x)
+
+# Random sequences with uniform distribution between zero and one
+x <- runif(n = 5, min = 0, max = 1)
+print(x)
+```
+
+
+
+
+## Plot data
+```{r}
+x <- seq(1:10)
+y <- x^2
+plot(x, y)
+```

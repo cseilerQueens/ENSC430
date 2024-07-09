@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>2 R Basics | _main.knit</title>
+  <meta name="description" content="This is a minimal example of using the bookdown package to write a book. The output format for this example is bookdown::gitbook." />
+  <meta name="generator" content="bookdown 0.40 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="2 R Basics | _main.knit" />
+  <meta property="og:type" content="book" />
+  
+  <meta property="og:description" content="This is a minimal example of using the bookdown package to write a book. The output format for this example is bookdown::gitbook." />
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="2 R Basics | _main.knit" />
+  
+  <meta name="twitter:description" content="This is a minimal example of using the bookdown package to write a book. The output format for this example is bookdown::gitbook." />
+  
+
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="index.html"/>
+
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<style type="text/css">
+  
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+</style>
+
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> ENSC 430 Overview</a></li>
+<li class="chapter" data-level="2" data-path="r-basics.html"><a href="r-basics.html"><i class="fa fa-check"></i><b>2</b> R Basics</a></li>
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./"></a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="r-basics" class="section level1 hasAnchor" number="2">
+<h1><span class="header-section-number">2</span> R Basics<a href="r-basics.html#r-basics" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<ul>
+<li>In this course you will be using the programming language R.</li>
+<li>R is a command line driven program. The user enters commands at the prompt and each command is executed one at a time.</li>
+<li>RStudio is a Graphic User Interface for R.</li>
+<li>For this course, you will first need to install R and then RStudio</li>
+<li>If you already have R or RStudio installed, please install them again to ensure you have the most recent version</li>
+<li>Install R from <a href="https://posit.co/download/rstudio-desktop">here</a></li>
+<li>Install RStudio from <a href="https://posit.co/download/rstudio-desktop">here</a></li>
+<li>Once R and RStudio are installed, open RStudio and learn the basic R syntax following the exercises below.</li>
+</ul>
+<div id="create-a-new-project" class="section level2 hasAnchor" number="2.1">
+<h2><span class="header-section-number">2.1</span> Create a new Project<a href="r-basics.html#create-a-new-project" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<ul>
+<li>Open RStudio</li>
+<li>Click on <code>File</code> in the upper-left corner</li>
+<li>From the drop-down list choose <code>New Project ...</code>, <code>New Directory</code>, <code>Browse...</code> and choose a directory of your project. For instance, in my case this will be <code>C:\Users\seile\Documents\queensu\teaching\classes\ENSC430\tutorials\ENSC430</code>. Important: make sure your directory does not include white space or special characters.</li>
+<li>Go to your new directory and create a new folder called <code>renv</code>. This is where you will store your packages, as explained next.</li>
+</ul>
+</div>
+<div id="set-up-your-computational-environment" class="section level2 hasAnchor" number="2.2">
+<h2><span class="header-section-number">2.2</span> Set up your computational environment<a href="r-basics.html#set-up-your-computational-environment" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<ul>
+<li>In the lower-left panel you find your console where you can execute commands.</li>
+<li>Your first task is to set up your computational environment using the command <code>.libPaths()</code></li>
+<li>In the Console, type the command below using the directory of your project. Note that you need to use <code>/</code> rather than <code>\</code>.</li>
+</ul>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="r-basics.html#cb1-1" tabindex="-1"></a><span class="co"># Set your working directory:</span></span>
+<span id="cb1-2"><a href="r-basics.html#cb1-2" tabindex="-1"></a><span class="fu">setwd</span>(<span class="st">&quot;C:/Users/seile/Documents/queensu/teaching/classes/ENSC430/tutorials/ENSC430&quot;</span>)</span>
+<span id="cb1-3"><a href="r-basics.html#cb1-3" tabindex="-1"></a></span>
+<span id="cb1-4"><a href="r-basics.html#cb1-4" tabindex="-1"></a><span class="co"># Tell R where to store your packages:</span></span>
+<span id="cb1-5"><a href="r-basics.html#cb1-5" tabindex="-1"></a><span class="fu">.libPaths</span>(<span class="st">&quot;C:/Users/seile/Documents/queensu/teaching/classes/ENSC430/tutorials/ENSC430/renv&quot;</span>)</span></code></pre></div>
+<ul>
+<li>You can check if all went well by typing <code>.libPaths()</code>. Does it return your directory? If yes, then continue.</li>
+<li>Next you will install your first package called <code>renv</code></li>
+</ul>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="r-basics.html#cb2-1" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">&quot;renv&quot;</span>)</span>
+<span id="cb2-2"><a href="r-basics.html#cb2-2" tabindex="-1"></a>renv<span class="sc">::</span><span class="fu">init</span>()</span></code></pre></div>
+<ul>
+<li>Next, install <code>rmarkdown</code>:</li>
+</ul>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="r-basics.html#cb3-1" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">&quot;rmarkdown&quot;</span>)</span></code></pre></div>
+<ul>
+<li>R Markdown allows you to integrate code, figures, and text. You will write your report in R Markdown.</li>
+</ul>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="r-basics.html#cb4-1" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">&quot;bookdown&quot;</span>)</span></code></pre></div>
+</div>
+<div id="syntax" class="section level2 hasAnchor" number="2.3">
+<h2><span class="header-section-number">2.3</span> Syntax<a href="r-basics.html#syntax" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<ul>
+<li>In R, you use the following syntax to to assign a value to a variable.</li>
+</ul>
+<pre><code>x &lt;- 1
+print(x)</code></pre>
+<ul>
+<li>The variable x used above is an example of an R object. The <code>print</code> statement prints the value of the object x.</li>
+<li>Once you assign values to R objects, you can use the following arithmetic operators to perform calculations.</li>
+</ul>
+<pre><code>a &lt;- 2
+b &lt;- 3
+
+# Addition
+c &lt;- a+b
+print(c)
+
+# Subtraction
+c &lt;- a-b
+print(c)
+
+# Multiplication
+c &lt;- a*b
+print(c)
+
+# Division
+c &lt;- a/b
+print(c)
+
+# Exponentiation
+c &lt;- a^b
+print(c)</code></pre>
+<ul>
+<li>Note that anything after the # symbol is ignored.</li>
+</ul>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="r-basics.html#cb7-1" tabindex="-1"></a>a <span class="ot">&lt;-</span> <span class="dv">2</span></span>
+<span id="cb7-2"><a href="r-basics.html#cb7-2" tabindex="-1"></a>b <span class="ot">&lt;-</span> <span class="dv">3</span></span>
+<span id="cb7-3"><a href="r-basics.html#cb7-3" tabindex="-1"></a>c <span class="ot">&lt;-</span> a <span class="sc">+</span> b</span>
+<span id="cb7-4"><a href="r-basics.html#cb7-4" tabindex="-1"></a><span class="co"># c &lt;- (a + b)^2</span></span>
+<span id="cb7-5"><a href="r-basics.html#cb7-5" tabindex="-1"></a><span class="fu">print</span>(c)</span></code></pre></div>
+<ul>
+<li>This way you can add comments into your code that to explain what you are doing</li>
+</ul>
+</div>
+<div id="objects" class="section level2 hasAnchor" number="2.4">
+<h2><span class="header-section-number">2.4</span> Objects<a href="r-basics.html#objects" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<ul>
+<li>All objects have two intrinsic attributes: mode and length.</li>
+<li>The mode is the basic type of the elements of the object.</li>
+<li>There are four main modes: numeric, character, complex, and logical (FALSE or TRUE).</li>
+</ul>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="r-basics.html#cb8-1" tabindex="-1"></a>a <span class="ot">&lt;-</span> <span class="dv">5</span></span>
+<span id="cb8-2"><a href="r-basics.html#cb8-2" tabindex="-1"></a><span class="fu">class</span>(a)</span>
+<span id="cb8-3"><a href="r-basics.html#cb8-3" tabindex="-1"></a></span>
+<span id="cb8-4"><a href="r-basics.html#cb8-4" tabindex="-1"></a>a <span class="ot">&lt;-</span> <span class="st">&quot;apple&quot;</span></span>
+<span id="cb8-5"><a href="r-basics.html#cb8-5" tabindex="-1"></a><span class="fu">class</span>(a)</span>
+<span id="cb8-6"><a href="r-basics.html#cb8-6" tabindex="-1"></a></span>
+<span id="cb8-7"><a href="r-basics.html#cb8-7" tabindex="-1"></a>a <span class="ot">&lt;-</span> <span class="dv">1</span> <span class="sc">+</span> <span class="dv">2</span><span class="dt">i</span></span>
+<span id="cb8-8"><a href="r-basics.html#cb8-8" tabindex="-1"></a><span class="fu">class</span>(a)</span>
+<span id="cb8-9"><a href="r-basics.html#cb8-9" tabindex="-1"></a></span>
+<span id="cb8-10"><a href="r-basics.html#cb8-10" tabindex="-1"></a>a <span class="ot">&lt;-</span> <span class="cn">TRUE</span></span>
+<span id="cb8-11"><a href="r-basics.html#cb8-11" tabindex="-1"></a><span class="fu">class</span>(a)</span></code></pre></div>
+<ul>
+<li>The length of an object is the number of elements of the object.</li>
+</ul>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="r-basics.html#cb9-1" tabindex="-1"></a>a <span class="ot">&lt;-</span> <span class="dv">2</span></span>
+<span id="cb9-2"><a href="r-basics.html#cb9-2" tabindex="-1"></a><span class="fu">length</span>(a)</span></code></pre></div>
+<pre><code>## [1] 1</code></pre>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="r-basics.html#cb11-1" tabindex="-1"></a>a <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">2</span>,<span class="dv">7</span>,<span class="dv">5</span>)</span>
+<span id="cb11-2"><a href="r-basics.html#cb11-2" tabindex="-1"></a><span class="fu">length</span>(a)</span></code></pre></div>
+<pre><code>## [1] 3</code></pre>
+<ul>
+<li>Next to mode and length, there are different types of objects, namely vector, factor, array, matrix, data frame, and list</li>
+</ul>
+<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="r-basics.html#cb13-1" tabindex="-1"></a><span class="co"># Vector with one element</span></span>
+<span id="cb13-2"><a href="r-basics.html#cb13-2" tabindex="-1"></a>a <span class="ot">&lt;-</span> <span class="dv">2</span></span>
+<span id="cb13-3"><a href="r-basics.html#cb13-3" tabindex="-1"></a><span class="fu">print</span>(a)</span>
+<span id="cb13-4"><a href="r-basics.html#cb13-4" tabindex="-1"></a></span>
+<span id="cb13-5"><a href="r-basics.html#cb13-5" tabindex="-1"></a><span class="co"># Vector with four elements</span></span>
+<span id="cb13-6"><a href="r-basics.html#cb13-6" tabindex="-1"></a>b <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">7</span>,<span class="dv">5</span>,<span class="dv">2</span>,<span class="dv">9</span>)</span>
+<span id="cb13-7"><a href="r-basics.html#cb13-7" tabindex="-1"></a><span class="fu">print</span>(b)</span>
+<span id="cb13-8"><a href="r-basics.html#cb13-8" tabindex="-1"></a></span>
+<span id="cb13-9"><a href="r-basics.html#cb13-9" tabindex="-1"></a><span class="co"># Data frame</span></span>
+<span id="cb13-10"><a href="r-basics.html#cb13-10" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">3</span>,<span class="dv">7</span>,<span class="dv">2</span>,<span class="dv">4</span>)</span>
+<span id="cb13-11"><a href="r-basics.html#cb13-11" tabindex="-1"></a>y <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">42</span>,<span class="dv">67</span>,<span class="dv">21</span>,<span class="dv">33</span>)</span>
+<span id="cb13-12"><a href="r-basics.html#cb13-12" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(x, y)</span>
+<span id="cb13-13"><a href="r-basics.html#cb13-13" tabindex="-1"></a><span class="fu">print</span>(df)</span>
+<span id="cb13-14"><a href="r-basics.html#cb13-14" tabindex="-1"></a></span>
+<span id="cb13-15"><a href="r-basics.html#cb13-15" tabindex="-1"></a><span class="co"># Matrix: in R, a matrix has 2 dimensions only)</span></span>
+<span id="cb13-16"><a href="r-basics.html#cb13-16" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">4</span>,<span class="dv">5</span>,<span class="dv">6</span>,<span class="dv">7</span>,<span class="dv">8</span>,<span class="dv">9</span>,<span class="dv">10</span>)</span>
+<span id="cb13-17"><a href="r-basics.html#cb13-17" tabindex="-1"></a>a <span class="ot">&lt;-</span> <span class="fu">matrix</span>(x, <span class="at">nrow =</span> <span class="dv">2</span>)</span>
+<span id="cb13-18"><a href="r-basics.html#cb13-18" tabindex="-1"></a><span class="fu">print</span>(a)</span>
+<span id="cb13-19"><a href="r-basics.html#cb13-19" tabindex="-1"></a></span>
+<span id="cb13-20"><a href="r-basics.html#cb13-20" tabindex="-1"></a><span class="co"># Array: an array has more than 2 dimensions</span></span>
+<span id="cb13-21"><a href="r-basics.html#cb13-21" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">4</span>,<span class="dv">5</span>,<span class="dv">6</span>,<span class="dv">7</span>,<span class="dv">8</span>,<span class="dv">9</span>)</span>
+<span id="cb13-22"><a href="r-basics.html#cb13-22" tabindex="-1"></a>a <span class="ot">&lt;-</span> <span class="fu">array</span>(<span class="at">data =</span> x, <span class="at">dim =</span> <span class="fu">c</span>(<span class="dv">3</span>,<span class="dv">3</span>,<span class="dv">3</span>))</span>
+<span id="cb13-23"><a href="r-basics.html#cb13-23" tabindex="-1"></a><span class="fu">print</span>(a)</span>
+<span id="cb13-24"><a href="r-basics.html#cb13-24" tabindex="-1"></a></span>
+<span id="cb13-25"><a href="r-basics.html#cb13-25" tabindex="-1"></a><span class="co"># List</span></span>
+<span id="cb13-26"><a href="r-basics.html#cb13-26" tabindex="-1"></a>a <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">3</span>,<span class="dv">2</span>,<span class="dv">5</span>,<span class="dv">6</span>)</span>
+<span id="cb13-27"><a href="r-basics.html#cb13-27" tabindex="-1"></a>b <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="cn">TRUE</span>, <span class="cn">FALSE</span>)</span>
+<span id="cb13-28"><a href="r-basics.html#cb13-28" tabindex="-1"></a>c <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;apples&quot;</span>, <span class="st">&quot;pears&quot;</span>, <span class="st">&quot;plums&quot;</span>)</span>
+<span id="cb13-29"><a href="r-basics.html#cb13-29" tabindex="-1"></a>d <span class="ot">&lt;-</span> <span class="dv">5</span></span>
+<span id="cb13-30"><a href="r-basics.html#cb13-30" tabindex="-1"></a></span>
+<span id="cb13-31"><a href="r-basics.html#cb13-31" tabindex="-1"></a>l <span class="ot">&lt;-</span> <span class="fu">list</span>(a,b,c,d)</span>
+<span id="cb13-32"><a href="r-basics.html#cb13-32" tabindex="-1"></a><span class="fu">print</span>(l)</span></code></pre></div>
+</div>
+<div id="generating-data" class="section level2 hasAnchor" number="2.5">
+<h2><span class="header-section-number">2.5</span> Generating data<a href="r-basics.html#generating-data" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="r-basics.html#cb14-1" tabindex="-1"></a><span class="co"># Sequence from 1 to 10 with step size 1</span></span>
+<span id="cb14-2"><a href="r-basics.html#cb14-2" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">10</span></span>
+<span id="cb14-3"><a href="r-basics.html#cb14-3" tabindex="-1"></a><span class="fu">print</span>(x)</span>
+<span id="cb14-4"><a href="r-basics.html#cb14-4" tabindex="-1"></a></span>
+<span id="cb14-5"><a href="r-basics.html#cb14-5" tabindex="-1"></a><span class="co"># Sequence from 1 to 10 with step size 0.5</span></span>
+<span id="cb14-6"><a href="r-basics.html#cb14-6" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">seq</span>(<span class="dv">1</span>, <span class="dv">10</span>, <span class="fl">0.5</span>)</span>
+<span id="cb14-7"><a href="r-basics.html#cb14-7" tabindex="-1"></a><span class="fu">print</span>(x)</span>
+<span id="cb14-8"><a href="r-basics.html#cb14-8" tabindex="-1"></a></span>
+<span id="cb14-9"><a href="r-basics.html#cb14-9" tabindex="-1"></a><span class="co"># Vector that repeats the value one for ten times</span></span>
+<span id="cb14-10"><a href="r-basics.html#cb14-10" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">rep</span>(<span class="dv">1</span>, <span class="dv">10</span>)</span>
+<span id="cb14-11"><a href="r-basics.html#cb14-11" tabindex="-1"></a><span class="fu">print</span>(x)</span>
+<span id="cb14-12"><a href="r-basics.html#cb14-12" tabindex="-1"></a></span>
+<span id="cb14-13"><a href="r-basics.html#cb14-13" tabindex="-1"></a><span class="co"># Random sequences with uniform distribution between zero and one</span></span>
+<span id="cb14-14"><a href="r-basics.html#cb14-14" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">runif</span>(<span class="at">n =</span> <span class="dv">5</span>, <span class="at">min =</span> <span class="dv">0</span>, <span class="at">max =</span> <span class="dv">1</span>)</span>
+<span id="cb14-15"><a href="r-basics.html#cb14-15" tabindex="-1"></a><span class="fu">print</span>(x)</span></code></pre></div>
+</div>
+<div id="plot-data" class="section level2 hasAnchor" number="2.6">
+<h2><span class="header-section-number">2.6</span> Plot data<a href="r-basics.html#plot-data" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="r-basics.html#cb15-1" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">seq</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>)</span>
+<span id="cb15-2"><a href="r-basics.html#cb15-2" tabindex="-1"></a>y <span class="ot">&lt;-</span> x<span class="sc">^</span><span class="dv">2</span></span>
+<span id="cb15-3"><a href="r-basics.html#cb15-3" tabindex="-1"></a><span class="fu">plot</span>(x, y)</span></code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-10-1.png" width="672" /></p>
+
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="index.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"whatsapp": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": null,
+"search": {
+"engine": "fuse",
+"options": null
+},
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+</body>
+
+</html>

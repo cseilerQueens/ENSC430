@@ -5,4 +5,7 @@ install.packages("renv")
 renv::init()
 install.packages("rmarkdown")
 install.packages("bookdown")
+install.packages("magrittr")
+install.packages("stringi")
+install.packages("stringr")
 

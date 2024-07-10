@@ -1,9 +1,23 @@
-# R Basics
-* In this course you will be using the programming language R.
-* R is a command line driven program. The user enters commands at the prompt and each command is executed one at a time.
-* RStudio is a Graphic User Interface for R.
-* For this course, you will first need to install R and then RStudio
-* If you already have R or RStudio installed, please install them again to ensure you have the most recent version
+---
+output:
+  pdf_document: default
+  html_document: default
+---
+# Programming in R
+In this course you will be using the programming language R. Today you will learn the R basics you need to master the course. The main elements are: 
+
+* Controlling your computational environment using ```renv```
+* Operators: ```+, -, *, /, ^```
+* R objects (vector, data frame, matrix, array, list)
+* Subset objects
+* Control structure: loops, if-else statements
+* Generating data: sequence and random data
+* Defining a function
+* Plotting data
+* Documenting your code using RMarkdown
+
+Let's start with setting up your computer. R is a command line driven program. The user enters commands at the prompt and each command is executed one at a time. RStudio is a Graphic User Interface for R. For this course, you will first need to install R and then RStudio. If you already have R or RStudio installed, please install them again to ensure you have the most recent version.
+
 * Install R from [here](https://posit.co/download/rstudio-desktop)
 * Install RStudio from [here](https://posit.co/download/rstudio-desktop)
 * Once R and RStudio are installed, open RStudio and learn the basic R syntax following the exercises below.
@@ -18,7 +32,8 @@
 * In the lower-left panel you find your console where you can execute commands. 
 * Your first task is to set up your computational environment using the command ```.libPaths()```
 * In the Console, type the command below using the directory of your project. Note that you need to use ```/``` rather than ```\```.
-```{r, evaluate = FALSE}
+
+```{r, eval = FALSE}
 # Set your working directory:
 setwd("C:/Users/seile/Documents/queensu/teaching/classes/ENSC430/tutorials/ENSC430")
 
@@ -36,19 +51,20 @@ renv::init()
 * Next, install ```rmarkdown```:
 ```{r, eval = FALSE}
 install.packages("rmarkdown")
+install.packages("magrittr")
+install.packages("stringi")
+install.packages("stringr")
 ```
 
-* R Markdown allows you to integrate code, figures, and text. You will write your report in R Markdown.
+* R Markdown allows you to integrate code, figures, and text. You will write your report in R Markdown, which I will explain at the end of the tutorial.
+
+The following sections introduce the most basic elements of the R programming language. Start by creating an empty R script by clicking on ```File/New File/R script```. Open the script in R Studio and copy-paste the examples into your script as you go through the examples. Execute each line by hitting ```Ctrl Enter``` so you understand and each step what the code is doing. 
+
+## Operators
+
+* In R, you use the following syntax to assign a value to a variable.
 
 ```{r, eval = FALSE}
-install.packages("bookdown")
-```
-
-## Syntax
-
-* In R, you use the following syntax to to assign a value to a variable.
-
-```
 x <- 1
 print(x)
 ```
@@ -56,7 +72,7 @@ print(x)
 * The variable x used above is an example of an R object. The ```print``` statement prints the value of the object x.
 * Once you assign values to R objects, you can use the following arithmetic operators to perform calculations.
 
-```
+```{r, eval = FALSE}
 a <- 2
 b <- 3
 
@@ -80,7 +96,7 @@ print(c)
 c <- a^b
 print(c)
 ```
-* Note that anything after the # symbol is ignored.
+* Note that anything after the ```#``` symbol is ignored.
 
 ```{r, eval = FALSE}
 a <- 2
@@ -112,14 +128,14 @@ class(a)
 ```
 * The length of an object is the number of elements of the object.
 
-```{r, exercise = FALSE, eval = TRUE}
+```{r, eval = FALSE}
 a <- 2
 length(a)
 
 a <- c(2,7,5)
 length(a)
 ```
-* Next to mode and length, there are different types of objects, namely vector, factor, array, matrix, data frame, and list
+* Next to mode and length, there are different types of objects, namely vector, data frame, matrix, array, and list
 
 ```{r, eval = FALSE}
 # Vector with one element
@@ -156,7 +172,184 @@ l <- list(a,b,c,d)
 print(l)
 ```
 
+* Let's learn how to subset vectors, data frames, matrices, arrays, and lists
+
+* Example: Vector
+```{r, eval = FALSE}
+# Create a vector
+vector_data <- c(10, 20, 30, 40, 50)
+
+# Print the vector
+print("Full Vector:")
+print(vector_data)
+
+# Subsetting by Index
+third_element <- vector_data[3]
+print("Third element:")
+print(third_element)
+
+# Subsetting by Multiple Indices
+subset_indices <- vector_data[c(1, 3, 5)]
+print("Subset (First, Third, and Fifth elements):")
+print(subset_indices)
+
+# Subsetting by Logical Condition
+subset_condition <- vector_data[vector_data > 25]
+print("Subset (Elements greater than 25):")
+print(subset_condition)
+```
+* Example: data frame
+```{r, eval = FALSE}
+# Create a data frame
+data <- data.frame(
+  Name = c("Alice", "Bob", "Charlie", "David", "Eve"),
+  Age = c(23, 25, 30, 22, 29),
+  Gender = c("F", "M", "M", "M", "F"),
+  Score = c(85, 90, 75, 88, 92)
+)
+
+# Print the data frame
+print("Full Data Frame:")
+print(data)
+
+# Subsetting by Columns
+subset_columns <- data[, c("Name", "Score")]
+print("Subset by Columns (Name and Score):")
+print(subset_columns)
+
+# Subsetting by Rows and Columns
+subset_rows_cols <- data[1:3, c("Name", "Age")]
+print("Subset by Rows and Columns (First 3 rows, Name and Age):")
+print(subset_rows_cols)
+
+# Subsetting by Condition
+subset_condition <- subset(data, Age > 25)
+print("Subset by Condition (Age > 25):")
+print(subset_condition)
+```
+
+* Example: matrix
+```{r, eval = FALSE}
+# Create a matrix
+matrix_data <- matrix(
+  1:12,        # Data
+  nrow = 4,    # Number of rows
+  ncol = 3,    # Number of columns
+  byrow = TRUE # Fill the matrix by rows
+)
+
+# Print the matrix
+print("Full Matrix:")
+print(matrix_data)
+
+# Subsetting by Rows and Columns
+subset_rows_cols <- matrix_data[1:2, 1:2]
+print("Subset (First 2 rows, First 2 columns):")
+print(subset_rows_cols)
+
+# Subsetting by Specific Rows
+subset_specific_rows <- matrix_data[c(1, 3), ]
+print("Subset (First and Third rows):")
+print(subset_specific_rows)
+
+# Subsetting by Specific Columns
+subset_specific_cols <- matrix_data[, c(2, 3)]
+print("Subset (Second and Third columns):")
+print(subset_specific_cols)
+```
+
+* Example: array
+```{r, eval = FALSE}
+
+# Create an array
+array_data <- array(
+  1:24,         # Data
+  dim = c(3, 4, 2) # Dimensions (3x4x2 array)
+)
+
+# Print the array
+print("Full Array:")
+print(array_data)
+
+# Subsetting by Indices
+element <- array_data[1, 2, 1]
+print("Element at (1, 2, 1):")
+print(element)
+
+# Subsetting by Slices
+slice <- array_data[, , 1]
+print("First slice (all elements in the first third dimension):")
+print(slice)
+
+# Subsetting by Specific Rows and Columns in a Specific Dimension
+subset_array <- array_data[1, , 2]
+print("First row, all columns, in the second slice:")
+print(subset_array)
+```
+
+* Example: list
+```{r, eval = FALSE}
+# Create a list
+list_data <- list(
+  Name = "Alice",
+  Age = 25,
+  Scores = c(85, 90, 88),
+  Address = list(
+    Street = "123 Main St",
+    City = "Springfield",
+    Zip = "12345"
+  )
+)
+
+# Print the list
+print("Full List:")
+print(list_data)
+
+# Subsetting by Element Name
+name <- list_data$Name
+print("Name element:")
+print(name)
+
+# Subsetting by Index
+age <- list_data[[2]]
+print("Second element (Age):")
+print(age)
+
+# Subsetting a Nested List
+city <- list_data$Address$City
+print("City element in Address:")
+print(city)
+```
+
+## Control structure
+* Control structures determine the order in which statements are executed in a program. Two important examples are loops and conditional statements.
+* Loop example
+```{r, eval = FALSE}
+# For loop to print numbers from 1 to 5
+for (i in 1:5) {
+  print(i)
+}
+```
+
+* Conditional statement example
+```{r, eval = FALSE}
+
+# Define a number
+number <- -3
+
+# If-else statement to check the sign of the number
+if (number > 0) {
+  print("The number is positive.")
+} else if (number < 0) {
+  print("The number is negative.")
+} else {
+  print("The number is zero.")
+}
+
+```
+
 ## Generating data
+* Many times you need to generate data, e.g. a sequence that ranges from 1 to 10. Instead of writing out each number, there are functions that do that for you
 
 ```{r, eval = FALSE}
 # Sequence from 1 to 10 with step size 1
@@ -176,12 +369,153 @@ x <- runif(n = 5, min = 0, max = 1)
 print(x)
 ```
 
+## Defining a function
+* Often you need to execute the same operation many times. To do this efficiently you can define a function and then apply this function whenever you need it
 
+```{r, eval = FALSE}
+# Define a function to add two numbers
+add_numbers <- function(a, b) {
+  # Calculate the sum
+  sum <- a + b
+  # Return the sum
+  return(sum)
+}
 
+# Print the function definition
+print("Function Definition:")
+print(add_numbers)
 
-## Plot data
-```{r}
+# Call the function with arguments 3 and 5
+result <- add_numbers(3, 5)
+
+# Print the result
+print("Result of add_numbers(3, 5):")
+print(result)
+```
+
+## Plotting data
+```{r, eval = FALSE}
 x <- seq(1:10)
 y <- x^2
 plot(x, y)
 ```
+
+* Add x and y labels using ```xlab``` and ```ylab```
+```{r, eval = FALSE}
+x <- seq(1:10)
+y <- x^2
+plot(x, y, 
+     xlab = "ENSC430 lectures attended", 
+     ylab = "Academic Performance")
+```
+
+* Make it a line plot using ```type = "l"```
+```{r, eval = FALSE}
+x <- seq(1:10)
+y <- x^2
+plot(x, y, type = "l")
+```
+
+* Add more lines using ```lines()```
+```{r, eval = FALSE}
+x <- seq(1:10)
+y1 <- x^2
+y2 <- x^3
+plot(x, y1, type = "l")
+lines(x, y2)
+```
+
+* Make each line a different color using ```col```
+```{r, eval = FALSE}
+x <- seq(1:10)
+y1 <- x^2
+y2 <- x^3
+plot(x, y1, type = "l", col = "red")
+lines(x, y2, col = "blue")
+```
+
+* Adjust x and y axis using ```xlim``` and ```ylim```
+```{r, eval = FALSE}
+x <- seq(1:10)
+y1 <- x^2
+y2 <- x^3
+plot(x, y1, type = "l", 
+     xlim = c(-5,10), ylim = c(-20, 100))
+lines(x, y2)
+```
+
+* Making square axis using ```par(pty="s")``` and ```asp = 1```
+```{r, eval = FALSE}
+x <- seq(1:10)
+y1 <- x^2
+y2 <- x^3
+par(pty="s")
+plot(x, y1, type = "l", asp = 1)
+lines(x, y2)
+```
+
+## Review
+Congratulations, you made it to the end of this tutorial. Let's list the key concepts you have learned today:
+
+* Operators: ```+, -, *, /, ^```
+* Objects: vector ```c()```, data frame ```data.frame()```, matrix ```matrix()```, array ```array()```, list ```list()```, 
+* Subset objects
+* Control structure: loops, if-else statements
+* Generating data: sequence and random data
+* Defining a function
+* Plotting data
+
+## Exercise
+Write a piece of code that includes the following elements:
+
+* Create an R object that is either a data frame, matrix, array, or list
+* Define a function
+* Apply the function to a subset of the R object using either a loop or a conditional statement
+* Plot the data
+
+Document your exercise in a Markdown document following the steps below.
+
+* Click on ```File, New File, R Markdown```, choosing PDF as output format
+* Save the new ```.Rmd``` in your project folder
+* Open the folder and start writing your code
+* Your rmarkdown document should look similar to this, without the ```#```:
+
+```{r, eval = FALSE}
+# ---
+# title: "ENSC 430 - Exercises"
+# author: "Christian Seiler"
+# date: "`r Sys.Date()`"
+# output: pdf_document
+# ---
+
+# ```{r setup, include=FALSE}
+# knitr::opts_chunk$set(echo = TRUE)
+# ```
+
+## Exercise 1
+Write a piece of code that includes the following elements:
+
+* Create a array with 3 dimensions
+* Define a function
+* For each array, subset and apply the function
+* Plot the data, one line for each array
+
+
+# ```{r, eval = TRUE}
+# Create an array
+# array_data <- array(1:12, dim = c(2, 3, 4))
+# add your code here
+# ```
+```
+
+* Once you are done, click on ```Knit```
+* If you change your code, close the PDF before knitting again
+
+As the course progresses you will be adding exercises to this markdown document. You will hand in the ```.PDF``` file by the end of the term for marking.
+
+
+
+
+
+
+

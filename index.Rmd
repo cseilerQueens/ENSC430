@@ -29,7 +29,7 @@ The following Table provides an overview of the topic and reading assignments fo
 |Week | Date | Topic | R-package | Supporting Lit.| 
 |:-|:---|:--------|:---|:---|
 |1 | Fri, Sep 6 | [Introduction](https://) | Ch. 1, 2 | - |
-|2 | Fri, Sep 13 | [Programming Basics](https://) | Ch. 3, 4 | - |
+|2 | Fri, Sep 13 | [Programming in R](https://) | Ch. 3, 4 | - |
 |3 | Fri, Sep 20 | [Socioeconomic Drivers](https://) | Ch. 5 | - |
 |4 | Fri, Sep 24 | [Climate Data Analysis](https://) | Ch. 6 | - |
 |5 | Fri, Oct 4 | [Global Earth Observations](https://) | Ch. 7, 8 | - |

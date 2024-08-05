@@ -1,0 +1,394 @@
+---
+output:
+  pdf_document: default
+  html_document: default
+---
+# Dynamical Systems Theory
+
+## Savings account
+
+The code below calculates the amount of money in your savings account at each time step by numerically integrating an ordinary differential equation (ODE) using the ```ode``` function. Have a look at the code. Which part of the code defines your initial value? Which part of the code is your ODE? Run this code on your computer.
+
+```{r, eval = TRUE}
+library(deSolve)
+
+interest <- function(t, state, parameters)
+{
+  with(as.list(c(state)), {
+    dx <- 0.06 * x
+    
+    list(c(dx))
+  })
+}
+state <- c(x = 100)
+times <- seq(0, 50, 1)
+out <- as.data.frame(ode(state, times, interest))
+
+par(pty = "s")
+plot(out$time,
+     out$x,
+     type = "l",
+     xlab = "Time Step",
+     ylab = "x")
+
+```
+
+## Lotka-Volterra
+
+Now that you know how to conduct numerical integration, let's apply your new skills to the Lotka-Volterra model:
+
+$$\frac{dY}{dt} = r_i * Y * (1 - Y / K) - \alpha * R * Y $$
+$$\frac{dR}{dt} = \alpha * \gamma * R * Y - m * R $$
+
+where $Y$ = prey, $R$ = predator, $\alpha$ = ingestion rate of predator (0.2), $r_i$ = rate of prey increase (1), $m$ = mortality rate (0.2), $\gamma$ = assimilation efficiency (0.5), $K$ = carrying capacity (10000). Adjust the code from your savings account above to reproduce the Figure below.
+
+```{r, echo=FALSE}
+library(deSolve)
+
+interest <- function(t, state, parameters)
+{
+  with(as.list(c(state)), {
+    alpha <- 0.2
+    ri <- 1
+    m <- 0.2
+    gamma <- 0.5
+    K <- 10000
+    
+    dY <- ri * Y * (1 - Y / K) - alpha * R * Y
+    dR <- alpha * gamma * R * Y - m * R
+    
+    list(c(dY, dR))
+  })
+}
+state <- c(Y = 1, R = 1)
+times <- seq(0, 70, 0.1)
+out <- as.data.frame(ode(state, times, interest))
+
+par(pty = "s")
+plot(out$time,
+     out$Y,
+     type = "l",
+     xlab = "Time Step",
+     ylab = "Species Density")
+lines(out$time, out$R, col = "red")
+legend("topleft", c("Predator", "Prey"), text.col = c("red", "black"))
+
+```
+
+Now adjust the code again to plot Predator versus Prey, reproducing the Figure below.
+
+```{r, echo=FALSE}
+library(deSolve)
+
+interest <- function(t, state, parameters)
+{
+  with(as.list(c(state)), {
+    alpha <- 0.2
+    ri <- 1
+    m <- 0.2
+    gamma <- 0.5
+    K <- 10000
+    
+    dY <- ri * Y * (1 - Y / K) - alpha * R * Y
+    dR <- alpha * gamma * R * Y - m * R
+    
+    list(c(dY, dR))
+  })
+}
+state <- c(Y = 1, R = 1)
+times <- seq(0, 70, 0.1)
+out <- as.data.frame(ode(state, times, interest))
+
+par(pty = "s")
+plot(
+  x = out$Y,
+  y = out$R,
+  type = "l",
+  xlab = "Prey",
+  ylab = "Predator"
+)
+```
+
+
+## Bifurcation
+
+The spruce budworm ($\textit{Choristoneura fumiferana}$) is an insect pest that consumes the leaves of coniferous trees in North America. In some years, their populations explode and the excessive consumption of pine buds and needles causes massive damage to the trees. The equation below describes the density of the spruce budworm ($B$), as a function of density-dependent growth (first term) and predatory mortality (second term):
+
+$$ \frac{dB}{dt} = r_i B \left( 1 - \frac{B}{K}\right) - \beta \frac{B^2}{B^2+k_s^2}$$
+where $t$ is the time, $r_i$ is the rate of increase, $K$ is the carrying capacity of the environment, $\beta$ is the maximum mortality rate, and $k_s$ is the half-saturation density at which mortality is half of the maximal rate. This is an ordinary differential equation (ODE). Let's plot the species density ($B$) as a function of time ($t$). To do that we will integrate the function above with respect to time using the ```ode``` function below. 
+
+```{r, eval = FALSE}
+library(deSolve)
+
+# Define the ODE function
+ode_function <- function(t, B, parameters) {
+  with(as.list(c(parameters, B)), {
+    dBdt <- ri*B*(1-B/K)-beta*B^2/(B^2+ks^2)
+    return(list(dBdt))
+  })
+}
+
+# Set parameter values and initial conditions
+parameters <- c(ri = 0.05, K = 10, beta = 0.1, ks = 1)
+initial_conditions <- c(B = 4)
+
+# Set your time axis
+time_points <- seq(0, 1000, by = 1)
+
+# Use the ode function to solve the ODE
+solution <- ode(y = initial_conditions, times = time_points, func = ode_function, parms = parameters)
+
+# Plot the solution
+par(pty="s")
+plot(solution, type = "l", xlab = "Time", ylab = "B", main = NA)
+
+```
+
+* Is the system in dynamic equilibrium?
+<!-- Yes, growth = mortality after about 300 time steps -->
+
+* What happens if you increase the rate of increase ($t_i$) from 0.05 to 0.08?
+<!-- The dynamic equilibrium is reached much sooner, at about time step 100 -->
+
+* Next, let's plot the rate of change ($\frac{dB}{dt}$) as a function of the population density ($B$)
+```{r, eval = FALSE}
+
+# Input values
+ ri <- 0.05
+ K <- 10
+ beta <- 0.1 
+ ks <- 1
+ B <- seq(0, 10, 0.01)
+
+# Function 
+dBdt <- ri*B*(1-B/K)-beta*B^2/(B^2+ks^2)
+
+# Plot
+par(pty="s")
+plot(x = B, y = dBdt, type = "l", xlab = "B", ylab = "dBdt", main = NA)
+abline(h = 0, col = "grey")
+
+```
+
+* How many equilibrium points are there?
+<!-- There are four equilibrium points (dB/dt = 0) -->
+
+* Are they stable or unstable?
+<!-- From left-to-right: unstable, stable, unstable, stable -->
+
+* Evaluate your answer by running the code below, trying different values for $B$ (e.g. 0, 1, 2, 5, 10) (```state <- c(B = 10)```). Document your findings.
+
+```{r, eval = FALSE}
+library(deSolve)
+
+ri <- 0.05
+K <- 10
+beta <- 0.1
+ks <- 1
+
+rate <- function(t, state, parameters)
+{
+  with(as.list(c(state)), {
+    ri <- 0.05
+    K <- 10
+    beta <- 0.1
+    ks <- 1
+    
+    dB <- ri * B * (1 - B / K) - beta * B ^ 2 / (B ^ 2 + ks ^ 2)
+    
+    list(c(dB))
+  })
+}
+
+state <- c(B = 1)
+times <- seq(0, 500, 1)
+out <- as.data.frame(ode(state, times, rate))
+
+par(pty = "s")
+plot(out$time,
+     out$B,
+     type = "l",
+     xlab = "Time Step",
+     ylab = "B")
+```
+
+* Run the code below to plot the bifurcation diagram 
+
+```{r, eval = FALSE}
+library(deSolve)
+library(rootSolve)
+
+ri <- 0.05
+K <- 10
+beta <- 0.1
+ks <- 1
+rate <- function(B, ri = 0.05)
+{
+  ri * B * (1 - B / K) - beta * B ^ 2 / (B ^ 2 + ks ^ 2)
+}
+
+equilibrium <- function(ri)
+{
+  Eq <- uniroot.all(f = rate,
+                    interval = c(0, 10),
+                    ri = ri)
+  eqtype <- vector(length = length(Eq))
+  for (i in 1:length(Eq))
+  {
+    jac <- gradient(f = rate, x = Eq[i], ri = ri)
+    eqtype[i] <- sign(jac) + 2
+  }
+  return(list(x = Eq, type = eqtype))
+}
+
+rseq <- seq(0.01, 0.07, by = 0.0001)
+
+par(pty = "s")
+plot(
+  0,
+  xlim = range(rseq),
+  ylim = c(0, 10),
+  type = "n",
+  xlab = "ri",
+  ylab = "B"
+)
+for (ri in rseq) {
+  eq <- equilibrium(ri)
+  points(
+    rep(ri, length(eq$x)),
+    eq$x,
+    pch = 16,
+    col = c("darkgrey", "black", "lightgrey")[eq$type],
+    bg = c("darkgrey", "black", "lightgrey")[eq$type]
+  )
+}
+equi <- uniroot.all(f = rate,
+                    interval = c(0, 10),
+                    r = 0.05)
+arrows(0.05, 10 , 0.05, equi[4] + 0.2, length = 0.1)
+arrows(0.05, equi[3] + 0.2, 0.05, equi[4] - 0.2, length = 0.1)
+arrows(0.05, equi[3] - 0.2, 0.05, equi[2] + 0.2, length = 0.1)
+arrows(0.05, equi[1] + 0.2, 0.05, equi[2] - 0.2, length = 0.1)
+```
+
+* What does each point on the curve represent?
+<!-- Each point gives the equilibrium species density $B$ for a given value of $r_i$ -->
+
+* Which grey shade corresponds to a stable, and which to an unstable equilibrium?
+<!-- Dark-grey = stable equilibrium, light-grey unstable equilibrium -->
+
+
+* Assume the initial budworm population is close to zero and $r_i$ equals 0.05. A small perturbation causes $B$ to increase. (a) What will the final population density be after some time? (b) What will happen with the population density if $r_i$ increases from 0.05 to 0.06?
+<!-- (a) B = 1, (b) B = 8 -->
+
+
+
+### Lorenz Attractor
+
+The Lorenz equations were the first chaotic system to be discovered. They are three differential equations that were derived to represent idealized behavior of the earth’s atmosphere:
+
+$\frac{dx}{dt} = -\frac{8}{3}x+yz$
+
+$\frac{dy}{dt} = -10 (y - z)$
+
+$\frac{dz}{dt} = -xy + 28y-z$
+
+* Run the code below to visualize the Lorenz Attractor
+
+```{r, eval = FALSE}
+library(deSolve)
+library(scatterplot3d)
+
+Lorenz <- function(t, state, parameters)
+{
+  with(as.list(c(state)), {
+    dx <- -8 / 3 * x + y * z
+    dy <- -10 * (y - z)
+    dz <- -x * y + 28 * y - z
+    list(c(dx, dy, dz))
+  })
+}
+state <- c(x = 1, y = 1, z = 1)
+times <- seq(0, 50, 0.01)
+out <- as.data.frame(ode(state, times, Lorenz, 0))
+
+par(pty = "s")
+scatterplot3d(
+  out$x,
+  out$y,
+  out$z,
+  type = "l",
+  xlab = "X",
+  ylab = "Y",
+  zlab = "Z",
+  grid = FALSE,
+  box = TRUE,
+  color = "blue"
+)
+```
+
+
+## Early warning signal (EWS) assessments
+
+Let's see if we can detect a critical transition in the population of fish from a time series using the ```EWSmethods``` R package.
+
+```{r, eval = FALSE}
+library(EWSmethods)
+set.seed(123) # Set seed to ensure reproducibility
+
+# Load data provided by the EWSmethods package
+data("simTransComms")
+data <- simTransComms
+
+# Let's look at community 1 only
+data <- data$community1
+
+time <- data$time
+population <- data$spp_3
+
+data <- data.frame(time, population)
+
+plot(
+  data$time,
+  data$population,
+  type = "l",
+  xlab = "Time",
+  ylab = "Population Density"
+)
+abline(v = 190, col = "red")
+```
+
+The Figure above shows a critical transition of the population occurring at about 190. Let's see if we can predict this transition by only looking at the data prior to this moment in time. To do this, let's truncate our data set, excluding all data after 190.
+
+```{r, eval = FALSE}
+# Truncate data to prior inflection point
+data <- subset(data , time < 191.5)
+
+plot(
+  data$time,
+  data$population,
+  type = "l",
+  xlab = "Time",
+  ylab = "Population Density"
+)
+```
+
+Next, apply the Univariate Early Warning Signal Assessment ```uniEWS```
+
+```{r, eval = FALSE}
+rolling_ews_eg <- uniEWS(
+  data = data,
+  metrics = c("ar1", "SD", "skew"),
+  method = "rolling",
+  winsize = 50
+)
+plot(rolling_ews_eg, y_lab = "Density")
+```
+EWS Indicators:
+
+* Autocorrelation at lag1	Autocorrelation (ar1): increases approaching a transition
+* Standard deviation (SD): Increasing variance/standard deviation is observed approaching a transition
+* Skewness (skew):	At a transition, the distribution of values in the time series can become asymmetric
+
+The figure above shows that all EWS indicators begin to trend upwards at about 170 which results in the positive Kendall Tau correlation coefficient indicative of an oncoming critical transition. A warning is indicated when an EWS displays a strong positive Kendall Tau correlation with time.
+

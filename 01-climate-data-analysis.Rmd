@@ -1,0 +1,96 @@
+---
+output:
+  pdf_document: default
+  html_document: default
+---
+# Climate Data Analysis
+
+## Earth System Grid Federation (ESGF)
+
+* Visit the [ESGF website](https://esgf.llnl.gov/)
+* Click on [Metagrid web application](https://aims2.llnl.gov/search)
+* We want to download mopnthly precipitation simulated by the Candian Earth System Model for the historical period
+* To find the file, you will need filter the data base by adding key words
+* In the keyword section, add ```CMIP``` (Coupled Model Intercomparison Project), ```CCCma``` (Canadian Centre for Climate Modelling and Analysis), ```CanESM5``` (Canadian Earth System Model version 5), ```historical``` (historical period), ```r10i1p1f1``` (ensemble member ID), ```Amon``` (realm: atmosphere, time resolution: monthly), and ```pr.gn``` (precipitation)
+* Once you find the file, download the corresponding wget script
+* To find different files, clear keywords and re-enter new keywords:
+
+```
+# Monthly precipitation
+CMIP6.CMIP.CCCma.CanESM5.historical.r10i1p1f1.Amon.pr.gn
+CMIP6.ScenarioMIP.CCCma.CanESM5.ssp585.r10i1p1f1.Amon.pr.gn
+
+# Daily precipitation
+CMIP6.CMIP.CCCma.CanESM5.historical.r10i1p1f1.day.pr.gn
+CMIP6.ScenarioMIP.CCCma.CanESM5.ssp585.r10i1p1f1.day.pr.gn
+
+### Monthly Net Biome Productivity
+CMIP6.CMIP.CCCma.CanESM5.historical.r10i1p1f1.Amon.nbp.gn
+CMIP6.ScenarioMIP.CCCma.CanESM5.ssp585.r10i1p1f1.Lmon.nbp.gn
+```
+
+* Variable names are listed [here](https://pcmdi.llnl.gov/mips/cmip3/variableList.html)
+* For example, search for ```precipitation``` (Windows search: ```Ctrl + F```, Mac search: ```Command + F```), you will find the variable description, ID, and physical units ```precipitation_flux, pr, kg m-2 s-1```
+
+* Open one of the wget files using a text editor and search for something that looks like this:
+
+```
+#These are the embedded files to be downloaded
+download_files="$(cat <<EOF--dataset.file.url.chksum_type.chksum
+'pr_Amon_CanESM5_historical_r10i1p1f1_gn_185001-201412.nc' 'http://crd-esgf-drc.ec.gc.ca/thredds/fileServer/esgC_dataroot/AR6/CMIP6/CMIP/CCCma/CanESM5/historical/r10i1p1f1/Amon/pr/gn/v20190429/pr_Amon_CanESM5_historical_r10i1p1f1_gn_185001-201412.nc' 'SHA256' '2eb2e7fa943902a9fd4f726a98e6ba5713b23558a8da5bda8c992ef374aca6d4'
+EOF--dataset.file.url.chksum_type.chksum
+)"
+```
+
+There you find the URL to the file that you want to download (it may look slightly different for you):
+
+```
+http://crd-esgf-drc.ec.gc.ca/thredds/fileServer/esgC_dataroot/AR6/CMIP6/CMIP/CCCma/CanESM5/historical/r10i1p1f1/Amon/pr/gn/v20190429/pr_Amon_CanESM5_historical_r10i1p1f1_gn_185001-201412.nc
+```
+
+* Copy-paste the URL to another text file
+* Repeat the same for all the other files you downloaded
+* Additional information: You can also first add all your files to a cart and then download a single wget file that contains all URLs
+
+* To download the netcdf files use the ```download.file``` function, e.g.:
+
+```{r}
+# Specify the URL of the file you want to download
+url <- "http://crd-esgf-drc.ec.gc.ca/thredds/fileServer/esgC_dataroot/AR6/CMIP6/CMIP/CCCma/CanESM5/historical/r10i1p1f1/Amon/pr/gn/v20190429/pr_Amon_CanESM5_historical_r10i1p1f1_gn_185001-201412.nc"
+
+# Specify the file name and location where you want to save the file on your computer
+file_name <- "pr_Amon_CanESM5_historical_r10i1p1f1_gn_185001-201412.nc"
+file_path <- "C:/Users/seile/Documents/queensu/teaching/classes/ENSC430/tutorials/ENSC430/data/"
+
+# Call the download.file() function, passing in the URL and file name/location as arguments
+download.file(url, paste(file_path, file_name, sep = ""), mode = "wb")
+
+```
+
+* Note that ```file_path``` should contain ```/``` rather than ```\``` and may not contain white space or special characters (e.g. ```C:\Users\seile\OneDrive - Queen's University\Documents``` will not work as a directory)
+
+## Open a netcdf file
+
+
+```{r}
+library(terra)
+rm(list = ls())
+data <- rast("data/pr_Amon_CanESM5_historical_r10i1p1f1_gn_185001-201412.nc")
+print(data)
+```
+* You see the spatial dimensions, spatial resolution, spatial extent in longitude and latitude, variable name, etc.
+* Each layer is one time step, starting in Jan 1850
+* Let's calculate the mean value over all time steps and plot the data
+
+```{r}
+library(maps)
+data <- terra::mean(data) # annual mean
+terra::plot(data)
+map("world2", add = TRUE)
+```
+* The ```terra``` package comes with different colors (```?map.pal```), e.g.
+```{r}
+my.col = map.pal("blues", n=100)
+terra::plot(data, col = my.col)
+map("world2", add = TRUE)
+```

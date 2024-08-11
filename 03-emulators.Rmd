@@ -1,0 +1,17 @@
+---
+output:
+  pdf_document: default
+  html_document: default
+---
+# Emulators
+
+## abc
+
+abc
+
+```{r}
+library(emulator)
+# val.vig <- as.matrix(read.table("val.txt",header=TRUE))
+
+
+```

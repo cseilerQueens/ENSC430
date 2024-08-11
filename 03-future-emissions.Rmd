@@ -1,0 +1,66 @@
+---
+output:
+  pdf_document: default
+  html_document: default
+---
+# Future Emissions
+Add text here
+
+## Install the kayadata R-package
+* In the lower-left panel you find your console where you can execute commands. 
+* Your first task is to set up your computational environment using the command ```.libPaths()```
+* In the Console, type the command below using the directory of your project. Note that you need to use ```/``` rather than ```\```.
+
+```{r, eval = FALSE}
+# Set your working directory:
+setwd("C:/Users/seile/Documents/queensu/teaching/classes/ENSC430/tutorials/ENSC430")
+
+# Tell R where to store your packages:
+.libPaths("C:/Users/seile/Documents/queensu/teaching/classes/ENSC430/tutorials/ENSC430/renv")
+
+# Install the kayadata R-package
+install.packages("kayadata")
+
+```
+
+* You will be asked to install a wide range of dependencies
+* Type ```Y``` when asked whether you want to proceed
+```{r, eval = FALSE}
+Do you want to proceed? [Y/n]: Y
+```
+
+
+## Using the kayadata package
+
+```{r, eval = FALSE}
+library(kayadata)
+
+# Read data for your country of choice
+canada_data <- get_kaya_data("Canada") 
+print(canada_data)
+```
+
+* To find our what the different columns are, read the documentation of the ```get_kaya_data``` function using ```?get_kaya_data```
+
+```{r, eval = FALSE}
+?get_kaya_data
+```
+
+* Let's make a few plots
+
+```{r, eval = FALSE}
+plot_kaya(canada_data, "P", y_lab = "Population (billions)")
+plot_kaya(canada_data, "G", y_lab = "GDP (trillions of constant 2015 USD)")
+plot_kaya(canada_data, "E", y_lab = "Total primary energy consumption (quads)")
+plot_kaya(canada_data, "ef", y_lab = "CO2 emissions from fossil fuel consumption (millions of metric tons)")
+```
+
+* Let's have a look at the projection for the year 2050
+
+```{r, eval = FALSE}
+canada_2050 <- project_top_down("Canada", 2050)
+print(canada_2050)
+```
+
+
+

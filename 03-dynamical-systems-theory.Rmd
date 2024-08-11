@@ -45,7 +45,7 @@ where $Y$ = prey, $R$ = predator, $\alpha$ = ingestion rate of predator (0.2), $
 ```{r, echo=FALSE}
 library(deSolve)
 
-interest <- function(t, state, parameters)
+ode_function <- function(t, state, parameters)
 {
   with(as.list(c(state)), {
     alpha <- 0.2
@@ -62,7 +62,7 @@ interest <- function(t, state, parameters)
 }
 state <- c(Y = 1, R = 1)
 times <- seq(0, 70, 0.1)
-out <- as.data.frame(ode(state, times, interest))
+out <- as.data.frame(ode(state, times, ode_function))
 
 par(pty = "s")
 plot(out$time,
@@ -232,13 +232,11 @@ equilibrium <- function(ri)
   Eq <- uniroot.all(f = rate,
                     interval = c(0, 10),
                     ri = ri)
-  eqtype <- vector(length = length(Eq))
   for (i in 1:length(Eq))
   {
     jac <- gradient(f = rate, x = Eq[i], ri = ri)
-    eqtype[i] <- sign(jac) + 2
   }
-  return(list(x = Eq, type = eqtype))
+  return(list(x = Eq))
 }
 
 rseq <- seq(0.01, 0.07, by = 0.0001)
@@ -256,19 +254,9 @@ for (ri in rseq) {
   eq <- equilibrium(ri)
   points(
     rep(ri, length(eq$x)),
-    eq$x,
-    pch = 16,
-    col = c("darkgrey", "black", "lightgrey")[eq$type],
-    bg = c("darkgrey", "black", "lightgrey")[eq$type]
+    eq$x
   )
 }
-equi <- uniroot.all(f = rate,
-                    interval = c(0, 10),
-                    r = 0.05)
-arrows(0.05, 10 , 0.05, equi[4] + 0.2, length = 0.1)
-arrows(0.05, equi[3] + 0.2, 0.05, equi[4] - 0.2, length = 0.1)
-arrows(0.05, equi[3] - 0.2, 0.05, equi[2] + 0.2, length = 0.1)
-arrows(0.05, equi[1] + 0.2, 0.05, equi[2] - 0.2, length = 0.1)
 ```
 
 * What does each point on the curve represent?

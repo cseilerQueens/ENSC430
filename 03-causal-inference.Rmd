@@ -3,7 +3,7 @@ output:
   pdf_document: default
   html_document: default
 ---
-# Causual Inference
+# Causal Inference
 
 ## Autoregression
 
@@ -20,7 +20,6 @@ $$ y_t = \beta_0 + \beta_1y_{t-1} + \beta_2y_{t-2}+...+ \beta_py_{t-p} + \epsilo
 Let's use a AR2 to forecast an oscillating function.
 
 ```{r}
-
 library(stats)
 
 # Create a sinusoidal time series
@@ -211,32 +210,6 @@ tsVAR <- vars::VAR(tsDat, p = 3)
 # Apply Granger 
 vars::causality(tsVAR, cause = "predator")$Granger
 vars::causality(tsVAR, cause = "prey")$Granger
-
-```
-## Conduct Granger causality
-
-Conduct your own Granger causality with abc data set 
-
-```{r}
-
-
-```
-
-## State space reconstruction causality
-
-```{r}
-library(rEDM)
-
-data(sardine_anchovy_sst)
-data <- sardine_anchovy_sst
-
-a <- ts(data)
-
-plot(a)
-
-
-df <- CCM( dataFrame = sardine_anchovy_sst, E = 3, Tp = 0, columns = "anchovy",
-target = "np_sst", libSizes = "10 70 10", sample = 100 )
 
 ```
 

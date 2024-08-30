@@ -1,0 +1,162 @@
+---
+output:
+  pdf_document: default
+  html_document: default
+---
+# Integrated Assessment Modeling (I)
+
+## Introduction
+In this tutorial you will conduct simulations with the Global Change Assessment Model [GCAM](https://jgcri.github.io/gcam-doc/index.html), which is an integrated assessment model that links the world's energy, agriculture and land use systems with a climate model. The model is designed to assess various climate change policies and technology strategies for the globe over long time scales. GCAM runs in 5-year time steps from 1990 to 2100 and includes 14 geographic regions in the energy/economy module and 151 regions in the agriculture and land use module. The model tracks emissions and atmospheric concentrations of greenhouse gases (CO2 and non-CO2), carbonaceous aerosols, sulfur dioxide, and reactive gases and provides estimates of the associated climate impacts, such as global mean temperature rise and sea level rise. The model has been exercised extensively to explore the effect of technology and policy on climate change. GCAM is a community model developed and run at the [Joint Global Change Research Institute, University of Maryland](https://www.pnnl.gov/projects/jgcri).
+
+## Download executible and inputs
+
+* Download the model from [here](https://github.com/JGCRI/gcam-core/releases)
+* Windows: ```gcam-v7.1-Windows-Release-Package.zip```
+* If your Mac uses an Apple-based processor (ARM64), choose: ```gcam-v7.1-Mac_arm64-Release-Package.zip``` 
+* If your Mac uses an Intel-based processor (x64), choose:  ```gcam-v7.1-Mac_x64-Release-Package.zip```
+
+If you don't know whether you your Mac uses ```ARM64``` or ```x64```, follow the steps below:
+
+* Click on the Apple menu in the top-left corner of your screen.
+* Select "About This Mac" from the dropdown menu.
+* In the window that appears, click on the "System Report" button. If you don't see this button, click on "More Info" first, then scroll down and click on "System Report".
+* On the Hardware panel, locate the "Processor Name." 
+* If you see "Apple M1" or "Apple M2" in the Processor Name or Chip section, your Mac is ARM-based.
+* If you see "Intel" in the Processor Name section, your Mac is x64-based.
+
+## Java
+* Check if you have ```Java``` installed
+* To do this, open a terminal and type ```java```
+* If you don't get an error message you are good to go
+* If you do get an error message, install Java from [here](https://www.java.com/en/download)
+
+## Run the model
+* Move the zipfile to a location where you want to work
+* Extract the zip file
+* Go into the ```exe``` folder
+* Make a test simulation by clicking on the executable ```gcam.exe```
+
+## Possible error message related to Java in Windows
+* Error message: ```The code execution cannot proceed because jvm.dll was not found```
+* In the Windows search box, type```advanced system settings```
+* Go to the Environment Variables button
+* Under System variables, click on ```New``` to add a new variable
+* Set the name to ```JAVA_HOME``` and add the two paths below of your Java installation:
+* ```C:\Program Files\Java\jdk-22\bin```
+* ```C:\Program Files\Java\jdk-22\bin\server```
+* Restart your laptop and execute the model again
+* For more suggestions on trouble shooting, please click [here](https://jgcri.github.io/gcam-doc/v7.0/user-guide.html#modelinterface-batch-modes)
+
+## Log file
+* If all went well a terminal opens and you can see how the model progresses
+* The simulation will take approximately 30 minutes to complete
+* At the end of a simulation you should see the text below in your terminal:
+
+```
+Starting output to XML Database.
+Data Readin, Model Run & Write Time: 2050.92 seconds.
+Write time:  658.458 seconds.
+Model run completed.
+Model exiting successfully.
+```
+
+* Information about each simulation is written to a log file, which can be accessed here: 
+
+```gcam/gcam-v7.1/exe/logs/main_log.txt```
+
+## Exercise (1.1): Reference Run
+* I have prepared some GCAM output that you can look at while your model is running. Download and unzip the example GCAM model output from [here](https://drive.google.com/file/d/1BwmioiEb9bk64L1gdfZ4vIVMe11KuLCp/view?usp=sharing) (764MB). You can store the file outside your GCAM folder so that you will not confuse the downloaded data set with the one you are currently generating.
+* To view the model output go to ```gcam\gcam-v7.1\ModelInterface``` and click on ```run-model-interface.bat```
+* Select ```Open``` from the Model Interface File menu and then select ```DB Open``` from the sub-menu. 
+* Open the ```database_basexdb``` directory that you have downloaded
+* Select a ```region``` (e.g. ```global```) and a variable (e.g. ```CO2 emissions``` by region) and click on ```Run Query```
+* Next, plot global population growth and GDP per capita (model inputs), as well as CO2 concentration, radiative forcing, and temperature (model outputs)
+* Take some time to explore other model outputs so you can a sense of what else is available.
+
+### Configuration File
+* Let's take a look at the configuration file While your simulation is running
+* The configuration file directs the GCAM executable as to what files to read in and allows the user to set various runtime and output options
+* The configuration file is located in the ```exe``` folder and is divided into following sections:
+* ```Files```: Points GCAM to various core input and output file locations.
+* ```ScenarioComponents```: This is where GCAM reads in the data that define a scenario. Each entry has a name and a path that must point to a valid GCAM xml input file. Note that the name attribute of each ScenarioComponent is for readability only, these are not used by GCAM.
+* ```Strings```:	The primary component in this section that should be modified is the scenarioName, which should be a short descriptive name for the scenario.
+* ```Bools```:	These boolean variables alter how GCAM runs and allow some alternative modes for GCAM operation.
+* ```Ints```	These integer variables set various GCAM run and output options.
+* By the time you got to this part of the exercise I hope that your reference simulation completed. Open your ```database_basexdb``` using the model interface and explore the results.
+
+## Exercise (1.2): Carbon Tax
+* Let's change our reference run by adding a carbon tax
+* Open the configuration file in a text editor (e.g. Notepad on Windows, TextEdit on Mac) and search for:
+
+```
+<Value name = "solver">../input/solution/cal_broyden_config.xml</Value>
+```
+
+* Below this line add:
+
+```
+<!-- set up the near-term / long-term policy inputs -->
+		<Value name = "long-term-co2">../input/policy/carbon_tax_25_5.xml</Value>
+		<Value name = "near-term-co2">../input/policy/spa14_tax.xml</Value>
+		<Value name = "co2-link">../input/policy/2025_target_finder_phasein.xml</Value>
+		<Value name = "co2luc-link">../input/policy/global_uct_phasein_no_constraint.xml</Value>
+```
+
+* Re-run the model. The output will be added to your currently existing output files from your previous run.
+* I have again prepared the corresponding GCAM output that you can look at while your model is running. Download and unzip the GCAM model output with carbon tax from [here](https://drive.google.com/file/d/1PbO9cozyRV8_30gk7nsvK_5RYAigzeCH/view?usp=sharing) (764MB) and explore the results.
+* How does the carbon tax affect global emissions, CO2 concentration, radiative forcing, and surface temperature?
+* By the time you got to this part of the exercise I hope that your carbon tax simulation completed. Open your ```database_basexdb``` using the model interface and explore the results. You will see two runs: the reference run and the carbon tax run. Select both runs in the Scenario Window using ```Ctrl``` to create Figures that include results from both runs.
+
+## Exercise (1.3): Target Run
+* You can use GCAM to find the least-cost emission pathway for achieving a specific climate policy goal
+* To do this you need to enable the target finder
+* Open the configuration file ```exe/configuration.xml```
+* Delete the Carbon Tax that you inserted in the previous exercise:
+```
+<!-- set up the near-term / long-term policy inputs -->
+		<Value name = "long-term-co2">../input/policy/carbon_tax_25_5.xml</Value>
+		<Value name = "near-term-co2">../input/policy/spa14_tax.xml</Value>
+		<Value name = "co2-link">../input/policy/2025_target_finder_phasein.xml</Value>
+		<Value name = "co2luc-link">../input/policy/global_uct_phasein_no_constraint.xml</Value>
+```
+* Search for ```<Value name="find-path">0</Value>``` under the category ```Bools```
+* Change the value from 0 to 1: ```<Value name="find-path">1</Value>```
+* The policy targets are defined in the corresponding files, such as ```/input/policy/forcing_target_4p5.xml```
+* There are different target types you can choose from:
+* ```concentration```: CO~2~ (or possibly other gasses via the configuration string: concentration-target-gas)
+* ```forcing```: Total radiative forcing
+* ```stabilization```: Stabilize CO~2~ (or possibly other gasses via the configuration string: concentration-target-gas)  with disregards to what that concentration might be
+* ```kyoto-forcing```: Radiative forcing from Kyoto GHGs only
+* ```rcp-forcing```: Radiative forcing using the RCP definition (MAGICC only)
+* ```temperature```: Global mean temperature
+* ```cumulative-emissions```: Reach a cumulative emission goal for CO2 emissions (or possibly other gasses via the configuration string: cumulative-target-gas)
+* The choice of your target is defined here: ```<target-type>forcing</target-type>```
+* We will create our own target. We are ambitious and want to know what needs to happen in order to stop the warming. Warming stops when the radiative forcing equals zero. 
+* Copy ```/input/policy/forcing_target_4p5.xml``` and rename it ```/input/policy/forcing_target_0p0.xml``` 
+* Open ```/input/policy/forcing_target_0p0.xml``` in a text editor and change the name and forcing target to ```<policy-target-runner name="forcing_0p0">``` and ```<target-value>0.0</target-value>```, respectively.
+* Open the configuration file and replace ```/input/policy/forcing_target_4p5.xml``` with ```/input/policy/forcing_target_0p0.xml```
+* In target mode, GCAM will run a scenario several times to find the optimal path to satisfy the configured climate goal.
+* This target run takes about 1.5 hours. Don't start the simulation in class. Instead, initiate the simulation at home. 
+* To run the model, go into the ```exe``` folder and click the executable ```gcam.exe```
+* We will analyze the outputs the next class. Before next week's class. please briefly check if your simulation was successful.
+
+## Exercises (2.1)
+
+* Let's evaluate our target run
+
+## Group Project
+You are part of the Canadian Delegation representing Canada at the UN climate talks. As part of your job you will assess what is required to reach the warming target of 1.5 Degrees Celsius set out by the 2015 Paris Agreement.
+* e least-cost emissions path to
+meet the 2 °C target
+- how does it work?
+- What is required?
+- Contrast this with current Policies
+- Limits: GDP is prescribed
+- Cause and effect?
+
+
+
+
+
+
+

@@ -3,7 +3,8 @@ output:
   pdf_document: default
   html_document: default
 ---
-# Programming in R
+# Programming
+
 In this course you will be using the programming language R. Today you will learn the R basics you need to master the course. The main elements are: 
 
 * Controlling your computational environment using ```renv```
@@ -58,9 +59,47 @@ install.packages("stringr")
 
 * R Markdown allows you to integrate code, figures, and text. You will write your report in R Markdown, which I will explain at the end of the tutorial.
 
-The following sections introduce the most basic elements of the R programming language. Start by creating an empty R script by clicking on ```File/New File/R script```. Open the script in R Studio and copy-paste the examples into your script as you go through the examples. Execute each line by hitting ```Ctrl Enter``` so you understand and each step what the code is doing. 
+* Let's install all dependencies that you will need to complete this course
+```{r, eval = FALSE}
+setwd("C:/Users/seile/Documents/queensu/teaching/classes/ENSC430/tutorials/ENSC430")
+.libPaths("C:/Users/seile/Documents/queensu/teaching/classes/ENSC430/tutorials/ENSC430/renv")
+
+install.packages("renv")
+renv::init()
+renv::activate()
+
+renv::install("rmarkdown")
+renv::install("bookdown")
+renv::install("magrittr")
+renv::install("stringi")
+renv::install("stringr")
+renv::install("devtools")
+renv::install("remotes")
+renv::install("deSolve")
+renv::install("scatterplot3d")
+renv::install("vars")
+renv::install("terra")
+renv::install("maps")
+renv::install("ClimInd")
+```
+
+* Create a snapshot and check status
+
+```{r}
+renv::snapshot()
+renv::status()
+```
+* The function above tells you whether a package is installed, recorded, and used
+* If it's used and recorded, call ```renv::restore()``` to install the version specified in the lockfile.
+* If it's used and not recorded, call ```renv::install()``` to install it from CRAN or elsewhere.
+* If it's not used and recorded, call ```renv::snapshot()``` to remove it from the lockfile.
+* If it's not used and not recorded, there's nothing to do. This the most common state because you only use a small fraction of all available packages in any one project.
+
+* If all is well, you receive the message ```No issues found -- the project is in a consistent state.```. You are done!
 
 ## Operators
+
+The following sections introduce the most basic elements of the R programming language. Start by creating an empty R script by clicking on ```File/New File/R script```. Open the script in R Studio and copy-paste the examples into your script as you go through the examples. Execute each line by hitting ```Ctrl Enter``` so you understand at each step what the code is doing. 
 
 * In R, you use the following syntax to assign a value to a variable.
 

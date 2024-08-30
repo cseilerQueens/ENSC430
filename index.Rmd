@@ -11,39 +11,76 @@ link-citations: yes
 # github-repo: rstudio/bookdown-demo
 description: "This is a minimal example of using the bookdown package to write a book. The output format for this example is bookdown::gitbook."
 ---
+```{r}
+setwd("C:/Users/seile/Documents/queensu/teaching/classes/ENSC430/tutorials/ENSC430")
+.libPaths("C:/Users/seile/Documents/queensu/teaching/classes/ENSC430/tutorials/ENSC430/renv")
+```
 
-# ENSC 430 Overview
+# Course Overview (ENSC 430A/B)
 
-Welcome to ENSC 430 Honours Project in Environmental Sustainability - ENSC 430. In this course you will:
+Welcome to ENSC 430: Honours Project in Environmental Sustainability. Climate change is one of the most pressing challenges of our time, requiring immediate and coordinated global action. To effectively address this complex issue, we must develop interdisciplinary skills that integrate knowledge from society, the economy, and the climate system. This course offers students the opportunity to develop these skills by focusing on three key areas:
 
-* Evaluate effectiveness of different climate change mitigation measures
-* Monitor current trends, evaluate model performance, assess future projections
-* Evaluate climate change impacts
-* Use AI to imporve models
+* Analyzing Climate Model Output: Interpret climate model data to assess the potential impacts of climate change on various aspects of the environment and human society.
+* Environmental Monitoring: Process satellite data and in situ observations to monitor and assess the current state of the environment.
+* Integrating Society, Economy, and Climate: Develop climate change mitigation strategies that account for feedback mechanisms between the climate, economy, and society.
 
-The skills you will learn will prepare you for your future job in government, academia, or the private sector. For more information, please download the [syllabus](https://drive.google.com/file/d/1vUuUg12YwXrV9h7bQcze_E3fofkN1ZZK/view?usp=sharing).
+We will address these areas using a dynamical systems approach, which is crucial for understanding critical transitions and causal relationships within the Earth system. The course runs for the full academic year from September to April. For more information, please download the [syllabus](https://drive.google.com/file/d/1VMzge6bvFzSfmV1fwytNvsXFDrhCdsg2/view?usp=sharing).
 
-## Schedule and slides
-The following Table provides an overview of the topic and reading assignments for each class. Each class consists of a lecture, in-class exercises, and discussions.
+## Location and Time
 
-|Week | Date | Topic | R-package | Supporting Lit.| 
-|:-|:---|:--------|:---|:---|
-|1 | Fri, Sep 6 | [Introduction](https://) | Ch. 1, 2 | - |
-|2 | Fri, Sep 13 | [Programming in R](https://) | Ch. 3, 4 | - |
-|3 | Fri, Sep 20 | [Socioeconomic Drivers](https://) | Ch. 5 | - |
-|4 | Fri, Sep 24 | [Climate Data Analysis](https://) | Ch. 6 | - |
-|5 | Fri, Oct 4 | [Global Earth Observations](https://) | Ch. 7, 8 | - |
-|6 | Fri, Oct 11 | [Climate Modeling](https://) | Ch. 9, 10 | - |
+* ENSC 430A: 2024 Fall term, Fr 2:30PM - 5:30PM, Ellis Hall, Room 226, Sep 3, 2024 to Dec 3, 2024
+* ENSC 430B: 2025 Winter term, Fr 2:30PM - 5:30PM, Ellis Hall, Room 226, Jan 6, 2025 to Apr 4, 2025
+
+## ENSC 430A Fall Term
+
+The material posted on this website is under development. The slides and exercises for each class will be in their final version the day of the class.
+
+|Week | Date | Slides | Key R packages | Reading |
+|:-|:-----|:-----------|:---|:---|
+|1 | Fri, Sep 6 | [Introduction](https://drive.google.com/file/d/1syS6N1kavfnpgMsWFLwfz47zq9BQEwxB/view?usp=sharing)| [renv](https://cran.r-project.org/web/packages/renv/index.html)| NA|
+|2 | Fri, Sep 13 | [Dynamical Systems](https://drive.google.com/file/d/19yMKOcvvYXZwZKBans7qvHnaGe-U1jt8/view?usp=drive_link) | [deSolve](https://cran.r-project.org/web/packages/deSolve/index.html)| [Scheffer et al (2003)](https://www.cell.com/trends/ecology-evolution/fulltext/S0169-5347(03)00278-7?large_figure=true)|
+|3 | Fri, Sep 20 | [Causal Inference](https://drive.google.com/file/d/1zj33Lq86ivyxbwxbpTaA-dGO7ZCmaKIg/view?usp=sharing) | [vars](https://cran.r-project.org/web/packages/vars/index.html)| [Runge et al (2019)](https://app.paperpile.com/view/plain/?id=3721495e-dd70-05e7-8277-ee8b76c8c489)|
+|4 | Fri, Sep 27 | [Climate Model Analysis (I): Climate Extremes](https://drive.google.com/file/d/19yMKOcvvYXZwZKBans7qvHnaGe-U1jt8/view?usp=drive_link) | [terra](https://cran.r-project.org/web/packages/terra/index.html), [ClimInd](https://cran.r-project.org/web/packages/ClimInd/index.html)| [Eyring et al (2016)](https://gmd.copernicus.org/articles/9/1937/2016/)|
+|5 | Fri, Oct 4 | Climate Model Analysis (II): Impacts on Biodiversity| [climetrics](https://cran.r-project.org/web/packages/climetrics/index.html)| [Taheri et al (2024)](https://nsojournals.onlinelibrary.wiley.com/doi/10.1111/ecog.07176?af=R)|
+|6 | Fri, Oct 11 | Climate Model Analysis (III): Causal Inference| [vars](https://cran.r-project.org/web/packages/vars/index.html)| [Papagiannopoulou et al (2017)](https://iopscience.iop.org/article/10.1088/1748-9326/aa7145/meta)|
 |7 | Fri, Oct 18 | Reading Week | - | - |
-|8 | Fri, Oct 25 | [Climate Model Performance](https://) | - | - |
-|9 | Fri, Nov 1 | [Climate Model Projections](https://) | Ch. 11, 12 | - |
-|10 | Fri, Nov 8 | [Climate Change Impact Modeling](https://climate4R) |  climate4R |-|
-|11 | Fri, Nov 15 | [Tuning models using AI](https://) | - | -|
-|12 | Fri, Nov 22 | [Emulating models using AI](https://) |- |  emulator|
-|13 | Fri, Nov 28 | [Synthesis and Reflection](https://) | - |-|
+|8 | Fri, Oct 25 | Global Earth Observations (I): Satellite Data| [terra](https://cran.r-project.org/web/packages/terra/index.html)| [Yan et al (2013)](https://www.nature.com/articles/nclimate1908)|
+|9 | Fri, Nov 1 | Global Earth Observations (II): In Situ Data| [FluxnetLSMR](https://github.com/aukkola/FluxnetLSM)| [Ukkola et al (2017)](https://gmd.copernicus.org/articles/10/3379/2017/gmd-10-3379-2017.pdf)|
+|10 | Fri, Nov 8 | Global Earth Observations (III): Causal Inference| [vars](https://cran.r-project.org/web/packages/vars/index.html)| [Krich et al (2020) (revisit)](https://app.paperpile.com/view/plain/?id=c2df6960-162e-0b21-a881-07ae75143c86)|
+|11 | Fri, Nov 15 | [Integrated Assessment Modeling (I): Mitigation Policies](https://drive.google.com/file/d/19yMKOcvvYXZwZKBans7qvHnaGe-U1jt8/view?usp=drive_link) | NA| [Edmonds et al (1983)](https://www.sciencedirect.com/science/article/pii/0140988383900142?via%3Dihub)| 
+|12 | Fri, Nov 22 | Integrated Assessment Modeling (II): Cost-Effective Pathways| NA| [Iyer et al (2015)](https://iopscience.iop.org/article/10.1088/1748-9326/10/12/125002/meta)|
+|13 | Fri, Nov 29 | Group Project | NA| NA|
+
+## ENSC 430B Winter Term
+
+|Week | Date |Activity|
+|:-|:---|:--------|
+|1 | Fri, Jan 10 | Identify project objectives| 
+|2 | Fri, Jan 17| Outline methods| 
+|3 | Fri, Jan 24| Conduct literature review| 
+|4 | Fri, Jan 31| Draft research plan|
+|5 | Fri, Feb 7| Present research plan (10 minutes per group)| 
+|6 | Fri, Feb 14| Implement project|
+|7 | Fri, Feb 21| Reading Break| 
+|8 | Fri, Feb 28| Continue implementing project| 
+|9 | Fri, Mar 7| Analyze results| 
+|10 | Fri, Mar 14| Prepare presentation| 
+|11 | Fri, Mar 21| Project Symposium from 08:30 AM to 04:30 PM|
+|12 | Fri, Mar 28| Write project report| 
+|13 | Fri, Apr 4| Finalize project report| 
 
 ##  Assessments
-Exam (Individual, 50%)
-Research Plan (Group, 10%)
-Progress Report Presentations (Group, 10%)
-Project Presentation (Group, 30%)
+
+|Assignment | Type | Weight | Due Date|
+|:----------|:-----|:-------|:--------|
+| Tutorial Report | Individual | 50% | Tue, Dec 3, 2024|
+| Project Presentation | Group | 10% | Fri, Mar 21, 2025|
+| Project Report | Group | 40% | Mon, Apr 7, 2025|
+
+## Contact
+
+* Instructor: Dr. Christian Seiler
+* Email: christian.seiler@queensu.ca
+* Office: Biosciences Complex, Room 3240, 116 Barrie Street
+* Office hours: Wednesdays 2-4 PM
+

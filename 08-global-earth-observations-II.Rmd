@@ -1,0 +1,8 @@
+---
+output:
+  pdf_document: default
+  html_document: default
+---
+# Global Earth Observations (II)
+
+* Coming soon ...

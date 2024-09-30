@@ -5,4 +5,326 @@ output:
 ---
 # Climate Model Analysis (II)
 
-* Coming soon ...
+Install the R package [climetrics](https://cran.r-project.org/web/packages/climetrics/index.html):
+
+```{r, eval = FALSE, echo - TRUE}
+setwd("C:/Users/seile/Documents/queensu/teaching/classes/ENSC430/tutorials/ENSC430")
+.libPaths("C:/Users/seile/Documents/queensu/teaching/classes/ENSC430/tutorials/ENSC430/renv")
+library(renv)
+renv::install("climetrics")
+library("climetrics")
+```
+
+Download climate model data from ESGF by clicking on the links and save them in a new folder called ```data``` that you put inside your working directory, e.g. ```C:\Users\seile\Documents\ENSC430\data```
+
+* [Monthly mean temperature, historical](http://crd-esgf-drc.ec.gc.ca/thredds/fileServer/esgC_dataroot/AR6/CMIP6/CMIP/CCCma/CanESM5/historical/r10i1p1f1/Amon/tas/gn/v20190429/tas_Amon_CanESM5_historical_r10i1p1f1_gn_185001-201412.nc)
+* [Monthly min temperature, historical](http://crd-esgf-drc.ec.gc.ca/thredds/fileServer/esgC_dataroot/AR6/CMIP6/CMIP/CCCma/CanESM5/historical/r10i1p1f1/Amon/tasmin/gn/v20190429/tasmin_Amon_CanESM5_historical_r10i1p1f1_gn_185001-201412.nc)
+* [Monthly max temperature, historical](http://crd-esgf-drc.ec.gc.ca/thredds/fileServer/esgC_dataroot/AR6/CMIP6/CMIP/CCCma/CanESM5/historical/r10i1p1f1/Amon/tasmax/gn/v20190429/tasmax_Amon_CanESM5_historical_r10i1p1f1_gn_185001-201412.nc)
+* [Monthly mean temperature, SSP585](http://crd-esgf-drc.ec.gc.ca/thredds/fileServer/esgD_dataroot/AR6/CMIP6/ScenarioMIP/CCCma/CanESM5/ssp585/r10i1p1f1/Amon/tas/gn/v20190429/tas_Amon_CanESM5_ssp585_r10i1p1f1_gn_201501-210012.nc)
+* [Monthly min temperature, SSP585](http://crd-esgf-drc.ec.gc.ca/thredds/fileServer/esgD_dataroot/AR6/CMIP6/ScenarioMIP/CCCma/CanESM5/ssp585/r10i1p1f1/Amon/tasmin/gn/v20190429/tasmin_Amon_CanESM5_ssp585_r10i1p1f1_gn_201501-210012.nc)
+* [Monthly max temperature, SSP585](http://crd-esgf-drc.ec.gc.ca/thredds/fileServer/esgD_dataroot/AR6/CMIP6/ScenarioMIP/CCCma/CanESM5/ssp585/r10i1p1f1/Amon/tasmax/gn/v20190429/tasmax_Amon_CanESM5_ssp585_r10i1p1f1_gn_201501-210012.nc)
+* [Monthly mean precipitation, historical](http://crd-esgf-drc.ec.gc.ca/thredds/fileServer/esgC_dataroot/AR6/CMIP6/CMIP/CCCma/CanESM5/historical/r10i1p1f1/Amon/pr/gn/v20190429/pr_Amon_CanESM5_historical_r10i1p1f1_gn_185001-201412.nc)
+* [Monthly mean precipitation, SSP585](http://crd-esgf-drc.ec.gc.ca/thredds/fileServer/esgD_dataroot/AR6/CMIP6/ScenarioMIP/CCCma/CanESM5/ssp585/r10i1p1f1/Amon/pr/gn/v20190429/pr_Amon_CanESM5_ssp585_r10i1p1f1_gn_201501-210012.nc)
+
+* [Land Cover Fraction](http://esgf.nci.org.au/thredds/fileServer/replica/CMIP6/CMIP/CCCma/CanESM5/historical/r10i1p1f1/fx/sftlf/gn/v20190429/sftlf_fx_CanESM5_historical_r10i1p1f1_gn.nc)
+
+## Koeppen-Geiger Climate Classification
+
+Create a Koeppen-Geiger climate classification for the historical period
+
+```{r}
+library(terra)
+library(climetrics)
+library(maps)
+
+# Read data
+## Temperature:
+tmean <- rast("data/tas_Amon_CanESM5_historical_r10i1p1f1_gn_185001-201412.nc")
+tmin <- rast("data/tasmin_Amon_CanESM5_historical_r10i1p1f1_gn_185001-201412.nc")
+tmax <- rast("data/tasmax_Amon_CanESM5_historical_r10i1p1f1_gn_185001-201412.nc")
+
+## Precipitation
+pr <- rast("data/pr_Amon_CanESM5_historical_r10i1p1f1_gn_185001-201412.nc")
+
+## Land Cover Fraction:
+lcf <- rast("data/sftlf_fx_CanESM5_historical_r10i1p1f1_gn.nc")
+
+# Get the dates
+dates <- time(tmean)
+dates <- format(dates, "%Y-%m-%d")
+dates <- as.Date(dates)
+
+# Create raster time series
+tmean <- rts(tmean, dates)
+tmin <- rts(tmin, dates)
+tmax <- rts(tmax, dates)
+pr <- rts(pr, dates)
+
+# Create a 12-month climatological mean dataset for the 30-year period 1971-01-16 to 2000-12-16
+tmean12 <- apply.months(tmean[['1971/2000']],'mean')
+tmin12 <- apply.months(tmin[['1971/2000']],'mean')
+tmax12 <- apply.months(tmax[['1971/2000']],'mean')
+pr12 <- apply.months(pr[['1971/2000']],'mean')
+
+# Convert units from K to C
+tmean12 <- tmean12 - 273.15
+tmin12 <- tmin12 - 273.15
+tmax12 <- tmax12 - 273.15
+
+# Convert units from kg m-2 s-1 to mm per month
+pr12 <- pr12 * 86400 * c(31, 28.25, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31) 
+
+# Create a mask that masks out the ocean
+## Set all grid cells with a land cover fraction equal to zero to NA:
+lcf[lcf == 0] <- NA
+## Set all other values equal to one
+lcf <- lcf - lcf + 1
+
+k1 <- climetrics::kgc(p=pr12 ,tmin = tmin12 ,tmax=tmax12, tmean = tmean12)
+
+# Mask out the ocean
+k1 <- k1 * lcf
+
+# Plot data
+my.col <- map.pal("elevation", n = 30)
+
+plot(k1, col = my.col, main = "Koeppen-Geiger Climate Classification \n (CanESM5, historical)")
+map("world2", add = TRUE)
+
+```
+
+The numbers in the Figure above refer to the following Koeppen-Geiger climate classification
+
+| Code | Class | Name | Description                                      |
+|------|-------|------|--------------------------------------------------|
+| 1    | 1     | Af   | Tropical, rainforest                             |
+| 2    | 1     | Am   | Tropical, monsoon                                |
+| 3    | 1     | Aw   | Tropical, savannah                               |
+| 4    | 2     | BWh  | Arid, desert hot                                 |
+| 5    | 2     | BWk  | Arid, desert cold                                |
+| 6    | 2     | BSh  | Arid, steppe hot                                 |
+| 7    | 2     | BSk  | Arid, steppe cold                                |
+| 8    | 3     | Csa  | Temperate, dry and hot summer                    |
+| 9    | 3     | Csb  | Temperate, dry and warm summer                   |
+| 10   | 3     | Csc  | Temperate, dry and cold summer                   |
+| 11   | 3     | Cwa  | Temperate, dry winter and hot summer             |
+| 12   | 3     | Cwb  | Temperate, dry winter and warm summer            |
+| 13   | 3     | Cwc  | Temperate, dry winter and cold summer            |
+| 14   | 3     | Cfa  | Temperate, without dry season and hot summer     |
+| 15   | 3     | Cfb  | Temperate, without dry season and warm summer    |
+| 16   | 3     | Cfc  | Temperate, without dry season and cold summer    |
+| 17   | 4     | Dsa  | Cold, dry and hot summer                         |
+| 18   | 4     | Dsb  | Cold, dry and warm summer                        |
+| 19   | 4     | Dsc  | Cold, dry and cool summer                        |
+| 20   | 4     | Dsd  | Cold, dry summer and very cold winter            |
+| 21   | 4     | Dwa  | Cold, dry winter and hot summer                  |
+| 22   | 4     | Dwb  | Cold, dry winter and warm summer                 |
+| 23   | 4     | Dwc  | Cold, dry winter and cool summer                 |
+| 24   | 4     | Dwd  | Cold, dry winter and very cold winter            |
+| 25   | 4     | Dfa  | Cold, without dry season and hot summer          |
+| 26   | 4     | Dfb  | Cold, without dry season and warm summer         |
+| 27   | 4     | Dfc  | Cold, without dry season and cool summer         |
+| 28   | 4     | Dfd  | Cold, without dry season and very cold winter    |
+| 29   | 5     | ET   | Polar, tundra                                    |
+| 30   | 5     | EF   | Polar, frost                                     |
+
+
+Create a Koeppen-Geiger climate classification for the future based on CanESM5 SSP5 for the 2071-2100 period. Call the Koeppen-Geiger climate classification ```k2``` rather than ```k1```. Your output should look similar to the Figure below
+
+```{r, echo = FALSE, eval = TRUE}
+
+library(terra)
+library(climetrics)
+library(maps)
+
+# Read data
+## Temperature:
+
+tmean <- rast("data/tas_Amon_CanESM5_ssp585_r10i1p1f1_gn_201501-210012.nc")
+tmin <- rast("data/tasmin_Amon_CanESM5_ssp585_r10i1p1f1_gn_201501-210012.nc")
+tmax <- rast("data/tasmax_Amon_CanESM5_ssp585_r10i1p1f1_gn_201501-210012.nc")
+
+## Precipitation
+pr <- rast("data/pr_Amon_CanESM5_ssp585_r10i1p1f1_gn_201501-210012.nc")
+
+## Land Cover Fraction:
+lcf <- rast("data/sftlf_fx_CanESM5_historical_r10i1p1f1_gn.nc")
+
+# Get the dates
+dates <- time(tmean)
+dates <- format(dates, "%Y-%m-%d")
+dates <- as.Date(dates)
+
+# Create raster time series
+tmean <- rts(tmean, dates)
+tmin <- rts(tmin, dates)
+tmax <- rts(tmax, dates)
+pr <- rts(pr, dates)
+
+# Create a 12-month climatological mean dataset for the 30-year period 2071-01-16 to 2100-12-16
+tmean12 <- apply.months(tmean[['2071/2100']],'mean')
+tmin12 <- apply.months(tmin[['2071/2100']],'mean')
+tmax12 <- apply.months(tmax[['2071/2100']],'mean')
+pr12 <- apply.months(pr[['2071/2100']],'mean')
+
+# Convert units from K to C
+tmean12 <- tmean12 - 273.15
+tmin12 <- tmin12 - 273.15
+tmax12 <- tmax12 - 273.15
+
+# Convert units from kg m-2 s-1 to mm per month
+pr12 <- pr12 * 86400 * c(31, 28.25, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31) 
+
+# Create a mask that masks out the ocean
+## Set all grid cells with a land cover fraction equal to zero to NA:
+lcf[lcf == 0] <- NA
+## Set all other values equal to one
+lcf <- lcf - lcf + 1
+
+k2 <- climetrics::kgc(p=pr12 ,tmin = tmin12 ,tmax=tmax12, tmean = tmean12)
+
+# Mask out the ocean
+k2 <- k2 * lcf
+
+# Plot data
+my.col <- map.pal("elevation", n = 30)
+
+plot(k2, col = my.col, main = "Koeppen-Geiger Climate Classification \n (CanESM5, SSP585)")
+map("world2", add = TRUE)
+
+```
+
+Let's plot them next to each other:
+
+```{r}
+par(mfrow = c(2,1))
+
+my.col <- map.pal("elevation", n = 30)
+
+plot(k1, col = my.col, main = "Koeppen-Geiger (CanESM5, historical)", cex.main = 0.75)
+map("world2", add = TRUE)
+
+plot(k2, col = my.col, main = "Koeppen-Geiger (CanESM5, SSP585)", cex.main = 0.75)
+map("world2", add = TRUE)
+```
+
+Let's show how the Tundra changes. From the table above you can see that the Tundra corresponds to class ```29```. Isolate class 29 in both ```k1```, and ```k2```, convert them to polygons, and plot them on top of each other using hatched areas.
+
+```{r}
+
+k1.class <- k1
+k1.class[k1.class != 29] <- NA
+k1.class <- k1.class - k1.class + 1
+
+
+k2.class <- k2
+k2.class[k2.class != 29] <- NA
+k2.class <- k2.class - k2.class + 1
+
+# Convert to polygon
+k1.class <- as.polygons(k1.class, dissolve = TRUE)
+k2.class <- as.polygons(k2.class, dissolve = TRUE)
+
+# Crop region (Extratropics, Northern Hemisphere)
+region <- c(0, 360, 40, 90)
+k1.class <- crop(k1.class, region)
+k2.class <- crop(k2.class, region)
+
+map(
+  "world2",
+  interior = FALSE,
+  boundary = TRUE,
+  fill = TRUE,
+  col = "grey",
+  border = "grey",
+  bg = "NA",
+  add = FALSE,
+  ylim = c(40, 90)
+)
+box()
+
+plot(
+  k1.class,
+  density = 15,
+  add = TRUE,
+  col = "blue",
+  border = "blue"
+)
+plot(
+  k2.class,
+  density = 15,
+  add = TRUE,
+  col = "red",
+  border = "red",
+  angle = -45
+)
+
+legend(
+  "topleft",
+  c("Current Tundra", "Future Tundra") ,
+  pch = 16,
+  col = c("blue", "red") ,
+  bty = "n"
+)
+
+```
+
+Repeat the same exercise for a different climate class.
+
+## Velocity of Climate Change
+
+Climate change velocity gives the ratio of the temporal climatic gradient at a given locality to the spatial climatic gradient across neighboring cells.
+
+```{r}
+
+# Read data
+
+tmin.hist <- rast("data/tasmin_Amon_CanESM5_historical_r10i1p1f1_gn_185001-201412.nc")
+tmax.hist <- rast("data/tasmax_Amon_CanESM5_historical_r10i1p1f1_gn_185001-201412.nc")
+
+tmin.ssp <- rast("data/tasmin_Amon_CanESM5_ssp585_r10i1p1f1_gn_201501-210012.nc")
+tmax.ssp <- rast("data/tasmax_Amon_CanESM5_ssp585_r10i1p1f1_gn_201501-210012.nc")
+
+pr.hist <- rast("data/pr_Amon_CanESM5_historical_r10i1p1f1_gn_185001-201412.nc")
+pr.ssp <- rast("data/pr_Amon_CanESM5_ssp585_r10i1p1f1_gn_201501-210012.nc")
+
+# Stack past and future together
+tmin <- c(tmin.hist, tmin.ssp)
+tmax <- c(tmax.hist, tmax.ssp)
+pr <- c(pr.hist, pr.ssp)
+
+# Get the dates
+dates <- time(tmin)
+dates <- format(dates, "%Y-%m-%d")
+dates <- as.Date(dates)
+
+# Convert units from K to C
+tmin <- tmin - 273.15
+tmax <- tmax - 273.15
+
+# Convert units from kg m-2 s-1 to mm per month
+days_per_month <- lubridate::days_in_month(dates)
+pr <- pr * 86400 * days_per_month
+
+# Create raster time series
+tmin <- rts(tmin, dates)
+tmax <- rts(tmax, dates)
+pr <- rts(pr, dates)
+
+# Mask ocean
+lcf <- rast("data/sftlf_fx_CanESM5_historical_r10i1p1f1_gn.nc")
+# Create a mask that masks out the ocean
+## Set all grid cells with a land cover fraction equal to zero to NA:
+lcf[lcf == 0] <- NA
+## Set all other values equal to one
+lcf <- lcf - lcf + 1
+```
+
+
+```{r}
+dv <- climetrics::dVelocity(pr, tmin, tmax, t1='1971/2000',t2='2071/2100')
+dv <- dv * lcf
+
+plot(dv, col=map.pal("elevation", n = 100), main='Velocity of Climate Change (km per year)')
+map("world2", add = TRUE, interior = FALSE)
+```

@@ -55,6 +55,7 @@ install.packages("rmarkdown")
 install.packages("magrittr")
 install.packages("stringi")
 install.packages("stringr")
+tinytex::install_tinytex()
 ```
 
 * R Markdown allows you to integrate code, figures, and text. You will write your report in R Markdown, which I will explain at the end of the tutorial.
@@ -81,6 +82,7 @@ renv::install("vars")
 renv::install("terra")
 renv::install("maps")
 renv::install("ClimInd")
+rev::install("EWSmethods")
 ```
 
 * Create a snapshot and check status
@@ -89,6 +91,7 @@ renv::install("ClimInd")
 renv::snapshot()
 renv::status()
 ```
+
 * The function above tells you whether a package is installed, recorded, and used
 * If it's used and recorded, call ```renv::restore()``` to install the version specified in the lockfile.
 * If it's used and not recorded, call ```renv::install()``` to install it from CRAN or elsewhere.
@@ -237,6 +240,7 @@ subset_condition <- vector_data[vector_data > 25]
 print("Subset (Elements greater than 25):")
 print(subset_condition)
 ```
+
 * Example: data frame
 ```{r, eval = FALSE}
 # Create a data frame
@@ -361,6 +365,7 @@ print(city)
 ```
 
 ## Control structure
+
 * Control structures determine the order in which statements are executed in a program. Two important examples are loops and conditional statements.
 * Loop example
 ```{r, eval = FALSE}
@@ -388,6 +393,7 @@ if (number > 0) {
 ```
 
 ## Generating data
+
 * Many times you need to generate data, e.g. a sequence that ranges from 1 to 10. Instead of writing out each number, there are functions that do that for you
 
 ```{r, eval = FALSE}
@@ -409,6 +415,7 @@ print(x)
 ```
 
 ## Defining a function
+
 * Often you need to execute the same operation many times. To do this efficiently you can define a function and then apply this function whenever you need it
 
 ```{r, eval = FALSE}
@@ -433,6 +440,7 @@ print(result)
 ```
 
 ## Plotting data
+
 ```{r, eval = FALSE}
 x <- seq(1:10)
 y <- x^2
@@ -494,6 +502,7 @@ lines(x, y2)
 ```
 
 ## Review
+
 Congratulations, you made it to the end of this tutorial. Let's list the key concepts you have learned today:
 
 * Operators: ```+, -, *, /, ^```
@@ -505,6 +514,7 @@ Congratulations, you made it to the end of this tutorial. Let's list the key con
 * Plotting data
 
 ## Exercise
+
 Write a piece of code that includes the following elements:
 
 * Create an R object that is either a data frame, matrix, array, or list
@@ -556,6 +566,19 @@ Write a piece of code that includes the following elements:
 
 
 
+
+```{r, eval = FALSE, echo = FALSE}
+## Differential equation
+x <- seq(0, 10, 0.1)
+y <- sin(x)
+dy <- cos(x)
+
+y <- ts(y)
+dy <- ts(dy)
+tsDat <- ts.union(y,dy)
+plot(tsDat)
+abline(v=19)
+```
 
 
 

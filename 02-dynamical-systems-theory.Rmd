@@ -5,14 +5,26 @@ output:
 ---
 # Dynamical Systems Theory
 
-## Savings account
+This tutorial covers the following topics:
+
+* Internal oscillation
+* Bifurcation
+* Chaotic behavior
+* Early warning indicators
+
+Please document all steps of this tutorial in your Tutorial Report
+
+## Internal Oscillation
+
+### Savings account
 
 The code below calculates the amount of money in your savings account at each time step by numerically integrating an ordinary differential equation (ODE) using the ```ode``` function. Have a look at the code. Which part of the code defines your initial value? Which part of the code is your ODE? Run this code on your computer.
 
 ```{r, eval = TRUE}
 library(deSolve)
 
-interest <- function(t, state, parameters)
+# Define the function
+ode_function <- function(t, state, parameters)
 {
   with(as.list(c(state)), {
     dx <- 0.06 * x
@@ -20,10 +32,15 @@ interest <- function(t, state, parameters)
     list(c(dx))
   })
 }
-state <- c(x = 100)
-times <- seq(0, 50, 1)
-out <- as.data.frame(ode(state, times, interest))
 
+# Define function inputs
+state <- c(x = 100) # Initial condition (t = 0)
+times <- seq(0, 50, 1) # Time steps
+
+# Run function
+out <- as.data.frame(ode(state, times, ode_function))
+
+# Plot output
 par(pty = "s")
 plot(out$time,
      out$x,
@@ -33,7 +50,7 @@ plot(out$time,
 
 ```
 
-## Lotka-Volterra
+### Lotka-Volterra
 
 Now that you know how to conduct numerical integration, let's apply your new skills to the Lotka-Volterra model:
 
@@ -147,7 +164,7 @@ plot(solution, type = "l", xlab = "Time", ylab = "B", main = NA)
 * Is the system in dynamic equilibrium?
 <!-- Yes, growth = mortality after about 300 time steps -->
 
-* What happens if you increase the rate of increase ($t_i$) from 0.05 to 0.08?
+* What happens if you increase the rate of increase ($r_i$) from 0.05 to 0.08?
 <!-- The dynamic equilibrium is reached much sooner, at about time step 100 -->
 
 * Next, let's plot the rate of change ($\frac{dB}{dt}$) as a function of the population density ($B$)
@@ -262,16 +279,10 @@ for (ri in rseq) {
 * What does each point on the curve represent?
 <!-- Each point gives the equilibrium species density $B$ for a given value of $r_i$ -->
 
-* Which grey shade corresponds to a stable, and which to an unstable equilibrium?
-<!-- Dark-grey = stable equilibrium, light-grey unstable equilibrium -->
-
-
-* Assume the initial budworm population is close to zero and $r_i$ equals 0.05. A small perturbation causes $B$ to increase. (a) What will the final population density be after some time? (b) What will happen with the population density if $r_i$ increases from 0.05 to 0.06?
+* Assume the initial budworm population is close to zero and $r_i$ equals 0.05. A small perturbation causes $B$ to increase. (a) What will the final population density be after some time? (b) Next, let's assume $r_i$ increases from 0.05 to 0.06. How will this affect the population density $B$ starting out at an initial population of 1?
 <!-- (a) B = 1, (b) B = 8 -->
 
-
-
-### Lorenz Attractor
+## Chaotic behaviour: Lorenz Attractor
 
 The Lorenz equations were the first chaotic system to be discovered. They are three differential equations that were derived to represent idealized behavior of the earth’s atmosphere:
 
@@ -296,7 +307,7 @@ Lorenz <- function(t, state, parameters)
     list(c(dx, dy, dz))
   })
 }
-state <- c(x = 1, y = 1, z = 1)
+state <- c(x = 1.01, y = 1, z = 1)
 times <- seq(0, 50, 0.01)
 out <- as.data.frame(ode(state, times, Lorenz, 0))
 
@@ -314,6 +325,12 @@ scatterplot3d(
   color = "blue"
 )
 ```
+
+* Record the last $x$, $y$, and $z$ values using ```tail(out)```
+
+* Apply a small change to the initial conditions and rerun the code. How do your changes affect the final $x$, $y$, and $z$ values?
+
+<!-- Small changes in initial conditions lead to large changes in the outcome -->
 
 
 ## Early warning signal (EWS) assessments
@@ -346,7 +363,7 @@ plot(
 abline(v = 190, col = "red")
 ```
 
-The Figure above shows a critical transition of the population occurring at about 190. Let's see if we can predict this transition by only looking at the data prior to this moment in time. To do this, let's truncate our data set, excluding all data after 190.
+The Figure above shows a critical transition of the population occurring at time step 190. Let's see if we can predict this transition by only looking at the data prior to this moment in time. To do this, let's truncate our data set, excluding all data after 190.
 
 ```{r, eval = FALSE}
 # Truncate data to prior inflection point
@@ -372,11 +389,15 @@ rolling_ews_eg <- uniEWS(
 )
 plot(rolling_ews_eg, y_lab = "Density")
 ```
-EWS Indicators:
 
+Interpret the behavior of the EWS indicators lag1 Autocorrelation (ar1) and Standard deviation (SD). Why do ar1 and SD increase after about time step 180?
+
+<!-- 
 * Autocorrelation at lag1	Autocorrelation (ar1): increases approaching a transition
 * Standard deviation (SD): Increasing variance/standard deviation is observed approaching a transition
 * Skewness (skew):	At a transition, the distribution of values in the time series can become asymmetric
 
 The figure above shows that all EWS indicators begin to trend upwards at about 170 which results in the positive Kendall Tau correlation coefficient indicative of an oncoming critical transition. A warning is indicated when an EWS displays a strong positive Kendall Tau correlation with time.
+
+-->
 

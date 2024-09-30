@@ -1,7 +1,7 @@
 ---
 output:
-  pdf_document: default
   html_document: default
+  pdf_document: default
 ---
 # Climate Model Analysis (I)
 
@@ -23,10 +23,6 @@ CMIP6.ScenarioMIP.CCCma.CanESM5.ssp585.r10i1p1f1.Amon.pr.gn
 # Daily precipitation
 CMIP6.CMIP.CCCma.CanESM5.historical.r10i1p1f1.day.pr.gn
 CMIP6.ScenarioMIP.CCCma.CanESM5.ssp585.r10i1p1f1.day.pr.gn
-
-### Monthly Net Biome Productivity
-CMIP6.CMIP.CCCma.CanESM5.historical.r10i1p1f1.Amon.nbp.gn
-CMIP6.ScenarioMIP.CCCma.CanESM5.ssp585.r10i1p1f1.Lmon.nbp.gn
 ```
 
 * Variable names are listed [here](https://pcmdi.llnl.gov/mips/cmip3/variableList.html)
@@ -317,9 +313,8 @@ plot(firstLayer, col = my.col, main = "Consecutive Dry Days")
 map("world2", add = TRUE)
 ```
 
-## Exercises
+## Consecutive Wet Days
 
-### (1) Consecutive Wet Days
 * Compute consecutive wet days using the ```cwd``` function provided by the [ClimInd](https://cran.r-project.org/web/packages/ClimInd/index.html) R-package
 * Use the script above as a template
 * Your results should look similar to the Figure below
@@ -359,11 +354,12 @@ plot(firstLayer, col = my.col, main = "Consecutive Wet Days")
 map("world2", add = TRUE)
 ```
 
-### (2) Linear trend of consecutive dry days
+## Linear trend of consecutive dry days
+
 * Compute the linear trend in consecutive dry days from 2015 to 2100
 * Before you start, let me briefly show you how you calculate the linear trend of a variable
 
-```{r, echo = FALSE}
+```{r}
 # Sample time series data
 time <- 1:10  # Independent variable (e.g., time in years)
 temperature <- runif(n = length(time), min = 1, max = 3) * time
@@ -398,7 +394,7 @@ data <- crop(x=data, y = c(100,170,-50,0))
 * Apply this function to each grid cell
 * Your results should look similar to the Figure below
 
-```{r, echo = FALSE}
+```{r}
 library(terra)
 library(ClimInd)
 library(maps)
@@ -426,7 +422,8 @@ cdd.gridCell <- app(data, fun = cdd.fun)
 
 n <- nlyr(cdd.gridCell)
 time <- seq(1, n, 1)
-# Define a function that calculated consecutive dry days
+
+# Define a function that calculates a linear trend
 trend.fun <- function(x) {
    linear.model <- lm(x ~ time)
    trend <- coef(linear.model)["time"]
@@ -448,16 +445,17 @@ my.col <- map.pal("differences", n = length(breaks) - 1)
 plot(trend, col = my.col, 
   type = "continuous",
   breaks = breaks,
-  main = "Consecutive Dry Days Trend (2015-2100)")
+  main = "Change in Consecutive Dry Days per year (2015-2100)")
 map("world2", add = TRUE)
 ```
 
-### (3) Consecutive dry days time series
+## Consecutive dry days time series
+
 * Next, plot a time series of consecutive dry days for the cropped region
 * To do that, use the ```global``` function in the ```terra``` package
 * Your results should look like the Figure below
 
-```{r, echo = FALSE}
+```{r}
 cdd.mean <- global(cdd.gridCell, mean, na.rm = TRUE)
 
 years <- rownames(cdd.mean)
@@ -468,10 +466,7 @@ plot(x = years, y = cdd.mean$mean,
 abline(trend_model, col="red", lwd=2)
 ```
 
-### (4) Analysis of an extreme climate index of your choice and region
-* Choose a different [ClimInd](https://cran.r-project.org/web/packages/ClimInd/index.html) climate index
-* Compute the future trend of this index for another region of the globe
+## Analysis of an extreme climate index of your choice and region
 
-
-
-
+* Repeat the previous two exercises but for a different region of the globe and a different climate index
+* The climate indices are provided by the [ClimInd](https://cran.r-project.org/web/packages/ClimInd/index.html) package

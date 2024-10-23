@@ -6,3 +6,76 @@ output:
 # Global Earth Observations (II)
 
 * Coming soon ...
+
+```{r, eval = FALSE}
+library(terra)
+library(ncdf4)
+
+rm(list=ls())
+
+my.grid <- rast("data/ERA5_tas_2000-2023.nc")
+my.grid <- subset(my.grid, 1:1)
+
+# set path and filename
+hdf_path <- "MOD13C2.061"
+
+# Get file names
+hdf_files <- list.files(hdf_path, pattern = "\\.hdf", full.names = TRUE, recursive = TRUE)
+
+# Define dates
+start.date <- "2000-02-01"
+timeInt <- "month"
+nTime <- length(hdf_files)
+dates <- base::seq(as.Date(start.date), by = timeInt, length = nTime)
+            
+rm(raster_list)
+raster_list <- list()
+
+for (j in 1:length(hdf_files)) {
+  
+hdf_file <- hdf_files[[j]]
+
+# Read HDF5 file
+data <- rast(hdf_file)
+
+# The first layer is EVI
+data <- subset(data, 2:2) 
+
+# EVI ranges between 0 and 1 
+# Set all negative values to NA
+data[data < 0] <- NA
+
+# Apply a scaling factor
+scaleFactor <- 10^(-8)
+data <- data * scaleFactor
+
+data <- terra::resample(x = data, y = my.grid)
+
+raster_list[[j]] <- data
+rm(data)
+gc()
+}
+
+# Make a raster stack and assign the dates
+data <- terra::rast(raster_list)
+terra::time(data) <- dates
+
+# Save data to netCDF file
+writeCDF(x = data, filename = "MOD13C2061-EVI-0.25deg.nc", varname = "EVI", overwrite=TRUE)
+```
+
+
+50 W and 80 W longitude and 5 N and 17 S
+
+
+# T63 resolution
+data <- raster::stack("LEOLSTCMG30.nc")
+r <- raster::raster("gpp_monthly.nc")
+r <- raster::rotate(r)
+data <- raster::resample(data, r, method='bilinear')
+data[data==0] <- NA
+writeRaster(data, filename = "LEOLSTCMG30_128x64.nc", format = "CDF", varname = "LST", overwrite=T)
+
+
+
+```

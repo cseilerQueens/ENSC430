@@ -1,0 +1,3327 @@
+--- 
+# title: "Applied Climate Science: Mitigation, Modeling, and Analysis (ENSC 430)"
+# author: "Christian Seiler"
+# date: "`r Sys.Date()`"
+site: bookdown::bookdown_site
+output: bookdown::gitbook
+documentclass: book
+# bibliography: [book.bib, packages.bib]
+biblio-style: apalike
+link-citations: yes
+# github-repo: rstudio/bookdown-demo
+description: "ENSC430"
+---
+```{r}
+setwd("C:/Users/seile/Documents/queensu/teaching/classes/ENSC430/tutorials/ENSC430")
+.libPaths("C:/Users/seile/Documents/queensu/teaching/classes/ENSC430/tutorials/ENSC430/renv")
+```
+
+# Course Overview (ENSC 430A/B)
+
+Welcome to ENSC 430: Honours Project in Environmental Sustainability. Climate change is one of the most pressing challenges of our time, requiring immediate and coordinated global action. To effectively address this complex issue, we must develop interdisciplinary skills that integrate knowledge from society, the economy, and the climate system. This course offers students the opportunity to develop these skills by focusing on three key areas:
+
+* Analyzing Climate Model Output: Interpret climate model data to assess the potential impacts of climate change on various aspects of the environment and human society.
+* Environmental Monitoring: Process satellite data and in situ observations to monitor and assess the current state of the environment.
+* Integrating Society, Economy, and Climate: Develop climate change mitigation strategies that account for feedback mechanisms between the climate, economy, and society.
+
+We will address these areas using a dynamical systems approach, which is crucial for understanding critical transitions and causal relationships within the Earth system. The course runs for the full academic year from September to April. For more information, please download the [syllabus](https://drive.google.com/file/d/1VMzge6bvFzSfmV1fwytNvsXFDrhCdsg2/view?usp=sharing).
+
+## Location and Time
+
+* ENSC 430A: 2024 Fall term, Fr 2:30PM - 5:30PM, Ellis Hall, Room 226, Sep 3, 2024 to Dec 3, 2024
+* ENSC 430B: 2025 Winter term, Fr 2:30PM - 5:30PM, Ellis Hall, Room 226, Jan 6, 2025 to Apr 4, 2025
+
+## ENSC 430A Fall Term
+
+The material posted on this website is under development. The slides and exercises for each class will be in their final version the day of the class.
+
+|Week | Date | Slides | Key R packages | Reading |
+|:-|:-----|:-----------|:---|:---|
+|1 | Fri, Sep 6 | [Introduction](https://drive.google.com/file/d/1syS6N1kavfnpgMsWFLwfz47zq9BQEwxB/view?usp=sharing)| [renv](https://cran.r-project.org/web/packages/renv/index.html)| NA|
+|2 | Fri, Sep 13 | [Dynamical Systems](https://drive.google.com/file/d/19EfYgffCpOi6XWySDtZhLcGzsDUAJnyh/view?usp=sharing) | [deSolve](https://cran.r-project.org/web/packages/deSolve/index.html)| [Scheffer et al (2003)](https://www.cell.com/trends/ecology-evolution/fulltext/S0169-5347(03)00278-7?large_figure=true)|
+|3 | Fri, Sep 20 | [Causal Inference](https://drive.google.com/file/d/1zj33Lq86ivyxbwxbpTaA-dGO7ZCmaKIg/view?usp=sharing) | [vars](https://cran.r-project.org/web/packages/vars/index.html)| [Runge et al (2019)](https://app.paperpile.com/view/plain/?id=3721495e-dd70-05e7-8277-ee8b76c8c489)|
+|4 | Fri, Sep 27 | [Climate Model Analysis (I): Climate Extremes](https://drive.google.com/file/d/19yMKOcvvYXZwZKBans7qvHnaGe-U1jt8/view?usp=drive_link) | [terra](https://cran.r-project.org/web/packages/terra/index.html), [ClimInd](https://cran.r-project.org/web/packages/ClimInd/index.html)| [Eyring et al (2016)](https://gmd.copernicus.org/articles/9/1937/2016/)|
+|5 | Fri, Oct 4 | [Climate Model Analysis (II): Impacts on Biodiversity](https://drive.google.com/file/d/1Du0wqgLeTptXaDuJbJ-z262fartnfO4a/view?usp=sharing)| [climetrics](https://cran.r-project.org/web/packages/climetrics/index.html)| [Taheri et al (2024)](https://nsojournals.onlinelibrary.wiley.com/doi/10.1111/ecog.07176?af=R)|
+|6 | Fri, Oct 11 | Climate Model Analysis (III): Causal Inference| [vars](https://cran.r-project.org/web/packages/vars/index.html)| [Papagiannopoulou et al (2017)](https://iopscience.iop.org/article/10.1088/1748-9326/aa7145/meta)|
+|7 | Fri, Oct 18 | Reading Week | - | - |
+|8 | Fri, Oct 25 | Global Earth Observations (I): Satellite Data| [terra](https://cran.r-project.org/web/packages/terra/index.html)| [Yan et al (2013)](https://www.nature.com/articles/nclimate1908)|
+|9 | Fri, Nov 1 | Global Earth Observations (II): In Situ Data| [FluxnetLSMR](https://github.com/aukkola/FluxnetLSM)| [Ukkola et al (2017)](https://gmd.copernicus.org/articles/10/3379/2017/gmd-10-3379-2017.pdf)|
+|10 | Fri, Nov 8 | Global Earth Observations (III): Causal Inference| [vars](https://cran.r-project.org/web/packages/vars/index.html)| [Papagiannopoulou et al (2017) (revisit)](https://iopscience.iop.org/article/10.1088/1748-9326/aa7145/meta)|
+|11 | Fri, Nov 15 | [Integrated Assessment Modeling (I): Mitigation Policies](https://drive.google.com/file/d/19yMKOcvvYXZwZKBans7qvHnaGe-U1jt8/view?usp=drive_link) | NA| [Edmonds et al (1983)](https://www.sciencedirect.com/science/article/pii/0140988383900142?via%3Dihub)| 
+|12 | Fri, Nov 22 | Integrated Assessment Modeling (II): Cost-Effective Pathways| NA| [Iyer et al (2015)](https://iopscience.iop.org/article/10.1088/1748-9326/10/12/125002/meta)|
+|13 | Fri, Nov 29 | Group Project | NA| NA|
+
+## ENSC 430B Winter Term
+
+|Week | Date |Activity|
+|:-|:---|:--------|
+|1 | Fri, Jan 10 | Identify project objectives| 
+|2 | Fri, Jan 17| Outline methods| 
+|3 | Fri, Jan 24| Conduct literature review| 
+|4 | Fri, Jan 31| Draft research plan|
+|5 | Fri, Feb 7| Present research plan (10 minutes per group)| 
+|6 | Fri, Feb 14| Implement project|
+|7 | Fri, Feb 21| Reading Break| 
+|8 | Fri, Feb 28| Continue implementing project| 
+|9 | Fri, Mar 7| Analyze results| 
+|10 | Fri, Mar 14| Prepare presentation| 
+|11 | Fri, Mar 21| Project Symposium from 08:30 AM to 04:30 PM|
+|12 | Fri, Mar 28| Write project report| 
+|13 | Fri, Apr 4| Finalize project report| 
+
+##  Assessments
+
+|Assignment | Type | Weight | Due Date|
+|:----------|:-----|:-------|:--------|
+| Tutorial Report | Individual | 50% | Tue, Dec 3, 2024|
+| Project Presentation | Group | 10% | Fri, Mar 21, 2025|
+| Project Report | Group | 40% | Mon, Apr 7, 2025|
+
+## Contact
+
+* Instructor: Dr. Christian Seiler
+* Email: christian.seiler@queensu.ca
+* Office: Biosciences Complex, Room 3240, 116 Barrie Street
+* Office hours: Wednesdays 2-4 PM
+
+<!--chapter:end:index.Rmd-->
+
+---
+output:
+  pdf_document: default
+  html_document: default
+---
+# Programming
+
+In this course you will be using the programming language R. Today you will learn the R basics you need to master the course. The main elements are: 
+
+* Controlling your computational environment using ```renv```
+* Operators: ```+, -, *, /, ^```
+* R objects (vector, data frame, matrix, array, list)
+* Subset objects
+* Control structure: loops, if-else statements
+* Generating data: sequence and random data
+* Defining a function
+* Plotting data
+* Documenting your code using RMarkdown
+
+Let's start with setting up your computer. R is a command line driven program. The user enters commands at the prompt and each command is executed one at a time. RStudio is a Graphic User Interface for R. For this course, you will first need to install R and then RStudio. If you already have R or RStudio installed, please install them again to ensure you have the most recent version.
+
+* Install R from [here](https://posit.co/download/rstudio-desktop)
+* Install RStudio from [here](https://posit.co/download/rstudio-desktop)
+* Once R and RStudio are installed, open RStudio and learn the basic R syntax following the exercises below.
+
+## Create a new Project
+* Open RStudio
+* Click on ```File``` in the upper-left corner
+* From the drop-down list choose ```New Project ...```, ```New Directory```, ```Browse...``` and choose a directory of your project. For instance, in my case this will be ```C:\Users\seile\Documents\queensu\teaching\classes\ENSC430\tutorials\ENSC430```. Important: make sure your directory does not include white space or special characters.
+* Go to your new directory and create a new folder called ```renv```. This is where you will store your packages, as explained next.
+
+## Set up your computational environment
+* In the lower-left panel you find your console where you can execute commands. 
+* Your first task is to set up your computational environment using the command ```.libPaths()```
+* In the Console, type the command below using the directory of your project. Note that you need to use ```/``` rather than ```\```.
+
+```{r, eval = FALSE}
+# Set your working directory:
+setwd("C:/Users/seile/Documents/queensu/teaching/classes/ENSC430/tutorials/ENSC430")
+
+# Tell R where to store your packages:
+.libPaths("C:/Users/seile/Documents/queensu/teaching/classes/ENSC430/tutorials/ENSC430/renv")
+```
+
+* You can check if all went well by typing ```.libPaths()```. Does it return your directory? If yes, then continue.
+* Next you will install your first package called ```renv```
+```{r, eval = FALSE}
+install.packages("renv")
+renv::init()
+```
+
+* Next, install ```rmarkdown```:
+```{r, eval = FALSE}
+install.packages("rmarkdown")
+install.packages("magrittr")
+install.packages("stringi")
+install.packages("stringr")
+tinytex::install_tinytex()
+```
+
+* R Markdown allows you to integrate code, figures, and text. You will write your report in R Markdown, which I will explain at the end of the tutorial.
+
+* Let's install all dependencies that you will need to complete this course
+```{r, eval = FALSE}
+setwd("C:/Users/seile/Documents/queensu/teaching/classes/ENSC430/tutorials/ENSC430")
+.libPaths("C:/Users/seile/Documents/queensu/teaching/classes/ENSC430/tutorials/ENSC430/renv")
+
+install.packages("renv")
+renv::init()
+renv::activate()
+
+renv::install("rmarkdown")
+renv::install("bookdown")
+renv::install("magrittr")
+renv::install("stringi")
+renv::install("stringr")
+renv::install("devtools")
+renv::install("remotes")
+renv::install("deSolve")
+renv::install("scatterplot3d")
+renv::install("vars")
+renv::install("terra")
+renv::install("maps")
+renv::install("ClimInd")
+rev::install("EWSmethods")
+renv::install("climetrics")
+```
+
+* Create a snapshot and check status
+
+```{r}
+renv::snapshot()
+renv::status()
+```
+
+* The function above tells you whether a package is installed, recorded, and used
+* If it's used and recorded, call ```renv::restore()``` to install the version specified in the lockfile.
+* If it's used and not recorded, call ```renv::install()``` to install it from CRAN or elsewhere.
+* If it's not used and recorded, call ```renv::snapshot()``` to remove it from the lockfile.
+* If it's not used and not recorded, there's nothing to do. This the most common state because you only use a small fraction of all available packages in any one project.
+
+* If all is well, you receive the message ```No issues found -- the project is in a consistent state.```. You are done!
+
+## Operators
+
+The following sections introduce the most basic elements of the R programming language. Start by creating an empty R script by clicking on ```File/New File/R script```. Open the script in R Studio and copy-paste the examples into your script as you go through the examples. Execute each line by hitting ```Ctrl Enter``` so you understand at each step what the code is doing. 
+
+* In R, you use the following syntax to assign a value to a variable.
+
+```{r, eval = FALSE}
+x <- 1
+print(x)
+```
+
+* The variable x used above is an example of an R object. The ```print``` statement prints the value of the object x.
+* Once you assign values to R objects, you can use the following arithmetic operators to perform calculations.
+
+```{r, eval = FALSE}
+a <- 2
+b <- 3
+
+# Addition
+c <- a+b
+print(c)
+
+# Subtraction
+c <- a-b
+print(c)
+
+# Multiplication
+c <- a*b
+print(c)
+
+# Division
+c <- a/b
+print(c)
+
+# Exponentiation
+c <- a^b
+print(c)
+```
+* Note that anything after the ```#``` symbol is ignored.
+
+```{r, eval = FALSE}
+a <- 2
+b <- 3
+c <- a + b
+# c <- (a + b)^2
+print(c)
+```
+* This way you can add comments into your code that to explain what you are doing
+
+## Objects
+
+* All objects have two intrinsic attributes: mode and length. 
+* The mode is the basic type of the elements of the object. 
+* There are four main modes: numeric, character, complex, and logical (FALSE or TRUE). 
+
+```{r, eval = FALSE}
+a <- 5
+class(a)
+
+a <- "apple"
+class(a)
+
+a <- 1 + 2i
+class(a)
+
+a <- TRUE
+class(a)
+```
+* The length of an object is the number of elements of the object.
+
+```{r, eval = FALSE}
+a <- 2
+length(a)
+
+a <- c(2,7,5)
+length(a)
+```
+* Next to mode and length, there are different types of objects, namely vector, data frame, matrix, array, and list
+
+```{r, eval = FALSE}
+# Vector with one element
+a <- 2
+print(a)
+
+# Vector with four elements
+b <- c(7,5,2,9)
+print(b)
+
+# Data frame
+x <- c(3,7,2,4)
+y <- c(42,67,21,33)
+df <- data.frame(x, y)
+print(df)
+
+# Matrix: in R, a matrix has 2 dimensions only)
+x <- c(1,2,3,4,5,6,7,8,9,10)
+a <- matrix(x, nrow = 2)
+print(a)
+
+# Array: an array has more than 2 dimensions
+x <- c(1,2,3,4,5,6,7,8,9)
+a <- array(data = x, dim = c(3,3,3))
+print(a)
+
+# List
+a <- c(3,2,5,6)
+b <- c(TRUE, FALSE)
+c <- c("apples", "pears", "plums")
+d <- 5
+
+l <- list(a,b,c,d)
+print(l)
+```
+
+* Let's learn how to subset vectors, data frames, matrices, arrays, and lists
+
+* Example: Vector
+```{r, eval = FALSE}
+# Create a vector
+vector_data <- c(10, 20, 30, 40, 50)
+
+# Print the vector
+print("Full Vector:")
+print(vector_data)
+
+# Subsetting by Index
+third_element <- vector_data[3]
+print("Third element:")
+print(third_element)
+
+# Subsetting by Multiple Indices
+subset_indices <- vector_data[c(1, 3, 5)]
+print("Subset (First, Third, and Fifth elements):")
+print(subset_indices)
+
+# Subsetting by Logical Condition
+subset_condition <- vector_data[vector_data > 25]
+print("Subset (Elements greater than 25):")
+print(subset_condition)
+```
+
+* Example: data frame
+```{r, eval = FALSE}
+# Create a data frame
+data <- data.frame(
+  Name = c("Alice", "Bob", "Charlie", "David", "Eve"),
+  Age = c(23, 25, 30, 22, 29),
+  Gender = c("F", "M", "M", "M", "F"),
+  Score = c(85, 90, 75, 88, 92)
+)
+
+# Print the data frame
+print("Full Data Frame:")
+print(data)
+
+# Subsetting by Columns
+subset_columns <- data[, c("Name", "Score")]
+print("Subset by Columns (Name and Score):")
+print(subset_columns)
+
+# Subsetting by Rows and Columns
+subset_rows_cols <- data[1:3, c("Name", "Age")]
+print("Subset by Rows and Columns (First 3 rows, Name and Age):")
+print(subset_rows_cols)
+
+# Subsetting by Condition
+subset_condition <- subset(data, Age > 25)
+print("Subset by Condition (Age > 25):")
+print(subset_condition)
+```
+
+* Example: matrix
+```{r, eval = FALSE}
+# Create a matrix
+matrix_data <- matrix(
+  1:12,        # Data
+  nrow = 4,    # Number of rows
+  ncol = 3,    # Number of columns
+  byrow = TRUE # Fill the matrix by rows
+)
+
+# Print the matrix
+print("Full Matrix:")
+print(matrix_data)
+
+# Subsetting by Rows and Columns
+subset_rows_cols <- matrix_data[1:2, 1:2]
+print("Subset (First 2 rows, First 2 columns):")
+print(subset_rows_cols)
+
+# Subsetting by Specific Rows
+subset_specific_rows <- matrix_data[c(1, 3), ]
+print("Subset (First and Third rows):")
+print(subset_specific_rows)
+
+# Subsetting by Specific Columns
+subset_specific_cols <- matrix_data[, c(2, 3)]
+print("Subset (Second and Third columns):")
+print(subset_specific_cols)
+```
+
+* Example: array
+```{r, eval = FALSE}
+
+# Create an array
+array_data <- array(
+  1:24,         # Data
+  dim = c(3, 4, 2) # Dimensions (3x4x2 array)
+)
+
+# Print the array
+print("Full Array:")
+print(array_data)
+
+# Subsetting by Indices
+element <- array_data[1, 2, 1]
+print("Element at (1, 2, 1):")
+print(element)
+
+# Subsetting by Slices
+slice <- array_data[, , 1]
+print("First slice (all elements in the first third dimension):")
+print(slice)
+
+# Subsetting by Specific Rows and Columns in a Specific Dimension
+subset_array <- array_data[1, , 2]
+print("First row, all columns, in the second slice:")
+print(subset_array)
+```
+
+* Example: list
+```{r, eval = FALSE}
+# Create a list
+list_data <- list(
+  Name = "Alice",
+  Age = 25,
+  Scores = c(85, 90, 88),
+  Address = list(
+    Street = "123 Main St",
+    City = "Springfield",
+    Zip = "12345"
+  )
+)
+
+# Print the list
+print("Full List:")
+print(list_data)
+
+# Subsetting by Element Name
+name <- list_data$Name
+print("Name element:")
+print(name)
+
+# Subsetting by Index
+age <- list_data[[2]]
+print("Second element (Age):")
+print(age)
+
+# Subsetting a Nested List
+city <- list_data$Address$City
+print("City element in Address:")
+print(city)
+```
+
+## Control structure
+
+* Control structures determine the order in which statements are executed in a program. Two important examples are loops and conditional statements.
+* Loop example
+```{r, eval = FALSE}
+# For loop to print numbers from 1 to 5
+for (i in 1:5) {
+  print(i)
+}
+```
+
+* Conditional statement example
+```{r, eval = FALSE}
+
+# Define a number
+number <- -3
+
+# If-else statement to check the sign of the number
+if (number > 0) {
+  print("The number is positive.")
+} else if (number < 0) {
+  print("The number is negative.")
+} else {
+  print("The number is zero.")
+}
+
+```
+
+## Generating data
+
+* Many times you need to generate data, e.g. a sequence that ranges from 1 to 10. Instead of writing out each number, there are functions that do that for you
+
+```{r, eval = FALSE}
+# Sequence from 1 to 10 with step size 1
+x <- 1:10
+print(x)
+
+# Sequence from 1 to 10 with step size 0.5
+x <- seq(1, 10, 0.5)
+print(x)
+
+# Vector that repeats the value one for ten times
+x <- rep(1, 10)
+print(x)
+
+# Random sequences with uniform distribution between zero and one
+x <- runif(n = 5, min = 0, max = 1)
+print(x)
+```
+
+## Defining a function
+
+* Often you need to execute the same operation many times. To do this efficiently you can define a function and then apply this function whenever you need it
+
+```{r, eval = FALSE}
+# Define a function to add two numbers
+add_numbers <- function(a, b) {
+  # Calculate the sum
+  sum <- a + b
+  # Return the sum
+  return(sum)
+}
+
+# Print the function definition
+print("Function Definition:")
+print(add_numbers)
+
+# Call the function with arguments 3 and 5
+result <- add_numbers(3, 5)
+
+# Print the result
+print("Result of add_numbers(3, 5):")
+print(result)
+```
+
+## Plotting data
+
+```{r, eval = FALSE}
+x <- seq(1:10)
+y <- x^2
+plot(x, y)
+```
+
+* Add x and y labels using ```xlab``` and ```ylab```
+```{r, eval = FALSE}
+x <- seq(1:10)
+y <- x^2
+plot(x, y, 
+     xlab = "ENSC430 lectures attended", 
+     ylab = "Academic Performance")
+```
+
+* Make it a line plot using ```type = "l"```
+```{r, eval = FALSE}
+x <- seq(1:10)
+y <- x^2
+plot(x, y, type = "l")
+```
+
+* Add more lines using ```lines()```
+```{r, eval = FALSE}
+x <- seq(1:10)
+y1 <- x^2
+y2 <- x^3
+plot(x, y1, type = "l")
+lines(x, y2)
+```
+
+* Make each line a different color using ```col```
+```{r, eval = FALSE}
+x <- seq(1:10)
+y1 <- x^2
+y2 <- x^3
+plot(x, y1, type = "l", col = "red")
+lines(x, y2, col = "blue")
+```
+
+* Adjust x and y axis using ```xlim``` and ```ylim```
+```{r, eval = FALSE}
+x <- seq(1:10)
+y1 <- x^2
+y2 <- x^3
+plot(x, y1, type = "l", 
+     xlim = c(-5,10), ylim = c(-20, 100))
+lines(x, y2)
+```
+
+* Making square axis using ```par(pty="s")``` and ```asp = 1```
+```{r, eval = FALSE}
+x <- seq(1:10)
+y1 <- x^2
+y2 <- x^3
+par(pty="s")
+plot(x, y1, type = "l", asp = 1)
+lines(x, y2)
+```
+
+## Review
+
+Congratulations, you made it to the end of this tutorial. Let's list the key concepts you have learned today:
+
+* Operators: ```+, -, *, /, ^```
+* Objects: vector ```c()```, data frame ```data.frame()```, matrix ```matrix()```, array ```array()```, list ```list()```, 
+* Subset objects
+* Control structure: loops, if-else statements
+* Generating data: sequence and random data
+* Defining a function
+* Plotting data
+
+## Exercise
+
+Write a piece of code that includes the following elements:
+
+* Create an R object that is either a data frame, matrix, array, or list
+* Define a function
+* Apply the function to a subset of the R object using either a loop or a conditional statement
+* Plot the data
+
+Document your exercise in a Markdown document following the steps below.
+
+* Click on ```File, New File, R Markdown```, choosing PDF as output format
+* Save the new ```.Rmd``` in your project folder
+* Open the folder and start writing your code
+* Your rmarkdown document should look similar to this, without the ```#```:
+
+```{r, eval = FALSE}
+# ---
+# title: "ENSC 430 - Exercises"
+# author: "Christian Seiler"
+# date: "`r Sys.Date()`"
+# output: pdf_document
+# ---
+
+# ```{r setup, include=FALSE}
+# knitr::opts_chunk$set(echo = TRUE)
+# ```
+
+## Exercise 1
+Write a piece of code that includes the following elements:
+
+* Create a array with 3 dimensions
+* Define a function
+* For each array, subset and apply the function
+* Plot the data, one line for each array
+
+
+# ```{r, eval = TRUE}
+# Create an array
+# array_data <- array(1:12, dim = c(2, 3, 4))
+# add your code here
+# ```
+```
+
+* Once you are done, click on ```Knit```
+* If you change your code, close the PDF before knitting again
+* To make your code more readable, highlight it and press ```Ctrl+Shift+A```
+* As the course progresses you will be adding exercises to this markdown document
+* You will hand in the ```.PDF``` file by the end of the term for marking
+
+
+
+
+
+```{r, eval = FALSE, echo = FALSE}
+## Differential equation
+x <- seq(0, 10, 0.1)
+y <- sin(x)
+dy <- cos(x)
+
+y <- ts(y)
+dy <- ts(dy)
+tsDat <- ts.union(y,dy)
+plot(tsDat)
+abline(v=19)
+```
+
+
+
+
+<!--chapter:end:01-programming.Rmd-->
+
+---
+output:
+  pdf_document: default
+  html_document: default
+---
+# Dynamical Systems Theory
+
+This tutorial covers the following topics:
+
+* Internal oscillation
+* Bifurcation
+* Chaotic behavior
+* Early warning indicators
+
+Please document all steps of this tutorial in your Tutorial Report
+
+## Internal Oscillation
+
+### Savings account
+
+The code below calculates the amount of money in your savings account at each time step by numerically integrating an ordinary differential equation (ODE) using the ```ode``` function. Have a look at the code. Which part of the code defines your initial value? Which part of the code is your ODE? Run this code on your computer.
+
+```{r, eval = TRUE}
+library(deSolve)
+
+# Define the function
+ode_function <- function(t, state, parameters)
+{
+  with(as.list(c(state)), {
+    dx <- 0.06 * x
+    
+    list(c(dx))
+  })
+}
+
+# Define function inputs
+state <- c(x = 100) # Initial condition (t = 0)
+times <- seq(0, 50, 1) # Time steps
+
+# Run function
+out <- as.data.frame(ode(state, times, ode_function))
+
+# Plot output
+par(pty = "s")
+plot(out$time,
+     out$x,
+     type = "l",
+     xlab = "Time Step",
+     ylab = "x")
+
+```
+
+### Lotka-Volterra
+
+Now that you know how to conduct numerical integration, let's apply your new skills to the Lotka-Volterra model:
+
+$$\frac{dY}{dt} = r_i * Y * (1 - Y / K) - \alpha * R * Y $$
+$$\frac{dR}{dt} = \alpha * \gamma * R * Y - m * R $$
+
+where $Y$ = prey, $R$ = predator, $\alpha$ = ingestion rate of predator (0.2), $r_i$ = rate of prey increase (1), $m$ = mortality rate (0.2), $\gamma$ = assimilation efficiency (0.5), $K$ = carrying capacity (10000). Adjust the code from your savings account above to reproduce the Figure below.
+
+```{r, echo=FALSE}
+library(deSolve)
+
+ode_function <- function(t, state, parameters)
+{
+  with(as.list(c(state)), {
+    alpha <- 0.2
+    ri <- 1
+    m <- 0.2
+    gamma <- 0.5
+    K <- 10000
+    
+    dY <- ri * Y * (1 - Y / K) - alpha * R * Y
+    dR <- alpha * gamma * R * Y - m * R
+    
+    list(c(dY, dR))
+  })
+}
+state <- c(Y = 1, R = 1)
+times <- seq(0, 70, 0.1)
+out <- as.data.frame(ode(state, times, ode_function))
+
+par(pty = "s")
+plot(out$time,
+     out$Y,
+     type = "l",
+     xlab = "Time Step",
+     ylab = "Species Density")
+lines(out$time, out$R, col = "red")
+legend("topleft", c("Predator", "Prey"), text.col = c("red", "black"))
+
+```
+
+Now adjust the code again to plot Predator versus Prey, reproducing the Figure below.
+
+```{r, echo=FALSE}
+library(deSolve)
+
+interest <- function(t, state, parameters)
+{
+  with(as.list(c(state)), {
+    alpha <- 0.2
+    ri <- 1
+    m <- 0.2
+    gamma <- 0.5
+    K <- 10000
+    
+    dY <- ri * Y * (1 - Y / K) - alpha * R * Y
+    dR <- alpha * gamma * R * Y - m * R
+    
+    list(c(dY, dR))
+  })
+}
+state <- c(Y = 1, R = 1)
+times <- seq(0, 70, 0.1)
+out <- as.data.frame(ode(state, times, interest))
+
+par(pty = "s")
+plot(
+  x = out$Y,
+  y = out$R,
+  type = "l",
+  xlab = "Prey",
+  ylab = "Predator"
+)
+```
+
+
+## Bifurcation
+
+The spruce budworm ($\textit{Choristoneura fumiferana}$) is an insect pest that consumes the leaves of coniferous trees in North America. In some years, their populations explode and the excessive consumption of pine buds and needles causes massive damage to the trees. The equation below describes the density of the spruce budworm ($B$), as a function of density-dependent growth (first term) and predatory mortality (second term):
+
+$$ \frac{dB}{dt} = r_i B \left( 1 - \frac{B}{K}\right) - \beta \frac{B^2}{B^2+k_s^2}$$
+where $t$ is the time, $r_i$ is the rate of increase, $K$ is the carrying capacity of the environment, $\beta$ is the maximum mortality rate, and $k_s$ is the half-saturation density at which mortality is half of the maximal rate. This is an ordinary differential equation (ODE). Let's plot the species density ($B$) as a function of time ($t$). To do that we will integrate the function above with respect to time using the ```ode``` function below. 
+
+```{r, eval = FALSE}
+library(deSolve)
+
+# Define the ODE function
+ode_function <- function(t, B, parameters) {
+  with(as.list(c(parameters, B)), {
+    dBdt <- ri*B*(1-B/K)-beta*B^2/(B^2+ks^2)
+    return(list(dBdt))
+  })
+}
+
+# Set parameter values and initial conditions
+parameters <- c(ri = 0.05, K = 10, beta = 0.1, ks = 1)
+initial_conditions <- c(B = 4)
+
+# Set your time axis
+time_points <- seq(0, 1000, by = 1)
+
+# Use the ode function to solve the ODE
+solution <- ode(y = initial_conditions, times = time_points, func = ode_function, parms = parameters)
+
+# Plot the solution
+par(pty="s")
+plot(solution, type = "l", xlab = "Time", ylab = "B", main = NA)
+
+```
+
+* Is the system in dynamic equilibrium?
+<!-- Yes, growth = mortality after about 300 time steps -->
+
+* What happens if you increase the rate of increase ($r_i$) from 0.05 to 0.08?
+<!-- The dynamic equilibrium is reached much sooner, at about time step 100 -->
+
+* Next, let's plot the rate of change ($\frac{dB}{dt}$) as a function of the population density ($B$)
+```{r, eval = FALSE}
+
+# Input values
+ ri <- 0.05
+ K <- 10
+ beta <- 0.1 
+ ks <- 1
+ B <- seq(0, 10, 0.01)
+
+# Function 
+dBdt <- ri*B*(1-B/K)-beta*B^2/(B^2+ks^2)
+
+# Plot
+par(pty="s")
+plot(x = B, y = dBdt, type = "l", xlab = "B", ylab = "dBdt", main = NA)
+abline(h = 0, col = "grey")
+
+```
+
+* How many equilibrium points are there?
+<!-- There are four equilibrium points (dB/dt = 0) -->
+
+* Are they stable or unstable?
+<!-- From left-to-right: unstable, stable, unstable, stable -->
+
+* Evaluate your answer by running the code below, trying different values for $B$ (e.g. 0, 1, 2, 5, 10) (```state <- c(B = 10)```). Document your findings.
+
+```{r, eval = FALSE}
+library(deSolve)
+
+ri <- 0.05
+K <- 10
+beta <- 0.1
+ks <- 1
+
+rate <- function(t, state, parameters)
+{
+  with(as.list(c(state)), {
+    ri <- 0.05
+    K <- 10
+    beta <- 0.1
+    ks <- 1
+    
+    dB <- ri * B * (1 - B / K) - beta * B ^ 2 / (B ^ 2 + ks ^ 2)
+    
+    list(c(dB))
+  })
+}
+
+state <- c(B = 1)
+times <- seq(0, 500, 1)
+out <- as.data.frame(ode(state, times, rate))
+
+par(pty = "s")
+plot(out$time,
+     out$B,
+     type = "l",
+     xlab = "Time Step",
+     ylab = "B")
+```
+
+* Run the code below to plot the bifurcation diagram 
+
+```{r, eval = FALSE}
+library(deSolve)
+library(rootSolve)
+
+ri <- 0.05
+K <- 10
+beta <- 0.1
+ks <- 1
+rate <- function(B, ri = 0.05)
+{
+  ri * B * (1 - B / K) - beta * B ^ 2 / (B ^ 2 + ks ^ 2)
+}
+
+equilibrium <- function(ri)
+{
+  Eq <- uniroot.all(f = rate,
+                    interval = c(0, 10),
+                    ri = ri)
+  for (i in 1:length(Eq))
+  {
+    jac <- gradient(f = rate, x = Eq[i], ri = ri)
+  }
+  return(list(x = Eq))
+}
+
+rseq <- seq(0.01, 0.07, by = 0.0001)
+
+par(pty = "s")
+plot(
+  0,
+  xlim = range(rseq),
+  ylim = c(0, 10),
+  type = "n",
+  xlab = "ri",
+  ylab = "B"
+)
+for (ri in rseq) {
+  eq <- equilibrium(ri)
+  points(
+    rep(ri, length(eq$x)),
+    eq$x
+  )
+}
+```
+
+* What does each point on the curve represent?
+<!-- Each point gives the equilibrium species density $B$ for a given value of $r_i$ -->
+
+* Assume the initial budworm population is close to zero and $r_i$ equals 0.05. A small perturbation causes $B$ to increase. (a) What will the final population density be after some time? (b) Next, let's assume $r_i$ increases from 0.05 to 0.06. How will this affect the population density $B$ starting out at an initial population of 1?
+<!-- (a) B = 1, (b) B = 8 -->
+
+## Chaotic behaviour: Lorenz Attractor
+
+The Lorenz equations were the first chaotic system to be discovered. They are three differential equations that were derived to represent idealized behavior of the earth’s atmosphere:
+
+$\frac{dx}{dt} = -\frac{8}{3}x+yz$
+
+$\frac{dy}{dt} = -10 (y - z)$
+
+$\frac{dz}{dt} = -xy + 28y-z$
+
+* Run the code below to visualize the Lorenz Attractor
+
+```{r, eval = FALSE}
+library(deSolve)
+library(scatterplot3d)
+
+Lorenz <- function(t, state, parameters)
+{
+  with(as.list(c(state)), {
+    dx <- -8 / 3 * x + y * z
+    dy <- -10 * (y - z)
+    dz <- -x * y + 28 * y - z
+    list(c(dx, dy, dz))
+  })
+}
+state <- c(x = 1.01, y = 1, z = 1)
+times <- seq(0, 50, 0.01)
+out <- as.data.frame(ode(state, times, Lorenz, 0))
+
+par(pty = "s")
+scatterplot3d(
+  out$x,
+  out$y,
+  out$z,
+  type = "l",
+  xlab = "X",
+  ylab = "Y",
+  zlab = "Z",
+  grid = FALSE,
+  box = TRUE,
+  color = "blue"
+)
+```
+
+* Record the last $x$, $y$, and $z$ values using ```tail(out)```
+
+* Apply a small change to the initial conditions and rerun the code. How do your changes affect the final $x$, $y$, and $z$ values?
+
+<!-- Small changes in initial conditions lead to large changes in the outcome -->
+
+
+## Early warning signal (EWS) assessments
+
+Let's see if we can detect a critical transition in the population of fish from a time series using the ```EWSmethods``` R package.
+
+```{r, eval = FALSE}
+library(EWSmethods)
+set.seed(123) # Set seed to ensure reproducibility
+
+# Load data provided by the EWSmethods package
+data("simTransComms")
+data <- simTransComms
+
+# Let's look at community 1 only
+data <- data$community1
+
+time <- data$time
+population <- data$spp_3
+
+data <- data.frame(time, population)
+
+plot(
+  data$time,
+  data$population,
+  type = "l",
+  xlab = "Time",
+  ylab = "Population Density"
+)
+abline(v = 190, col = "red")
+```
+
+The Figure above shows a critical transition of the population occurring at time step 190. Let's see if we can predict this transition by only looking at the data prior to this moment in time. To do this, let's truncate our data set, excluding all data after 190.
+
+```{r, eval = FALSE}
+# Truncate data to prior inflection point
+data <- subset(data , time < 191.5)
+
+plot(
+  data$time,
+  data$population,
+  type = "l",
+  xlab = "Time",
+  ylab = "Population Density"
+)
+```
+
+Next, apply the Univariate Early Warning Signal Assessment ```uniEWS```
+
+```{r, eval = FALSE}
+rolling_ews_eg <- uniEWS(
+  data = data,
+  metrics = c("ar1", "SD", "skew"),
+  method = "rolling",
+  winsize = 50
+)
+plot(rolling_ews_eg, y_lab = "Density")
+```
+
+Interpret the behavior of the EWS indicators lag1 Autocorrelation (ar1) and Standard deviation (SD). Why do ar1 and SD increase after about time step 180?
+
+<!-- 
+* Autocorrelation at lag1	Autocorrelation (ar1): increases approaching a transition
+* Standard deviation (SD): Increasing variance/standard deviation is observed approaching a transition
+* Skewness (skew):	At a transition, the distribution of values in the time series can become asymmetric
+
+The figure above shows that all EWS indicators begin to trend upwards at about 170 which results in the positive Kendall Tau correlation coefficient indicative of an oncoming critical transition. A warning is indicated when an EWS displays a strong positive Kendall Tau correlation with time.
+
+-->
+
+
+<!--chapter:end:02-dynamical-systems-theory.Rmd-->
+
+---
+output:
+  pdf_document: default
+  html_document: default
+---
+# Causal Inference
+
+Let's start by loading all the libraries that we will need
+
+```{r, eval = FALSE}
+library(stats)
+library(vars)
+library(deSolve)
+```
+
+
+## Autoregression
+
+A first-order autoregressive model (AR1) is defined as:
+
+$$ y_t = \beta_0 + \beta_1y_{t-1} + \epsilon_t$$
+The response variable in the previous time period ($y_t$) is the predictor. If we want to predict $y$ this year ($y_t$) using measurements from two (rather than one) previous time steps, then we use a second order autoregressive model (AR2):
+
+$$ y_t = \beta_0 + \beta_1y_{t-1} + \beta_2y_{t-2}+ \epsilon_t$$
+More, generally, a $p$-order autoregressive model is defined as:
+
+$$ y_t = \beta_0 + \beta_1y_{t-1} + \beta_2y_{t-2}+...+ \beta_py_{t-p} + \epsilon_t$$
+
+Let's use a AR2 to forecast an oscillating function.
+
+```{r}
+# Create a sinusoidal time series
+t <- seq(0, 20, 0.1) # time axis
+n <- length(t) # number of time steps
+x <- sin(t)
+time_series <- ts(x)
+plot(time_series)
+```
+
+Next, fit an second-order autoregressive model using Ordinary Least Squares regression (OLS)
+
+```{r}
+ar_model <- ar.ols(time_series, order.max = 2)
+print(ar_model)
+```
+
+The Intercept refers to $\beta_0$ and the coefficients 1 and 2 refer to $\beta_1$ and $\beta_2$. Our AR2 is therefore:
+
+$$ y_t = -0.0003167 + 1.99y_{t-1} - 1.00y_{t-2} $$
+
+Let's plot this function:
+
+* Set parameters
+
+```{r}
+beta0 <- -0.0003167 # intercept
+beta1 <- 1.99    # Coefficient of y_{t-1}
+beta2 <- - 1.00 # Coefficient of y_{t-2}
+```
+
+* Set the initial values of the time series
+* We will need two initial values because we are predicting $y_t$ from $y_{t-1}$ and $y_{t-2}$
+
+```{r}
+y <- numeric(n)
+y3 <- time_series[3]
+y2 <- time_series[2]
+y[1:2] <- c(y2, y3)  # Initial value
+```
+
+* Generate the time series using AR2
+
+```{r}
+for (t in 3:n) {
+  epsilon_t <- 0  # Random error term
+  y[t] <- beta0 + beta1 * y[t-1] + beta2 * y[t-2] + epsilon_t
+}
+```
+
+* Plot the generated time series
+
+```{r}
+plot(y, type = "l", col = "blue", lwd = 2, 
+     xlab = "Time", ylab = "Y_t", main = "Time Series Generated with AR2")
+```
+
+* You can reproduce a sinusoidal function using AR, amazing! Given that each $y_t$ depends on previous time steps (in our case $y_{t-1}$ and $y_{t-2}$), we should be able to use AR to preduct the future. Let's try that next using the ```stats::predict``` function.
+
+```{r}
+# Forecast the next 100 steps
+forecast_length <- 100
+pred <- stats::predict(ar_model, n.ahead = forecast_length)
+
+# Combine actual and forecasted values
+combined_series <- c(time_series, pred$pred)
+
+# Plot the actual time series and the forecast
+plot(
+  combined_series,
+  type = "l",
+  col = "red",
+  lwd = 2,
+  xlab = "Time",
+  ylab = "Value",
+  main = "Autoregression with OLS"
+)
+
+lines(1:n, time_series, col = "black", lwd = 2)  # Actual time series in black
+
+# Add a legend
+legend(
+  "bottomleft",
+  legend = c("Actual", "Forecast"),
+  col = c("black", "red"),
+  lwd = 2
+)
+
+```
+
+* The result matches what you intuitively expect. Let's now see how we can work with multiple variables. 
+
+
+## Vector autoregression (VAR)
+
+Vector autoregression (VAR) extends the idea of autoregression to multivariate time series. Each variable is a linear function of past lags of itself and past lags of the other variables. Suppose we measure two different time series variables, denoted by $x_{t}$ and $y_{t}$. The first-order vector autoregressive model (VAR(1)) then is:
+
+$$ x_{t} = \beta_{1} + \beta_{11}  x_{t-1} +  \beta_{12}  y_{t-1} + \epsilon_{1,t} $$
+$$ y_{t} = \beta_{2} + \beta_{21}  x_{t-1} +  \beta_{22}  y_{t-1} + \epsilon_{2,t} $$
+
+You can see that the variable $x_t$ depends on the 1-lag of itself ($x_{t-1}$) and of the other variable ($y_{t-1}$). As for AR, the order of VAR can be increased by including more time lags. Let's apply VAR to two time series. 
+
+```{r}
+
+# Create time-series objects
+ts1 <- ts(rnorm(n=5000))
+ts2 <- ts(rnorm(n=5000))
+
+# Bind time series and plot them
+tsDat <- ts.union(ts1, ts2)
+plot(tsDat)
+```
+
+* Calculate the coefficients for both time series using a time lag order of 1
+
+```{r}
+tsVAR <- vars::VAR(tsDat, p = 1) # p gives the lag order
+print(tsVAR)
+```
+
+* The output gives you the coefficients and the y-intercept. The ```tsVAR``` object serves as an input when testing for Granger causality. But before we move on to Granger, let's brielfy recap what we have learned so far:
+
+* Create a autoregression model (AR): ```stats::ar.ols(time_series, order.max = 2)```
+* Predict the future using AR: ```stats::predict(ar_model, n.ahead = forecast_length)```
+* Create a vector autoregression model (VAR): ```vars::VAR(tsDat, p = 3)```
+
+Now we have the necessary skills for conducting causal inference, as explained next.
+
+## Granger Causality
+
+Using our time series above, we can now ask whether $x$ cause $y$. To address this question, we define two models. 
+
+* (1) Restricted model: univariate autoregression of $y$: 
+
+$$ y_{t} = \alpha_{0} + \alpha_{1}  y_{t-1} + \epsilon_{1,t} $$
+
+* (2) Unrestricted model: multivariate autoregression of $y$:
+
+$$ y_{t} = \beta_{0} + \beta_{1}  x_{t-1} +  \beta_{2}  y_{t-1} + \epsilon_{2,t} $$
+
+The restricted model is an autoregressive model where $y_t$ depends only on $y$ lags. The unrestricted model is an autoregressive model where $y_t$ depends on $y$ and $x$ lags. If the unrestricted model outperforms the restricted model, then $x$ precedes $y$. The performance is measured via an $F$-test that compares the error terms of both models. 
+
+* Conduct Granger causality:
+```{r}
+vars::causality(tsVAR, cause = "ts1")$Granger
+```
+
+* The null hypothesis ```H0``` says that the first time series does not Granger-cause thje second time series.
+* The $p$-value exceeds 0.05, confirming the null hypothesis.
+* You can safely assume that time series 1 does not Granger-cause time series 2
+* Does that surprise you or did you expect this to happen? Explain why.
+* Check for the reverse and see if time series 2 Granger-causes time series 1
+
+```{r, eval = FALSE, echo = FALSE}
+vars::causality(tsVAR, cause = "ts2")$Granger
+```
+
+Let's apply Granger causality to a different set of time series that do have a statistical association.
+
+* Create two sinusoidal time series that differ by random noise and that are lagged
+
+```{r}
+rm(list = ls())
+t <- seq(0, 20, 0.1) # time axis
+n <- length(t) # number of time steps
+
+x <- sin(t)
+y <- x[1:(n-9)]
+x <- x[10:n]
+
+# Add noise to y
+noise <- runif(n=length(y), min = -0.5, max = 0.5)
+y <- y + noise
+
+x <- ts(x)
+y <- ts(y)
+
+tsDat <- ts.union(x, y)
+plot(tsDat)
+```
+
+* Create a vector autoregression model and apply Granger causation
+
+```{r}
+tsVAR <- vars::VAR(tsDat, p = 2)
+
+# Apply Granger 
+vars::causality(tsVAR, cause = "x")$Granger
+vars::causality(tsVAR, cause = "y")$Granger
+
+```
+
+* What is your interpretation of the results?
+
+Now let's apply our new skills to the Lotka-Volterra model.
+
+* Create two time series, one for predator, the other for prey
+
+```{r}
+
+rm(list = ls())
+
+# (1) Create Predator-Prey time series
+ode_function <- function(t, state, parameters)
+{
+  with(as.list(c(state)), {
+    alpha <- 0.2
+    ri <- 1
+    m <- 0.2
+    gamma <- 0.5
+    K <- 10000
+    
+    dY <- ri * Y * (1 - Y / K) - alpha * R * Y
+    dR <- alpha * gamma * R * Y - m * R
+    
+    list(c(dY, dR))
+  })
+}
+state <- c(Y = 1, R = 1)
+times <- seq(0, 70, 0.1)
+out <- as.data.frame(ode(state, times, ode_function))
+predator <- ts(out$R)
+prey <- ts(out$Y)
+tsDat <- ts.union(predator, prey)
+plot(tsDat)
+```
+
+* Conduct Granger causality
+
+```{r}
+tsVAR <- vars::VAR(tsDat, p = 3)
+vars::causality(tsVAR, cause = "predator")$Granger
+vars::causality(tsVAR, cause = "prey")$Granger
+
+```
+* Interpret the results
+
+## Evaluate the statistical association between $x$, $y$, and $z$ in the Lorenz equations using Granger causality
+
+To recall, the Lorenz equations were the first chaotic system to be discovered. They are three differential equations that were derived to represent idealized behavior of the earth’s atmosphere:
+
+$\frac{dx}{dt} = -\frac{8}{3}x+yz$
+
+$\frac{dy}{dt} = -10 (y - z)$
+
+$\frac{dz}{dt} = -xy + 28y-z$
+
+* Good luck!
+
+```{r, eval = FALSE, echo = FALSE}
+Lorenz <- function(t, state, parameters)
+{
+  with(as.list(c(state)), {
+    dx <- -8 / 3 * x + y * z
+    dy <- -10 * (y - z)
+    dz <- -x * y + 28 * y - z
+    list(c(dx, dy, dz))
+  })
+}
+state <- c(x = 1.01, y = 1, z = 1)
+times <- seq(0, 50, 0.01)
+out <- as.data.frame(ode(state, times, Lorenz, 0))
+
+x <- ts(out$x)
+y <- ts(out$y)
+z <- ts(out$z)
+
+tsDat <- ts.union(x,y,z)
+plot(tsDat)
+```
+
+```{r, eval = FALSE, echo = FALSE}
+tsVAR <- vars::VAR(tsDat, p = 3)
+vars::causality(tsVAR, cause = "x")$Granger
+vars::causality(tsVAR, cause = "y")$Granger
+vars::causality(tsVAR, cause = "z")$Granger
+```
+
+<!--chapter:end:03-causal-inference.Rmd-->
+
+---
+output:
+  html_document: default
+  pdf_document: default
+---
+# Climate Model Analysis (I)
+
+## Earth System Grid Federation (ESGF)
+
+* Visit the [ESGF website](https://esgf.llnl.gov/)
+* Click on [Metagrid web application](https://aims2.llnl.gov/search)
+* We want to download monthly precipitation simulated by the Candian Earth System Model for the historical period
+* To find the file, you will need filter the data base by adding key words
+* In the keyword section, add ```CMIP``` (Coupled Model Intercomparison Project), ```CCCma``` (Canadian Centre for Climate Modelling and Analysis), ```CanESM5``` (Canadian Earth System Model version 5), ```historical``` (historical period), ```r10i1p1f1``` (ensemble member ID), ```Amon``` (realm: atmosphere, time resolution: monthly), and ```pr.gn``` (precipitation)
+* Once you find the file, download the corresponding wget script
+* To find different files, clear keywords and re-enter new keywords:
+
+```
+# Monthly precipitation
+CMIP6.CMIP.CCCma.CanESM5.historical.r10i1p1f1.Amon.pr.gn
+CMIP6.ScenarioMIP.CCCma.CanESM5.ssp585.r10i1p1f1.Amon.pr.gn
+
+# Daily precipitation
+CMIP6.CMIP.CCCma.CanESM5.historical.r10i1p1f1.day.pr.gn
+CMIP6.ScenarioMIP.CCCma.CanESM5.ssp585.r10i1p1f1.day.pr.gn
+```
+
+* Variable names are listed [here](https://pcmdi.llnl.gov/mips/cmip3/variableList.html)
+* For example, search for ```precipitation``` (Windows search: ```Ctrl + F```, Mac search: ```Command + F```), you will find the variable description, ID, and physical units ```precipitation_flux, pr, kg m-2 s-1```
+
+* Open one of the wget files using a text editor and search for something that looks like this:
+
+```
+#These are the embedded files to be downloaded
+download_files="$(cat <<EOF--dataset.file.url.chksum_type.chksum
+'pr_Amon_CanESM5_historical_r10i1p1f1_gn_185001-201412.nc' 'http://crd-esgf-drc.ec.gc.ca/thredds/fileServer/esgC_dataroot/AR6/CMIP6/CMIP/CCCma/CanESM5/historical/r10i1p1f1/Amon/pr/gn/v20190429/pr_Amon_CanESM5_historical_r10i1p1f1_gn_185001-201412.nc' 'SHA256' '2eb2e7fa943902a9fd4f726a98e6ba5713b23558a8da5bda8c992ef374aca6d4'
+EOF--dataset.file.url.chksum_type.chksum
+)"
+```
+
+There you find the URL to the file that you want to download (it may look slightly different for you):
+
+```
+http://crd-esgf-drc.ec.gc.ca/thredds/fileServer/esgC_dataroot/AR6/CMIP6/CMIP/CCCma/CanESM5/historical/r10i1p1f1/Amon/pr/gn/v20190429/pr_Amon_CanESM5_historical_r10i1p1f1_gn_185001-201412.nc
+```
+
+* Copy-paste the URL to another text file
+* Repeat the same for all the other files you downloaded
+* Additional information: You can also first add all your files to a cart and then download a single wget file that contains all URLs
+
+* To download the netcdf files use the ```download.file``` function, e.g.:
+
+```{r, eval = FALSE}
+# Specify the URL of the file you want to download
+url <- "http://crd-esgf-drc.ec.gc.ca/thredds/fileServer/esgC_dataroot/AR6/CMIP6/CMIP/CCCma/CanESM5/historical/r10i1p1f1/Amon/pr/gn/v20190429/pr_Amon_CanESM5_historical_r10i1p1f1_gn_185001-201412.nc"
+
+# Specify the file name and location where you want to save the file on your computer
+file_name <- "pr_Amon_CanESM5_historical_r10i1p1f1_gn_185001-201412.nc"
+file_path <- "C:/Users/seile/Documents/queensu/teaching/classes/ENSC430/tutorials/ENSC430/data/"
+
+# Call the download.file() function, passing in the URL and file name/location as arguments
+download.file(url, paste(file_path, file_name, sep = ""), mode = "wb")
+```
+
+* Note that ```file_path``` should contain ```/``` rather than ```\``` and may not contain white space or special characters (e.g. ```C:\Users\seile\OneDrive - Queen's University\Documents``` will not work as a directory)
+
+## Open, process, and plot netcdf files
+
+```{r}
+library(terra)
+rm(list = ls())
+data <- rast("data/pr_Amon_CanESM5_historical_r10i1p1f1_gn_185001-201412.nc")
+print(data)
+```
+* You see the spatial dimensions, spatial resolution, spatial extent in longitude and latitude, variable name, etc.
+* Each layer is one time step, starting in Jan 1850
+* Let's calculate the mean value over all time steps and plot the data
+
+```{r}
+library(maps)
+data <- terra::mean(data) # annual mean
+terra::plot(data)
+map("world2", add = TRUE)
+```
+
+* The ```terra``` package comes with different colors (```?map.pal```), e.g.
+
+```{r}
+my.col = map.pal("blues", n=100)
+terra::plot(data, col = my.col)
+map("world2", add = TRUE)
+```
+
+* Let's plot how precipitation is projected to change between the 1995-2014 and 2081-2100 periods
+* Download future precipitation projections:
+
+```{r, eval = FALSE}
+# Get the URL for the SSP5-8.5 scenario
+url <- "http://crd-esgf-drc.ec.gc.ca/thredds/fileServer/esgD_dataroot/AR6/CMIP6/ScenarioMIP/CCCma/CanESM5/ssp585/r10i1p1f1/Amon/pr/gn/v20190429/pr_Amon_CanESM5_ssp585_r10i1p1f1_gn_201501-210012.nc"
+
+# Specify the file name and location where you want to save the file on your computer
+file_name <- "pr_Amon_CanESM5_ssp585_r10i1p1f1_gn_201501-210012.nc"
+file_path <- "C:/Users/seile/Documents/queensu/teaching/classes/ENSC430/tutorials/ENSC430/data/"
+
+# Call the download.file() function, passing in the URL and file name/location as arguments
+download.file(url, paste(file_path, file_name, sep = ""), mode = "wb")
+```
+
+* Load, process, and plot the data
+
+```{r}
+library(terra)
+
+# Read in data
+hist <- rast("data/pr_Amon_CanESM5_historical_r10i1p1f1_gn_185001-201412.nc")
+ssp5 <- rast("data/pr_Amon_CanESM5_ssp585_r10i1p1f1_gn_201501-210012.nc")
+
+# Subset last 20 years from both files
+n <- nlyr(hist) # number of layers = number of time steps
+hist <- subset(hist, (n - 239):n) # last 240 months = 20 years
+
+n <- nlyr(ssp5) # number of layers = number of time steps
+ssp5 <- subset(ssp5, (n - 239):n) # last 240 months = 20 years
+
+delta <- mean(ssp5) - mean(hist)
+
+# Let's change the unit of precipitation from kg m2 s-1 to kg m2 day-1
+delta <- delta * 86400
+
+my.col = map.pal("differences", n = 100)
+plot(delta, col = my.col)
+map("world2", add = TRUE)
+```
+
+* Nice, but we want to have the divergence from red to blue at zero
+* To achieve this, we need to define the breaks of the color palette
+* Also, we will reverse the color, so that blue implies a projected increase in precipitation
+
+```{r}
+# Set the desired range for the palette
+min_val <- -8
+max_val <- 8
+
+# Define breaks to control the min and max of the palette
+breaks <- seq(min_val, max_val, 2)
+
+my.col <- rev(map.pal("differences", n = length(breaks) - 1))
+
+plot(delta,
+     type = "continuous",
+     breaks = breaks,
+     col = my.col)
+map("world2", add = TRUE)
+```
+
+* Great, but are the projected changes statistically significant?
+* Let's apply a t-test for each grid cell and mark all grid cells where the projected change is statistically significant at the 0.05-level
+* Before we do that, let's practice how to do a t-test in the first place
+
+```{r}
+# Create two random data sets
+a <- runif(n = 100, min = 10, max = 20)
+b <- runif(n = 100, min = 11, max = 21)
+
+# Test whether the mean of both data sets is statistically different
+pvalue <- t.test(x = a,
+                 y = b,
+                 alternative = c("two.sided"))$p.value
+print(pvalue)
+```
+
+* OK, let's apply this to the projected change in precipitation
+
+```{r}
+# Load data
+hist <- rast("data/pr_Amon_CanESM5_historical_r10i1p1f1_gn_185001-201412.nc")
+ssp5 <- rast("data/pr_Amon_CanESM5_ssp585_r10i1p1f1_gn_201501-210012.nc")
+
+# Define a function that performs a t-test and returns the p-value
+ttest.fun <- function(x) {
+  n <- length(x) / 2
+  a <- x[1:n]
+  b <- x[(n + 1):(2 * n)]
+  pvalue <- t.test(x = a,
+                   y = b,
+                   alternative = c("two.sided"))$p.value
+  return(pvalue)
+}
+
+# Apply the t-test function to each cell in the raster stacks
+pvalue.gridCell <- app(c(hist, ssp5), fun = ttest.fun)
+
+# Plot the p-values raster
+plot(pvalue.gridCell)
+```
+
+* Now let's create a mask where all grid cells with statistically significant changes have no value (NA) while all others have a value of one
+
+```{r}
+pvalue.gridCell[pvalue.gridCell<0.05] <- NA # statistically significant changes = 0
+mask <- pvalue.gridCell - pvalue.gridCell + 1 # nost statistically significant changes = 1
+```
+
+* Great, now let's plot our previous map that shows the projected change in precipitation and mask out all grid cells where the projected changes are not statistically significant
+
+```{r}
+
+plot(
+  delta,
+  type = "continuous",
+  breaks = breaks,
+  col = my.col,
+  main = "Projected Changes in Annual Mean Precipitation \n from 1995-2014 to 2081-2100 (CanESM5, SSP5-8.5)",
+  font.main = 1
+)
+
+plot(mask,
+     add = TRUE,
+     legend = FALSE,
+     col = "white")
+map("world2", add = TRUE)
+mtext("mm per day", side = 4, line = 0.75)
+```
+
+## Climate Extremes
+* Next we will use the [ClimInd](https://cran.r-project.org/web/packages/ClimInd/index.html) R-package to compute climate indices
+* The package contains 138 standard climate indices at monthly, seasonal and annual resolution
+* The indices characterize different aspects of the frequency, intensity and duration of extreme events
+* Input variables consist of surface air temperature, precipitation, relative humidity, wind speed, cloudiness, solar radiation, and snow cover
+* The package includes Temperature based indices (42), Precipitation based indices (22), Bioclimatic indices (21), Wind-based indices (5), Aridity/continentality indices (10), Snow-based indices (13), Cloud/radiation based indices (6), Drought indices (8), Fire indices (5), and Tourism indices (5)
+* Let's first practice a simple example using random data
+
+```{r}
+library(ClimInd)
+
+# Generate random data with dates in month/day/year format
+dates <- seq(as.Date("1990/1/1"), as.Date("1999/12/31"), "days")
+dates <- format(dates, "%m/%d/%Y")
+data <- runif(n=length(dates), min = 0, max = 5)
+names(data) <- dates
+
+# Let's pretend our data consists of daily precipitation in mm/day
+# Let's compute consecutive dry days
+
+my.cdd <- cdd(data, data_names = NULL, time.scale = "YEAR", na.rm = FALSE)
+print(my.cdd)
+```
+
+* Great, now let's apply our new skill to climate model data
+* Download future daily temperature and precipitation data (CanESM5, SSP5-8.5, r10i1p1f1)
+
+```{r, eval = FALSE}
+
+# Daily future precipitation
+file_path <- "C:/Users/seile/Documents/queensu/teaching/classes/ENSC430/tutorials/ENSC430/data/" # Change this path to wherever you wish to store your data
+
+# Specify the URL of the file you want to download
+url <- "http://crd-esgf-drc.ec.gc.ca/thredds/fileServer/esgD_dataroot/AR6/CMIP6/ScenarioMIP/CCCma/CanESM5/ssp585/r10i1p1f1/day/pr/gn/v20190429/pr_day_CanESM5_ssp585_r10i1p1f1_gn_20150101-21001231.nc"
+
+# Specify the file name and location where you want to save the file on your computer
+file_name <- "pr_day_CanESM5_ssp585_r10i1p1f1_gn_20150101-21001231.nc"
+
+# Download file
+options(timeout=300) # If the download requires more time, then increase the number of seconds
+download.file(url, paste(file_path, file_name, sep = ""), mode = "wb", timeout=300)
+
+
+# Daily future temperature
+# Specify the URL of the file you want to download
+url <- "http://esgf-data1.llnl.gov/thredds/fileServer/css03_data/CMIP6/ScenarioMIP/CCCma/CanESM5/ssp585/r10i1p1f1/day/tas/gn/v20190429/tas_day_CanESM5_ssp585_r10i1p1f1_gn_20150101-21001231.nc"
+
+# Specify the file name and location where you want to save the file on your computer
+file_name <- "tas_day_CanESM5_ssp585_r10i1p1f1_gn_20150101-21001231.nc"
+
+# Call the download.file() function, passing in the URL and file name/location as arguments
+options(timeout=300) # If the download requires more time, then increase the number of seconds
+download.file(url, paste(file_path, file_name, sep = ""), mode = "wb")
+```
+
+
+```{r}
+library(terra)
+library(ClimInd)
+library(maps)
+
+# Load daily precipitation data
+pr <- rast("data/pr_day_CanESM5_ssp585_r10i1p1f1_gn_20150101-21001231.nc")
+
+# Let's subset four years for testing purposes
+data <- subset(pr, 1:1460)
+data <- data * 86400 # convert from kg m-2 s-1 to mm day-1
+
+  dates <- time(data)
+  dates <- format(dates, "%m/%d/%Y")
+  names(data) <- dates
+  
+# Define a function that calculated consecutive dry days
+cdd.fun <- function(x) {
+   my.cdd <- cdd(data = x, time.scale = "YEAR", na.rm = FALSE)
+  return(my.cdd)
+}
+
+# Apply function to each gridcell
+cdd.gridCell <- app(data, fun = cdd.fun)
+
+# You now have a raster stack with one leayer for each year
+# print(cdd.gridCell)
+
+# Let's plot the first year
+my.col = rev(map.pal("magma", n=100))
+firstLayer <- subset(cdd.gridCell, 1:1)
+plot(firstLayer, col = my.col, main = "Consecutive Dry Days")
+map("world2", add = TRUE)
+```
+
+## Consecutive Wet Days
+
+* Compute consecutive wet days using the ```cwd``` function provided by the [ClimInd](https://cran.r-project.org/web/packages/ClimInd/index.html) R-package
+* Use the script above as a template
+* Your results should look similar to the Figure below
+
+```{r, echo = FALSE}
+library(terra)
+library(ClimInd)
+library(maps)
+
+# Load daily precipitation data
+pr <- rast("data/pr_day_CanESM5_ssp585_r10i1p1f1_gn_20150101-21001231.nc")
+
+# Let's subset four years for testing purposes
+data <- subset(pr, 1:1460)
+data <- data * 86400 # convert from kg m-2 s-1 to mm day-1
+
+  dates <- time(data)
+  dates <- format(dates, "%m/%d/%Y")
+  names(data) <- dates
+  
+# Define a function that calculated consecutive dry days
+cwd.fun <- function(x) {
+   my.cwd <- cwd(data = x, time.scale = "YEAR", na.rm = FALSE)
+  return(my.cwd)
+}
+
+# Apply function to each gridcell
+cwd.gridCell <- app(data, fun = cwd.fun)
+
+# You now have a raster stack with one leayer for each year
+# print(cdd.gridCell)
+
+# Let's plot the first year
+my.col = map.pal("blues", n=100)
+firstLayer <- subset(cwd.gridCell, 1:1)
+plot(firstLayer, col = my.col, main = "Consecutive Wet Days")
+map("world2", add = TRUE)
+```
+
+## Linear trend of consecutive dry days
+
+* Compute the linear trend in consecutive dry days from 2015 to 2100
+* Before you start, let me briefly show you how you calculate the linear trend of a variable
+
+```{r}
+# Sample time series data
+time <- 1:10  # Independent variable (e.g., time in years)
+temperature <- runif(n = length(time), min = 1, max = 3) * time
+
+# Fit a linear model (trend)
+trend_model <- lm(temperature ~ time)
+
+# Extract the slope (coefficient for 'time')
+slope <- coef(trend_model)["time"]
+
+# Print the slope
+print(slope)
+
+# Plot time series
+plot(time, temperature,type = "l")
+abline(trend_model, col="red", lwd=2)
+```
+
+* Calculating climate extremes from daily data is computationally expensive
+* To speed things up, let's focus on one region
+* Let's first crop Australia and then perform the calculation for the region
+
+```{r, eval = FALSE}
+# Load daily precipitation data
+data <- rast("data/pr_day_CanESM5_ssp585_r10i1p1f1_gn_20150101-21001231.nc")
+# Let's focus on Australia
+data <- crop(x=data, y = c(100,170,-50,0))
+```
+
+* Now, calculate the trend of consecutive dry days for each grid cell
+* To achieve this, define a function that calculates the slope of a linear regression
+* Apply this function to each grid cell
+* Your results should look similar to the Figure below
+
+```{r}
+library(terra)
+library(ClimInd)
+library(maps)
+
+# Load daily precipitation data
+data <- rast("data/pr_day_CanESM5_ssp585_r10i1p1f1_gn_20150101-21001231.nc")
+
+# Let's focus on Australia
+data <- crop(x=data, y = c(100,170,-50,0))
+
+data <- data * 86400 # convert from kg m-2 s-1 to mm day-1
+
+  dates <- time(data)
+  dates <- format(dates, "%m/%d/%Y")
+  names(data) <- dates
+  
+# Define a function that calculates consecutive dry days
+cdd.fun <- function(x) {
+   my.cdd <- cdd(data = x, time.scale = "YEAR", na.rm = FALSE)
+  return(my.cdd)
+}
+
+# Apply function to each gridcell
+cdd.gridCell <- app(data, fun = cdd.fun)
+
+n <- nlyr(cdd.gridCell)
+time <- seq(1, n, 1)
+
+# Define a function that calculates a linear trend
+trend.fun <- function(x) {
+   linear.model <- lm(x ~ time)
+   trend <- coef(linear.model)["time"]
+  return(trend)
+}
+
+# Apply function to each gridcell
+trend <- app(cdd.gridCell, fun = trend.fun)
+
+# Set the desired range for the palette
+min_val <- -1
+max_val <- 1
+
+# Define breaks to control the min and max of the palette
+breaks <- seq(min_val, max_val, 0.1)
+
+my.col <- map.pal("differences", n = length(breaks) - 1)
+
+plot(trend, col = my.col, 
+  type = "continuous",
+  breaks = breaks,
+  main = "Change in Consecutive Dry Days per year (2015-2100)")
+map("world2", add = TRUE)
+```
+
+## Consecutive dry days time series
+
+* Next, plot a time series of consecutive dry days for the cropped region
+* To do that, use the ```global``` function in the ```terra``` package
+* Your results should look like the Figure below
+
+```{r}
+cdd.mean <- global(cdd.gridCell, mean, na.rm = TRUE)
+
+years <- rownames(cdd.mean)
+plot(x = years, y = cdd.mean$mean, 
+     type = "l",
+     ylab = "CDD in Australia")
+
+abline(trend_model, col="red", lwd=2)
+```
+
+## Analysis of an extreme climate index of your choice and region
+
+* Repeat the previous two exercises but for a different region of the globe and a different climate index
+* The climate indices are provided by the [ClimInd](https://cran.r-project.org/web/packages/ClimInd/index.html) package
+
+<!--chapter:end:04-climate-model-analysis-I.Rmd-->
+
+---
+output:
+  pdf_document: default
+  html_document: default
+---
+# Climate Model Analysis (II)
+
+```{r, eval = TRUE, echo = FALSE}
+setwd("C:/Users/seile/Documents/queensu/teaching/classes/ENSC430/tutorials/ENSC430")
+.libPaths("C:/Users/seile/Documents/queensu/teaching/classes/ENSC430/tutorials/ENSC430/renv")
+library(terra)
+library(climetrics)
+library(maps)
+```
+
+Download climate model data from ESGF by clicking on the links below and save them in a new folder called ```data```. Put this folder inside your working directory, e.g. ```C:\Users\seile\Documents\ENSC430\data```
+
+* [Monthly mean temperature, historical](http://crd-esgf-drc.ec.gc.ca/thredds/fileServer/esgC_dataroot/AR6/CMIP6/CMIP/CCCma/CanESM5/historical/r10i1p1f1/Amon/tas/gn/v20190429/tas_Amon_CanESM5_historical_r10i1p1f1_gn_185001-201412.nc)
+* [Monthly min temperature, historical](http://crd-esgf-drc.ec.gc.ca/thredds/fileServer/esgC_dataroot/AR6/CMIP6/CMIP/CCCma/CanESM5/historical/r10i1p1f1/Amon/tasmin/gn/v20190429/tasmin_Amon_CanESM5_historical_r10i1p1f1_gn_185001-201412.nc)
+* [Monthly max temperature, historical](http://crd-esgf-drc.ec.gc.ca/thredds/fileServer/esgC_dataroot/AR6/CMIP6/CMIP/CCCma/CanESM5/historical/r10i1p1f1/Amon/tasmax/gn/v20190429/tasmax_Amon_CanESM5_historical_r10i1p1f1_gn_185001-201412.nc)
+* [Monthly mean temperature, SSP585](http://crd-esgf-drc.ec.gc.ca/thredds/fileServer/esgD_dataroot/AR6/CMIP6/ScenarioMIP/CCCma/CanESM5/ssp585/r10i1p1f1/Amon/tas/gn/v20190429/tas_Amon_CanESM5_ssp585_r10i1p1f1_gn_201501-210012.nc)
+* [Monthly min temperature, SSP585](http://crd-esgf-drc.ec.gc.ca/thredds/fileServer/esgD_dataroot/AR6/CMIP6/ScenarioMIP/CCCma/CanESM5/ssp585/r10i1p1f1/Amon/tasmin/gn/v20190429/tasmin_Amon_CanESM5_ssp585_r10i1p1f1_gn_201501-210012.nc)
+* [Monthly max temperature, SSP585](http://crd-esgf-drc.ec.gc.ca/thredds/fileServer/esgD_dataroot/AR6/CMIP6/ScenarioMIP/CCCma/CanESM5/ssp585/r10i1p1f1/Amon/tasmax/gn/v20190429/tasmax_Amon_CanESM5_ssp585_r10i1p1f1_gn_201501-210012.nc)
+* [Monthly mean precipitation, historical](http://crd-esgf-drc.ec.gc.ca/thredds/fileServer/esgC_dataroot/AR6/CMIP6/CMIP/CCCma/CanESM5/historical/r10i1p1f1/Amon/pr/gn/v20190429/pr_Amon_CanESM5_historical_r10i1p1f1_gn_185001-201412.nc)
+* [Monthly mean precipitation, SSP585](http://crd-esgf-drc.ec.gc.ca/thredds/fileServer/esgD_dataroot/AR6/CMIP6/ScenarioMIP/CCCma/CanESM5/ssp585/r10i1p1f1/Amon/pr/gn/v20190429/pr_Amon_CanESM5_ssp585_r10i1p1f1_gn_201501-210012.nc)
+
+* [Land Cover Fraction](http://esgf.nci.org.au/thredds/fileServer/replica/CMIP6/CMIP/CCCma/CanESM5/historical/r10i1p1f1/fx/sftlf/gn/v20190429/sftlf_fx_CanESM5_historical_r10i1p1f1_gn.nc)
+
+## Koeppen-Geiger Climate Classification
+
+Create a Koeppen-Geiger climate classification for the historical period
+
+```{r}
+# Read data
+## Temperature:
+tmean <- rast("data/tas_Amon_CanESM5_historical_r10i1p1f1_gn_185001-201412.nc")
+tmin <- rast("data/tasmin_Amon_CanESM5_historical_r10i1p1f1_gn_185001-201412.nc")
+tmax <- rast("data/tasmax_Amon_CanESM5_historical_r10i1p1f1_gn_185001-201412.nc")
+
+## Precipitation
+pr <- rast("data/pr_Amon_CanESM5_historical_r10i1p1f1_gn_185001-201412.nc")
+
+## Land Cover Fraction:
+lcf <- rast("data/sftlf_fx_CanESM5_historical_r10i1p1f1_gn.nc")
+
+# Get the dates
+dates <- terra::time(tmean)
+dates <- format(dates, "%Y-%m-%d")
+dates <- base::as.Date(dates)
+
+# Create raster time series
+tmean <- rts(tmean, dates)
+tmin <- rts(tmin, dates)
+tmax <- rts(tmax, dates)
+pr <- rts(pr, dates)
+
+# Create a 12-month climatological mean dataset for the 30-year period 1971-01-16 to 2000-12-16
+tmean12 <- apply.months(tmean[['1971/2000']],'mean')
+tmin12 <- apply.months(tmin[['1971/2000']],'mean')
+tmax12 <- apply.months(tmax[['1971/2000']],'mean')
+pr12 <- apply.months(pr[['1971/2000']],'mean')
+
+# Convert units from K to C
+tmean12 <- tmean12 - 273.15
+tmin12 <- tmin12 - 273.15
+tmax12 <- tmax12 - 273.15
+
+# Convert units from kg m-2 s-1 to mm per month
+pr12 <- pr12 * 86400 * c(31, 28.25, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31) 
+
+# Create a mask that masks out the ocean
+## Set all grid cells with a land cover fraction equal to zero to NA:
+lcf[lcf == 0] <- NA
+## Set all other values equal to one
+lcf <- lcf - lcf + 1
+
+k1 <- climetrics::kgc(p=pr12 ,tmin = tmin12 ,tmax=tmax12, tmean = tmean12)
+
+# Mask out the ocean
+k1 <- k1 * lcf
+
+# Plot data
+my.col <- map.pal("elevation", n = 30)
+
+plot(k1, col = my.col, main = "Koeppen-Geiger Climate Classification \n (CanESM5, historical)")
+map("world2", add = TRUE)
+
+```
+
+The numbers in the Figure above refer to the following Koeppen-Geiger climate classification
+
+| Code | Class | Name | Description                                      |
+|------|-------|------|--------------------------------------------------|
+| 1    | 1     | Af   | Tropical, rainforest                             |
+| 2    | 1     | Am   | Tropical, monsoon                                |
+| 3    | 1     | Aw   | Tropical, savannah                               |
+| 4    | 2     | BWh  | Arid, desert hot                                 |
+| 5    | 2     | BWk  | Arid, desert cold                                |
+| 6    | 2     | BSh  | Arid, steppe hot                                 |
+| 7    | 2     | BSk  | Arid, steppe cold                                |
+| 8    | 3     | Csa  | Temperate, dry and hot summer                    |
+| 9    | 3     | Csb  | Temperate, dry and warm summer                   |
+| 10   | 3     | Csc  | Temperate, dry and cold summer                   |
+| 11   | 3     | Cwa  | Temperate, dry winter and hot summer             |
+| 12   | 3     | Cwb  | Temperate, dry winter and warm summer            |
+| 13   | 3     | Cwc  | Temperate, dry winter and cold summer            |
+| 14   | 3     | Cfa  | Temperate, without dry season and hot summer     |
+| 15   | 3     | Cfb  | Temperate, without dry season and warm summer    |
+| 16   | 3     | Cfc  | Temperate, without dry season and cold summer    |
+| 17   | 4     | Dsa  | Cold, dry and hot summer                         |
+| 18   | 4     | Dsb  | Cold, dry and warm summer                        |
+| 19   | 4     | Dsc  | Cold, dry and cool summer                        |
+| 20   | 4     | Dsd  | Cold, dry summer and very cold winter            |
+| 21   | 4     | Dwa  | Cold, dry winter and hot summer                  |
+| 22   | 4     | Dwb  | Cold, dry winter and warm summer                 |
+| 23   | 4     | Dwc  | Cold, dry winter and cool summer                 |
+| 24   | 4     | Dwd  | Cold, dry winter and very cold winter            |
+| 25   | 4     | Dfa  | Cold, without dry season and hot summer          |
+| 26   | 4     | Dfb  | Cold, without dry season and warm summer         |
+| 27   | 4     | Dfc  | Cold, without dry season and cool summer         |
+| 28   | 4     | Dfd  | Cold, without dry season and very cold winter    |
+| 29   | 5     | ET   | Polar, tundra                                    |
+| 30   | 5     | EF   | Polar, frost                                     |
+
+
+Create a Koeppen-Geiger climate classification for the future based on CanESM5 SSP5 for the 2071-2100 period. Call the Koeppen-Geiger climate classification ```k2``` rather than ```k1```. Your output should look similar to the Figure below
+
+```{r, echo = FALSE, eval = TRUE}
+
+library(terra)
+library(climetrics)
+library(maps)
+
+# Read data
+## Temperature:
+
+tmean <- rast("data/tas_Amon_CanESM5_ssp585_r10i1p1f1_gn_201501-210012.nc")
+tmin <- rast("data/tasmin_Amon_CanESM5_ssp585_r10i1p1f1_gn_201501-210012.nc")
+tmax <- rast("data/tasmax_Amon_CanESM5_ssp585_r10i1p1f1_gn_201501-210012.nc")
+
+## Precipitation
+pr <- rast("data/pr_Amon_CanESM5_ssp585_r10i1p1f1_gn_201501-210012.nc")
+
+## Land Cover Fraction:
+lcf <- rast("data/sftlf_fx_CanESM5_historical_r10i1p1f1_gn.nc")
+
+# Get the dates
+dates <- terra::time(tmean)
+dates <- format(dates, "%Y-%m-%d")
+dates <- base::as.Date(dates)
+
+# Create raster time series
+tmean <- rts(tmean, dates)
+tmin <- rts(tmin, dates)
+tmax <- rts(tmax, dates)
+pr <- rts(pr, dates)
+
+# Create a 12-month climatological mean dataset for the 30-year period 2071-01-16 to 2100-12-16
+tmean12 <- apply.months(tmean[['2071/2100']],'mean')
+tmin12 <- apply.months(tmin[['2071/2100']],'mean')
+tmax12 <- apply.months(tmax[['2071/2100']],'mean')
+pr12 <- apply.months(pr[['2071/2100']],'mean')
+
+# Convert units from K to C
+tmean12 <- tmean12 - 273.15
+tmin12 <- tmin12 - 273.15
+tmax12 <- tmax12 - 273.15
+
+# Convert units from kg m-2 s-1 to mm per month
+pr12 <- pr12 * 86400 * c(31, 28.25, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31) 
+
+# Create a mask that masks out the ocean
+## Set all grid cells with a land cover fraction equal to zero to NA:
+lcf[lcf == 0] <- NA
+## Set all other values equal to one
+lcf <- lcf - lcf + 1
+
+k2 <- climetrics::kgc(p=pr12 ,tmin = tmin12 ,tmax=tmax12, tmean = tmean12)
+
+# Mask out the ocean
+k2 <- k2 * lcf
+
+# Plot data
+my.col <- map.pal("elevation", n = 30)
+
+plot(k2, col = my.col, main = "Koeppen-Geiger Climate Classification \n (CanESM5, SSP585)")
+map("world2", add = TRUE)
+
+```
+
+Let's plot them next to each other:
+
+```{r}
+par(mfrow = c(2,1))
+
+my.col <- map.pal("elevation", n = 30)
+
+plot(k1, col = my.col, main = "Koeppen-Geiger (CanESM5, historical)", cex.main = 0.75)
+map("world2", add = TRUE)
+
+plot(k2, col = my.col, main = "Koeppen-Geiger (CanESM5, SSP585)", cex.main = 0.75)
+map("world2", add = TRUE)
+```
+
+Let's evaluate how the Tundra changes. From the table above you can see that the Tundra corresponds to class ```29```. Isolate class 29 in both ```k1```, and ```k2```, convert them to polygons, and plot them on top of each other using hatched areas.
+
+```{r}
+
+k1.class <- k1
+k1.class[k1.class != 29] <- NA
+k1.class <- k1.class - k1.class + 1
+
+
+k2.class <- k2
+k2.class[k2.class != 29] <- NA
+k2.class <- k2.class - k2.class + 1
+
+# Convert to polygon
+k1.class <- as.polygons(k1.class, dissolve = TRUE)
+k2.class <- as.polygons(k2.class, dissolve = TRUE)
+
+# Crop region (Extratropics, Northern Hemisphere)
+region <- c(0, 360, 40, 90)
+k1.class <- crop(k1.class, region)
+k2.class <- crop(k2.class, region)
+
+map(
+  "world2",
+  interior = FALSE,
+  boundary = TRUE,
+  fill = TRUE,
+  col = "grey",
+  border = "grey",
+  bg = "NA",
+  add = FALSE,
+  ylim = c(40, 90)
+)
+box()
+
+plot(
+  k1.class,
+  density = 15,
+  add = TRUE,
+  col = "blue",
+  border = "blue"
+)
+plot(
+  k2.class,
+  density = 15,
+  add = TRUE,
+  col = "red",
+  border = "red",
+  angle = -45
+)
+
+legend(
+  "topleft",
+  c("Current Tundra", "Future Tundra") ,
+  pch = 16,
+  col = c("blue", "red") ,
+  bty = "n"
+)
+
+```
+
+* Repeat the same exercise for a different climate class
+
+## Climate Change Metrics
+
+* Create raster time series used for computing climate change metrics below
+
+```{r}
+# Read data
+tmean.hist <- rast("data/tas_Amon_CanESM5_historical_r10i1p1f1_gn_185001-201412.nc")
+tmin.hist <- rast("data/tasmin_Amon_CanESM5_historical_r10i1p1f1_gn_185001-201412.nc")
+tmax.hist <- rast("data/tasmax_Amon_CanESM5_historical_r10i1p1f1_gn_185001-201412.nc")
+
+tmean.ssp <- rast("data/tas_Amon_CanESM5_ssp585_r10i1p1f1_gn_201501-210012.nc")
+tmin.ssp <- rast("data/tasmin_Amon_CanESM5_ssp585_r10i1p1f1_gn_201501-210012.nc")
+tmax.ssp <- rast("data/tasmax_Amon_CanESM5_ssp585_r10i1p1f1_gn_201501-210012.nc")
+
+pr.hist <- rast("data/pr_Amon_CanESM5_historical_r10i1p1f1_gn_185001-201412.nc")
+pr.ssp <- rast("data/pr_Amon_CanESM5_ssp585_r10i1p1f1_gn_201501-210012.nc")
+
+# Stack past and future together
+tmean <- c(tmean.hist, tmean.ssp)
+tmin <- c(tmin.hist, tmin.ssp)
+tmax <- c(tmax.hist, tmax.ssp)
+pr <- c(pr.hist, pr.ssp)
+
+# Get the dates
+dates <- terra::time(tmin)
+dates <- format(dates, "%Y-%m-%d")
+dates <- base::as.Date(dates)
+
+# Convert units from K to C
+tmean <- tmean - 273.15
+tmin <- tmin - 273.15
+tmax <- tmax - 273.15
+
+# Convert units from kg m-2 s-1 to mm per month
+days_per_month <- lubridate::days_in_month(dates)
+pr <- pr * 86400 * days_per_month
+
+# Create raster time series
+tmean <- rts(tmean, dates)
+tmin <- rts(tmin, dates)
+tmax <- rts(tmax, dates)
+pr <- rts(pr, dates)
+
+# Ocean mask
+lcf <- rast("data/sftlf_fx_CanESM5_historical_r10i1p1f1_gn.nc")
+# Create a mask that masks out the ocean
+## Set all grid cells with a land cover fraction equal to zero to NA:
+lcf[lcf == 0] <- NA
+## Set all other values equal to one
+lcf <- lcf - lcf + 1
+```
+
+### Climate Metric (1): Standardized local anomalies
+
+Standardized local anomalies give the difference of a variable divided by its historical interannual variability expressed in terms of standard deviation. High standardized anomaly values correspond to large changes compared to its historical inter-annual variability.
+
+```{r}
+cm1 <- sed(pr ,tmin ,tmax , t1='1971/2000',t2='2071/2100')
+cm1 <- cm1 * lcf
+plot(cm1, col=map.pal("elevation", n = 100), main='Standardized Local Anomalies (-)')
+map("world2", add = TRUE, interior = FALSE)
+```
+
+* In what regions are the projected changes particularly large?
+* Are these large changes due to changes in temperature or precipitation? 
+* To answer this question, calculate the same climate metric for temperature and precipitation separately.
+
+```{r, eval = FALSE, echo = FALSE}
+cm1p <- sed(pr, t1='1971/2000',t2='2071/2100')
+cm1p <- cm1p * lcf
+plot(cm1p, col=map.pal("elevation", n = 100), main='Standardized Local Precipitation Anomalies (-)')
+map("world2", add = TRUE, interior = FALSE)
+```
+```{r, eval = FALSE, echo = FALSE}
+cm1t <- sed(tmin, tmax, t1='1971/2000',t2='2071/2100')
+cm1t <- cm1t * lcf
+plot(cm1t, col=map.pal("elevation", n = 100), main='Standardized Local Temperature Anomalies (-)')
+map("world2", add = TRUE, interior = FALSE)
+```
+
+### Climate Metric (2): Changes in probability of local climate extremes
+
+This climate metric shows how the probability of climate extremes, expressed as percentiles, are projected to change in the future. The example below assesses the change in the probability of hot (0.95 percentile of monthly mean temperature) and dry (0.05 percentile of precipitation) climate conditions
+
+```{r}
+cm2 <- localExtreme(tmean , pr, t1='1971/2000',t2='2071/2100', extreme = c(0.95,0.05))
+cm2 <- cm2 * lcf
+plot(cm2, col = map.pal("elevation", n = 100), main='Changes in probability of local climate extremes (hot and dry) (-)')
+map("world2", add = TRUE, interior = FALSE)
+```
+
+* Calculate the same climate metric but for wet extremes
+
+```{r, eval = FALSE, echo = FALSE}
+cm2wet <- localExtreme(pr, t1='1971/2000',t2='2071/2100', extreme = c(0.95))
+cm2wet <- cm2wet * lcf
+plot(cm2wet, col = map.pal("elevation", n = 100), main='Changes in probability of extreme precipitation (-)')
+map("world2", add = TRUE, interior = FALSE)
+```
+
+### Climate Metric (3): Change in area of analogous climates
+
+This climate metric gives the relative change in the area of a given climate class in percentage. 
+
+```{r}
+cm3 <- aaClimate(pr, tmin, tmax, tmean, t1='1971/2000',t2='2071/2100')
+cm3 <- cm3 * lcf
+
+breaks <- seq(-125, 125, 25)
+my.col <- rev(map.pal("differences", n = length(breaks) - 1))
+
+plot(cm3, type = "continuous", col = my.col, breaks = breaks, main='Changes in the Area of Analogous Climate (%)')
+map("world2", add = TRUE, interior = FALSE)
+
+```
+
+### Climate Metric (4): Change in the distance to analogous climates
+
+This metric expresses the change in distance to locations with an analogous climate as follows:
+
+* Quantify the distances to all cells with analogous climates in the time periods 1 and 2
+
+* For each cell, calculate the median of the great-circle distances below the 10th percentile of the distribution of all values for time periods 1 and 2
+
+* Calculate the change in the distances 
+
+* Negative values indicate a decrease in distance
+
+* Positive values indicate an increase in distance
+
+```{r}
+cm4 <- daClimate(precip = pr, tmin = tmin, tmax = tmax, tmean = tmean, t1='1971/2000',t2='2071/2100')
+cm4 <- cm4/1000 * lcf
+
+breaks <- seq(-2000, 2000, 10)
+my.col <- rev(map.pal("differences", n = length(breaks) - 1))
+
+plot(cm4, type = "continuous", col = my.col, breaks = breaks, main='Change in the distance to analogous climates (km)')
+map("world2", add = TRUE, interior = FALSE)
+```
+
+### Climate Metric (5): Novel climates
+
+This climate metric quantifies the dissimilarities between climate variables of two time periods. This metric uses standard euclidean distance between each cell in Time 2 and all cells in Time 1 and retains the minimum of those distances. The inter-annual standard deviation for each variable is used for the standardization. The larger the value, the more dissimilar the climate in Time 2 is in relation to the global pool of potential climatic analogues.
+
+```{r}
+cm5 <- novelClimate(pr, tmin, tmax, t1='1971/2000',t2='2071/2100')
+cm5 <- cm5 * lcf
+
+plot(cm5, col = map.pal("elevation", n = 100), main='Novel Climates')
+map("world2", add = TRUE, interior = FALSE)
+
+```
+
+* Is the novel climate in the Amazon due to changes in temperature or precipitation?
+
+```{r, eval = FALSE, echo = FALSE}
+
+cm5 <- novelClimate(pr, t1='1971/2000',t2='2071/2100')
+cm5 <- cm5 * lcf
+
+plot(cm5, col = map.pal("elevation", n = 100), main='Novel Climate due to precipitation')
+map("world2", add = TRUE, interior = FALSE)
+```
+
+```{r, eval = FALSE, echo = FALSE}
+
+cm5 <- novelClimate(tmin, tmax, t1='1971/2000',t2='2071/2100')
+cm5 <- cm5 * lcf
+
+plot(cm5, col = map.pal("elevation", n = 100), main='Novel Climate due to temperature')
+map("world2", add = TRUE, interior = FALSE)
+```
+
+
+### Climate Metric (5): Climate Change Velocity
+
+* Ratio of the temporal climatic gradient at a given locality to the spatial climatic gradient across
+neighboring cells
+* Example: (Celsius per unit of time) / (Celsius per unit of distance) = distance per unit of time
+* The metric represents the speed along Earth’s surface needed to maintain a constant climate
+
+```{r}
+dv <- dVelocity(pr, tmin, tmax, t1='1971/2000',t2='2071/2100')
+dv <- dv * lcf
+
+plot(dv, col=map.pal("elevation", n = 100), main='Velocity of Climate Change (km per year)')
+map("world2", add = TRUE, interior = FALSE)
+```
+
+* Is climate change velocity generally larger or smaller in mountains? Explain your answer.
+* Consider a frog species living in the Amazon of Southern Colombia. Let's further assume that the frog species is intolerant to changes in climate. How fast does the frog species need to migrate to avoid extinction? Have a look at the map below to find the answer.
+
+
+```{r}
+breaks <- seq(0, 60, 5)
+my.col <- map.pal("elevation", n = length(breaks) - 1)
+plot(dv, type = "continuous", col=my.col, breaks = breaks, main='Velocity of Climate Change (km per year)', xlim = c(280, 320), ylim = c(-20, 10))
+map("world2", add = TRUE, interior = TRUE)
+```
+
+<!--chapter:end:05-climate-model-analysis-II.Rmd-->
+
+---
+output:
+  html_document: default
+  pdf_document: default
+---
+# Climate Model Analysis (III)
+The goal of this tutorial is to identify regions with dynamic feedback mechanisms during the historical period as well as under future climate conditions. In this exercise we will focus on the temperature-albedo feedback. The main steps are:
+
+* Download data (near-surface air temperature $tas$, surface downwelling radiation $rsds$, and surface upwelling radiation $rsus$
+* Calculate albedo $albs$: $albs = rsus / rsds$
+* Calculate anomalies
+* Detrend time series
+* Drop layers with gridcells that have no values (NA)
+* Conduct Granger causality test
+
+## Download CanESM5 data, historical, ensemble member r1i1p1f1
+
+* [Monthly near-surface air temperature, CanESM5, historical](http://crd-esgf-drc.ec.gc.ca/thredds/fileServer/esgC_dataroot/AR6/CMIP6/CMIP/CCCma/CanESM5/historical/r1i1p1f1/Amon/tas/gn/v20190429/tas_Amon_CanESM5_historical_r1i1p1f1_gn_185001-201412.nc)
+
+* [Monthly Surface downwelling shortwave radiation (rsds), CanESM5, SSP5-8.5](http://crd-esgf-drc.ec.gc.ca/thredds/fileServer/esgC_dataroot/AR6/CMIP6/CMIP/CCCma/CanESM5/historical/r1i1p1f1/Amon/rsds/gn/v20190429/rsds_Amon_CanESM5_historical_r1i1p1f1_gn_185001-201412.nc)
+
+* [Monthly Surface upwelling shortwave radiation (rsus), CanESM5, SSP5-8.5](http://esgf.nci.org.au/thredds/fileServer/replica/CMIP6/CMIP/CCCma/CanESM5/historical/r1i1p1f1/Amon/rsus/gn/v20190429/rsus_Amon_CanESM5_historical_r1i1p1f1_gn_185001-201412.nc)
+
+Read-in the data and calculate surface albedo
+
+```{r}
+rm(list = ls())
+
+library(terra)
+library(maps)
+
+tas <- rast("data/tas_Amon_CanESM5_historical_r1i1p1f1_gn_185001-201412.nc")
+rsus <- terra::rast("data/rsus_Amon_CanESM5_historical_r1i1p1f1_gn_185001-201412.nc")
+rsds <- terra::rast("data/rsds_Amon_CanESM5_historical_r1i1p1f1_gn_185001-201412.nc")
+albs <- rsus/rsds
+
+# Plot albedo to see if it looks OK
+test <- subset(albs, 1)
+plot(test, main = "Surface Albedo (-)")
+```
+
+* You can see that there are no values in the Arctic in the first time step (January). How come? The Granger causality test will fail if there is NA. We will need to exclude this region from our analysis as Granger causality cannot deal with missing values.
+
+Next, calculate 12-month climatologies.
+
+```{r}
+library(climetrics)
+# Get the dates
+dates <- terra::time(tas)
+dates <- format(dates, "%Y-%m-%d")
+dates <- base::as.Date(dates)
+
+# Create raster time series
+tas.ts <- rts(tas, dates)
+albs.ts <- rts(albs, dates)
+
+# Calculate 12-month climatological means
+tas.12 <- apply.months(tas.ts,'mean')
+albs.12 <- apply.months(albs.ts,'mean')
+```
+
+Calculate the anomalies. This is done by subtracting the 12-month climatologies from the monthly data
+
+```{r}
+# Get the number of years
+n <- length(dates)/12
+
+# Create a time series where the 12-month climatological mean repeats for all years 
+tas.clim <- rep(tas.12, n)
+albs.clim <- rep(albs.12, n)
+
+# Calculate anomalies
+tas.anom <- tas - tas.clim
+albs.anom <- albs - albs.clim
+
+# Have a look at the data
+plot(tas.anom)
+```
+
+Detrend your time series by defining a function that calculates and removes the linear trend from your monthly anomalies. Before we do this for our globally gridded data set, let's first practice using a random time series.
+
+```{r}
+
+# Define a function that removes a linear trend
+detrend.fun <- function(x) {
+   time <- 1:length(x)
+   linear.trend <- lm(formula = x ~ time, na.action = na.exclude)
+   detrended.series <- residuals(linear.trend)
+  return(detrended.series)
+}
+
+# Generate a time series with a trend
+set.seed(123)
+time <- seq(1:100)
+time.series <- ts(time + rnorm(100, mean = 0, sd = 10))
+
+# Test the function
+detrended.time.series <- detrend.fun(time.series)
+
+plot(time.series, ylim = c(-20, 120))
+lines(detrended.time.series, col = "red")
+```
+
+With the detrending confirmed to work, let's apply it to our gridded temperature and albedo datasets.
+
+```{r}
+tas.anom.detrend <- app(x = tas.anom, fun = detrend.fun)
+albs.anom.detrend <- app(x = albs.anom, fun = detrend.fun)
+
+plot(tas.anom.detrend)
+```
+
+Now that you have created detrended anomalies of surface albedo and near-surface air temperature, you can assess the statistical association between both time series using Granger causality. Start by defining a Granger causality function that we can apply to each gridcell. 
+
+```{r}
+granger.fun <- function(x) {
+  n <- length(x)
+  # Get first (a) and second (b) variable
+  a <- x[1:(n/2)]
+  b <- x[(n/2+1):n]
+  # Convert to time series
+  a <- ts(a)
+  b <- ts(b)
+  tsDat <- ts.union(a, b)
+  tsVAR <- vars::VAR(tsDat, p = 6)
+  # Apply Granger cauality test 
+  p.value <- c(vars::causality(tsVAR, cause = "a")$Granger[3]$p.value)
+  return(p.value)
+}
+```
+
+Check whether albedo Granger-causes temperature anomalies.
+
+```{r}
+# Stack your raster objects, where the first part is the cause and the second the response
+data <- c(albs.anom.detrend, tas.anom.detrend)
+
+# Exclude high latitudes where albedo is NA caused by the lack of sunshine
+data <- crop(x=data, y = c(-1.40625, 358.5938, -65, 65))
+
+# Assess Granger causality  
+p.value <- app(x = data, fun = granger.fun)
+
+# Create a boolean map where all locations with p-values < 0.01 equal 1 and all remaining gridcells equal zero
+p.value[p.value>=0.01] <- 0
+p.value[p.value>0] <- 1
+albedoCausesTas <- p.value
+```
+
+Next, repeat the same but checking whether temperature Granger-causes albedo anomalies 
+
+```{r}
+# Stack your raster objects, where the first part is the cause and the second the response
+data <- c(tas.anom.detrend, albs.anom.detrend)
+
+# Exclude polar regions where albedo has NA values as there is no incvoming solar radiation during the cold season
+data <- crop(x=data, y = c(-1.40625, 358.5938, -65, 65))
+
+# Assess Granger causality  
+p.value <- app(x = data, fun = granger.fun)
+
+# Create a boolean map where all locations with p-values < 0.05 equal 1 and all remaining gridcells equal zero
+p.value[p.value>=0.01] <- 0
+p.value[p.value>0] <- 1
+tasCausesAlbedo <- p.value
+```
+
+Let's combine both maps to identify regions with a dynamic albedo-temperature feedback
+
+```{r}
+feedback <- albedoCausesTas + tasCausesAlbedo
+
+feedback[feedback != 2] <- NA
+feedback <- feedback - feedback + 1
+plot(feedback)
+map("world2", add = TRUE, interior = FALSE)
+```
+
+## Analyze the feedback mechanism for a single gridcell
+
+Next you will verify your results for a single gridcell with dynamic interactions. Let's choose a place in the Canadian Arctic (longitude = 260, latitude = 60)
+
+```{r}
+lon <- 260
+lat <- 60
+coords <- matrix(c(lon, lat), ncol = 2, byrow = TRUE)
+location <- vect(coords, type = "points")
+
+plot(feedback)
+map("world2", add = TRUE, interior = FALSE)
+points(location, col = "red", pch = 16, cex = 1.0)
+
+```
+
+Extract the values for this location
+
+```{r}
+# Extract data for the location
+albs.anom.detrend.gc <- extract(albs.anom.detrend, location)
+tas.anom.detrend.gc <- extract(tas.anom.detrend, location)
+
+# Get the values and drop the layer names
+albs.anom.detrend.gc <- unlist(unname(as.vector(albs.anom.detrend.gc)))
+tas.anom.detrend.gc <- unlist(unname(as.vector(tas.anom.detrend.gc)))
+
+# Omit the first time step
+n <- length(albs.anom.detrend.gc)
+albs.anom.detrend.gc <- albs.anom.detrend.gc[2:n]
+tas.anom.detrend.gc <- tas.anom.detrend.gc[2:n]
+
+# Make a time series
+albs <- ts(albs.anom.detrend.gc)
+tas <- ts(tas.anom.detrend.gc)
+tsDat <- ts.union(albs, tas)
+
+# Plot time series
+plot(tsDat)
+```
+
+Run Granger causality again just for this dataset to verify your results
+
+```{r}
+tsVAR <- vars::VAR(tsDat, p = 6)
+vars::causality(tsVAR, cause = "albs")
+vars::causality(tsVAR, cause = "tas")
+```
+
+Let's assess the relative importance of each variable in driving the other variable's dynamics.
+
+```{r}
+# Fit VAR model
+var_model <- VAR(tsDat, p = 6)
+
+# Perform variance decomposition
+variance_decomp <- fevd(var_model, n.ahead=6)
+
+# Plot the results
+plot(variance_decomp)
+```
+
+* What is the relative importance of temperature driving albedo, and of albedo driving temperature?
+
+Repeat the same exercise with CanESM for the future period using SSP5-8.5. You can download the corresponding files below.
+
+### SSP585
+
+* [Monthly near-surface air temperature, CanESM5, SSP5-8.5](http://esgf.nci.org.au/thredds/fileServer/replica/CMIP6/ScenarioMIP/CCCma/CanESM5/ssp585/r1i1p1f1/Amon/tas/gn/v20190429/tas_Amon_CanESM5_ssp585_r1i1p1f1_gn_201501-210012.nc)
+
+* [Monthly Surface downwelling shortwave radiation (rsds), CanESM5, SSP5-8.5](http://esgf.nci.org.au/thredds/fileServer/replica/CMIP6/ScenarioMIP/CCCma/CanESM5/ssp585/r1i1p1f1/Amon/rsds/gn/v20190429/rsds_Amon_CanESM5_ssp585_r1i1p1f1_gn_201501-210012.nc)
+
+* [Monthly Surface upwelling shortwave radiation (rsus), CanESM5, SSP5-8.5](http://esgf.nci.org.au/thredds/fileServer/replica/CMIP6/ScenarioMIP/CCCma/CanESM5/ssp585/r1i1p1f1/Amon/rsus/gn/v20190429/rsus_Amon_CanESM5_ssp585_r1i1p1f1_gn_201501-210012.nc)
+
+
+
+
+
+<!--chapter:end:06-climate-model-analysis-III.Rmd-->
+
+---
+output:
+  pdf_document: default
+  html_document: default
+---
+# Global Earth Observations (I)
+
+* Coming soon ...
+
+<!--chapter:end:07-global-earth-observations-I.Rmd-->
+
+---
+output:
+  pdf_document: default
+  html_document: default
+---
+# Global Earth Observations (II)
+
+* Coming soon ...
+
+<!--chapter:end:08-global-earth-observations-II.Rmd-->
+
+---
+output:
+  pdf_document: default
+  html_document: default
+---
+# Global Earth Observations (III)
+
+* Coming soon ...
+
+<!--chapter:end:09-global-earth-observations-III.Rmd-->
+
+---
+output:
+  pdf_document: default
+  html_document: default
+---
+# Integrated Assessment Modeling (I)
+
+## Introduction
+In this tutorial you will conduct simulations with the Global Change Assessment Model [GCAM](https://jgcri.github.io/gcam-doc/index.html), which is an integrated assessment model that links the world's energy, agriculture and land use systems with a climate model. The model is designed to assess various climate change policies and technology strategies for the globe over long time scales. GCAM runs in 5-year time steps from 1990 to 2100 and includes 14 geographic regions in the energy/economy module and 151 regions in the agriculture and land use module. The model tracks emissions and atmospheric concentrations of greenhouse gases (CO2 and non-CO2), carbonaceous aerosols, sulfur dioxide, and reactive gases and provides estimates of the associated climate impacts, such as global mean temperature rise and sea level rise. The model has been exercised extensively to explore the effect of technology and policy on climate change. GCAM is a community model developed and run at the [Joint Global Change Research Institute, University of Maryland](https://www.pnnl.gov/projects/jgcri).
+
+## Download executible and inputs
+
+* Download the model from [here](https://github.com/JGCRI/gcam-core/releases)
+* Windows: ```gcam-v7.1-Windows-Release-Package.zip```
+* If your Mac uses an Apple-based processor (ARM64), choose: ```gcam-v7.1-Mac_arm64-Release-Package.zip``` 
+* If your Mac uses an Intel-based processor (x64), choose:  ```gcam-v7.1-Mac_x64-Release-Package.zip```
+
+If you don't know whether you your Mac uses ```ARM64``` or ```x64```, follow the steps below:
+
+* Click on the Apple menu in the top-left corner of your screen.
+* Select "About This Mac" from the dropdown menu.
+* In the window that appears, click on the "System Report" button. If you don't see this button, click on "More Info" first, then scroll down and click on "System Report".
+* On the Hardware panel, locate the "Processor Name." 
+* If you see "Apple M1" or "Apple M2" in the Processor Name or Chip section, your Mac is ARM-based.
+* If you see "Intel" in the Processor Name section, your Mac is x64-based.
+
+## Java
+* Check if you have ```Java``` installed
+* To do this, open a terminal and type ```java```
+* If you don't get an error message you are good to go
+* If you do get an error message, install Java from [here](https://www.java.com/en/download)
+
+## Run the model
+* Move the zipfile to a location where you want to work
+* Extract the zip file
+* Go into the ```exe``` folder
+* Make a test simulation by clicking on the executable ```gcam.exe```
+
+## Possible error message related to Java in Windows
+* Error message: ```The code execution cannot proceed because jvm.dll was not found```
+* In the Windows search box, type```advanced system settings```
+* Go to the Environment Variables button
+* Under System variables, click on ```New``` to add a new variable
+* Set the name to ```JAVA_HOME``` and add the two paths below of your Java installation:
+* ```C:\Program Files\Java\jdk-22\bin```
+* ```C:\Program Files\Java\jdk-22\bin\server```
+* Restart your laptop and execute the model again
+* For more suggestions on trouble shooting, please click [here](https://jgcri.github.io/gcam-doc/v7.0/user-guide.html#modelinterface-batch-modes)
+
+## Log file
+* If all went well a terminal opens and you can see how the model progresses
+* The simulation will take approximately 30 minutes to complete
+* At the end of a simulation you should see the text below in your terminal:
+
+```
+Starting output to XML Database.
+Data Readin, Model Run & Write Time: 2050.92 seconds.
+Write time:  658.458 seconds.
+Model run completed.
+Model exiting successfully.
+```
+
+* Information about each simulation is written to a log file, which can be accessed here: 
+
+```gcam/gcam-v7.1/exe/logs/main_log.txt```
+
+## Exercise (1.1): Reference Run
+* I have prepared some GCAM output that you can look at while your model is running. Download and unzip the example GCAM model output from [here](https://drive.google.com/file/d/1BwmioiEb9bk64L1gdfZ4vIVMe11KuLCp/view?usp=sharing) (764MB). You can store the file outside your GCAM folder so that you will not confuse the downloaded data set with the one you are currently generating.
+* To view the model output go to ```gcam\gcam-v7.1\ModelInterface``` and click on ```run-model-interface.bat```
+* Select ```Open``` from the Model Interface File menu and then select ```DB Open``` from the sub-menu. 
+* Open the ```database_basexdb``` directory that you have downloaded
+* Select a ```region``` (e.g. ```global```) and a variable (e.g. ```CO2 emissions``` by region) and click on ```Run Query```
+* Next, plot global population growth and GDP per capita (model inputs), as well as CO2 concentration, radiative forcing, and temperature (model outputs)
+* Take some time to explore other model outputs so you can a sense of what else is available.
+
+### Configuration File
+* Let's take a look at the configuration file While your simulation is running
+* The configuration file directs the GCAM executable as to what files to read in and allows the user to set various runtime and output options
+* The configuration file is located in the ```exe``` folder and is divided into following sections:
+* ```Files```: Points GCAM to various core input and output file locations.
+* ```ScenarioComponents```: This is where GCAM reads in the data that define a scenario. Each entry has a name and a path that must point to a valid GCAM xml input file. Note that the name attribute of each ScenarioComponent is for readability only, these are not used by GCAM.
+* ```Strings```:	The primary component in this section that should be modified is the scenarioName, which should be a short descriptive name for the scenario.
+* ```Bools```:	These boolean variables alter how GCAM runs and allow some alternative modes for GCAM operation.
+* ```Ints```	These integer variables set various GCAM run and output options.
+* By the time you got to this part of the exercise I hope that your reference simulation completed. Open your ```database_basexdb``` using the model interface and explore the results.
+
+## Exercise (1.2): Carbon Tax
+* Let's change our reference run by adding a carbon tax
+* Open the configuration file in a text editor (e.g. Notepad on Windows, TextEdit on Mac) and search for:
+
+```
+<Value name = "solver">../input/solution/cal_broyden_config.xml</Value>
+```
+
+* Below this line add:
+
+```
+<!-- set up the near-term / long-term policy inputs -->
+		<Value name = "long-term-co2">../input/policy/carbon_tax_25_5.xml</Value>
+		<Value name = "near-term-co2">../input/policy/spa14_tax.xml</Value>
+		<Value name = "co2-link">../input/policy/2025_target_finder_phasein.xml</Value>
+		<Value name = "co2luc-link">../input/policy/global_uct_phasein_no_constraint.xml</Value>
+```
+
+* Re-run the model. The output will be added to your currently existing output files from your previous run.
+* I have again prepared the corresponding GCAM output that you can look at while your model is running. Download and unzip the GCAM model output with carbon tax from [here](https://drive.google.com/file/d/1PbO9cozyRV8_30gk7nsvK_5RYAigzeCH/view?usp=sharing) (764MB) and explore the results.
+* How does the carbon tax affect global emissions, CO2 concentration, radiative forcing, and surface temperature?
+* By the time you got to this part of the exercise I hope that your carbon tax simulation completed. Open your ```database_basexdb``` using the model interface and explore the results. You will see two runs: the reference run and the carbon tax run. Select both runs in the Scenario Window using ```Ctrl``` to create Figures that include results from both runs.
+
+## Exercise (1.3): Target Run
+* You can use GCAM to find the least-cost emission pathway for achieving a specific climate policy goal
+* To do this you need to enable the target finder
+* Open the configuration file ```exe/configuration.xml```
+* Delete the Carbon Tax that you inserted in the previous exercise:
+```
+<!-- set up the near-term / long-term policy inputs -->
+		<Value name = "long-term-co2">../input/policy/carbon_tax_25_5.xml</Value>
+		<Value name = "near-term-co2">../input/policy/spa14_tax.xml</Value>
+		<Value name = "co2-link">../input/policy/2025_target_finder_phasein.xml</Value>
+		<Value name = "co2luc-link">../input/policy/global_uct_phasein_no_constraint.xml</Value>
+```
+* Search for ```<Value name="find-path">0</Value>``` under the category ```Bools```
+* Change the value from 0 to 1: ```<Value name="find-path">1</Value>```
+* The policy targets are defined in the corresponding files, such as ```/input/policy/forcing_target_4p5.xml```
+* There are different target types you can choose from:
+* ```concentration```: CO~2~ (or possibly other gasses via the configuration string: concentration-target-gas)
+* ```forcing```: Total radiative forcing
+* ```stabilization```: Stabilize CO~2~ (or possibly other gasses via the configuration string: concentration-target-gas)  with disregards to what that concentration might be
+* ```kyoto-forcing```: Radiative forcing from Kyoto GHGs only
+* ```rcp-forcing```: Radiative forcing using the RCP definition (MAGICC only)
+* ```temperature```: Global mean temperature
+* ```cumulative-emissions```: Reach a cumulative emission goal for CO2 emissions (or possibly other gasses via the configuration string: cumulative-target-gas)
+* The choice of your target is defined here: ```<target-type>forcing</target-type>```
+* We will create our own target. We are ambitious and want to know what needs to happen in order to stop the warming. Warming stops when the radiative forcing equals zero. 
+* Copy ```/input/policy/forcing_target_4p5.xml``` and rename it ```/input/policy/forcing_target_0p0.xml``` 
+* Open ```/input/policy/forcing_target_0p0.xml``` in a text editor and change the name and forcing target to ```<policy-target-runner name="forcing_0p0">``` and ```<target-value>0.0</target-value>```, respectively.
+* Open the configuration file and replace ```/input/policy/forcing_target_4p5.xml``` with ```/input/policy/forcing_target_0p0.xml```
+* In target mode, GCAM will run a scenario several times to find the optimal path to satisfy the configured climate goal.
+* This target run takes about 1.5 hours. Don't start the simulation in class. Instead, initiate the simulation at home. 
+* To run the model, go into the ```exe``` folder and click the executable ```gcam.exe```
+* We will analyze the outputs the next class. Before next week's class. please briefly check if your simulation was successful.
+
+## Exercises (2.1)
+
+* Let's evaluate our target run
+
+## Group Project
+You are part of the Canadian Delegation representing Canada at the UN climate talks. As part of your job you will assess what is required to reach the warming target of 1.5 Degrees Celsius set out by the 2015 Paris Agreement.
+* e least-cost emissions path to
+meet the 2 °C target
+- how does it work?
+- What is required?
+- Contrast this with current Policies
+- Limits: GDP is prescribed
+- Cause and effect?
+
+
+
+
+
+
+
+
+<!--chapter:end:10-integrated-assessment-modeling-I.Rmd-->
+
+---
+output:
+  pdf_document: default
+  html_document: default
+---
+# Integrated Assessment Modeling (II)
+
+* Coming soon ...
+
+<!--chapter:end:11-integrated-assessment-modeling-II.Rmd-->
+
+---
+output:
+  pdf_document: default
+  html_document: default
+---
+# Programming in R
+In this course you will be using the programming language R. Today you will learn the R basics you need to master the course. The main elements are: 
+
+* Controlling your computational environment using ```renv```
+* Operators: ```+, -, *, /, ^```
+* R objects (vector, data frame, matrix, array, list)
+* Subset objects
+* Control structure: loops, if-else statements
+* Generating data: sequence and random data
+* Defining a function
+* Plotting data
+* Documenting your code using RMarkdown
+
+Let's start with setting up your computer. R is a command line driven program. The user enters commands at the prompt and each command is executed one at a time. RStudio is a Graphic User Interface for R. For this course, you will first need to install R and then RStudio. If you already have R or RStudio installed, please install them again to ensure you have the most recent version.
+
+* Install R from [here](https://posit.co/download/rstudio-desktop)
+* Install RStudio from [here](https://posit.co/download/rstudio-desktop)
+* Once R and RStudio are installed, open RStudio and learn the basic R syntax following the exercises below.
+
+## Create a new Project
+* Open RStudio
+* Click on ```File``` in the upper-left corner
+* From the drop-down list choose ```New Project ...```, ```New Directory```, ```Browse...``` and choose a directory of your project. For instance, in my case this will be ```C:\Users\seile\Documents\queensu\teaching\classes\ENSC430\tutorials\ENSC430```. Important: make sure your directory does not include white space or special characters.
+* Go to your new directory and create a new folder called ```renv```. This is where you will store your packages, as explained next.
+
+## Set up your computational environment
+* In the lower-left panel you find your console where you can execute commands. 
+* Your first task is to set up your computational environment using the command ```.libPaths()```
+* In the Console, type the command below using the directory of your project. Note that you need to use ```/``` rather than ```\```.
+
+```{r, eval = FALSE}
+# Set your working directory:
+setwd("C:/Users/seile/Documents/queensu/teaching/classes/ENSC430/tutorials/ENSC430")
+
+# Tell R where to store your packages:
+.libPaths("C:/Users/seile/Documents/queensu/teaching/classes/ENSC430/tutorials/ENSC430/renv")
+```
+
+* You can check if all went well by typing ```.libPaths()```. Does it return your directory? If yes, then continue.
+* Next you will install your first package called ```renv```
+```{r, eval = FALSE}
+install.packages("renv")
+renv::init()
+```
+
+* Next, install ```rmarkdown```:
+```{r, eval = FALSE}
+install.packages("rmarkdown")
+install.packages("magrittr")
+install.packages("stringi")
+install.packages("stringr")
+```
+
+* R Markdown allows you to integrate code, figures, and text. You will write your report in R Markdown, which I will explain at the end of the tutorial.
+
+The following sections introduce the most basic elements of the R programming language. Start by creating an empty R script by clicking on ```File/New File/R script```. Open the script in R Studio and copy-paste the examples into your script as you go through the examples. Execute each line by hitting ```Ctrl Enter``` so you understand and each step what the code is doing. 
+
+## Operators
+
+* In R, you use the following syntax to assign a value to a variable.
+
+```{r, eval = FALSE}
+x <- 1
+print(x)
+```
+
+* The variable x used above is an example of an R object. The ```print``` statement prints the value of the object x.
+* Once you assign values to R objects, you can use the following arithmetic operators to perform calculations.
+
+```{r, eval = FALSE}
+a <- 2
+b <- 3
+
+# Addition
+c <- a+b
+print(c)
+
+# Subtraction
+c <- a-b
+print(c)
+
+# Multiplication
+c <- a*b
+print(c)
+
+# Division
+c <- a/b
+print(c)
+
+# Exponentiation
+c <- a^b
+print(c)
+```
+* Note that anything after the ```#``` symbol is ignored.
+
+```{r, eval = FALSE}
+a <- 2
+b <- 3
+c <- a + b
+# c <- (a + b)^2
+print(c)
+```
+* This way you can add comments into your code that to explain what you are doing
+
+## Objects
+
+* All objects have two intrinsic attributes: mode and length. 
+* The mode is the basic type of the elements of the object. 
+* There are four main modes: numeric, character, complex, and logical (FALSE or TRUE). 
+
+```{r, eval = FALSE}
+a <- 5
+class(a)
+
+a <- "apple"
+class(a)
+
+a <- 1 + 2i
+class(a)
+
+a <- TRUE
+class(a)
+```
+* The length of an object is the number of elements of the object.
+
+```{r, eval = FALSE}
+a <- 2
+length(a)
+
+a <- c(2,7,5)
+length(a)
+```
+* Next to mode and length, there are different types of objects, namely vector, data frame, matrix, array, and list
+
+```{r, eval = FALSE}
+# Vector with one element
+a <- 2
+print(a)
+
+# Vector with four elements
+b <- c(7,5,2,9)
+print(b)
+
+# Data frame
+x <- c(3,7,2,4)
+y <- c(42,67,21,33)
+df <- data.frame(x, y)
+print(df)
+
+# Matrix: in R, a matrix has 2 dimensions only)
+x <- c(1,2,3,4,5,6,7,8,9,10)
+a <- matrix(x, nrow = 2)
+print(a)
+
+# Array: an array has more than 2 dimensions
+x <- c(1,2,3,4,5,6,7,8,9)
+a <- array(data = x, dim = c(3,3,3))
+print(a)
+
+# List
+a <- c(3,2,5,6)
+b <- c(TRUE, FALSE)
+c <- c("apples", "pears", "plums")
+d <- 5
+
+l <- list(a,b,c,d)
+print(l)
+```
+
+* Let's learn how to subset vectors, data frames, matrices, arrays, and lists
+
+* Example: Vector
+```{r, eval = FALSE}
+# Create a vector
+vector_data <- c(10, 20, 30, 40, 50)
+
+# Print the vector
+print("Full Vector:")
+print(vector_data)
+
+# Subsetting by Index
+third_element <- vector_data[3]
+print("Third element:")
+print(third_element)
+
+# Subsetting by Multiple Indices
+subset_indices <- vector_data[c(1, 3, 5)]
+print("Subset (First, Third, and Fifth elements):")
+print(subset_indices)
+
+# Subsetting by Logical Condition
+subset_condition <- vector_data[vector_data > 25]
+print("Subset (Elements greater than 25):")
+print(subset_condition)
+```
+* Example: data frame
+```{r, eval = FALSE}
+# Create a data frame
+data <- data.frame(
+  Name = c("Alice", "Bob", "Charlie", "David", "Eve"),
+  Age = c(23, 25, 30, 22, 29),
+  Gender = c("F", "M", "M", "M", "F"),
+  Score = c(85, 90, 75, 88, 92)
+)
+
+# Print the data frame
+print("Full Data Frame:")
+print(data)
+
+# Subsetting by Columns
+subset_columns <- data[, c("Name", "Score")]
+print("Subset by Columns (Name and Score):")
+print(subset_columns)
+
+# Subsetting by Rows and Columns
+subset_rows_cols <- data[1:3, c("Name", "Age")]
+print("Subset by Rows and Columns (First 3 rows, Name and Age):")
+print(subset_rows_cols)
+
+# Subsetting by Condition
+subset_condition <- subset(data, Age > 25)
+print("Subset by Condition (Age > 25):")
+print(subset_condition)
+```
+
+* Example: matrix
+```{r, eval = FALSE}
+# Create a matrix
+matrix_data <- matrix(
+  1:12,        # Data
+  nrow = 4,    # Number of rows
+  ncol = 3,    # Number of columns
+  byrow = TRUE # Fill the matrix by rows
+)
+
+# Print the matrix
+print("Full Matrix:")
+print(matrix_data)
+
+# Subsetting by Rows and Columns
+subset_rows_cols <- matrix_data[1:2, 1:2]
+print("Subset (First 2 rows, First 2 columns):")
+print(subset_rows_cols)
+
+# Subsetting by Specific Rows
+subset_specific_rows <- matrix_data[c(1, 3), ]
+print("Subset (First and Third rows):")
+print(subset_specific_rows)
+
+# Subsetting by Specific Columns
+subset_specific_cols <- matrix_data[, c(2, 3)]
+print("Subset (Second and Third columns):")
+print(subset_specific_cols)
+```
+
+* Example: array
+```{r, eval = FALSE}
+
+# Create an array
+array_data <- array(
+  1:24,         # Data
+  dim = c(3, 4, 2) # Dimensions (3x4x2 array)
+)
+
+# Print the array
+print("Full Array:")
+print(array_data)
+
+# Subsetting by Indices
+element <- array_data[1, 2, 1]
+print("Element at (1, 2, 1):")
+print(element)
+
+# Subsetting by Slices
+slice <- array_data[, , 1]
+print("First slice (all elements in the first third dimension):")
+print(slice)
+
+# Subsetting by Specific Rows and Columns in a Specific Dimension
+subset_array <- array_data[1, , 2]
+print("First row, all columns, in the second slice:")
+print(subset_array)
+```
+
+* Example: list
+```{r, eval = FALSE}
+# Create a list
+list_data <- list(
+  Name = "Alice",
+  Age = 25,
+  Scores = c(85, 90, 88),
+  Address = list(
+    Street = "123 Main St",
+    City = "Springfield",
+    Zip = "12345"
+  )
+)
+
+# Print the list
+print("Full List:")
+print(list_data)
+
+# Subsetting by Element Name
+name <- list_data$Name
+print("Name element:")
+print(name)
+
+# Subsetting by Index
+age <- list_data[[2]]
+print("Second element (Age):")
+print(age)
+
+# Subsetting a Nested List
+city <- list_data$Address$City
+print("City element in Address:")
+print(city)
+```
+
+## Control structure
+* Control structures determine the order in which statements are executed in a program. Two important examples are loops and conditional statements.
+* Loop example
+```{r, eval = FALSE}
+# For loop to print numbers from 1 to 5
+for (i in 1:5) {
+  print(i)
+}
+```
+
+* Conditional statement example
+```{r, eval = FALSE}
+
+# Define a number
+number <- -3
+
+# If-else statement to check the sign of the number
+if (number > 0) {
+  print("The number is positive.")
+} else if (number < 0) {
+  print("The number is negative.")
+} else {
+  print("The number is zero.")
+}
+
+```
+
+## Generating data
+* Many times you need to generate data, e.g. a sequence that ranges from 1 to 10. Instead of writing out each number, there are functions that do that for you
+
+```{r, eval = FALSE}
+# Sequence from 1 to 10 with step size 1
+x <- 1:10
+print(x)
+
+# Sequence from 1 to 10 with step size 0.5
+x <- seq(1, 10, 0.5)
+print(x)
+
+# Vector that repeats the value one for ten times
+x <- rep(1, 10)
+print(x)
+
+# Random sequences with uniform distribution between zero and one
+x <- runif(n = 5, min = 0, max = 1)
+print(x)
+```
+
+## Defining a function
+* Often you need to execute the same operation many times. To do this efficiently you can define a function and then apply this function whenever you need it
+
+```{r, eval = FALSE}
+# Define a function to add two numbers
+add_numbers <- function(a, b) {
+  # Calculate the sum
+  sum <- a + b
+  # Return the sum
+  return(sum)
+}
+
+# Print the function definition
+print("Function Definition:")
+print(add_numbers)
+
+# Call the function with arguments 3 and 5
+result <- add_numbers(3, 5)
+
+# Print the result
+print("Result of add_numbers(3, 5):")
+print(result)
+```
+
+## Plotting data
+```{r, eval = FALSE}
+x <- seq(1:10)
+y <- x^2
+plot(x, y)
+```
+
+* Add x and y labels using ```xlab``` and ```ylab```
+```{r, eval = FALSE}
+x <- seq(1:10)
+y <- x^2
+plot(x, y, 
+     xlab = "ENSC430 lectures attended", 
+     ylab = "Academic Performance")
+```
+
+* Make it a line plot using ```type = "l"```
+```{r, eval = FALSE}
+x <- seq(1:10)
+y <- x^2
+plot(x, y, type = "l")
+```
+
+* Add more lines using ```lines()```
+```{r, eval = FALSE}
+x <- seq(1:10)
+y1 <- x^2
+y2 <- x^3
+plot(x, y1, type = "l")
+lines(x, y2)
+```
+
+* Make each line a different color using ```col```
+```{r, eval = FALSE}
+x <- seq(1:10)
+y1 <- x^2
+y2 <- x^3
+plot(x, y1, type = "l", col = "red")
+lines(x, y2, col = "blue")
+```
+
+* Adjust x and y axis using ```xlim``` and ```ylim```
+```{r, eval = FALSE}
+x <- seq(1:10)
+y1 <- x^2
+y2 <- x^3
+plot(x, y1, type = "l", 
+     xlim = c(-5,10), ylim = c(-20, 100))
+lines(x, y2)
+```
+
+* Making square axis using ```par(pty="s")``` and ```asp = 1```
+```{r, eval = FALSE}
+x <- seq(1:10)
+y1 <- x^2
+y2 <- x^3
+par(pty="s")
+plot(x, y1, type = "l", asp = 1)
+lines(x, y2)
+```
+
+## Review
+Congratulations, you made it to the end of this tutorial. Let's list the key concepts you have learned today:
+
+* Operators: ```+, -, *, /, ^```
+* Objects: vector ```c()```, data frame ```data.frame()```, matrix ```matrix()```, array ```array()```, list ```list()```, 
+* Subset objects
+* Control structure: loops, if-else statements
+* Generating data: sequence and random data
+* Defining a function
+* Plotting data
+
+## Exercise
+Write a piece of code that includes the following elements:
+
+* Create an R object that is either a data frame, matrix, array, or list
+* Define a function
+* Apply the function to a subset of the R object using either a loop or a conditional statement
+* Plot the data
+
+Document your exercise in a Markdown document following the steps below.
+
+* Click on ```File, New File, R Markdown```, choosing PDF as output format
+* Save the new ```.Rmd``` in your project folder
+* Open the folder and start writing your code
+* Your rmarkdown document should look similar to this, without the ```#```:
+
+```{r, eval = FALSE}
+# ---
+# title: "ENSC 430 - Exercises"
+# author: "Christian Seiler"
+# date: "`r Sys.Date()`"
+# output: pdf_document
+# ---
+
+# ```{r setup, include=FALSE}
+# knitr::opts_chunk$set(echo = TRUE)
+# ```
+
+## Exercise 1
+Write a piece of code that includes the following elements:
+
+* Create a array with 3 dimensions
+* Define a function
+* For each array, subset and apply the function
+* Plot the data, one line for each array
+
+
+# ```{r, eval = TRUE}
+# Create an array
+# array_data <- array(1:12, dim = c(2, 3, 4))
+# add your code here
+# ```
+```
+
+* Once you are done, click on ```Knit```
+* If you change your code, close the PDF before knitting again
+
+As the course progresses you will be adding exercises to this markdown document. You will hand in the ```.PDF``` file by the end of the term for marking.
+
+
+
+
+
+
+
+
+<!--chapter:end:Rbasics.Rmd-->
+

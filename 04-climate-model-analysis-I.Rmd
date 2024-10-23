@@ -411,7 +411,7 @@ data <- data * 86400 # convert from kg m-2 s-1 to mm day-1
   dates <- format(dates, "%m/%d/%Y")
   names(data) <- dates
   
-# Define a function that calculated consecutive dry days
+# Define a function that calculates consecutive dry days
 cdd.fun <- function(x) {
    my.cdd <- cdd(data = x, time.scale = "YEAR", na.rm = FALSE)
   return(my.cdd)

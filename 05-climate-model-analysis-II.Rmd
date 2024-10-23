@@ -1,21 +1,25 @@
 ---
 output:
-  pdf_document: default
   html_document: default
+  pdf_document: default
 ---
 # Climate Model Analysis (II)
 
-Install the R package [climetrics](https://cran.r-project.org/web/packages/climetrics/index.html):
-
-```{r, eval = FALSE, echo - TRUE}
+```{r, eval = TRUE, echo = FALSE, include=FALSE}
 setwd("C:/Users/seile/Documents/queensu/teaching/classes/ENSC430/tutorials/ENSC430")
 .libPaths("C:/Users/seile/Documents/queensu/teaching/classes/ENSC430/tutorials/ENSC430/renv")
-library(renv)
-renv::install("climetrics")
-library("climetrics")
+library(terra)
+library(climetrics)
+library(maps)
 ```
 
-Download climate model data from ESGF by clicking on the links and save them in a new folder called ```data``` that you put inside your working directory, e.g. ```C:\Users\seile\Documents\ENSC430\data```
+```{r, eval = FALSE, echo = TRUE}
+library(terra)
+library(climetrics)
+library(maps)
+```
+
+Download climate model data from ESGF by clicking on the links below and save them in a new folder called ```data```. Put this folder inside your working directory, e.g. ```C:\Users\seile\Documents\ENSC430\data```
 
 * [Monthly mean temperature, historical](http://crd-esgf-drc.ec.gc.ca/thredds/fileServer/esgC_dataroot/AR6/CMIP6/CMIP/CCCma/CanESM5/historical/r10i1p1f1/Amon/tas/gn/v20190429/tas_Amon_CanESM5_historical_r10i1p1f1_gn_185001-201412.nc)
 * [Monthly min temperature, historical](http://crd-esgf-drc.ec.gc.ca/thredds/fileServer/esgC_dataroot/AR6/CMIP6/CMIP/CCCma/CanESM5/historical/r10i1p1f1/Amon/tasmin/gn/v20190429/tasmin_Amon_CanESM5_historical_r10i1p1f1_gn_185001-201412.nc)
@@ -33,10 +37,6 @@ Download climate model data from ESGF by clicking on the links and save them in 
 Create a Koeppen-Geiger climate classification for the historical period
 
 ```{r}
-library(terra)
-library(climetrics)
-library(maps)
-
 # Read data
 ## Temperature:
 tmean <- rast("data/tas_Amon_CanESM5_historical_r10i1p1f1_gn_185001-201412.nc")
@@ -50,9 +50,9 @@ pr <- rast("data/pr_Amon_CanESM5_historical_r10i1p1f1_gn_185001-201412.nc")
 lcf <- rast("data/sftlf_fx_CanESM5_historical_r10i1p1f1_gn.nc")
 
 # Get the dates
-dates <- time(tmean)
+dates <- terra::time(tmean)
 dates <- format(dates, "%Y-%m-%d")
-dates <- as.Date(dates)
+dates <- base::as.Date(dates)
 
 # Create raster time series
 tmean <- rts(tmean, dates)
@@ -151,9 +151,9 @@ pr <- rast("data/pr_Amon_CanESM5_ssp585_r10i1p1f1_gn_201501-210012.nc")
 lcf <- rast("data/sftlf_fx_CanESM5_historical_r10i1p1f1_gn.nc")
 
 # Get the dates
-dates <- time(tmean)
+dates <- terra::time(tmean)
 dates <- format(dates, "%Y-%m-%d")
-dates <- as.Date(dates)
+dates <- base::as.Date(dates)
 
 # Create raster time series
 tmean <- rts(tmean, dates)
@@ -208,7 +208,7 @@ plot(k2, col = my.col, main = "Koeppen-Geiger (CanESM5, SSP585)", cex.main = 0.7
 map("world2", add = TRUE)
 ```
 
-Let's show how the Tundra changes. From the table above you can see that the Tundra corresponds to class ```29```. Isolate class 29 in both ```k1```, and ```k2```, convert them to polygons, and plot them on top of each other using hatched areas.
+Let's evaluate how the Tundra changes. From the table above you can see that the Tundra corresponds to class ```29```. Isolate class 29 in both ```k1```, and ```k2```, convert them to polygons, and plot them on top of each other using hatched areas.
 
 ```{r}
 
@@ -269,19 +269,19 @@ legend(
 
 ```
 
-Repeat the same exercise for a different climate class.
+* Repeat the same exercise for a different climate class
 
-## Velocity of Climate Change
+## Climate Change Metrics
 
-Climate change velocity gives the ratio of the temporal climatic gradient at a given locality to the spatial climatic gradient across neighboring cells.
+* Create raster time series used for computing climate change metrics below
 
 ```{r}
-
 # Read data
-
+tmean.hist <- rast("data/tas_Amon_CanESM5_historical_r10i1p1f1_gn_185001-201412.nc")
 tmin.hist <- rast("data/tasmin_Amon_CanESM5_historical_r10i1p1f1_gn_185001-201412.nc")
 tmax.hist <- rast("data/tasmax_Amon_CanESM5_historical_r10i1p1f1_gn_185001-201412.nc")
 
+tmean.ssp <- rast("data/tas_Amon_CanESM5_ssp585_r10i1p1f1_gn_201501-210012.nc")
 tmin.ssp <- rast("data/tasmin_Amon_CanESM5_ssp585_r10i1p1f1_gn_201501-210012.nc")
 tmax.ssp <- rast("data/tasmax_Amon_CanESM5_ssp585_r10i1p1f1_gn_201501-210012.nc")
 
@@ -289,16 +289,18 @@ pr.hist <- rast("data/pr_Amon_CanESM5_historical_r10i1p1f1_gn_185001-201412.nc")
 pr.ssp <- rast("data/pr_Amon_CanESM5_ssp585_r10i1p1f1_gn_201501-210012.nc")
 
 # Stack past and future together
+tmean <- c(tmean.hist, tmean.ssp)
 tmin <- c(tmin.hist, tmin.ssp)
 tmax <- c(tmax.hist, tmax.ssp)
 pr <- c(pr.hist, pr.ssp)
 
 # Get the dates
-dates <- time(tmin)
+dates <- terra::time(tmin)
 dates <- format(dates, "%Y-%m-%d")
-dates <- as.Date(dates)
+dates <- base::as.Date(dates)
 
 # Convert units from K to C
+tmean <- tmean - 273.15
 tmin <- tmin - 273.15
 tmax <- tmax - 273.15
 
@@ -307,11 +309,12 @@ days_per_month <- lubridate::days_in_month(dates)
 pr <- pr * 86400 * days_per_month
 
 # Create raster time series
+tmean <- rts(tmean, dates)
 tmin <- rts(tmin, dates)
 tmax <- rts(tmax, dates)
 pr <- rts(pr, dates)
 
-# Mask ocean
+# Ocean mask
 lcf <- rast("data/sftlf_fx_CanESM5_historical_r10i1p1f1_gn.nc")
 # Create a mask that masks out the ocean
 ## Set all grid cells with a land cover fraction equal to zero to NA:
@@ -320,11 +323,152 @@ lcf[lcf == 0] <- NA
 lcf <- lcf - lcf + 1
 ```
 
+### Climate Metric (1): Standardized local anomalies
+
+Standardized local anomalies give the difference of a variable divided by its historical interannual variability expressed in terms of standard deviation. High standardized anomaly values correspond to large changes compared to its historical inter-annual variability.
 
 ```{r}
-dv <- climetrics::dVelocity(pr, tmin, tmax, t1='1971/2000',t2='2071/2100')
+cm1 <- sed(pr ,tmin ,tmax , t1='1971/2000',t2='2071/2100')
+cm1 <- cm1 * lcf
+plot(cm1, col=map.pal("elevation", n = 100), main='Standardized Local Anomalies (-)')
+map("world2", add = TRUE, interior = FALSE)
+```
+
+* In what regions are the projected changes particularly large?
+* Are these large changes due to changes in temperature or precipitation? 
+* To answer this question, calculate the same climate metric for temperature and precipitation separately.
+
+```{r, eval = FALSE, echo = FALSE}
+cm1p <- sed(pr, t1='1971/2000',t2='2071/2100')
+cm1p <- cm1p * lcf
+plot(cm1p, col=map.pal("elevation", n = 100), main='Standardized Local Precipitation Anomalies (-)')
+map("world2", add = TRUE, interior = FALSE)
+```
+```{r, eval = FALSE, echo = FALSE}
+cm1t <- sed(tmin, tmax, t1='1971/2000',t2='2071/2100')
+cm1t <- cm1t * lcf
+plot(cm1t, col=map.pal("elevation", n = 100), main='Standardized Local Temperature Anomalies (-)')
+map("world2", add = TRUE, interior = FALSE)
+```
+
+### Climate Metric (2): Changes in probability of local climate extremes
+
+This climate metric shows how the probability of climate extremes, expressed as percentiles, are projected to change in the future. The example below assesses the change in the probability of hot (0.95 percentile of monthly mean temperature) and dry (0.05 percentile of precipitation) climate conditions
+
+```{r}
+cm2 <- localExtreme(tmean , pr, t1='1971/2000',t2='2071/2100', extreme = c(0.95,0.05))
+cm2 <- cm2 * lcf
+plot(cm2, col = map.pal("elevation", n = 100), main='Changes in probability of local climate extremes (hot and dry) (-)')
+map("world2", add = TRUE, interior = FALSE)
+```
+
+* Calculate the same climate metric but for wet extremes
+
+```{r, eval = FALSE, echo = FALSE}
+cm2wet <- localExtreme(pr, t1='1971/2000',t2='2071/2100', extreme = c(0.95))
+cm2wet <- cm2wet * lcf
+plot(cm2wet, col = map.pal("elevation", n = 100), main='Changes in probability of extreme precipitation (-)')
+map("world2", add = TRUE, interior = FALSE)
+```
+
+### Climate Metric (3): Change in area of analogous climates
+
+This climate metric gives the relative change in the area of a given climate class in percentage. 
+
+```{r}
+cm3 <- aaClimate(pr, tmin, tmax, tmean, t1='1971/2000',t2='2071/2100')
+cm3 <- cm3 * lcf
+
+breaks <- seq(-125, 125, 25)
+my.col <- rev(map.pal("differences", n = length(breaks) - 1))
+
+plot(cm3, type = "continuous", col = my.col, breaks = breaks, main='Changes in the Area of Analogous Climate (%)')
+map("world2", add = TRUE, interior = FALSE)
+
+plot(cm3)
+```
+
+### Climate Metric (4): Change in the distance to analogous climates
+
+This metric expresses the change in distance to locations with an analogous climate as follows:
+
+* Quantify the distances to all cells with analogous climates in the time periods 1 and 2
+
+* For each cell, calculate the median of the great-circle distances below the 10th percentile of the distribution of all values for time periods 1 and 2
+
+* Calculate the change in the distances 
+
+* Negative values indicate a decrease in distance
+
+* Positive values indicate an increase in distance
+
+```{r}
+cm4 <- daClimate(precip = pr, tmin = tmin, tmax = tmax, tmean = tmean, t1='1971/2000',t2='2071/2100')
+cm4 <- cm4/1000 * lcf
+
+breaks <- seq(-2000, 2000, 10)
+my.col <- rev(map.pal("differences", n = length(breaks) - 1))
+
+plot(cm4, type = "continuous", col = my.col, breaks = breaks, main='Change in the distance to analogous climates (km)')
+map("world2", add = TRUE, interior = FALSE)
+```
+
+### Climate Metric (5): Novel climates
+
+This climate metric quantifies the dissimilarities between climate variables of two time periods. This metric uses standard euclidean distance between each cell in Time 2 and all cells in Time 1 and retains the minimum of those distances. The inter-annual standard deviation for each variable is used for the standardization. The larger the value, the more dissimilar the climate in Time 2 is in relation to the global pool of potential climatic analogues.
+
+```{r}
+cm5 <- novelClimate(pr, tmin, tmax, t1='1971/2000',t2='2071/2100')
+cm5 <- cm5 * lcf
+
+plot(cm5, col = map.pal("elevation", n = 100), main='Novel Climates')
+map("world2", add = TRUE, interior = FALSE)
+
+```
+
+* Is the novel climate in the Amazon due to changes in temperature or precipitation?
+
+```{r, eval = FALSE, echo = FALSE}
+
+cm5 <- novelClimate(pr, t1='1971/2000',t2='2071/2100')
+cm5 <- cm5 * lcf
+
+plot(cm5, col = map.pal("elevation", n = 100), main='Novel Climate due to precipitation')
+map("world2", add = TRUE, interior = FALSE)
+```
+
+```{r, eval = FALSE, echo = FALSE}
+
+cm5 <- novelClimate(tmin, tmax, t1='1971/2000',t2='2071/2100')
+cm5 <- cm5 * lcf
+
+plot(cm5, col = map.pal("elevation", n = 100), main='Novel Climate due to temperature')
+map("world2", add = TRUE, interior = FALSE)
+```
+
+
+### Climate Metric (5): Climate Change Velocity
+
+* Ratio of the temporal climatic gradient at a given locality to the spatial climatic gradient across
+neighboring cells
+* Example: (Celsius per unit of time) / (Celsius per unit of distance) = distance per unit of time
+* The metric represents the speed along Earth’s surface needed to maintain a constant climate
+
+```{r}
+dv <- dVelocity(pr, tmin, tmax, t1='1971/2000',t2='2071/2100')
 dv <- dv * lcf
 
 plot(dv, col=map.pal("elevation", n = 100), main='Velocity of Climate Change (km per year)')
 map("world2", add = TRUE, interior = FALSE)
+```
+
+* Is climate change velocity generally larger or smaller in mountains? Explain your answer.
+* Consider a frog species living in the Amazon of Southern Colombia. Let's further assume that the frog species is intolerant to changes in climate. How fast does the frog species need to migrate to avoid extinction? Have a look at the map below to find the answer.
+
+
+```{r}
+breaks <- seq(0, 60, 5)
+my.col <- map.pal("elevation", n = length(breaks) - 1)
+plot(dv, type = "continuous", col=my.col, breaks = breaks, main='Velocity of Climate Change (km per year)', xlim = c(280, 320), ylim = c(-20, 10))
+map("world2", add = TRUE, interior = TRUE)
 ```

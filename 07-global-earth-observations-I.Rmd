@@ -5,4 +5,409 @@ output:
 ---
 # Global Earth Observations (I)
 
-* Coming soon ...
+## Earthdata Login account
+You will need a NASA Earthdata Login account in order to download LP DAAC data. Go to the [Earthdata Login website](https://urs.earthdata.nasa.gov/) and click the ```Register``` button, which is next to the green ```Log In``` button under the Password entry box. Fill in the required boxes (indicated with a red asterisk), then click on the ```Register for Earthdata Login``` green button at the bottom of the page. An email with instructions for activating the registration completes the process.
+
+To download data from the LP DAAC archive, you need to authorize our applications to view your NASA Earthdata Login profile. Once authorization is complete, you may resume your session. To authorize Data Pool, please click [here](https://urs.earthdata.nasa.gov/approve_app?client_id=ijpRZvb9qeKCK5ctsn75Tg&_ga=2.128429068.1284688367.1541426539-1515316899.1516123516).
+
+## Install dependencies
+
+```{r, eval = TRUE, echo = FALSE, include=FALSE}
+setwd("C:/Users/seile/Documents/queensu/teaching/classes/ENSC430/tutorials/ENSC430")
+.libPaths("C:/Users/seile/Documents/queensu/teaching/classes/ENSC430/tutorials/ENSC430/renv")
+library(renv)
+renv::install("sys")
+renv::install("getPass")
+renv::install("httr")
+```
+
+## Download test
+
+```{r, eval = FALSE}
+
+# Load necessary packages into R
+library(sys)
+library(getPass)
+library(httr)
+# ---------------------------------SET UP ENVIRONMENT--------------------------------------------- #
+dl_dir <- Sys.getenv("HOME")                                 # Set dir to download files to
+setwd(dl_dir)                                                # Set the working dir to the dl_dir
+usr <- file.path(Sys.getenv("USERPROFILE"))                  # Retrieve home dir (for netrc file)
+if (usr == "") {usr = Sys.getenv("HOME")}                    # If no user profile exists, use home
+netrc <- file.path(usr,'.netrc', fsep = .Platform$file.sep)  # Path to netrc file
+
+# ------------------------------------CREATE .NETRC FILE------------------------------------------ #
+# If you already have a .netrc file with your Earthdata Login credentials stored in your home
+# directory, this portion will be skipped. Otherwise you will be prompted for your NASA Earthdata
+# Login Username/Password and a netrc file will be created to store your credentials (in home dir)
+if (file.exists(netrc) == FALSE || grepl("urs.earthdata.nasa.gov", readLines(netrc)) == FALSE) {
+  netrc_conn <- file(netrc)
+
+  # User will be prompted for NASA Earthdata Login Username and Password below
+  writeLines(c("machine urs.earthdata.nasa.gov",
+               sprintf("login %s", getPass(msg = "Enter NASA Earthdata Login Username \n (or create an account at urs.earthdata.nasa.gov) :")),
+               sprintf("password %s", getPass(msg = "Enter NASA Earthdata Login Password:"))), netrc_conn)
+  close(netrc_conn)
+  }
+
+# ---------------------------CONNECT TO DATA POOL AND DOWNLOAD FILES------------------------------ #
+# Below, define either a single link to a file for download, a list of links, or a text file
+# containing links to the desired files to download. For a text file, there should be 1 file link
+# listed per line. Here we show examples of each of the three ways to download files.
+# **IMPORTANT: be sure to update the links for the specific files you are interested in downloading.
+
+# 1. Single file (this is just an example link, replace with your desired file to download):
+files <- "https://e4ftl01.cr.usgs.gov/MOLA/MYD09GA.061/2002.07.06/MYD09GA.A2002187.h10v04.061.2020071193416.hdf"
+
+# Loop through all files
+for (i in 1:length(files)) {
+  filename <-  tail(strsplit(files[i], '/')[[1]], n = 1) # Keep original filename
+
+  # Write file to disk (authenticating with netrc) using the current directory/filename
+  response <- GET(files[i], write_disk(filename, overwrite = TRUE), progress(),
+                  config(netrc = TRUE, netrc_file = netrc), set_cookies("LC" = "cookies"))
+
+  # Check to see if file downloaded correctly
+  if (response$status_code == 200) {
+    print(sprintf("%s downloaded at %s", filename, dl_dir))
+  } else {
+  print(sprintf("%s not downloaded. Verify that your username and password are correct in %s", filename, netrc))
+  }
+}
+
+```
+
+Locate the file ```MYD09GA.A2002187.h10v04.061.2020071193416.hdf``` to identify where the data was downloaded. Now you are ready to download the data set you will be working with. 
+
+## Download Enhanced Vegetation Index (EVI)
+
+You will be downloading satellite data from the Moderate Resolution Imaging Spectroradiometer (MODIS). The specific MODIS product we are processing is the Vegetation Indices Monthly L3 Global 0.05 CMG ([MOD13C2](https://lpdaac.usgs.gov/products/mod13c2v061/)). Each HDF file is located in its own folder. The first step is to generate a list of all the URLs where our files are stored. Run the script below to create the list.
+
+```{r}
+# Load packages
+library(rvest)
+library(dplyr)
+
+# Set base URL (main directory)
+base_url <- "https://e4ftl01.cr.usgs.gov/MOLT/MOD13C2.061/"
+
+# Function to get links (folders or files) from a given URL
+get_links <- function(url) {
+  # Read the webpage content
+  page <- read_html(url)
+  
+  # Extract all file/folder links
+  links <- page %>%
+    html_nodes("a") %>%  # Select all anchor tags
+    html_attr("href")     # Get the href attributes (links)
+  
+  # Filter out navigation links (e.g., "../")
+  links <- links[!grepl("(\\.\\./|^/$)", links)]
+  
+  # Return the links
+  return(links)
+}
+
+# Get the list of folders (each folder represents a date like '2000.02.01/')
+folders <- get_links(base_url)
+
+# Filter folders that match the pattern YYYY.MM.DD/
+folders <- folders[grepl("^\\d{4}\\.\\d{2}\\.\\d{2}/$", folders)]
+
+# Initialize an empty list to store .hdf file URLs
+hdf_files <- list()
+
+# Loop over each folder
+for (folder in folders) {
+  # Construct the full folder URL
+  folder_url <- paste0(base_url, folder)
+  
+  # Get all links inside the folder
+  files_in_folder <- get_links(folder_url)
+  
+  # Filter only .hdf files
+  hdf_in_folder <- files_in_folder[grepl("\\.hdf$", files_in_folder)]
+  
+  # Check if any .hdf files are found
+  if (length(hdf_in_folder) > 0) {
+    # If .hdf files are found, construct full paths and add to the list
+    full_paths <- paste0(folder_url, hdf_in_folder)
+    hdf_files <- c(hdf_files, full_paths)  # Add to the list
+  } else {
+    # If no .hdf files, skip the folder
+    message(paste("No .hdf files found in", folder_url))
+  }
+}
+
+print("the first five .hdf file URLs are:")
+print(hdf_files[1:5])
+```
+Great. Each file is approximately 100 MB, and with about 300 files, the total comes to 30,000 MB (30 GB). These files are large because they contain multiple variables and have a high spatial resolution (0.05 degrees, roughly 5 km at the equator). To speed things up, you'll start by processing 12 months of data to get familiar with the process. Later, you'll download a fully processed file with all time steps but at a lower spatial resolution from a different link for analysis. Run the code below to download 12 HDF files.
+
+```{r}
+files <- unlist(hdf_files[1:12]) # 12 files only
+
+# Loop through all files
+for (i in 1:length(files)) {
+  filename <-  tail(strsplit(files[i], '/')[[1]], n = 1) # Keep original filename
+
+  # Write file to disk (authenticating with netrc) using the current directory/filename
+  response <- GET(files[i], write_disk(filename, overwrite = TRUE), progress(),
+                  config(netrc = TRUE, netrc_file = netrc), set_cookies("LC" = "cookies"))
+
+  # Check to see if file downloaded correctly
+  if (response$status_code == 200) {
+    print(sprintf("%s downloaded at %s", filename, dl_dir))
+  } else {
+  print(sprintf("%s not downloaded. Verify that your username and password are correct in %s", filename, netrc))
+  }
+}
+
+```
+
+The next step is to read in the downloaded files and to convert them to a single NetCDF file. Move the HDF files into a folder that you name ```MOD13C2.061```. Make sure this folder is in your working directory. Next, run the script below to convert the HDF files to a single NetCDF file.
+
+```{r, eval = FALSE}
+library(terra)
+library(ncdf4)
+library(maps)
+
+rm(list=ls())
+
+# set path and filename
+hdf_path <- "MOD13C2.061"
+
+# Get file names
+hdf_files <- list.files(hdf_path, pattern = "\\.hdf", full.names = TRUE, recursive = TRUE)
+hdf_files <- hdf_files[1:12] # Only 12, in case you downloaded more
+
+# Define dates
+start.date <- "2000-02-01"
+timeInt <- "month"
+nTime <- length(hdf_files)
+dates <- base::seq(as.Date(start.date), by = timeInt, length = nTime)
+            
+rm(raster_list)
+raster_list <- list()
+
+for (j in 1:length(hdf_files)) {
+  
+hdf_file <- hdf_files[[j]]
+
+# Read HDF5 file
+data <- rast(hdf_file)
+
+# The first layer is EVI
+data <- subset(data, 2:2) 
+
+# EVI ranges between 0 and 1 
+# Set all negative values to NA
+data[data < 0] <- NA
+
+# Apply a scaling factor
+scaleFactor <- 10^(-8)
+data <- data * scaleFactor
+
+raster_list[[j]] <- data
+rm(data)
+gc()
+}
+
+# Make a raster stack and assign the dates
+data <- terra::rast(raster_list)
+terra::time(data) <- dates
+
+# Save data to netCDF file
+writeCDF(x = data, filename = "MOD13C2061-EVI.nc", varname = "EVI", overwrite=TRUE)
+```
+Plot the output. You are now able to monitor planet earth from space. For your project you can adjust those scripts to download the full data set. 
+
+```{r}
+firstTimeStep <- subset(data, 1:1)
+plot(firstTimeStep)
+```
+
+Let's het a feeling for the spatial resolution
+
+```{r}
+plot(firstTimeStep, xlim = c(-60, -45), ylim = c(-10, 5), main = "Mouth of the Amazon River")
+map("world", add = TRUE)
+```
+
+
+```{r}
+plot(firstTimeStep, xlim = c(-80, -75), ylim = c(42, 45), main = "Lake Ontario")
+map("world", add = TRUE)
+```
+
+
+## Analysis
+
+Download the full EVI time series processed at a lower spatial resolution (0.25 degrees, about 25 km at the equator) from here. This data set covers almost 25 years of data from Feb 2000 to Sep 2024.We are going to crop the Amazon basin to have fewer data.
+
+```{r}
+library(terra)
+
+data <- terra::rast("MOD13C2061-EVI-0.25deg.nc")
+
+# Let's subset Jan 2001 to Dec 2023
+data <- subset(data, 12:287)
+# Let's focus on the Amazon basin
+data <- crop(x=data, y = c(285, 315, -15, 5))
+
+firstTimeStep <- subset(data, 1:1)
+
+plot(firstTimeStep, main = "EVI (-)")
+map("world2", add = TRUE)
+```
+
+Next, we will need to convert the data to anomalies. You already know how to do this and we can use code from the previous tutorial.
+ 
+```{r}
+library(climetrics)
+# Get the dates
+dates <- terra::time(data)
+dates <- format(dates, "%Y-%m-%d")
+dates <- base::as.Date(dates)
+
+# Create raster time series
+data.ts <- rts(data, dates)
+
+# Calculate 12-month climatological means
+data.12 <- apply.months(data.ts,'mean')
+
+plot(data.12)
+
+```
+
+
+Calculate the anomalies. This is done by subtracting the 12-month climatologies from the monthly data.
+
+```{r}
+# Get the number of years
+n <- length(dates)/12
+
+# Create a time series where the 12-month climatological mean repeats for all years 
+data.clim <- rep(data.12, n)
+
+# Calculate anomalies
+data.anom <- data - data.clim
+
+# Have a look at the data
+plot(subset(data.anom, 1:1))
+map("world2", add = TRUE, interior = FALSE)
+```
+
+
+Let's find out if there is a trend in the EVI anomalies. When doing that we need to take care of missing data 
+
+```{r}
+# Define a function that calculates a linear trend
+trend.fun <- function(x) {
+  
+  # If a grid cell contains NA, then set the result to NA
+  if (is.na(mean(x))) {
+    return(NA)
+  } else {
+   time <- 1:length(x)
+   linear.model <- lm(x ~ time)
+   trend <- coef(linear.model)["time"]
+  return(trend)
+  }
+}
+
+# Apply function to each gridcell
+trend <- app(data.anom, fun = trend.fun)
+```
+
+
+Plot the trend
+
+```{r}
+# Set the desired range for the palette
+min_val <- -0.0003
+max_val <- 0.0003
+
+# Define breaks to control the min and max of the palette
+breaks <- seq(min_val, max_val, 0.0001)
+
+my.col <- rev(map.pal("differences", n = length(breaks) - 1))
+
+plot(trend, col = my.col, 
+  type = "continuous",
+  breaks = breaks,
+  main = "Change in Consecutive Dry Days per year (2015-2100)")
+map("world2", add = TRUE)
+
+
+```
+
+Have a look at the region North West of Bolivia. What do you think is happening here? Verify your answer using Google Maps.
+
+Let's detrend our time series. You already know how to do this and we can borrow code from the previous tutorial.
+
+```{r}
+# Define a function that removes a linear trend
+detrend.fun <- function(x) {
+  # If a grid cell contains NA, then set the result to NA
+  if (is.na(mean(x))) {
+    return(rep(NA, length(time)))
+  } else {
+    time <- 1:length(x)
+    linear.model <- lm(x ~ time)
+    detrended.series <- stats::residuals(linear.model)
+    return(detrended.series)
+  }
+}
+
+data.anom.detrend <- app(x = data.anom, fun = detrend.fun)
+
+plot(subset(data.anom.detrend, 1:1))
+map("world2", add = TRUE, interior = FALSE)
+```
+
+Next, recall the early warning signal (EWS) assessment on univariate time series. Below an example with random data
+
+```{r, eval = FALSE}
+library(EWSmethods)
+
+data <- runif(1000)
+data <- data.frame(1:length(data), data)
+
+rolling_ews_eg <- uniEWS(
+  data = data,
+  metrics = c("ar1", "SD", "skew"),
+  method = "rolling",
+  winsize = 50
+)
+plot(rolling_ews_eg, y_lab = "Density")
+
+```
+
+We now need to apply this to each gridcell
+
+
+```{r}
+# Define a function that removes a linear trend
+ews.tau.ar1.fun <- function(x) {
+  # If a grid cell contains NA, then set the result to NA
+  if (is.na(mean(x))) {
+    return(rep(NA, length(time)))
+  } else {
+    time <- 1:length(x)
+    df <- data.frame(time, x)
+    rolling_ews_eg <- uniEWS(
+      data = df,
+      metrics = "ar1",
+      method = "rolling",
+      winsize = 50
+    )
+    result <- rolling_ews_eg$EWS$cor
+    return(result)
+  }
+}
+
+data.anom.crop <- crop(x=data.anom, y = c(302, 304, 0, 2))
+ews.tau.ar1 <- app(x = data.anom.crop, fun = ews.tau.ar1.fun)
+plot(ews.tau.ar1)
+```

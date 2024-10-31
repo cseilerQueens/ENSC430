@@ -1,0 +1,32 @@
+---
+title: "test"
+author: "Christian Seiler"
+date: "`r Sys.Date()`"
+output: html_document
+---
+
+# Test
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r}
+a <- 1
+print(a)
+```
+
+```{r, eval = FALSE}
+a <- 2
+print(a)
+```
+
+```{r, echo = FALSE}
+a <- 3
+print(a)
+```
+
+```{r, eval = FALSE}
+a <- 4
+print(a)
+```

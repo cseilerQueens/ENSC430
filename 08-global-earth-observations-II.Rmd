@@ -5,77 +5,302 @@ output:
 ---
 # Global Earth Observations (II)
 
-* Coming soon ...
+In this tutorial ...You will conduct a causal inference analysis that evaluates the statistical associated between satellite data (Enhanved Vegetation Index) and reanalysis (precipitation).
+
+
+
+## Download reanalysis data provided by the European Centre for Medium-Range Weather Forecasts (ECMWF)
+* Go to the [Copernicus Data Store](https://cds.climate.copernicus.eu/datasets?q=era5&kw=Variable+domain%3A+Atmosphere+%28surface%29&kw=Variable+domain%3A+Atmosphere+%28upper+air%29&kw=Variable+domain%3A+Atmosphere+%28upper+level%29&kw=Variable+domain%3A+Ocean+%28physics%29)
+* Click on ```Login-Register```
+* Create a ECMWF Account
+* After you created your account, return to the data store and select ```ERA5 monthly averaged data on single levels from 1940 to present```
+* Click on ```Download```
+* Select ```Monthly averaged reanalysis```
+* Select "Popular" and "Total Precipitation"
+* Select years 2001-2023
+* Select all months (Jan - Dec)
+* Select the time: 00:00
+* Select the Whole available region
+* Data format: NetCDF4 (not GRIB!)
+* Hit the ```Submit Form``` button
+* Wait a minute
+* Once your request has been completed, you can hit the download button (379.33 MB)
+* Once the download completed, rename your file to ```ERA5_pr_2002-2023.nc``` and move it to your working directory.
+
+## Process Data
+
+### Plot data and verify physicals units
+
+Load the libraries that you will need for this tutorial
 
 ```{r, eval = FALSE}
+setwd("C:/Users/seile/Documents/queensu/teaching/classes/ENSC430/tutorials/ENSC430")
+.libPaths("C:/Users/seile/Documents/queensu/teaching/classes/ENSC430/tutorials/ENSC430/renv")
+
 library(terra)
 library(ncdf4)
+library(maps)
+library(climetrics)
+```
 
-rm(list=ls())
+```{r, include = FALSE}
+setwd("C:/Users/seile/Documents/queensu/teaching/classes/ENSC430/tutorials/ENSC430")
+.libPaths("C:/Users/seile/Documents/queensu/teaching/classes/ENSC430/tutorials/ENSC430/renv")
 
-my.grid <- rast("data/ERA5_tas_2000-2023.nc")
-my.grid <- subset(my.grid, 1:1)
+library(terra)
+library(ncdf4)
+library(maps)
+library(climetrics)
+```
 
-# set path and filename
-hdf_path <- "MOD13C2.061"
+* The variable is the total precipitation measured in m per day.
 
-# Get file names
-hdf_files <- list.files(hdf_path, pattern = "\\.hdf", full.names = TRUE, recursive = TRUE)
+* Let's plot the annual total precipitation of the first year.
 
-# Define dates
-start.date <- "2000-02-01"
-timeInt <- "month"
-nTime <- length(hdf_files)
-dates <- base::seq(as.Date(start.date), by = timeInt, length = nTime)
-            
-rm(raster_list)
-raster_list <- list()
+```{r}
+rm(list = ls())
+data <- terra::rast("data/ERA5_pr_2001-2023.nc")
 
-for (j in 1:length(hdf_files)) {
-  
-hdf_file <- hdf_files[[j]]
+# Get the first 12 months of data
+firstYear <- subset(data, 1:12)
 
-# Read HDF5 file
-data <- rast(hdf_file)
+# Calculate the mean and multiply with the number of days per year
+firstYear <- mean(firstYear) * 365
 
-# The first layer is EVI
-data <- subset(data, 2:2) 
+# Convert the unit from m to mm
+firstYear <- firstYear * 1000
 
-# EVI ranges between 0 and 1 
-# Set all negative values to NA
-data[data < 0] <- NA
+# Define the minimum and maximum values you wish to plot
+min_val <- 0
+max_val <- 5000
 
-# Apply a scaling factor
-scaleFactor <- 10^(-8)
-data <- data * scaleFactor
+# Define the color breaks
+breaks <- seq(min_val, max_val, 250)
 
-data <- terra::resample(x = data, y = my.grid)
+my.col <- map.pal("blues", n = length(breaks) - 1)
 
-raster_list[[j]] <- data
-rm(data)
-gc()
-}
+terra::plot(firstYear, type = "continuous", col = my.col, breaks = breaks, main = "Annual Total Precipitation (mm/yr)")
+map("world2", add = TRUE)
+```
+* Note the white line along the equator?  These are values that exceed 5000 mm per year.
 
-# Make a raster stack and assign the dates
-data <- terra::rast(raster_list)
-terra::time(data) <- dates
+## Spatial resolution
 
-# Save data to netCDF file
-writeCDF(x = data, filename = "MOD13C2061-EVI-0.25deg.nc", varname = "EVI", overwrite=TRUE)
+When combining data from different sources, you need to make sure that the data sets use the same spatial grid. Furthermore, you need to mask out all values that both data sets do not have in common. Finally, the analysis you are baout to perform is computational expensive. Choose a relatively coarse grid so that the analysis does not take too long. Run the code below to create a common grid that is a little more coarse than the original one. 
+
+```{r}
+rm(list = ls())
+
+# Enhanced Vegetation Index
+evi <- terra::rast("MOD13C2061-EVI-0.25deg.nc")
+evi <- subset(evi, 12:287) # Subset Jan 2001 to Dec 2023
+evi <- aggregate(x = evi, fact=2, fun="mean") # More coarse spatial resolution
+mask <- mean(evi) # create mask
+mask <- mask - mask + 1 # make boolean mask
+
+# Precipitation
+pr <- terra::rast("data/ERA5_pr_2001-2023.nc")
+pr <- resample(x = pr, y = evi) # make resolution same as EVI
+pr <- pr * mask # exclude gridcells that both data sets do not have in common
+```
+
+## Precipitation
+
+* Calculate 12-month climatological means
+
+```{r}
+data <- pr
+
+# Create a sequence of dates
+start_date <- as.Date("2001-01-15")
+end_date <- as.Date("2023-12-15")
+dates <- seq(from = start_date, to = end_date, by = "month")
+
+# Create raster time series
+data.ts <- rts(data, dates)
+
+# Calculate 12-month climatological means
+data.12 <- apply.months(data.ts,'mean')
+
+# Plot 12 months of data
+my.col = map.pal("blues", n = 100)
+plot(data.12, col = my.col)
 ```
 
 
-50 W and 80 W longitude and 5 N and 17 S
+## Calculate Precipitation Anomalies
 
+```{r}
 
-# T63 resolution
-data <- raster::stack("LEOLSTCMG30.nc")
-r <- raster::raster("gpp_monthly.nc")
-r <- raster::rotate(r)
-data <- raster::resample(data, r, method='bilinear')
-data[data==0] <- NA
-writeRaster(data, filename = "LEOLSTCMG30_128x64.nc", format = "CDF", varname = "LST", overwrite=T)
+# Get the number of years
+n <- length(dates)/12
 
+# Create a time series where the 12-month climatological mean repeats for all years 
+data.clim <- rep(data.12, n)
 
+# Calculate anomalies
+data.anom <- data - data.clim
 
+# Have a look at the data
+
+# Set the desired range for the palette
+min_val <- -0.03
+max_val <- 0.03
+
+# Define breaks to control the min and max of the palette
+breaks <- seq(min_val, max_val, 0.005)
+my.col <- rev(map.pal("differences", n = length(breaks) - 1))
+
+plot(subset(data.anom, 1:1), type = "continuous", col = my.col, breaks = breaks)
+map("world2", add = TRUE)
+```
+## Detrend precipitation anomalies
+
+```{r}
+
+# Define a function that removes a linear trend
+detrend.fun <- function(x) {
+  time <- 1:length(x)
+  # If a grid cell contains NA, then set the result to NA
+  if (is.na(mean(x))) {
+    return(rep(NA, length(time)))
+  } else {
+    time <- 1:length(x)
+    linear.model <- lm(x ~ time)
+    detrended.series <- stats::residuals(linear.model)
+    return(detrended.series)
+  }
+}
+
+data.anom.detrend <- app(x = data.anom, fun = detrend.fun)
+
+my.col = rev(map.pal("differences", n = 100))
+plot(subset(data.anom.detrend, 1:1), col = my.col, main = "Detrended precipitation anomaly (mm/day)")
+map("world2", add = TRUE)
+
+pr.anom.detrend <- data.anom.detrend
+
+```
+### EVI
+
+Now we need to do the same for the EVI data. We have already done this in the previous tutorial, so I am just adding that same code below in a slightly more concise fashion.
+
+```{r}
+data <- evi
+
+# Get the dates
+# Create a sequence of dates
+start_date <- as.Date("2001-01-15")
+end_date <- as.Date("2023-12-15")
+dates <- seq(from = start_date, to = end_date, by = "month")
+
+# Create raster time series
+data.ts <- rts(data, dates)
+
+# Calculate 12-month climatological means
+data.12 <- apply.months(data.ts,'mean')
+
+# Get the number of years
+n <- length(dates)/12
+
+# Create a time series where the 12-month climatological mean repeats for all years 
+data.clim <- rep(data.12, n)
+
+# Calculate anomalies
+data.anom <- data - data.clim
+
+# Define a function that calculates a linear trend
+trend.fun <- function(x) {
+  
+  # If a grid cell contains NA, then set the result to NA
+  if (is.na(mean(x))) {
+    return(NA)
+  } else {
+   time <- 1:length(x)
+   linear.model <- lm(x ~ time)
+   trend <- coef(linear.model)["time"]
+  return(trend)
+  }
+}
+
+data.anom.detrend <- app(x = data.anom, fun = detrend.fun)
+
+plot(subset(data.anom.detrend, 1:1), main = "Detrended EVI anomaly (-)")
+map("world2", add = TRUE)
+
+evi.anom.detrend <- data.anom.detrend
+```
+
+## Causal inference
+
+Now that you have created detrended anomalies of precipitation and EVI, you can assess the statistical association between both time series using Granger causality. The following analysis is similar to the causal inference analysis we conducted for temperature and albedo for climate model data. Start by defining a Granger causality function that we can apply to each gridcell.
+
+```{r}
+granger.fun <- function(x) {
+  
+    # If a grid cell contains NA, then set the result to NA
+  if (is.na(mean(x))) {
+    return(NA)
+  } else {
+    
+  n <- length(x)
+  # Get first (a) and second (b) variable
+  a <- x[1:(n/2)]
+  b <- x[(n/2+1):n]
+  # Convert to time series
+  a <- ts(a)
+  b <- ts(b)
+  tsDat <- ts.union(a, b)
+  tsVAR <- vars::VAR(tsDat, p = 1)
+  # Apply Granger causality test 
+  p.value <- c(vars::causality(tsVAR, cause = "a")$Granger[3]$p.value)
+  return(p.value)
+  }
+}
+```
+
+Check whether precipitation Granger-causes EVI anomalies.
+
+```{r}
+# Stack your raster objects, where the first part is the cause and the second the response
+data <- c(pr.anom.detrend, evi.anom.detrend)
+
+# Let's focus on Australia
+data <- crop(x=data, y = c(110, 160, -45, -10))
+
+# Let's focus on the Amazon basin
+# data <- crop(x=data, y = c(285, 315, -15, 5))
+
+# Assess Granger causality  
+p.value <- app(x = data, fun = granger.fun)
+
+# Create a boolean map where all locations with p-values < 0.01 equal 1 and all remaining gridcells equal zero
+p.value[p.value>=0.05] <- 0
+p.value[p.value>0] <- 1
+prCausesEvi <- p.value
+plot(prCausesEvi, col = c("white", "orange"), main = "Precipitation Granger-causes EVI Anomalies")
+map("world2", add = TRUE, interior = FALSE)
+```
+
+Check whether EVI Granger-causes precipitation
+
+```{r}
+# Stack your raster objects, where the first part is the cause and the second the response
+data <- c(evi.anom.detrend, pr.anom.detrend)
+
+# Let's focus on Australia
+data <- crop(x=data, y = c(110, 160, -45, -10))
+
+# Let's focus on the Amazon basin
+# data <- crop(x=data, y = c(285, 315, -15, 5))
+
+# Assess Granger causality  
+p.value <- app(x = data, fun = granger.fun)
+
+# Create a boolean map where all locations with p-values < 0.01 equal 1 and all remaining gridcells equal zero
+p.value[p.value>=0.05] <- 0
+p.value[p.value>0] <- 1
+eviCausesPr <- p.value
+plot(eviCausesPr, col = c("white", "orange"), main = "EVI Granger-causes Precipitation Anomalies")
+map("world2", add = TRUE, interior = FALSE)
 ```

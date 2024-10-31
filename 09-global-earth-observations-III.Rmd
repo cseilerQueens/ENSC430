@@ -5,4 +5,32 @@ output:
 ---
 # Global Earth Observations (III)
 
-* Coming soon ...
+* Visit the [FLUXNET Data Portal](https://fluxnet.org/data/download-data/#0)
+* Click on FLUXNET2015 Tier 2 Data
+* Select SUBSET data product
+
+
+
+
+```{r, eval = TRUE, echo = FALSE, include=FALSE}
+rm(list = ls())
+setwd("C:/Users/seile/Documents/queensu/teaching/classes/ENSC430/tutorials/ENSC430")
+.libPaths("C:/Users/seile/Documents/queensu/teaching/classes/ENSC430/tutorials/ENSC430/renv")
+library(renv)
+
+# remotes::install_github("aukkola/FluxnetLSM")
+# library(FluxnetLSM)
+
+
+library(terra)
+library(climetrics)
+library(maps)
+library(vars)
+```
+
+```{r, eval = FALSE, echo = TRUE}
+library(terra)
+library(climetrics)
+library(maps)
+library(vars)
+```

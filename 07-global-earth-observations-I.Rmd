@@ -12,7 +12,9 @@ To download data from the LP DAAC archive, you need to authorize our application
 
 ## Install dependencies
 
-```{r, eval = TRUE, echo = FALSE, include=FALSE}
+Install the packages ```sys```, ```getPass```, and ```httr```:
+
+```{r, eval = FALSE}
 setwd("C:/Users/seile/Documents/queensu/teaching/classes/ENSC430/tutorials/ENSC430")
 .libPaths("C:/Users/seile/Documents/queensu/teaching/classes/ENSC430/tutorials/ENSC430/renv")
 library(renv)
@@ -21,10 +23,46 @@ renv::install("getPass")
 renv::install("httr")
 ```
 
-## Download test
+
+Load the libraries that you will need for this tutorial
 
 ```{r, eval = FALSE}
+setwd("C:/Users/seile/Documents/queensu/teaching/classes/ENSC430/tutorials/ENSC430")
+.libPaths("C:/Users/seile/Documents/queensu/teaching/classes/ENSC430/tutorials/ENSC430/renv")
 
+library(terra)
+library(ncdf4)
+library(maps)
+library(climetrics)
+library(EWSmethods)
+library(sys)
+library(getPass)
+library(httr)
+library(rvest)
+library(dplyr)
+```
+
+```{r, include = FALSE}
+setwd("C:/Users/seile/Documents/queensu/teaching/classes/ENSC430/tutorials/ENSC430")
+.libPaths("C:/Users/seile/Documents/queensu/teaching/classes/ENSC430/tutorials/ENSC430/renv")
+
+library(terra)
+library(ncdf4)
+library(maps)
+library(climetrics)
+library(EWSmethods)
+library(sys)
+library(getPass)
+library(httr)
+library(rvest)
+library(dplyr)
+```
+
+## Download Test
+
+Test whether you can download a file 
+
+```{r, eval = FALSE}
 # Load necessary packages into R
 library(sys)
 library(getPass)
@@ -40,7 +78,8 @@ netrc <- file.path(usr,'.netrc', fsep = .Platform$file.sep)  # Path to netrc fil
 # If you already have a .netrc file with your Earthdata Login credentials stored in your home
 # directory, this portion will be skipped. Otherwise you will be prompted for your NASA Earthdata
 # Login Username/Password and a netrc file will be created to store your credentials (in home dir)
-if (file.exists(netrc) == FALSE || grepl("urs.earthdata.nasa.gov", readLines(netrc)) == FALSE) {
+# if (file.exists(netrc) == FALSE || grepl("urs.earthdata.nasa.gov", readLines(netrc)) == FALSE) {
+if (file.exists(netrc) == FALSE) {
   netrc_conn <- file(netrc)
 
   # User will be prompted for NASA Earthdata Login Username and Password below
@@ -83,11 +122,7 @@ Locate the file ```MYD09GA.A2002187.h10v04.061.2020071193416.hdf``` to identify 
 
 You will be downloading satellite data from the Moderate Resolution Imaging Spectroradiometer (MODIS). The specific MODIS product we are processing is the Vegetation Indices Monthly L3 Global 0.05 CMG ([MOD13C2](https://lpdaac.usgs.gov/products/mod13c2v061/)). Each HDF file is located in its own folder. The first step is to generate a list of all the URLs where our files are stored. Run the script below to create the list.
 
-```{r}
-# Load packages
-library(rvest)
-library(dplyr)
-
+```{r, eval = FALSE}
 # Set base URL (main directory)
 base_url <- "https://e4ftl01.cr.usgs.gov/MOLT/MOD13C2.061/"
 
@@ -139,12 +174,13 @@ for (folder in folders) {
   }
 }
 
-print("the first five .hdf file URLs are:")
-print(hdf_files[1:5])
+print("the first three .hdf file URLs are:")
+print(hdf_files[1:3])
 ```
-Great. Each file is approximately 100 MB, and with about 300 files, the total comes to 30,000 MB (30 GB). These files are large because they contain multiple variables and have a high spatial resolution (0.05 degrees, roughly 5 km at the equator). To speed things up, you'll start by processing 12 months of data to get familiar with the process. Later, you'll download a fully processed file with all time steps but at a lower spatial resolution from a different link for analysis. Run the code below to download 12 HDF files.
 
-```{r}
+Great! Each file is approximately 100 MB, and with about 300 files, the total comes to 30,000 MB (30 GB). These files are large because they contain multiple variables and have a high spatial resolution (0.05 degrees, roughly 5 km at the equator). To speed things up, you'll start by processing 12 months of data to get familiar with the process. Later in this tutorial, you will download a fully processed file with all time steps but at a lower spatial resolution from a different link for analysis. Run the code below to download 12 HDF files.
+
+```{r, eval = FALSE}
 files <- unlist(hdf_files[1:12]) # 12 files only
 
 # Loop through all files
@@ -168,10 +204,6 @@ for (i in 1:length(files)) {
 The next step is to read in the downloaded files and to convert them to a single NetCDF file. Move the HDF files into a folder that you name ```MOD13C2.061```. Make sure this folder is in your working directory. Next, run the script below to convert the HDF files to a single NetCDF file.
 
 ```{r, eval = FALSE}
-library(terra)
-library(ncdf4)
-library(maps)
-
 rm(list=ls())
 
 # set path and filename
@@ -219,35 +251,27 @@ terra::time(data) <- dates
 
 # Save data to netCDF file
 writeCDF(x = data, filename = "MOD13C2061-EVI.nc", varname = "EVI", overwrite=TRUE)
-```
-Plot the output. You are now able to monitor planet earth from space. For your project you can adjust those scripts to download the full data set. 
 
-```{r}
-firstTimeStep <- subset(data, 1:1)
+# Plot the first time step
+firstTimeStep <- subset(data, 1)
 plot(firstTimeStep)
+map("world", add = TRUE)
 ```
 
-Let's het a feeling for the spatial resolution
+Well done – you can now monitor planet Earth from space! For your project, you can adjust the scripts above to download the full dataset and/or different variables. Let's plot a smaller region to get a sense of the spatial resolution.
 
 ```{r}
+data <- rast("MOD13C2061-EVI.nc")
+firstTimeStep <- subset(data, 1)
 plot(firstTimeStep, xlim = c(-60, -45), ylim = c(-10, 5), main = "Mouth of the Amazon River")
 map("world", add = TRUE)
 ```
 
-
-```{r}
-plot(firstTimeStep, xlim = c(-80, -75), ylim = c(42, 45), main = "Lake Ontario")
-map("world", add = TRUE)
-```
-
-
 ## Analysis
 
-Download the full EVI time series processed at a lower spatial resolution (0.25 degrees, about 25 km at the equator) from here. This data set covers almost 25 years of data from Feb 2000 to Sep 2024.We are going to crop the Amazon basin to have fewer data.
+I have processed the complete dataset for you at a reduced spatial resolution of 0.25 degrees (approximately 25 km at the equator) to save you time. The dataset spans nearly 25 years, from February 2000 to September 2024, and is available for download [here](https://drive.google.com/file/d/1-CCfBwO_P7eBuhqbcOuM5mhrxdjYuv3Z/view?usp=sharing). Our analysis will focus on the Amazon Basin. Download the file to your working directory and run the script below.
 
 ```{r}
-library(terra)
-
 data <- terra::rast("MOD13C2061-EVI-0.25deg.nc")
 
 # Let's subset Jan 2001 to Dec 2023
@@ -255,16 +279,15 @@ data <- subset(data, 12:287)
 # Let's focus on the Amazon basin
 data <- crop(x=data, y = c(285, 315, -15, 5))
 
-firstTimeStep <- subset(data, 1:1)
+evi.mean <- mean(data, na.rm = TRUE)
 
-plot(firstTimeStep, main = "EVI (-)")
+plot(evi.mean, main = "Annual Mean Enhanced Vegetation Index (EVI) (-)")
 map("world2", add = TRUE)
 ```
 
-Next, we will need to convert the data to anomalies. You already know how to do this and we can use code from the previous tutorial.
+Next, we will need to convert the data to anomalies. You already know how to do this and we can use the code from the previous tutorial.
  
 ```{r}
-library(climetrics)
 # Get the dates
 dates <- terra::time(data)
 dates <- format(dates, "%Y-%m-%d")
@@ -276,12 +299,11 @@ data.ts <- rts(data, dates)
 # Calculate 12-month climatological means
 data.12 <- apply.months(data.ts,'mean')
 
+# Plot 12 months of data
 plot(data.12)
-
 ```
 
-
-Calculate the anomalies. This is done by subtracting the 12-month climatologies from the monthly data.
+Calculate the anomalies by subtracting the 12-month climatologies from the monthly data. You already know how to do this from the previous tutorial.
 
 ```{r}
 # Get the number of years
@@ -295,11 +317,10 @@ data.anom <- data - data.clim
 
 # Have a look at the data
 plot(subset(data.anom, 1:1))
-map("world2", add = TRUE, interior = FALSE)
+map("world2", add = TRUE)
 ```
 
-
-Let's find out if there is a trend in the EVI anomalies. When doing that we need to take care of missing data 
+Let us find out if there is a trend in the EVI anomalies.
 
 ```{r}
 # Define a function that calculates a linear trend
@@ -320,8 +341,7 @@ trend.fun <- function(x) {
 trend <- app(data.anom, fun = trend.fun)
 ```
 
-
-Plot the trend
+Plot the trend:
 
 ```{r}
 # Set the desired range for the palette
@@ -336,19 +356,18 @@ my.col <- rev(map.pal("differences", n = length(breaks) - 1))
 plot(trend, col = my.col, 
   type = "continuous",
   breaks = breaks,
-  main = "Change in Consecutive Dry Days per year (2015-2100)")
+  main = "Trend in EVI (2001-2023)")
 map("world2", add = TRUE)
-
-
 ```
 
-Have a look at the region North West of Bolivia. What do you think is happening here? Verify your answer using Google Maps.
+* Have a look at the region Northwest of Bolivia. What do you think is happening here? Compare the region with images from Google Maps.
 
-Let's detrend our time series. You already know how to do this and we can borrow code from the previous tutorial.
+The next step is to detrend our time series. You already know how to do this and we can borrow code from the previous tutorial.
 
 ```{r}
 # Define a function that removes a linear trend
 detrend.fun <- function(x) {
+  time <- 1:length(x)
   # If a grid cell contains NA, then set the result to NA
   if (is.na(mean(x))) {
     return(rep(NA, length(time)))
@@ -363,36 +382,52 @@ detrend.fun <- function(x) {
 data.anom.detrend <- app(x = data.anom, fun = detrend.fun)
 
 plot(subset(data.anom.detrend, 1:1))
-map("world2", add = TRUE, interior = FALSE)
+map("world2", add = TRUE)
 ```
 
-Next, recall the early warning signal (EWS) assessment on univariate time series. Below an example with random data
-
-```{r, eval = FALSE}
-library(EWSmethods)
-
-data <- runif(1000)
-data <- data.frame(1:length(data), data)
-
-rolling_ews_eg <- uniEWS(
-  data = data,
-  metrics = c("ar1", "SD", "skew"),
-  method = "rolling",
-  winsize = 50
-)
-plot(rolling_ews_eg, y_lab = "Density")
-
-```
-
-We now need to apply this to each gridcell
-
+As you may have figured out by now, there is a lot of land use change happening in the Amazon basin. For our analysis we need to exclude grid cells affected by land use change. You can do this by obtaining a map of land cover and masking all regions that don't classify as forests. Alternatively, you can filter out all grid cells with low EVI values. Let's create a mask that only shows grid cells with EVI values > 0.4.  
 
 ```{r}
-# Define a function that removes a linear trend
+data <- terra::rast("MOD13C2061-EVI-0.25deg.nc")
+
+# Let's focus on the Amazon basin
+data <- crop(x=data, y = c(285, 315, -15, 5))
+
+mask <- min(data, na.rm = FALSE)
+
+mask[mask<0.4] <- NA
+mask <- mask - mask + 1
+
+plot(mask, main = "Mask where min EVI > 0.4 (-)")
+map("world2", add = TRUE)
+```
+
+
+Let's apply the mask to our time series.
+
+```{r}
+data.anom.detrend <- data.anom.detrend * mask
+plot(subset(data.anom.detrend, 1), main = "Detrended EVI Anomalies (-)")
+map("world2", add = TRUE)
+```
+
+We are now ready to apply the early warning indicators for ecosystem resilience from the previous tutorial. These indicators will be applied to each grid cell. However, the analysis is computationally expensive. To make it feasible, we first need to reduce the grid's spatial resolution using the ```aggregate``` function. 
+
+```{r}
+data.anom.detrend.coarse <- aggregate(x = data.anom.detrend, fact=2, fun="mean")
+plot(subset(data.anom.detrend.coarse, 1), main = "Detrended EVI Anomalies (-)")
+map("world2", add = TRUE)
+```
+
+To run the Univariate Early Warning Signal Assessment, execute the script below, which will run for a few minutes. Perfect time for a break!
+
+```{r}
+# Define a function
 ews.tau.ar1.fun <- function(x) {
   # If a grid cell contains NA, then set the result to NA
   if (is.na(mean(x))) {
-    return(rep(NA, length(time)))
+  #  return(rep(NA, length(x)))
+    return(NA)
   } else {
     time <- 1:length(x)
     df <- data.frame(time, x)
@@ -400,14 +435,202 @@ ews.tau.ar1.fun <- function(x) {
       data = df,
       metrics = "ar1",
       method = "rolling",
-      winsize = 50
+      winsize = 60
     )
     result <- rolling_ews_eg$EWS$cor
     return(result)
   }
 }
 
-data.anom.crop <- crop(x=data.anom, y = c(302, 304, 0, 2))
-ews.tau.ar1 <- app(x = data.anom.crop, fun = ews.tau.ar1.fun)
-plot(ews.tau.ar1)
+# Apply Univariate Early Warning Signal Assessment
+ews.tau.ar1 <- terra::app(x = data.anom.detrend.coarse, fun = ews.tau.ar1.fun)
 ```
+
+Plot Kendall's Tau coefficient for Autocorrelation.
+
+```{r}
+# Set the desired range for the palette
+min_val <- -0.9
+max_val <- 0.9
+
+# Define breaks to control the min and max of the palette
+breaks <- seq(min_val, max_val, 0.1)
+
+my.col <- map.pal("differences", n = length(breaks) - 1)
+
+plot(ews.tau.ar1, col = my.col, 
+  type = "continuous",
+  breaks = breaks,
+  main = "Tau AR1, EVI (2001-2023)")
+map("world2", add = TRUE)
+```
+
+* What is your interpretation of the result?
+
+Repeat the analysis, calculating ecosystem resilience for Australia. For this example, do not mask out low EVI values. The coordinates are 110 to 160 longitude and -45 to -10 latitude, so ```data <- crop(x=data, y = c(110, 160, -45, -10))```. Your result should look similar to the Figures below. Good luck!
+
+Steps:
+
+* Plot EVI mean
+
+```{r, echo = FALSE}
+data <- terra::rast("MOD13C2061-EVI-0.25deg.nc")
+
+# Let's subset Jan 2001 to Dec 2023
+data <- subset(data, 12:287)
+# Let's focus on Australia
+data <- crop(x=data, y = c(110, 160, -45, -10))
+
+evi.mean <- mean(data, na.rm = TRUE)
+
+plot(evi.mean, main = "Annual Mean Enhanced Vegetation Index (EVI) (-)")
+map("world2", add = TRUE)
+```
+
+* Calculate 12-month climatological means
+ 
+```{r, echo = FALSE}
+# Get the dates
+dates <- terra::time(data)
+dates <- format(dates, "%Y-%m-%d")
+dates <- base::as.Date(dates)
+
+# Create raster time series
+data.ts <- rts(data, dates)
+
+# Calculate 12-month climatological means
+data.12 <- apply.months(data.ts,'mean')
+
+# Plot 12 months of data
+plot(data.12)
+```
+
+* Calculate the anomalies by subtracting the 12-month climatologies from the monthly data.
+
+```{r, echo = FALSE}
+# Get the number of years
+n <- length(dates)/12
+
+# Create a time series where the 12-month climatological mean repeats for all years 
+data.clim <- rep(data.12, n)
+
+# Calculate anomalies
+data.anom <- data - data.clim
+
+# Have a look at the data
+plot(subset(data.anom, 1:1))
+map("world2", add = TRUE)
+```
+
+* Plot the trend in EVI anomalies.
+
+```{r, echo = FALSE}
+# Define a function that calculates a linear trend
+trend.fun <- function(x) {
+  
+  # If a grid cell contains NA, then set the result to NA
+  if (is.na(mean(x))) {
+    return(NA)
+  } else {
+   time <- 1:length(x)
+   linear.model <- lm(x ~ time)
+   trend <- coef(linear.model)["time"]
+  return(trend)
+  }
+}
+
+# Apply function to each gridcell
+trend <- app(data.anom, fun = trend.fun)
+
+# Set the desired range for the palette
+min_val <- -0.0003
+max_val <- 0.0003
+
+# Define breaks to control the min and max of the palette
+breaks <- seq(min_val, max_val, 0.0001)
+
+my.col <- rev(map.pal("differences", n = length(breaks) - 1))
+
+plot(trend, col = my.col, 
+  type = "continuous",
+  breaks = breaks,
+  main = "Trend in EVI (2001-2023)")
+map("world2", add = TRUE)
+```
+
+* Detrend the time series.
+
+```{r, echo = FALSE}
+# Define a function that removes a linear trend
+detrend.fun <- function(x) {
+  time <- 1:length(x)
+  # If a grid cell contains NA, then set the result to NA
+  if (is.na(mean(x))) {
+    return(rep(NA, length(time)))
+  } else {
+    time <- 1:length(x)
+    linear.model <- lm(x ~ time)
+    detrended.series <- stats::residuals(linear.model)
+    return(detrended.series)
+  }
+}
+
+data.anom.detrend <- app(x = data.anom, fun = detrend.fun)
+
+plot(subset(data.anom.detrend, 1), main = "Detrended EVI Anomalies (-)")
+map("world2", add = TRUE)
+```
+
+
+* Reduce the spatial resolution.
+
+```{r, echo = FALSE}
+data.anom.detrend.coarse <- aggregate(x = data.anom.detrend, fact=2, fun="mean")
+plot(subset(data.anom.detrend.coarse, 1), main = "Detrended EVI Anomalies (-)")
+map("world2", add = TRUE)
+```
+
+* Run the Univariate Early Warning Signal Assessment
+
+```{r, echo = FALSE}
+# Define a function
+ews.tau.ar1.fun <- function(x) {
+  # If a grid cell contains NA, then set the result to NA
+  if (is.na(mean(x))) {
+  #  return(rep(NA, length(x)))
+    return(NA)
+  } else {
+    time <- 1:length(x)
+    df <- data.frame(time, x)
+    rolling_ews_eg <- uniEWS(
+      data = df,
+      metrics = "ar1",
+      method = "rolling",
+      winsize = 60
+    )
+    result <- rolling_ews_eg$EWS$cor
+    return(result)
+  }
+}
+
+# Apply Univariate Early Warning Signal Assessment
+ews.tau.ar1 <- terra::app(x = data.anom.detrend.coarse, fun = ews.tau.ar1.fun)
+
+# Set the desired range for the palette
+min_val <- -0.9
+max_val <- 0.9
+
+# Define breaks to control the min and max of the palette
+breaks <- seq(min_val, max_val, 0.1)
+
+my.col <- map.pal("differences", n = length(breaks) - 1)
+
+plot(ews.tau.ar1, col = my.col, 
+  type = "continuous",
+  breaks = breaks,
+  main = "Tau AR1, EVI (2001-2023)")
+map("world2", add = TRUE)
+```
+
+* Interpret your result.
+

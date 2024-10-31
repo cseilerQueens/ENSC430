@@ -42,9 +42,9 @@ The material posted on this website is under development. The slides and exercis
 |3 | Fri, Sep 20 | [Causal Inference](https://drive.google.com/file/d/1zj33Lq86ivyxbwxbpTaA-dGO7ZCmaKIg/view?usp=sharing) | [vars](https://cran.r-project.org/web/packages/vars/index.html)| [Runge et al (2019)](https://app.paperpile.com/view/plain/?id=3721495e-dd70-05e7-8277-ee8b76c8c489)|
 |4 | Fri, Sep 27 | [Climate Model Analysis (I): Climate Extremes](https://drive.google.com/file/d/19yMKOcvvYXZwZKBans7qvHnaGe-U1jt8/view?usp=drive_link) | [terra](https://cran.r-project.org/web/packages/terra/index.html), [ClimInd](https://cran.r-project.org/web/packages/ClimInd/index.html)| [Eyring et al (2016)](https://gmd.copernicus.org/articles/9/1937/2016/)|
 |5 | Fri, Oct 4 | [Climate Model Analysis (II): Impacts on Biodiversity](https://drive.google.com/file/d/1Du0wqgLeTptXaDuJbJ-z262fartnfO4a/view?usp=sharing)| [climetrics](https://cran.r-project.org/web/packages/climetrics/index.html)| [Taheri et al (2024)](https://nsojournals.onlinelibrary.wiley.com/doi/10.1111/ecog.07176?af=R)|
-|6 | Fri, Oct 11 | Climate Model Analysis (III): Causal Inference| [vars](https://cran.r-project.org/web/packages/vars/index.html)| [Papagiannopoulou et al (2017)](https://iopscience.iop.org/article/10.1088/1748-9326/aa7145/meta)|
+|6 | Fri, Oct 11 | [Climate Model Analysis (III): Causal Inference](https://drive.google.com/file/d/1BNwSVvtdim9-Cld86TVo-tIuIC2UBP4M/view?usp=sharing)| [vars](https://cran.r-project.org/web/packages/vars/index.html)| [Papagiannopoulou et al (2017)](https://iopscience.iop.org/article/10.1088/1748-9326/aa7145/meta)|
 |7 | Fri, Oct 18 | Reading Week | - | - |
-|8 | Fri, Oct 25 | Global Earth Observations (I): Satellite Data| [terra](https://cran.r-project.org/web/packages/terra/index.html)| [Yan et al (2013)](https://www.nature.com/articles/nclimate1908)|
+|8 | Fri, Oct 25 | [Global Earth Observations (I): Satellite Data](https://drive.google.com/file/d/1XmdoHExibtMsIMtHv55FurtGqoqlMo3-/view?usp=sharing)| [terra](https://cran.r-project.org/web/packages/terra/index.html)| [Yan et al (2013)](https://www.nature.com/articles/nclimate1908)|
 |9 | Fri, Nov 1 | Global Earth Observations (II): In Situ Data| [FluxnetLSMR](https://github.com/aukkola/FluxnetLSM)| [Ukkola et al (2017)](https://gmd.copernicus.org/articles/10/3379/2017/gmd-10-3379-2017.pdf)|
 |10 | Fri, Nov 8 | Global Earth Observations (III): Causal Inference| [vars](https://cran.r-project.org/web/packages/vars/index.html)| [Papagiannopoulou et al (2017) (revisit)](https://iopscience.iop.org/article/10.1088/1748-9326/aa7145/meta)|
 |11 | Fri, Nov 15 | [Integrated Assessment Modeling (I): Mitigation Policies](https://drive.google.com/file/d/19yMKOcvvYXZwZKBans7qvHnaGe-U1jt8/view?usp=drive_link) | NA| [Edmonds et al (1983)](https://www.sciencedirect.com/science/article/pii/0140988383900142?via%3Dihub)| 
@@ -1866,14 +1866,20 @@ abline(trend_model, col="red", lwd=2)
 
 ---
 output:
-  pdf_document: default
   html_document: default
+  pdf_document: default
 ---
 # Climate Model Analysis (II)
 
-```{r, eval = TRUE, echo = FALSE}
+```{r, eval = TRUE, echo = FALSE, include=FALSE}
 setwd("C:/Users/seile/Documents/queensu/teaching/classes/ENSC430/tutorials/ENSC430")
 .libPaths("C:/Users/seile/Documents/queensu/teaching/classes/ENSC430/tutorials/ENSC430/renv")
+library(terra)
+library(climetrics)
+library(maps)
+```
+
+```{r, eval = FALSE, echo = TRUE}
 library(terra)
 library(climetrics)
 library(maps)
@@ -2244,7 +2250,6 @@ my.col <- rev(map.pal("differences", n = length(breaks) - 1))
 
 plot(cm3, type = "continuous", col = my.col, breaks = breaks, main='Changes in the Area of Analogous Climate (%)')
 map("world2", add = TRUE, interior = FALSE)
-
 ```
 
 ### Climate Metric (4): Change in the distance to analogous climates
@@ -2342,14 +2347,13 @@ output:
 # Climate Model Analysis (III)
 The goal of this tutorial is to identify regions with dynamic feedback mechanisms during the historical period as well as under future climate conditions. In this exercise we will focus on the temperature-albedo feedback. The main steps are:
 
-* Download data (near-surface air temperature $tas$, surface downwelling radiation $rsds$, and surface upwelling radiation $rsus$
+* Download data (near-surface air temperature $tas$, surface downwelling radiation $rsds$, and surface upwelling radiation $rsus$)
 * Calculate albedo $albs$: $albs = rsus / rsds$
 * Calculate anomalies
 * Detrend time series
-* Drop layers with gridcells that have no values (NA)
 * Conduct Granger causality test
 
-## Download CanESM5 data, historical, ensemble member r1i1p1f1
+Download CanESM5 data, historical, ensemble member r1i1p1f1
 
 * [Monthly near-surface air temperature, CanESM5, historical](http://crd-esgf-drc.ec.gc.ca/thredds/fileServer/esgC_dataroot/AR6/CMIP6/CMIP/CCCma/CanESM5/historical/r1i1p1f1/Amon/tas/gn/v20190429/tas_Amon_CanESM5_historical_r1i1p1f1_gn_185001-201412.nc)
 
@@ -2357,22 +2361,39 @@ The goal of this tutorial is to identify regions with dynamic feedback mechanism
 
 * [Monthly Surface upwelling shortwave radiation (rsus), CanESM5, SSP5-8.5](http://esgf.nci.org.au/thredds/fileServer/replica/CMIP6/CMIP/CCCma/CanESM5/historical/r1i1p1f1/Amon/rsus/gn/v20190429/rsus_Amon_CanESM5_historical_r1i1p1f1_gn_185001-201412.nc)
 
-Read-in the data and calculate surface albedo
+Read-in data and calculate surface albedo
+
+```{r, eval = TRUE, echo = FALSE, include=FALSE}
+rm(list = ls())
+setwd("C:/Users/seile/Documents/queensu/teaching/classes/ENSC430/tutorials/ENSC430")
+.libPaths("C:/Users/seile/Documents/queensu/teaching/classes/ENSC430/tutorials/ENSC430/renv")
+library(terra)
+library(climetrics)
+library(maps)
+library(vars)
+```
+
+```{r, eval = FALSE, echo = TRUE}
+library(terra)
+library(climetrics)
+library(maps)
+library(vars)
+```
 
 ```{r}
-rm(list = ls())
-
-library(terra)
-library(maps)
-
-tas <- rast("data/tas_Amon_CanESM5_historical_r1i1p1f1_gn_185001-201412.nc")
+tas <- terra::rast("data/tas_Amon_CanESM5_historical_r1i1p1f1_gn_185001-201412.nc")
 rsus <- terra::rast("data/rsus_Amon_CanESM5_historical_r1i1p1f1_gn_185001-201412.nc")
 rsds <- terra::rast("data/rsds_Amon_CanESM5_historical_r1i1p1f1_gn_185001-201412.nc")
 albs <- rsus/rsds
 
-# Plot albedo to see if it looks OK
-test <- subset(albs, 1)
-plot(test, main = "Surface Albedo (-)")
+# Plot first time step of tas and albedo to see if they look OK
+tas1 <- subset(tas, 1)
+albs1 <- subset(albs, 1)
+par(mfrow = c(2,1))
+plot(tas1, main = "Near-surface Air Temperature (K)")
+map("world2", add = TRUE, interior = FALSE)
+plot(albs1, main = "Surface Albedo (-)")
+map("world2", add = TRUE, interior = FALSE)
 ```
 
 * You can see that there are no values in the Arctic in the first time step (January). How come? The Granger causality test will fail if there is NA. We will need to exclude this region from our analysis as Granger causality cannot deal with missing values.
@@ -2393,9 +2414,12 @@ albs.ts <- rts(albs, dates)
 # Calculate 12-month climatological means
 tas.12 <- apply.months(tas.ts,'mean')
 albs.12 <- apply.months(albs.ts,'mean')
+
+plot(albs.12)
+map("world2", add = TRUE, interior = FALSE)
 ```
 
-Calculate the anomalies. This is done by subtracting the 12-month climatologies from the monthly data
+Calculate the anomalies. This is done by subtracting the 12-month climatologies from the monthly data.
 
 ```{r}
 # Get the number of years
@@ -2410,13 +2434,13 @@ tas.anom <- tas - tas.clim
 albs.anom <- albs - albs.clim
 
 # Have a look at the data
-plot(tas.anom)
+plot(albs.anom)
+map("world2", add = TRUE, interior = FALSE)
 ```
 
 Detrend your time series by defining a function that calculates and removes the linear trend from your monthly anomalies. Before we do this for our globally gridded data set, let's first practice using a random time series.
 
 ```{r}
-
 # Define a function that removes a linear trend
 detrend.fun <- function(x) {
    time <- 1:length(x)
@@ -2444,6 +2468,7 @@ tas.anom.detrend <- app(x = tas.anom, fun = detrend.fun)
 albs.anom.detrend <- app(x = albs.anom, fun = detrend.fun)
 
 plot(tas.anom.detrend)
+map("world2", add = TRUE, interior = FALSE)
 ```
 
 Now that you have created detrended anomalies of surface albedo and near-surface air temperature, you can assess the statistical association between both time series using Granger causality. Start by defining a Granger causality function that we can apply to each gridcell. 
@@ -2458,8 +2483,8 @@ granger.fun <- function(x) {
   a <- ts(a)
   b <- ts(b)
   tsDat <- ts.union(a, b)
-  tsVAR <- vars::VAR(tsDat, p = 6)
-  # Apply Granger cauality test 
+  tsVAR <- vars::VAR(tsDat, p = 12)
+  # Apply Granger causality test 
   p.value <- c(vars::causality(tsVAR, cause = "a")$Granger[3]$p.value)
   return(p.value)
 }
@@ -2471,8 +2496,8 @@ Check whether albedo Granger-causes temperature anomalies.
 # Stack your raster objects, where the first part is the cause and the second the response
 data <- c(albs.anom.detrend, tas.anom.detrend)
 
-# Exclude high latitudes where albedo is NA caused by the lack of sunshine
-data <- crop(x=data, y = c(-1.40625, 358.5938, -65, 65))
+# Let's focus on N. America and exclude high latitudes where albedo is NA due to lack of sunshine
+data <- crop(x=data, y = c(157, 350, 30, 65))
 
 # Assess Granger causality  
 p.value <- app(x = data, fun = granger.fun)
@@ -2481,16 +2506,18 @@ p.value <- app(x = data, fun = granger.fun)
 p.value[p.value>=0.01] <- 0
 p.value[p.value>0] <- 1
 albedoCausesTas <- p.value
+plot(albedoCausesTas, col = c("white", "orange"), main = "Albedo Granger-causes Temperature Anomalies")
+map("world2", add = TRUE, interior = FALSE)
 ```
 
-Next, repeat the same but checking whether temperature Granger-causes albedo anomalies 
+Next, check whether temperature Granger-causes albedo anomalies 
 
 ```{r}
 # Stack your raster objects, where the first part is the cause and the second the response
 data <- c(tas.anom.detrend, albs.anom.detrend)
 
-# Exclude polar regions where albedo has NA values as there is no incvoming solar radiation during the cold season
-data <- crop(x=data, y = c(-1.40625, 358.5938, -65, 65))
+# Let's focus on N. America and exclude high latitudes where albedo is NA due to lack of sunshine
+data <- crop(x=data, y = c(157, 350, 30, 65))
 
 # Assess Granger causality  
 p.value <- app(x = data, fun = granger.fun)
@@ -2499,6 +2526,8 @@ p.value <- app(x = data, fun = granger.fun)
 p.value[p.value>=0.01] <- 0
 p.value[p.value>0] <- 1
 tasCausesAlbedo <- p.value
+plot(tasCausesAlbedo, col = c("white", "orange"), main = "Temperature Granger-causes Albedo Anomalies")
+map("world2", add = TRUE, interior = FALSE)
 ```
 
 Let's combine both maps to identify regions with a dynamic albedo-temperature feedback
@@ -2508,21 +2537,19 @@ feedback <- albedoCausesTas + tasCausesAlbedo
 
 feedback[feedback != 2] <- NA
 feedback <- feedback - feedback + 1
-plot(feedback)
+plot(feedback, col = "orange", main = "Albedo-Temperature Feedback")
 map("world2", add = TRUE, interior = FALSE)
 ```
 
-## Analyze the feedback mechanism for a single gridcell
-
-Next you will verify your results for a single gridcell with dynamic interactions. Let's choose a place in the Canadian Arctic (longitude = 260, latitude = 60)
+Next you will verify your results for a single gridcell. Let's choose a place in the Canadian Arctic (longitude = 260, latitude = 60).
 
 ```{r}
 lon <- 260
-lat <- 60
+lat <- 62
 coords <- matrix(c(lon, lat), ncol = 2, byrow = TRUE)
 location <- vect(coords, type = "points")
 
-plot(feedback)
+plot(feedback, col = "orange")
 map("world2", add = TRUE, interior = FALSE)
 points(location, col = "red", pch = 16, cex = 1.0)
 
@@ -2561,11 +2588,11 @@ vars::causality(tsVAR, cause = "albs")
 vars::causality(tsVAR, cause = "tas")
 ```
 
-Let's assess the relative importance of each variable in driving the other variable's dynamics.
+Let's assess the relative importance of each variable in driving the other variable's dynamics. We can do this through variance decomposition.
 
 ```{r}
 # Fit VAR model
-var_model <- VAR(tsDat, p = 6)
+var_model <- VAR(tsDat, p = 12)
 
 # Perform variance decomposition
 variance_decomp <- fevd(var_model, n.ahead=6)
@@ -2574,21 +2601,15 @@ variance_decomp <- fevd(var_model, n.ahead=6)
 plot(variance_decomp)
 ```
 
-* What is the relative importance of temperature driving albedo, and of albedo driving temperature?
+* Which statistical association is stronger, temperature driving albedo, or albedo driving temperature?
 
-Repeat the same exercise with CanESM for the future period using SSP5-8.5. You can download the corresponding files below.
-
-### SSP585
+Repeat the same exercise with CanESM for the future period using SSP5-8.5 and evaluate how this feedback mechanism changes. You can download the corresponding files below.
 
 * [Monthly near-surface air temperature, CanESM5, SSP5-8.5](http://esgf.nci.org.au/thredds/fileServer/replica/CMIP6/ScenarioMIP/CCCma/CanESM5/ssp585/r1i1p1f1/Amon/tas/gn/v20190429/tas_Amon_CanESM5_ssp585_r1i1p1f1_gn_201501-210012.nc)
 
 * [Monthly Surface downwelling shortwave radiation (rsds), CanESM5, SSP5-8.5](http://esgf.nci.org.au/thredds/fileServer/replica/CMIP6/ScenarioMIP/CCCma/CanESM5/ssp585/r1i1p1f1/Amon/rsds/gn/v20190429/rsds_Amon_CanESM5_ssp585_r1i1p1f1_gn_201501-210012.nc)
 
 * [Monthly Surface upwelling shortwave radiation (rsus), CanESM5, SSP5-8.5](http://esgf.nci.org.au/thredds/fileServer/replica/CMIP6/ScenarioMIP/CCCma/CanESM5/ssp585/r1i1p1f1/Amon/rsus/gn/v20190429/rsus_Amon_CanESM5_ssp585_r1i1p1f1_gn_201501-210012.nc)
-
-
-
-
 
 <!--chapter:end:06-climate-model-analysis-III.Rmd-->
 
@@ -2599,7 +2620,636 @@ output:
 ---
 # Global Earth Observations (I)
 
-* Coming soon ...
+## Earthdata Login account
+You will need a NASA Earthdata Login account in order to download LP DAAC data. Go to the [Earthdata Login website](https://urs.earthdata.nasa.gov/) and click the ```Register``` button, which is next to the green ```Log In``` button under the Password entry box. Fill in the required boxes (indicated with a red asterisk), then click on the ```Register for Earthdata Login``` green button at the bottom of the page. An email with instructions for activating the registration completes the process.
+
+To download data from the LP DAAC archive, you need to authorize our applications to view your NASA Earthdata Login profile. Once authorization is complete, you may resume your session. To authorize Data Pool, please click [here](https://urs.earthdata.nasa.gov/approve_app?client_id=ijpRZvb9qeKCK5ctsn75Tg&_ga=2.128429068.1284688367.1541426539-1515316899.1516123516).
+
+## Install dependencies
+
+Install the packages ```sys```, ```getPass```, and ```httr```:
+
+```{r, eval = FALSE}
+setwd("C:/Users/seile/Documents/queensu/teaching/classes/ENSC430/tutorials/ENSC430")
+.libPaths("C:/Users/seile/Documents/queensu/teaching/classes/ENSC430/tutorials/ENSC430/renv")
+library(renv)
+renv::install("sys")
+renv::install("getPass")
+renv::install("httr")
+```
+
+
+Load the libraries that you will need for this tutorial
+
+```{r, eval = FALSE}
+setwd("C:/Users/seile/Documents/queensu/teaching/classes/ENSC430/tutorials/ENSC430")
+.libPaths("C:/Users/seile/Documents/queensu/teaching/classes/ENSC430/tutorials/ENSC430/renv")
+
+library(terra)
+library(ncdf4)
+library(maps)
+library(climetrics)
+library(EWSmethods)
+library(sys)
+library(getPass)
+library(httr)
+library(rvest)
+library(dplyr)
+```
+
+```{r, include = FALSE}
+setwd("C:/Users/seile/Documents/queensu/teaching/classes/ENSC430/tutorials/ENSC430")
+.libPaths("C:/Users/seile/Documents/queensu/teaching/classes/ENSC430/tutorials/ENSC430/renv")
+
+library(terra)
+library(ncdf4)
+library(maps)
+library(climetrics)
+library(EWSmethods)
+library(sys)
+library(getPass)
+library(httr)
+library(rvest)
+library(dplyr)
+```
+
+## Download Test
+
+Test whether you can download a file 
+
+```{r, eval = FALSE}
+# Load necessary packages into R
+library(sys)
+library(getPass)
+library(httr)
+# ---------------------------------SET UP ENVIRONMENT--------------------------------------------- #
+dl_dir <- Sys.getenv("HOME")                                 # Set dir to download files to
+setwd(dl_dir)                                                # Set the working dir to the dl_dir
+usr <- file.path(Sys.getenv("USERPROFILE"))                  # Retrieve home dir (for netrc file)
+if (usr == "") {usr = Sys.getenv("HOME")}                    # If no user profile exists, use home
+netrc <- file.path(usr,'.netrc', fsep = .Platform$file.sep)  # Path to netrc file
+
+# ------------------------------------CREATE .NETRC FILE------------------------------------------ #
+# If you already have a .netrc file with your Earthdata Login credentials stored in your home
+# directory, this portion will be skipped. Otherwise you will be prompted for your NASA Earthdata
+# Login Username/Password and a netrc file will be created to store your credentials (in home dir)
+# if (file.exists(netrc) == FALSE || grepl("urs.earthdata.nasa.gov", readLines(netrc)) == FALSE) {
+if (file.exists(netrc) == FALSE) {
+  netrc_conn <- file(netrc)
+
+  # User will be prompted for NASA Earthdata Login Username and Password below
+  writeLines(c("machine urs.earthdata.nasa.gov",
+               sprintf("login %s", getPass(msg = "Enter NASA Earthdata Login Username \n (or create an account at urs.earthdata.nasa.gov) :")),
+               sprintf("password %s", getPass(msg = "Enter NASA Earthdata Login Password:"))), netrc_conn)
+  close(netrc_conn)
+  }
+
+# ---------------------------CONNECT TO DATA POOL AND DOWNLOAD FILES------------------------------ #
+# Below, define either a single link to a file for download, a list of links, or a text file
+# containing links to the desired files to download. For a text file, there should be 1 file link
+# listed per line. Here we show examples of each of the three ways to download files.
+# **IMPORTANT: be sure to update the links for the specific files you are interested in downloading.
+
+# 1. Single file (this is just an example link, replace with your desired file to download):
+files <- "https://e4ftl01.cr.usgs.gov/MOLA/MYD09GA.061/2002.07.06/MYD09GA.A2002187.h10v04.061.2020071193416.hdf"
+
+# Loop through all files
+for (i in 1:length(files)) {
+  filename <-  tail(strsplit(files[i], '/')[[1]], n = 1) # Keep original filename
+
+  # Write file to disk (authenticating with netrc) using the current directory/filename
+  response <- GET(files[i], write_disk(filename, overwrite = TRUE), progress(),
+                  config(netrc = TRUE, netrc_file = netrc), set_cookies("LC" = "cookies"))
+
+  # Check to see if file downloaded correctly
+  if (response$status_code == 200) {
+    print(sprintf("%s downloaded at %s", filename, dl_dir))
+  } else {
+  print(sprintf("%s not downloaded. Verify that your username and password are correct in %s", filename, netrc))
+  }
+}
+
+```
+
+Locate the file ```MYD09GA.A2002187.h10v04.061.2020071193416.hdf``` to identify where the data was downloaded. Now you are ready to download the data set you will be working with. 
+
+## Download Enhanced Vegetation Index (EVI)
+
+You will be downloading satellite data from the Moderate Resolution Imaging Spectroradiometer (MODIS). The specific MODIS product we are processing is the Vegetation Indices Monthly L3 Global 0.05 CMG ([MOD13C2](https://lpdaac.usgs.gov/products/mod13c2v061/)). Each HDF file is located in its own folder. The first step is to generate a list of all the URLs where our files are stored. Run the script below to create the list.
+
+```{r, eval = FALSE}
+# Set base URL (main directory)
+base_url <- "https://e4ftl01.cr.usgs.gov/MOLT/MOD13C2.061/"
+
+# Function to get links (folders or files) from a given URL
+get_links <- function(url) {
+  # Read the webpage content
+  page <- read_html(url)
+  
+  # Extract all file/folder links
+  links <- page %>%
+    html_nodes("a") %>%  # Select all anchor tags
+    html_attr("href")     # Get the href attributes (links)
+  
+  # Filter out navigation links (e.g., "../")
+  links <- links[!grepl("(\\.\\./|^/$)", links)]
+  
+  # Return the links
+  return(links)
+}
+
+# Get the list of folders (each folder represents a date like '2000.02.01/')
+folders <- get_links(base_url)
+
+# Filter folders that match the pattern YYYY.MM.DD/
+folders <- folders[grepl("^\\d{4}\\.\\d{2}\\.\\d{2}/$", folders)]
+
+# Initialize an empty list to store .hdf file URLs
+hdf_files <- list()
+
+# Loop over each folder
+for (folder in folders) {
+  # Construct the full folder URL
+  folder_url <- paste0(base_url, folder)
+  
+  # Get all links inside the folder
+  files_in_folder <- get_links(folder_url)
+  
+  # Filter only .hdf files
+  hdf_in_folder <- files_in_folder[grepl("\\.hdf$", files_in_folder)]
+  
+  # Check if any .hdf files are found
+  if (length(hdf_in_folder) > 0) {
+    # If .hdf files are found, construct full paths and add to the list
+    full_paths <- paste0(folder_url, hdf_in_folder)
+    hdf_files <- c(hdf_files, full_paths)  # Add to the list
+  } else {
+    # If no .hdf files, skip the folder
+    message(paste("No .hdf files found in", folder_url))
+  }
+}
+
+print("the first three .hdf file URLs are:")
+print(hdf_files[1:3])
+```
+
+Great! Each file is approximately 100 MB, and with about 300 files, the total comes to 30,000 MB (30 GB). These files are large because they contain multiple variables and have a high spatial resolution (0.05 degrees, roughly 5 km at the equator). To speed things up, you'll start by processing 12 months of data to get familiar with the process. Later in this tutorial, you will download a fully processed file with all time steps but at a lower spatial resolution from a different link for analysis. Run the code below to download 12 HDF files.
+
+```{r, eval = FALSE}
+files <- unlist(hdf_files[1:12]) # 12 files only
+
+# Loop through all files
+for (i in 1:length(files)) {
+  filename <-  tail(strsplit(files[i], '/')[[1]], n = 1) # Keep original filename
+
+  # Write file to disk (authenticating with netrc) using the current directory/filename
+  response <- GET(files[i], write_disk(filename, overwrite = TRUE), progress(),
+                  config(netrc = TRUE, netrc_file = netrc), set_cookies("LC" = "cookies"))
+
+  # Check to see if file downloaded correctly
+  if (response$status_code == 200) {
+    print(sprintf("%s downloaded at %s", filename, dl_dir))
+  } else {
+  print(sprintf("%s not downloaded. Verify that your username and password are correct in %s", filename, netrc))
+  }
+}
+
+```
+
+The next step is to read in the downloaded files and to convert them to a single NetCDF file. Move the HDF files into a folder that you name ```MOD13C2.061```. Make sure this folder is in your working directory. Next, run the script below to convert the HDF files to a single NetCDF file.
+
+```{r, eval = FALSE}
+rm(list=ls())
+
+# set path and filename
+hdf_path <- "MOD13C2.061"
+
+# Get file names
+hdf_files <- list.files(hdf_path, pattern = "\\.hdf", full.names = TRUE, recursive = TRUE)
+hdf_files <- hdf_files[1:12] # Only 12, in case you downloaded more
+
+# Define dates
+start.date <- "2000-02-01"
+timeInt <- "month"
+nTime <- length(hdf_files)
+dates <- base::seq(as.Date(start.date), by = timeInt, length = nTime)
+            
+rm(raster_list)
+raster_list <- list()
+
+for (j in 1:length(hdf_files)) {
+  
+hdf_file <- hdf_files[[j]]
+
+# Read HDF5 file
+data <- rast(hdf_file)
+
+# The first layer is EVI
+data <- subset(data, 2:2) 
+
+# EVI ranges between 0 and 1 
+# Set all negative values to NA
+data[data < 0] <- NA
+
+# Apply a scaling factor
+scaleFactor <- 10^(-8)
+data <- data * scaleFactor
+
+raster_list[[j]] <- data
+rm(data)
+gc()
+}
+
+# Make a raster stack and assign the dates
+data <- terra::rast(raster_list)
+terra::time(data) <- dates
+
+# Save data to netCDF file
+writeCDF(x = data, filename = "MOD13C2061-EVI.nc", varname = "EVI", overwrite=TRUE)
+
+# Plot the first time step
+firstTimeStep <- subset(data, 1)
+plot(firstTimeStep)
+map("world", add = TRUE)
+```
+
+Well done – you can now monitor planet Earth from space! For your project, you can adjust the scripts above to download the full dataset and/or different variables. Let's plot a smaller region to get a sense of the spatial resolution.
+
+```{r}
+data <- rast("MOD13C2061-EVI.nc")
+firstTimeStep <- subset(data, 1)
+plot(firstTimeStep, xlim = c(-60, -45), ylim = c(-10, 5), main = "Mouth of the Amazon River")
+map("world", add = TRUE)
+```
+
+## Analysis
+
+I have processed the complete dataset for you at a reduced spatial resolution of 0.25 degrees (approximately 25 km at the equator) to save you time. The dataset spans nearly 25 years, from February 2000 to September 2024, and is available for download [here](https://drive.google.com/file/d/1-CCfBwO_P7eBuhqbcOuM5mhrxdjYuv3Z/view?usp=sharing). Our analysis will focus on the Amazon Basin. Download the file to your working directory and run the script below.
+
+```{r}
+data <- terra::rast("MOD13C2061-EVI-0.25deg.nc")
+
+# Let's subset Jan 2001 to Dec 2023
+data <- subset(data, 12:287)
+# Let's focus on the Amazon basin
+data <- crop(x=data, y = c(285, 315, -15, 5))
+
+evi.mean <- mean(data, na.rm = TRUE)
+
+plot(evi.mean, main = "Annual Mean Enhanced Vegetation Index (EVI) (-)")
+map("world2", add = TRUE)
+```
+
+Next, we will need to convert the data to anomalies. You already know how to do this and we can use the code from the previous tutorial.
+ 
+```{r}
+# Get the dates
+dates <- terra::time(data)
+dates <- format(dates, "%Y-%m-%d")
+dates <- base::as.Date(dates)
+
+# Create raster time series
+data.ts <- rts(data, dates)
+
+# Calculate 12-month climatological means
+data.12 <- apply.months(data.ts,'mean')
+
+# Plot 12 months of data
+plot(data.12)
+```
+
+Calculate the anomalies by subtracting the 12-month climatologies from the monthly data. You already know how to do this from the previous tutorial.
+
+```{r}
+# Get the number of years
+n <- length(dates)/12
+
+# Create a time series where the 12-month climatological mean repeats for all years 
+data.clim <- rep(data.12, n)
+
+# Calculate anomalies
+data.anom <- data - data.clim
+
+# Have a look at the data
+plot(subset(data.anom, 1:1))
+map("world2", add = TRUE)
+```
+
+Let us find out if there is a trend in the EVI anomalies.
+
+```{r}
+# Define a function that calculates a linear trend
+trend.fun <- function(x) {
+  
+  # If a grid cell contains NA, then set the result to NA
+  if (is.na(mean(x))) {
+    return(NA)
+  } else {
+   time <- 1:length(x)
+   linear.model <- lm(x ~ time)
+   trend <- coef(linear.model)["time"]
+  return(trend)
+  }
+}
+
+# Apply function to each gridcell
+trend <- app(data.anom, fun = trend.fun)
+```
+
+Plot the trend:
+
+```{r}
+# Set the desired range for the palette
+min_val <- -0.0003
+max_val <- 0.0003
+
+# Define breaks to control the min and max of the palette
+breaks <- seq(min_val, max_val, 0.0001)
+
+my.col <- rev(map.pal("differences", n = length(breaks) - 1))
+
+plot(trend, col = my.col, 
+  type = "continuous",
+  breaks = breaks,
+  main = "Trend in EVI (2001-2023)")
+map("world2", add = TRUE)
+```
+
+* Have a look at the region Northwest of Bolivia. What do you think is happening here? Compare the region with images from Google Maps.
+
+The next step is to detrend our time series. You already know how to do this and we can borrow code from the previous tutorial.
+
+```{r}
+# Define a function that removes a linear trend
+detrend.fun <- function(x) {
+  time <- 1:length(x)
+  # If a grid cell contains NA, then set the result to NA
+  if (is.na(mean(x))) {
+    return(rep(NA, length(time)))
+  } else {
+    time <- 1:length(x)
+    linear.model <- lm(x ~ time)
+    detrended.series <- stats::residuals(linear.model)
+    return(detrended.series)
+  }
+}
+
+data.anom.detrend <- app(x = data.anom, fun = detrend.fun)
+
+plot(subset(data.anom.detrend, 1:1))
+map("world2", add = TRUE)
+```
+
+As you may have figured out by now, there is a lot of land use change happening in the Amazon basin. For our analysis we need to exclude grid cells affected by land use change. You can do this by obtaining a map of land cover and masking all regions that don't classify as forests. Alternatively, you can filter out all grid cells with low EVI values. Let's create a mask that only shows grid cells with EVI values > 0.4.  
+
+```{r}
+data <- terra::rast("MOD13C2061-EVI-0.25deg.nc")
+
+# Let's focus on the Amazon basin
+data <- crop(x=data, y = c(285, 315, -15, 5))
+
+mask <- min(data, na.rm = FALSE)
+
+mask[mask<0.4] <- NA
+mask <- mask - mask + 1
+
+plot(mask, main = "Mask where min EVI > 0.4 (-)")
+map("world2", add = TRUE)
+```
+
+
+Let's apply the mask to our time series.
+
+```{r}
+data.anom.detrend <- data.anom.detrend * mask
+plot(subset(data.anom.detrend, 1), main = "Detrended EVI Anomalies (-)")
+map("world2", add = TRUE)
+```
+
+We are now ready to apply the early warning indicators for ecosystem resilience from the previous tutorial. These indicators will be applied to each grid cell. However, the analysis is computationally expensive. To make it feasible, we first need to reduce the grid's spatial resolution using the ```aggregate``` function. 
+
+```{r}
+data.anom.detrend.coarse <- aggregate(x = data.anom.detrend, fact=2, fun="mean")
+plot(subset(data.anom.detrend.coarse, 1), main = "Detrended EVI Anomalies (-)")
+map("world2", add = TRUE)
+```
+
+To run the Univariate Early Warning Signal Assessment, execute the script below, which will run for a few minutes. Perfect time for a break!
+
+```{r}
+# Define a function
+ews.tau.ar1.fun <- function(x) {
+  # If a grid cell contains NA, then set the result to NA
+  if (is.na(mean(x))) {
+  #  return(rep(NA, length(x)))
+    return(NA)
+  } else {
+    time <- 1:length(x)
+    df <- data.frame(time, x)
+    rolling_ews_eg <- uniEWS(
+      data = df,
+      metrics = "ar1",
+      method = "rolling",
+      winsize = 60
+    )
+    result <- rolling_ews_eg$EWS$cor
+    return(result)
+  }
+}
+
+# Apply Univariate Early Warning Signal Assessment
+ews.tau.ar1 <- terra::app(x = data.anom.detrend.coarse, fun = ews.tau.ar1.fun)
+```
+
+Plot Kendall's Tau coefficient for Autocorrelation.
+
+```{r}
+# Set the desired range for the palette
+min_val <- -0.9
+max_val <- 0.9
+
+# Define breaks to control the min and max of the palette
+breaks <- seq(min_val, max_val, 0.1)
+
+my.col <- map.pal("differences", n = length(breaks) - 1)
+
+plot(ews.tau.ar1, col = my.col, 
+  type = "continuous",
+  breaks = breaks,
+  main = "Tau AR1, EVI (2001-2023)")
+map("world2", add = TRUE)
+```
+
+* What is your interpretation of the result?
+
+Repeat the analysis, calculating ecosystem resilience for Australia. For this example, do not mask out low EVI values. The coordinates are 110 to 160 longitude and -45 to -10 latitude, so ```data <- crop(x=data, y = c(110, 160, -45, -10))```. Your result should look similar to the Figure below. Goo luck!
+
+Steps:
+
+* Plot EVI mean
+
+```{r, echo = FALSE}
+data <- terra::rast("MOD13C2061-EVI-0.25deg.nc")
+
+# Let's subset Jan 2001 to Dec 2023
+data <- subset(data, 12:287)
+# Let's focus on Australia
+# data <- crop(x=data, y = c(220, 270, 48, 70))
+data <- crop(x=data, y = c(110, 160, -45, -10))
+
+evi.mean <- mean(data, na.rm = TRUE)
+
+plot(evi.mean, main = "Annual Mean Enhanced Vegetation Index (EVI) (-)")
+map("world2", add = TRUE)
+```
+
+* Calculate 12-month climatological means
+ 
+```{r, echo = FALSE}
+# Get the dates
+dates <- terra::time(data)
+dates <- format(dates, "%Y-%m-%d")
+dates <- base::as.Date(dates)
+
+# Create raster time series
+data.ts <- rts(data, dates)
+
+# Calculate 12-month climatological means
+data.12 <- apply.months(data.ts,'mean')
+
+# Plot 12 months of data
+plot(data.12)
+```
+
+* Calculate the anomalies by subtracting the 12-month climatologies from the monthly data.
+
+```{r, echo = FALSE}
+# Get the number of years
+n <- length(dates)/12
+
+# Create a time series where the 12-month climatological mean repeats for all years 
+data.clim <- rep(data.12, n)
+
+# Calculate anomalies
+data.anom <- data - data.clim
+
+# Have a look at the data
+plot(subset(data.anom, 1:1))
+map("world2", add = TRUE)
+```
+
+* Plot the trend in EVI anomalies.
+
+```{r, echo = FALSE}
+# Define a function that calculates a linear trend
+trend.fun <- function(x) {
+  
+  # If a grid cell contains NA, then set the result to NA
+  if (is.na(mean(x))) {
+    return(NA)
+  } else {
+   time <- 1:length(x)
+   linear.model <- lm(x ~ time)
+   trend <- coef(linear.model)["time"]
+  return(trend)
+  }
+}
+
+# Apply function to each gridcell
+trend <- app(data.anom, fun = trend.fun)
+
+# Set the desired range for the palette
+min_val <- -0.0003
+max_val <- 0.0003
+
+# Define breaks to control the min and max of the palette
+breaks <- seq(min_val, max_val, 0.0001)
+
+my.col <- rev(map.pal("differences", n = length(breaks) - 1))
+
+plot(trend, col = my.col, 
+  type = "continuous",
+  breaks = breaks,
+  main = "Trend in EVI (2001-2023)")
+map("world2", add = TRUE)
+```
+
+* Detrend the time series.
+
+```{r, echo = FALSE}
+# Define a function that removes a linear trend
+detrend.fun <- function(x) {
+  time <- 1:length(x)
+  # If a grid cell contains NA, then set the result to NA
+  if (is.na(mean(x))) {
+    return(rep(NA, length(time)))
+  } else {
+    time <- 1:length(x)
+    linear.model <- lm(x ~ time)
+    detrended.series <- stats::residuals(linear.model)
+    return(detrended.series)
+  }
+}
+
+data.anom.detrend <- app(x = data.anom, fun = detrend.fun)
+
+plot(subset(data.anom.detrend, 1), main = "Detrended EVI Anomalies (-)")
+map("world2", add = TRUE)
+```
+
+
+* Reduce the spatial resolution.
+
+```{r, echo = FALSE}
+data.anom.detrend.coarse <- aggregate(x = data.anom.detrend, fact=2, fun="mean")
+plot(subset(data.anom.detrend.coarse, 1), main = "Detrended EVI Anomalies (-)")
+map("world2", add = TRUE)
+```
+
+* Run the Univariate Early Warning Signal Assessment
+
+```{r, echo = FALSE}
+# Define a function
+ews.tau.ar1.fun <- function(x) {
+  # If a grid cell contains NA, then set the result to NA
+  if (is.na(mean(x))) {
+  #  return(rep(NA, length(x)))
+    return(NA)
+  } else {
+    time <- 1:length(x)
+    df <- data.frame(time, x)
+    rolling_ews_eg <- uniEWS(
+      data = df,
+      metrics = "ar1",
+      method = "rolling",
+      winsize = 60
+    )
+    result <- rolling_ews_eg$EWS$cor
+    return(result)
+  }
+}
+
+# Apply Univariate Early Warning Signal Assessment
+ews.tau.ar1 <- terra::app(x = data.anom.detrend.coarse, fun = ews.tau.ar1.fun)
+
+# Set the desired range for the palette
+min_val <- -0.9
+max_val <- 0.9
+
+# Define breaks to control the min and max of the palette
+breaks <- seq(min_val, max_val, 0.1)
+
+my.col <- map.pal("differences", n = length(breaks) - 1)
+
+plot(ews.tau.ar1, col = my.col, 
+  type = "continuous",
+  breaks = breaks,
+  main = "Tau AR1, EVI (2001-2023)")
+map("world2", add = TRUE)
+```
+
+* Interpret your result.
+
 
 <!--chapter:end:07-global-earth-observations-I.Rmd-->
 
@@ -2800,528 +3450,4 @@ output:
 * Coming soon ...
 
 <!--chapter:end:11-integrated-assessment-modeling-II.Rmd-->
-
----
-output:
-  pdf_document: default
-  html_document: default
----
-# Programming in R
-In this course you will be using the programming language R. Today you will learn the R basics you need to master the course. The main elements are: 
-
-* Controlling your computational environment using ```renv```
-* Operators: ```+, -, *, /, ^```
-* R objects (vector, data frame, matrix, array, list)
-* Subset objects
-* Control structure: loops, if-else statements
-* Generating data: sequence and random data
-* Defining a function
-* Plotting data
-* Documenting your code using RMarkdown
-
-Let's start with setting up your computer. R is a command line driven program. The user enters commands at the prompt and each command is executed one at a time. RStudio is a Graphic User Interface for R. For this course, you will first need to install R and then RStudio. If you already have R or RStudio installed, please install them again to ensure you have the most recent version.
-
-* Install R from [here](https://posit.co/download/rstudio-desktop)
-* Install RStudio from [here](https://posit.co/download/rstudio-desktop)
-* Once R and RStudio are installed, open RStudio and learn the basic R syntax following the exercises below.
-
-## Create a new Project
-* Open RStudio
-* Click on ```File``` in the upper-left corner
-* From the drop-down list choose ```New Project ...```, ```New Directory```, ```Browse...``` and choose a directory of your project. For instance, in my case this will be ```C:\Users\seile\Documents\queensu\teaching\classes\ENSC430\tutorials\ENSC430```. Important: make sure your directory does not include white space or special characters.
-* Go to your new directory and create a new folder called ```renv```. This is where you will store your packages, as explained next.
-
-## Set up your computational environment
-* In the lower-left panel you find your console where you can execute commands. 
-* Your first task is to set up your computational environment using the command ```.libPaths()```
-* In the Console, type the command below using the directory of your project. Note that you need to use ```/``` rather than ```\```.
-
-```{r, eval = FALSE}
-# Set your working directory:
-setwd("C:/Users/seile/Documents/queensu/teaching/classes/ENSC430/tutorials/ENSC430")
-
-# Tell R where to store your packages:
-.libPaths("C:/Users/seile/Documents/queensu/teaching/classes/ENSC430/tutorials/ENSC430/renv")
-```
-
-* You can check if all went well by typing ```.libPaths()```. Does it return your directory? If yes, then continue.
-* Next you will install your first package called ```renv```
-```{r, eval = FALSE}
-install.packages("renv")
-renv::init()
-```
-
-* Next, install ```rmarkdown```:
-```{r, eval = FALSE}
-install.packages("rmarkdown")
-install.packages("magrittr")
-install.packages("stringi")
-install.packages("stringr")
-```
-
-* R Markdown allows you to integrate code, figures, and text. You will write your report in R Markdown, which I will explain at the end of the tutorial.
-
-The following sections introduce the most basic elements of the R programming language. Start by creating an empty R script by clicking on ```File/New File/R script```. Open the script in R Studio and copy-paste the examples into your script as you go through the examples. Execute each line by hitting ```Ctrl Enter``` so you understand and each step what the code is doing. 
-
-## Operators
-
-* In R, you use the following syntax to assign a value to a variable.
-
-```{r, eval = FALSE}
-x <- 1
-print(x)
-```
-
-* The variable x used above is an example of an R object. The ```print``` statement prints the value of the object x.
-* Once you assign values to R objects, you can use the following arithmetic operators to perform calculations.
-
-```{r, eval = FALSE}
-a <- 2
-b <- 3
-
-# Addition
-c <- a+b
-print(c)
-
-# Subtraction
-c <- a-b
-print(c)
-
-# Multiplication
-c <- a*b
-print(c)
-
-# Division
-c <- a/b
-print(c)
-
-# Exponentiation
-c <- a^b
-print(c)
-```
-* Note that anything after the ```#``` symbol is ignored.
-
-```{r, eval = FALSE}
-a <- 2
-b <- 3
-c <- a + b
-# c <- (a + b)^2
-print(c)
-```
-* This way you can add comments into your code that to explain what you are doing
-
-## Objects
-
-* All objects have two intrinsic attributes: mode and length. 
-* The mode is the basic type of the elements of the object. 
-* There are four main modes: numeric, character, complex, and logical (FALSE or TRUE). 
-
-```{r, eval = FALSE}
-a <- 5
-class(a)
-
-a <- "apple"
-class(a)
-
-a <- 1 + 2i
-class(a)
-
-a <- TRUE
-class(a)
-```
-* The length of an object is the number of elements of the object.
-
-```{r, eval = FALSE}
-a <- 2
-length(a)
-
-a <- c(2,7,5)
-length(a)
-```
-* Next to mode and length, there are different types of objects, namely vector, data frame, matrix, array, and list
-
-```{r, eval = FALSE}
-# Vector with one element
-a <- 2
-print(a)
-
-# Vector with four elements
-b <- c(7,5,2,9)
-print(b)
-
-# Data frame
-x <- c(3,7,2,4)
-y <- c(42,67,21,33)
-df <- data.frame(x, y)
-print(df)
-
-# Matrix: in R, a matrix has 2 dimensions only)
-x <- c(1,2,3,4,5,6,7,8,9,10)
-a <- matrix(x, nrow = 2)
-print(a)
-
-# Array: an array has more than 2 dimensions
-x <- c(1,2,3,4,5,6,7,8,9)
-a <- array(data = x, dim = c(3,3,3))
-print(a)
-
-# List
-a <- c(3,2,5,6)
-b <- c(TRUE, FALSE)
-c <- c("apples", "pears", "plums")
-d <- 5
-
-l <- list(a,b,c,d)
-print(l)
-```
-
-* Let's learn how to subset vectors, data frames, matrices, arrays, and lists
-
-* Example: Vector
-```{r, eval = FALSE}
-# Create a vector
-vector_data <- c(10, 20, 30, 40, 50)
-
-# Print the vector
-print("Full Vector:")
-print(vector_data)
-
-# Subsetting by Index
-third_element <- vector_data[3]
-print("Third element:")
-print(third_element)
-
-# Subsetting by Multiple Indices
-subset_indices <- vector_data[c(1, 3, 5)]
-print("Subset (First, Third, and Fifth elements):")
-print(subset_indices)
-
-# Subsetting by Logical Condition
-subset_condition <- vector_data[vector_data > 25]
-print("Subset (Elements greater than 25):")
-print(subset_condition)
-```
-* Example: data frame
-```{r, eval = FALSE}
-# Create a data frame
-data <- data.frame(
-  Name = c("Alice", "Bob", "Charlie", "David", "Eve"),
-  Age = c(23, 25, 30, 22, 29),
-  Gender = c("F", "M", "M", "M", "F"),
-  Score = c(85, 90, 75, 88, 92)
-)
-
-# Print the data frame
-print("Full Data Frame:")
-print(data)
-
-# Subsetting by Columns
-subset_columns <- data[, c("Name", "Score")]
-print("Subset by Columns (Name and Score):")
-print(subset_columns)
-
-# Subsetting by Rows and Columns
-subset_rows_cols <- data[1:3, c("Name", "Age")]
-print("Subset by Rows and Columns (First 3 rows, Name and Age):")
-print(subset_rows_cols)
-
-# Subsetting by Condition
-subset_condition <- subset(data, Age > 25)
-print("Subset by Condition (Age > 25):")
-print(subset_condition)
-```
-
-* Example: matrix
-```{r, eval = FALSE}
-# Create a matrix
-matrix_data <- matrix(
-  1:12,        # Data
-  nrow = 4,    # Number of rows
-  ncol = 3,    # Number of columns
-  byrow = TRUE # Fill the matrix by rows
-)
-
-# Print the matrix
-print("Full Matrix:")
-print(matrix_data)
-
-# Subsetting by Rows and Columns
-subset_rows_cols <- matrix_data[1:2, 1:2]
-print("Subset (First 2 rows, First 2 columns):")
-print(subset_rows_cols)
-
-# Subsetting by Specific Rows
-subset_specific_rows <- matrix_data[c(1, 3), ]
-print("Subset (First and Third rows):")
-print(subset_specific_rows)
-
-# Subsetting by Specific Columns
-subset_specific_cols <- matrix_data[, c(2, 3)]
-print("Subset (Second and Third columns):")
-print(subset_specific_cols)
-```
-
-* Example: array
-```{r, eval = FALSE}
-
-# Create an array
-array_data <- array(
-  1:24,         # Data
-  dim = c(3, 4, 2) # Dimensions (3x4x2 array)
-)
-
-# Print the array
-print("Full Array:")
-print(array_data)
-
-# Subsetting by Indices
-element <- array_data[1, 2, 1]
-print("Element at (1, 2, 1):")
-print(element)
-
-# Subsetting by Slices
-slice <- array_data[, , 1]
-print("First slice (all elements in the first third dimension):")
-print(slice)
-
-# Subsetting by Specific Rows and Columns in a Specific Dimension
-subset_array <- array_data[1, , 2]
-print("First row, all columns, in the second slice:")
-print(subset_array)
-```
-
-* Example: list
-```{r, eval = FALSE}
-# Create a list
-list_data <- list(
-  Name = "Alice",
-  Age = 25,
-  Scores = c(85, 90, 88),
-  Address = list(
-    Street = "123 Main St",
-    City = "Springfield",
-    Zip = "12345"
-  )
-)
-
-# Print the list
-print("Full List:")
-print(list_data)
-
-# Subsetting by Element Name
-name <- list_data$Name
-print("Name element:")
-print(name)
-
-# Subsetting by Index
-age <- list_data[[2]]
-print("Second element (Age):")
-print(age)
-
-# Subsetting a Nested List
-city <- list_data$Address$City
-print("City element in Address:")
-print(city)
-```
-
-## Control structure
-* Control structures determine the order in which statements are executed in a program. Two important examples are loops and conditional statements.
-* Loop example
-```{r, eval = FALSE}
-# For loop to print numbers from 1 to 5
-for (i in 1:5) {
-  print(i)
-}
-```
-
-* Conditional statement example
-```{r, eval = FALSE}
-
-# Define a number
-number <- -3
-
-# If-else statement to check the sign of the number
-if (number > 0) {
-  print("The number is positive.")
-} else if (number < 0) {
-  print("The number is negative.")
-} else {
-  print("The number is zero.")
-}
-
-```
-
-## Generating data
-* Many times you need to generate data, e.g. a sequence that ranges from 1 to 10. Instead of writing out each number, there are functions that do that for you
-
-```{r, eval = FALSE}
-# Sequence from 1 to 10 with step size 1
-x <- 1:10
-print(x)
-
-# Sequence from 1 to 10 with step size 0.5
-x <- seq(1, 10, 0.5)
-print(x)
-
-# Vector that repeats the value one for ten times
-x <- rep(1, 10)
-print(x)
-
-# Random sequences with uniform distribution between zero and one
-x <- runif(n = 5, min = 0, max = 1)
-print(x)
-```
-
-## Defining a function
-* Often you need to execute the same operation many times. To do this efficiently you can define a function and then apply this function whenever you need it
-
-```{r, eval = FALSE}
-# Define a function to add two numbers
-add_numbers <- function(a, b) {
-  # Calculate the sum
-  sum <- a + b
-  # Return the sum
-  return(sum)
-}
-
-# Print the function definition
-print("Function Definition:")
-print(add_numbers)
-
-# Call the function with arguments 3 and 5
-result <- add_numbers(3, 5)
-
-# Print the result
-print("Result of add_numbers(3, 5):")
-print(result)
-```
-
-## Plotting data
-```{r, eval = FALSE}
-x <- seq(1:10)
-y <- x^2
-plot(x, y)
-```
-
-* Add x and y labels using ```xlab``` and ```ylab```
-```{r, eval = FALSE}
-x <- seq(1:10)
-y <- x^2
-plot(x, y, 
-     xlab = "ENSC430 lectures attended", 
-     ylab = "Academic Performance")
-```
-
-* Make it a line plot using ```type = "l"```
-```{r, eval = FALSE}
-x <- seq(1:10)
-y <- x^2
-plot(x, y, type = "l")
-```
-
-* Add more lines using ```lines()```
-```{r, eval = FALSE}
-x <- seq(1:10)
-y1 <- x^2
-y2 <- x^3
-plot(x, y1, type = "l")
-lines(x, y2)
-```
-
-* Make each line a different color using ```col```
-```{r, eval = FALSE}
-x <- seq(1:10)
-y1 <- x^2
-y2 <- x^3
-plot(x, y1, type = "l", col = "red")
-lines(x, y2, col = "blue")
-```
-
-* Adjust x and y axis using ```xlim``` and ```ylim```
-```{r, eval = FALSE}
-x <- seq(1:10)
-y1 <- x^2
-y2 <- x^3
-plot(x, y1, type = "l", 
-     xlim = c(-5,10), ylim = c(-20, 100))
-lines(x, y2)
-```
-
-* Making square axis using ```par(pty="s")``` and ```asp = 1```
-```{r, eval = FALSE}
-x <- seq(1:10)
-y1 <- x^2
-y2 <- x^3
-par(pty="s")
-plot(x, y1, type = "l", asp = 1)
-lines(x, y2)
-```
-
-## Review
-Congratulations, you made it to the end of this tutorial. Let's list the key concepts you have learned today:
-
-* Operators: ```+, -, *, /, ^```
-* Objects: vector ```c()```, data frame ```data.frame()```, matrix ```matrix()```, array ```array()```, list ```list()```, 
-* Subset objects
-* Control structure: loops, if-else statements
-* Generating data: sequence and random data
-* Defining a function
-* Plotting data
-
-## Exercise
-Write a piece of code that includes the following elements:
-
-* Create an R object that is either a data frame, matrix, array, or list
-* Define a function
-* Apply the function to a subset of the R object using either a loop or a conditional statement
-* Plot the data
-
-Document your exercise in a Markdown document following the steps below.
-
-* Click on ```File, New File, R Markdown```, choosing PDF as output format
-* Save the new ```.Rmd``` in your project folder
-* Open the folder and start writing your code
-* Your rmarkdown document should look similar to this, without the ```#```:
-
-```{r, eval = FALSE}
-# ---
-# title: "ENSC 430 - Exercises"
-# author: "Christian Seiler"
-# date: "`r Sys.Date()`"
-# output: pdf_document
-# ---
-
-# ```{r setup, include=FALSE}
-# knitr::opts_chunk$set(echo = TRUE)
-# ```
-
-## Exercise 1
-Write a piece of code that includes the following elements:
-
-* Create a array with 3 dimensions
-* Define a function
-* For each array, subset and apply the function
-* Plot the data, one line for each array
-
-
-# ```{r, eval = TRUE}
-# Create an array
-# array_data <- array(1:12, dim = c(2, 3, 4))
-# add your code here
-# ```
-```
-
-* Once you are done, click on ```Knit```
-* If you change your code, close the PDF before knitting again
-
-As the course progresses you will be adding exercises to this markdown document. You will hand in the ```.PDF``` file by the end of the term for marking.
-
-
-
-
-
-
-
-
-<!--chapter:end:Rbasics.Rmd-->
 

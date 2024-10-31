@@ -384,8 +384,6 @@ my.col <- rev(map.pal("differences", n = length(breaks) - 1))
 
 plot(cm3, type = "continuous", col = my.col, breaks = breaks, main='Changes in the Area of Analogous Climate (%)')
 map("world2", add = TRUE, interior = FALSE)
-
-plot(cm3)
 ```
 
 ### Climate Metric (4): Change in the distance to analogous climates

@@ -1,0 +1,15 @@
+week-1-climate-change
+motivation
+queens-university-high-performance-computer
+rstudio
+r-markdown
+import-data
+basic-statistics
+data-frames
+selecting-data
+comparing-time-periods
+el-nino
+plotting
+quantifying-the-warming-trend
+has-the-rate-of-warming-changed
+independent-analysis

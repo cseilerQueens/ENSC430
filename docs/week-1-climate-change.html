@@ -4,15 +4,13 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<title>Chapter 1 Week 1: Climate Change | _main.knit</title>
-<meta name="description" content="1.1 Motivation Why are we learning R? Throughout this course, you will use environmental and climate datasets to investigate questions about how the Earth system is changing. R is the programming...">
+<title>Chapter 1 Week 1: Climate Change | ENSC 430</title>
+<meta name="author" content="Christian Seiler">
 <meta name="generator" content="bookdown 0.47 with bs4_book()">
-<meta property="og:title" content="Chapter 1 Week 1: Climate Change | _main.knit">
+<meta property="og:title" content="Chapter 1 Week 1: Climate Change | ENSC 430">
 <meta property="og:type" content="book">
-<meta property="og:description" content="1.1 Motivation Why are we learning R? Throughout this course, you will use environmental and climate datasets to investigate questions about how the Earth system is changing. R is the programming...">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Chapter 1 Week 1: Climate Change | _main.knit">
-<meta name="twitter:description" content="1.1 Motivation Why are we learning R? Throughout this course, you will use environmental and climate datasets to investigate questions about how the Earth system is changing. R is the programming...">
+<meta name="twitter:title" content="Chapter 1 Week 1: Climate Change | ENSC 430">
 <!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
 <script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.12.0/transition.js"></script><script src="libs/bs3compat-0.12.0/tabs.js"></script><script src="libs/bs3compat-0.12.0/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
@@ -20,6 +18,9 @@
     
     div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
   </style>
+<meta name="description" content="1.1 Motivation Why are we learning R? Throughout this course, you will use environmental and climate datasets to investigate questions about how the Earth system is changing. R is the programming...">
+<meta property="og:description" content="1.1 Motivation Why are we learning R? Throughout this course, you will use environmental and climate datasets to investigate questions about how the Earth system is changing. R is the programming...">
+<meta name="twitter:description" content="1.1 Motivation Why are we learning R? Throughout this course, you will use environmental and climate datasets to investigate questions about how the Earth system is changing. R is the programming...">
 </head>
 <body data-spy="scroll" data-target="#toc">
 
@@ -29,7 +30,7 @@
 
     <div class="d-flex align-items-start justify-content-between">
       <h1>
-        <a href="index.html" title=""></a>
+        <a href="index.html" title="">ENSC 430</a>
       </h1>
       <button class="btn btn-outline-primary d-lg-none ml-2 mt-1" type="button" data-toggle="collapse" data-target="#main-nav" aria-expanded="true" aria-controls="main-nav"><i class="fas fa-bars"></i><span class="sr-only">Show table of contents</span></button>
     </div>
@@ -168,8 +169,8 @@
 <p>The functions above calculate the mean, minimum, maximum, standard deviation, and number of observations, respectively. You can find out more about a function by typing a question mark followed by the function name:</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="op">?</span><span class="va">sd</span></span></code></pre></div>
-<p><strong>Quiz Question:</strong> What is the difference between the warmest and coldest year during the 1850-2024 period?</p>
-<p><strong>Quiz Question:</strong> How large is the global mean surface temperature standard deviation?</p>
+<p><strong>Quiz Question 1:</strong> What is the difference in global mean surface temperature between the warmest and coldest years during the 1850–2024 period?</p>
+<p><strong>Quiz Question 2:</strong> How large is the global mean surface temperature standard deviation?</p>
 </div>
 <div id="data-frames" class="section level2" number="1.7">
 <h2>
@@ -198,19 +199,19 @@
 <p>One of the most important tasks when working with environmental data is selecting the observations that are relevant to a particular question. For example, let’s get all years with a global mean surface temperature exceeding 15 degrees Celsius:</p>
 <div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">data</span><span class="op">[</span><span class="va">data</span><span class="op">$</span><span class="va">GMST</span> <span class="op">&gt;</span> <span class="fl">15</span>, <span class="op">]</span></span></code></pre></div>
-<p><strong>Quiz Question:</strong> How many years have a global mean surface temperature that exceeds 15 degrees?</p>
-<p><strong>Quiz Question:</strong> How many years have a global mean surface temperature below 13.7 degrees Celsius?</p>
-<p><strong>Quiz Question:</strong> What was the average GMST during years when the temperature was below 13.7 degrees Celsius?</p>
+<p><strong>Quiz Question 3:</strong> How many years have a global mean surface temperature that exceed 15 degrees Celsius?</p>
+<p><strong>Quiz Question 4:</strong> How many years have a global mean surface temperature below 13.7 degrees Celsius?</p>
+<p><strong>Quiz Question 5:</strong> What was the average GMST during years when the temperature was below 13.7 degrees Celsius?</p>
 <p>We can combine two conditions using <code>&amp;</code>. For example, the following selects years when GMST was between 14.0 and 14.5 degrees Celsius:</p>
 <div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">data</span><span class="op">[</span><span class="va">data</span><span class="op">$</span><span class="va">GMST</span> <span class="op">&gt;=</span> <span class="fl">14</span> <span class="op">&amp;</span> <span class="va">data</span><span class="op">$</span><span class="va">GMST</span> <span class="op">&lt;=</span> <span class="fl">14.5</span>, <span class="op">]</span></span></code></pre></div>
-<p><strong>Quiz Question:</strong> How many years had a GMST between 14.0 and 14.5 degrees Celsius?</p>
+<p><strong>Quiz Question 6:</strong> How many years had a GMST between 14.0 and 14.5 degrees Celsius?</p>
 <p>Let us now find which years were the four hottest years on record. To do this, we first sort the data frame by temperature using the <code><a href="https://rdrr.io/r/base/order.html">order()</a></code> function and get the 4 hottest years.</p>
 <div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">data_sorted</span> <span class="op">&lt;-</span> <span class="va">data</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/order.html">order</a></span><span class="op">(</span><span class="va">data</span><span class="op">$</span><span class="va">GMST</span>, decreasing <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>, <span class="op">]</span></span>
 <span><span class="va">data_sorted</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">4</span>,<span class="op">]</span></span></code></pre></div>
-<p><strong>Quiz Question:</strong> Which years were the four hottest years on record?</p>
-<p><strong>Quiz Question:</strong> How many of the ten warmest years occurred after the year 2015?</p>
+<p><strong>Quiz Question 7:</strong> Which years were the four hottest years on record?</p>
+<p><strong>Quiz Question 8:</strong> How many of the ten warmest years occurred after the year 2015?</p>
 </div>
 <div id="comparing-time-periods" class="section level2" number="1.9">
 <h2>
@@ -222,15 +223,15 @@
 <p>We can then calculate the average GMST during this period:</p>
 <div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">early</span><span class="op">$</span><span class="va">GMST</span><span class="op">)</span></span></code></pre></div>
-<p><strong>Quiz Question:</strong> What was the average GMST between 1850 and 1900?</p>
-<p><strong>Quiz Question:</strong> What was the average GMST between 2000 and 2024?</p>
-<p><strong>Quiz Question:</strong> How much warmer was the 2000–2024 period than the 1850–1900 period?</p>
-<p><strong>Quiz Question:</strong> Which of the two periods had greater variability in GMST?</p>
+<p><strong>Quiz Question 9:</strong> What was the average GMST between 1850 and 1900?</p>
+<p><strong>Quiz Question 10:</strong> What was the average GMST between 2000 and 2024?</p>
+<p><strong>Quiz Question 11:</strong> How much warmer was the 2000–2024 period than the 1850–1900 period?</p>
+<p><strong>Quiz Question 12:</strong> Which of the two periods had greater variability in GMST?</p>
 <p>We can directly compare the temperature in different years. For example, the following calculates the change between 1850 and 2024:</p>
 <div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">data</span><span class="op">$</span><span class="va">GMST</span><span class="op">[</span><span class="va">data</span><span class="op">$</span><span class="va">year</span> <span class="op">==</span> <span class="fl">2024</span><span class="op">]</span> <span class="op">-</span> <span class="va">data</span><span class="op">$</span><span class="va">GMST</span><span class="op">[</span><span class="va">data</span><span class="op">$</span><span class="va">year</span> <span class="op">==</span> <span class="fl">1850</span><span class="op">]</span></span></code></pre></div>
-<p><strong>Quiz Question:</strong> How much did GMST increase between 1850 and 2024?</p>
-<p><strong>Quiz Question:</strong> How much did GMST increase between 1950 and 2024?</p>
+<p><strong>Quiz Question 13:</strong> How much did GMST increase between 1850 and 2024?</p>
+<p><strong>Quiz Question 14:</strong> How much did GMST increase between 1950 and 2024?</p>
 </div>
 <div id="el-nino" class="section level2" number="1.10">
 <h2>
@@ -251,8 +252,8 @@
 <div class="sourceCode" id="cb19"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">EN.yes</span> <span class="op">&lt;-</span> <span class="va">data</span><span class="op">[</span><span class="va">data</span><span class="op">$</span><span class="va">El_Nino</span> <span class="op">==</span> <span class="cn">TRUE</span>, <span class="op">]</span></span>
 <span><span class="va">EN.no</span> <span class="op">&lt;-</span> <span class="va">data</span><span class="op">[</span><span class="va">data</span><span class="op">$</span><span class="va">El_Nino</span> <span class="op">==</span> <span class="cn">FALSE</span>, <span class="op">]</span></span></code></pre></div>
-<p><strong>Quiz Question:</strong> How much warmer are El Nino years, on average, than non–El Nino years?</p>
-<p><strong>Quiz Question:</strong> How warm was the warmest El Nino year?</p>
+<p><strong>Quiz Question 15:</strong> How much warmer are El Nino years, on average, than non–El Nino years?</p>
+<p><strong>Quiz Question 16:</strong> How warm was the warmest El Nino year?</p>
 </div>
 <div id="plotting" class="section level2" number="1.11">
 <h2>
@@ -290,7 +291,7 @@
 <p>The second coefficient is the estimated change in GMST per year. We can multiply it by 100 to express the trend as degrees Celsius per century.</p>
 <div class="sourceCode" id="cb25"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/stats/coef.html">coef</a></span><span class="op">(</span><span class="va">model</span><span class="op">)</span><span class="op">[</span><span class="fl">2</span><span class="op">]</span> <span class="op">*</span> <span class="fl">100</span></span></code></pre></div>
-<p><strong>Quiz Question:</strong> What is the estimated rate of global warming in degrees Celsius per century over the entire 1850–2024 period?</p>
+<p><strong>Quiz Question 17:</strong> What is the estimated rate of global warming in degrees Celsius per century over the entire 1850–2024 period?</p>
 </div>
 <div id="has-the-rate-of-warming-changed" class="section level2" number="1.13">
 <h2>
@@ -302,8 +303,8 @@
 <span><span class="va">early_model</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span><span class="op">(</span><span class="va">GMST</span> <span class="op">~</span> <span class="va">year</span>, data <span class="op">=</span> <span class="va">early</span><span class="op">)</span></span>
 <span><span class="va">early_trend</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/coef.html">coef</a></span><span class="op">(</span><span class="va">early_model</span><span class="op">)</span><span class="op">[</span><span class="fl">2</span><span class="op">]</span> <span class="op">*</span> <span class="fl">100</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="va">early_trend</span><span class="op">)</span></span></code></pre></div>
-<p><strong>Quiz Question:</strong> What was the estimated warming rate per century between 1850 and 1950?</p>
-<p><strong>Quiz Question:</strong> What was the estimated warming rate per century between 1950 and 2024?</p>
+<p><strong>Quiz Question 18:</strong> What was the estimated warming rate per century between 1850 and 1950?</p>
+<p><strong>Quiz Question 19:</strong> What was the estimated warming rate per century between 1950 and 2024?</p>
 </div>
 <div id="independent-analysis" class="section level2" number="1.14">
 <h2>
@@ -311,17 +312,486 @@
 </h2>
 <p>Up to this point, the tutorial has provided examples of the R code needed to perform the analysis. In the following exercises, you will need to determine which R commands you need yourself. The goal is not to memorize R commands. The goal is to learn how to use R as a scientific tool.</p>
 <p>Applying what you have learned</p>
-<p><strong>Quiz Question:</strong> What were the five coldest years in the GMST record?</p>
-<p><strong>Quiz Question:</strong> How much larger is the GMST variability during 2000–2024 compared to 1850–1874?</p>
-<p><strong>Quiz Question:</strong> What is the warming rate per century of El Nino years?</p>
+<p><strong>Quiz Question 20:</strong> What were the five coldest years in the GMST record?</p>
+<p><strong>Quiz Question 21:</strong> How much larger is the GMST variability during 2000–2024 compared to 1850–1874?</p>
+<p><strong>Quiz Question 22:</strong> What is the warming rate per century of El Nino years?</p>
 <p>Use the GMST dataset to investigate a question about global temperature that interests you. Your analysis should include:</p>
 <ul>
 <li>a clearly stated scientific question</li>
 <li>an appropriate analysis using R</li>
 <li>at least one figure</li>
 <li>at least one quantitative result</li>
-<li>a short interpretation of what your analysis tells us.</li>
+<li>a short interpretation of what your analysis tells us</li>
 </ul>
+<p><strong>Quiz Reflection 1:</strong> What are the main things you learned in this tutorial?</p>
+<p><strong>Quiz Reflection 2:</strong> What concepts are you still struggling to understand?</p>
+</div>
+<div id="appendix" class="section level2" number="1.15">
+<h2>
+<span class="header-section-number">1.15</span> Appendix<a class="anchor" aria-label="anchor" href="#appendix"><i class="fas fa-link"></i></a>
+</h2>
+<p>If you enjoyed the exercises above, I invite you to delve deeper into R by reviewing the tutorial below. This is voluntary and will not be graded. The main elements of the tutorial below are:</p>
+<ul>
+<li>Operators: <code>+, -, *, /, ^</code>
+</li>
+<li>R objects (vector, data frame, matrix, array, list)</li>
+<li>Subset objects</li>
+<li>Control structure: loops, if-else statements</li>
+<li>Generating data: sequence and random data</li>
+<li>Defining a function</li>
+<li>Plotting data</li>
+</ul>
+<div id="operators" class="section level3" number="1.15.1">
+<h3>
+<span class="header-section-number">1.15.1</span> Operators<a class="anchor" aria-label="anchor" href="#operators"><i class="fas fa-link"></i></a>
+</h3>
+<ul>
+<li>In R, you use the following syntax to assign a value to a variable.</li>
+</ul>
+<div class="sourceCode" id="cb27"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">x</span> <span class="op">&lt;-</span> <span class="fl">1</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span></code></pre></div>
+<ul>
+<li>The variable x used above is an example of an R object. The <code>print</code> statement prints the value of the object x.</li>
+<li>Once you assign values to R objects, you can use the following arithmetic operators to perform calculations.</li>
+</ul>
+<div class="sourceCode" id="cb28"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">a</span> <span class="op">&lt;-</span> <span class="fl">2</span></span>
+<span><span class="va">b</span> <span class="op">&lt;-</span> <span class="fl">3</span></span>
+<span></span>
+<span><span class="co"># Addition</span></span>
+<span><span class="va">c</span> <span class="op">&lt;-</span> <span class="va">a</span><span class="op">+</span><span class="va">b</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="va">c</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Subtraction</span></span>
+<span><span class="va">c</span> <span class="op">&lt;-</span> <span class="va">a</span><span class="op">-</span><span class="va">b</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="va">c</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Multiplication</span></span>
+<span><span class="va">c</span> <span class="op">&lt;-</span> <span class="va">a</span><span class="op">*</span><span class="va">b</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="va">c</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Division</span></span>
+<span><span class="va">c</span> <span class="op">&lt;-</span> <span class="va">a</span><span class="op">/</span><span class="va">b</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="va">c</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Exponentiation</span></span>
+<span><span class="va">c</span> <span class="op">&lt;-</span> <span class="va">a</span><span class="op">^</span><span class="va">b</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="va">c</span><span class="op">)</span></span></code></pre></div>
+<ul>
+<li><p>Paste the code above into your markdown document and run it</p></li>
+<li><p>See what happens when you insert a <code>#</code>, e.g. <code># print(c)</code></p></li>
+</ul>
+</div>
+<div id="objects" class="section level3" number="1.15.2">
+<h3>
+<span class="header-section-number">1.15.2</span> Objects<a class="anchor" aria-label="anchor" href="#objects"><i class="fas fa-link"></i></a>
+</h3>
+<ul>
+<li>All objects have two intrinsic attributes: mode and length</li>
+<li>The mode is the basic type of the elements of the object</li>
+<li>There are four main modes: numeric, character, complex, and logical (FALSE or TRUE)</li>
+</ul>
+<div class="sourceCode" id="cb29"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">a</span> <span class="op">&lt;-</span> <span class="fl">5</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/class.html">class</a></span><span class="op">(</span><span class="va">a</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">a</span> <span class="op">&lt;-</span> <span class="st">"apple"</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/class.html">class</a></span><span class="op">(</span><span class="va">a</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">a</span> <span class="op">&lt;-</span> <span class="fl">1</span> <span class="op">+</span> <span class="fl">2i</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/class.html">class</a></span><span class="op">(</span><span class="va">a</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">a</span> <span class="op">&lt;-</span> <span class="cn">TRUE</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/class.html">class</a></span><span class="op">(</span><span class="va">a</span><span class="op">)</span></span></code></pre></div>
+<ul>
+<li>The length of an object is the number of elements of the object</li>
+</ul>
+<div class="sourceCode" id="cb30"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">a</span> <span class="op">&lt;-</span> <span class="fl">2</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">a</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">a</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">2</span>,<span class="fl">7</span>,<span class="fl">5</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">a</span><span class="op">)</span></span></code></pre></div>
+<ul>
+<li><p>What is the length of <code>b &lt;- c(1:10)</code>?</p></li>
+<li><p>Next to mode and length, there are different types of objects, namely vector, data frame, matrix, array, and list</p></li>
+</ul>
+<div class="sourceCode" id="cb31"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># Vector with one element</span></span>
+<span><span class="va">a</span> <span class="op">&lt;-</span> <span class="fl">2</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="va">a</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Vector with four elements</span></span>
+<span><span class="va">b</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">7</span>,<span class="fl">5</span>,<span class="fl">2</span>,<span class="fl">9</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="va">b</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Data frame</span></span>
+<span><span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">3</span>,<span class="fl">7</span>,<span class="fl">2</span>,<span class="fl">4</span><span class="op">)</span></span>
+<span><span class="va">y</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">42</span>,<span class="fl">67</span>,<span class="fl">21</span>,<span class="fl">33</span><span class="op">)</span></span>
+<span><span class="va">df</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span><span class="va">x</span>, <span class="va">y</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="va">df</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Matrix: in R, a matrix has 2 dimensions only)</span></span>
+<span><span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>,<span class="fl">2</span>,<span class="fl">3</span>,<span class="fl">4</span>,<span class="fl">5</span>,<span class="fl">6</span>,<span class="fl">7</span>,<span class="fl">8</span>,<span class="fl">9</span>,<span class="fl">10</span><span class="op">)</span></span>
+<span><span class="va">a</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html">matrix</a></span><span class="op">(</span><span class="va">x</span>, nrow <span class="op">=</span> <span class="fl">2</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="va">a</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Array: an array has more than 2 dimensions</span></span>
+<span><span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>,<span class="fl">2</span>,<span class="fl">3</span>,<span class="fl">4</span>,<span class="fl">5</span>,<span class="fl">6</span>,<span class="fl">7</span>,<span class="fl">8</span>,<span class="fl">9</span><span class="op">)</span></span>
+<span><span class="va">a</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/array.html">array</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">x</span>, dim <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">3</span>,<span class="fl">3</span>,<span class="fl">3</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="va">a</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># List</span></span>
+<span><span class="va">a</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">3</span>,<span class="fl">2</span>,<span class="fl">5</span>,<span class="fl">6</span><span class="op">)</span></span>
+<span><span class="va">b</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="cn">TRUE</span>, <span class="cn">FALSE</span><span class="op">)</span></span>
+<span><span class="va">c</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"apples"</span>, <span class="st">"pears"</span>, <span class="st">"plums"</span><span class="op">)</span></span>
+<span><span class="va">d</span> <span class="op">&lt;-</span> <span class="fl">5</span></span>
+<span></span>
+<span><span class="va">l</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="va">a</span>,<span class="va">b</span>,<span class="va">c</span>,<span class="va">d</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="va">l</span><span class="op">)</span></span></code></pre></div>
+<ul>
+<li><p>Make a vector with a length equal to 5</p></li>
+<li><p>Make a data frame with 4 columns and 5 rows</p></li>
+<li><p>Make a matrix with 4 columns and 5 rows</p></li>
+<li><p>Make an array with 4 columns, 5 rows, and 3 layers</p></li>
+<li><p>Make a list that contains numbers and words (i.e. strings)</p></li>
+<li><p>Let’s learn how to subset vectors, data frames, matrices, arrays, and lists</p></li>
+<li><p>Example: Vector</p></li>
+</ul>
+<div class="sourceCode" id="cb32"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># Create a vector</span></span>
+<span><span class="va">vector_data</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">10</span>, <span class="fl">20</span>, <span class="fl">30</span>, <span class="fl">40</span>, <span class="fl">50</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Print the vector</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="st">"Full Vector:"</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="va">vector_data</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Subsetting by Index</span></span>
+<span><span class="va">third_element</span> <span class="op">&lt;-</span> <span class="va">vector_data</span><span class="op">[</span><span class="fl">3</span><span class="op">]</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="st">"Third element:"</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="va">third_element</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Subsetting by Multiple Indices</span></span>
+<span><span class="va">subset_indices</span> <span class="op">&lt;-</span> <span class="va">vector_data</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">3</span>, <span class="fl">5</span><span class="op">)</span><span class="op">]</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="st">"Subset (First, Third, and Fifth elements):"</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="va">subset_indices</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Subsetting by Logical Condition</span></span>
+<span><span class="va">subset_condition</span> <span class="op">&lt;-</span> <span class="va">vector_data</span><span class="op">[</span><span class="va">vector_data</span> <span class="op">&gt;</span> <span class="fl">25</span><span class="op">]</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="st">"Subset (Elements greater than 25):"</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="va">subset_condition</span><span class="op">)</span></span></code></pre></div>
+<ul>
+<li><p>Change the code so that you subset the fourth and fifth element of the vector</p></li>
+<li><p>Example: data frame</p></li>
+</ul>
+<div class="sourceCode" id="cb33"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># Create a data frame</span></span>
+<span><span class="va">data</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span></span>
+<span>  Name <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Alice"</span>, <span class="st">"Bob"</span>, <span class="st">"Charlie"</span>, <span class="st">"David"</span>, <span class="st">"Eve"</span><span class="op">)</span>,</span>
+<span>  Age <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">23</span>, <span class="fl">25</span>, <span class="fl">30</span>, <span class="fl">22</span>, <span class="fl">29</span><span class="op">)</span>,</span>
+<span>  Gender <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"F"</span>, <span class="st">"M"</span>, <span class="st">"M"</span>, <span class="st">"M"</span>, <span class="st">"F"</span><span class="op">)</span>,</span>
+<span>  Score <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">85</span>, <span class="fl">90</span>, <span class="fl">75</span>, <span class="fl">88</span>, <span class="fl">92</span><span class="op">)</span></span>
+<span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Print the data frame</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="st">"Full Data Frame:"</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="va">data</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Subsetting by Columns</span></span>
+<span><span class="va">subset_columns</span> <span class="op">&lt;-</span> <span class="va">data</span><span class="op">[</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Name"</span>, <span class="st">"Score"</span><span class="op">)</span><span class="op">]</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="st">"Subset by Columns (Name and Score):"</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="va">subset_columns</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Subsetting by Rows and Columns</span></span>
+<span><span class="va">subset_rows_cols</span> <span class="op">&lt;-</span> <span class="va">data</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">3</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Name"</span>, <span class="st">"Age"</span><span class="op">)</span><span class="op">]</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="st">"Subset by Rows and Columns (First 3 rows, Name and Age):"</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="va">subset_rows_cols</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Subsetting by Condition</span></span>
+<span><span class="va">subset_condition</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/subset.html">subset</a></span><span class="op">(</span><span class="va">data</span>, <span class="va">Age</span> <span class="op">&gt;</span> <span class="fl">25</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="st">"Subset by Condition (Age &gt; 25):"</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="va">subset_condition</span><span class="op">)</span></span></code></pre></div>
+<ul>
+<li><p>Change the code so that you only extract the Age. This can be done by writing <code>data$Age</code></p></li>
+<li><p>Example: matrix</p></li>
+</ul>
+<div class="sourceCode" id="cb34"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># Create a matrix</span></span>
+<span><span class="va">matrix_data</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html">matrix</a></span><span class="op">(</span></span>
+<span>  <span class="fl">1</span><span class="op">:</span><span class="fl">12</span>,        <span class="co"># Data</span></span>
+<span>  nrow <span class="op">=</span> <span class="fl">4</span>,    <span class="co"># Number of rows</span></span>
+<span>  ncol <span class="op">=</span> <span class="fl">3</span>,    <span class="co"># Number of columns</span></span>
+<span>  byrow <span class="op">=</span> <span class="cn">TRUE</span> <span class="co"># Fill the matrix by rows</span></span>
+<span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Print the matrix</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="st">"Full Matrix:"</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="va">matrix_data</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Subsetting by Rows and Columns</span></span>
+<span><span class="va">subset_rows_cols</span> <span class="op">&lt;-</span> <span class="va">matrix_data</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">2</span>, <span class="fl">1</span><span class="op">:</span><span class="fl">2</span><span class="op">]</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="st">"Subset (First 2 rows, First 2 columns):"</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="va">subset_rows_cols</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Subsetting by Specific Rows</span></span>
+<span><span class="va">subset_specific_rows</span> <span class="op">&lt;-</span> <span class="va">matrix_data</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">3</span><span class="op">)</span>, <span class="op">]</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="st">"Subset (First and Third rows):"</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="va">subset_specific_rows</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Subsetting by Specific Columns</span></span>
+<span><span class="va">subset_specific_cols</span> <span class="op">&lt;-</span> <span class="va">matrix_data</span><span class="op">[</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">2</span>, <span class="fl">3</span><span class="op">)</span><span class="op">]</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="st">"Subset (Second and Third columns):"</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="va">subset_specific_cols</span><span class="op">)</span></span></code></pre></div>
+<ul>
+<li><p>Change the code so that you only show the second column.</p></li>
+<li><p>Example: array</p></li>
+</ul>
+<div class="sourceCode" id="cb35"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># Create an array</span></span>
+<span><span class="va">array_data</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/array.html">array</a></span><span class="op">(</span></span>
+<span>  <span class="fl">1</span><span class="op">:</span><span class="fl">24</span>,         <span class="co"># Data</span></span>
+<span>  dim <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">3</span>, <span class="fl">4</span>, <span class="fl">2</span><span class="op">)</span> <span class="co"># Dimensions (3x4x2 array)</span></span>
+<span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Print the array</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="st">"Full Array:"</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="va">array_data</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Subsetting by Indices</span></span>
+<span><span class="va">element</span> <span class="op">&lt;-</span> <span class="va">array_data</span><span class="op">[</span><span class="fl">1</span>, <span class="fl">2</span>, <span class="fl">1</span><span class="op">]</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="st">"Element at (1, 2, 1):"</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="va">element</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Subsetting by Slices</span></span>
+<span><span class="va">slice</span> <span class="op">&lt;-</span> <span class="va">array_data</span><span class="op">[</span>, , <span class="fl">1</span><span class="op">]</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="st">"First slice (all elements in the first third dimension):"</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="va">slice</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Subsetting by Specific Rows and Columns in a Specific Dimension</span></span>
+<span><span class="va">subset_array</span> <span class="op">&lt;-</span> <span class="va">array_data</span><span class="op">[</span><span class="fl">1</span>, , <span class="fl">2</span><span class="op">]</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="st">"First row, all columns, in the second slice:"</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="va">subset_array</span><span class="op">)</span></span></code></pre></div>
+<ul>
+<li><p>Change the code so that you only show the second slice</p></li>
+<li><p>Example: list</p></li>
+</ul>
+<div class="sourceCode" id="cb36"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># Create a list</span></span>
+<span><span class="va">list_data</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span></span>
+<span>  Name <span class="op">=</span> <span class="st">"Alice"</span>,</span>
+<span>  Age <span class="op">=</span> <span class="fl">25</span>,</span>
+<span>  Scores <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">85</span>, <span class="fl">90</span>, <span class="fl">88</span><span class="op">)</span>,</span>
+<span>  Address <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span></span>
+<span>    Street <span class="op">=</span> <span class="st">"123 Princess St"</span>,</span>
+<span>    City <span class="op">=</span> <span class="st">"Kingston"</span>,</span>
+<span>    Postal <span class="op">=</span> <span class="st">"K7L4L1"</span></span>
+<span>  <span class="op">)</span></span>
+<span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Print the list</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="st">"Full List:"</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="va">list_data</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Subsetting by Element Name</span></span>
+<span><span class="va">name</span> <span class="op">&lt;-</span> <span class="va">list_data</span><span class="op">$</span><span class="va">Name</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="st">"Name element:"</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="va">name</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Subsetting by Index</span></span>
+<span><span class="va">age</span> <span class="op">&lt;-</span> <span class="va">list_data</span><span class="op">[[</span><span class="fl">2</span><span class="op">]</span><span class="op">]</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="st">"Second element (Age):"</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="va">age</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Subsetting a Nested List</span></span>
+<span><span class="va">city</span> <span class="op">&lt;-</span> <span class="va">list_data</span><span class="op">$</span><span class="va">Address</span><span class="op">$</span><span class="va">City</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="st">"City element in Address:"</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="va">city</span><span class="op">)</span></span></code></pre></div>
+<ul>
+<li>Change the code so that you only show the postal code</li>
+</ul>
+</div>
+<div id="control-structure" class="section level3" number="1.15.3">
+<h3>
+<span class="header-section-number">1.15.3</span> Control structure<a class="anchor" aria-label="anchor" href="#control-structure"><i class="fas fa-link"></i></a>
+</h3>
+<ul>
+<li><p>Control structures determine the order in which statements are executed in a program. Two important examples are loops and conditional statements</p></li>
+<li><p>Loop example</p></li>
+</ul>
+<div class="sourceCode" id="cb37"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># For loop to print numbers from 1 to 5</span></span>
+<span><span class="kw">for</span> <span class="op">(</span><span class="va">i</span> <span class="kw">in</span> <span class="fl">1</span><span class="op">:</span><span class="fl">5</span><span class="op">)</span> <span class="op">{</span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="va">i</span><span class="op">)</span></span>
+<span><span class="op">}</span></span></code></pre></div>
+<ul>
+<li><p>Change the code so that you loop over the strings apple, grape, and mango</p></li>
+<li><p>Conditional statement example</p></li>
+</ul>
+<div class="sourceCode" id="cb38"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># Define a number</span></span>
+<span><span class="va">number</span> <span class="op">&lt;-</span> <span class="op">-</span><span class="fl">3</span></span>
+<span></span>
+<span><span class="co"># If-else statement to check the sign of the number</span></span>
+<span><span class="kw">if</span> <span class="op">(</span><span class="va">number</span> <span class="op">&gt;</span> <span class="fl">0</span><span class="op">)</span> <span class="op">{</span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="st">"The number is positive."</span><span class="op">)</span></span>
+<span><span class="op">}</span> <span class="kw">else</span> <span class="kw">if</span> <span class="op">(</span><span class="va">number</span> <span class="op">&lt;</span> <span class="fl">0</span><span class="op">)</span> <span class="op">{</span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="st">"The number is negative."</span><span class="op">)</span></span>
+<span><span class="op">}</span> <span class="kw">else</span> <span class="op">{</span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="st">"The number is zero."</span><span class="op">)</span></span>
+<span><span class="op">}</span></span></code></pre></div>
+</div>
+<div id="generating-data" class="section level3" number="1.15.4">
+<h3>
+<span class="header-section-number">1.15.4</span> Generating data<a class="anchor" aria-label="anchor" href="#generating-data"><i class="fas fa-link"></i></a>
+</h3>
+<ul>
+<li>Many times you need to generate data, e.g. a sequence that ranges from 1 to 10. Instead of writing out each number, there are functions that do that for you.</li>
+</ul>
+<div class="sourceCode" id="cb39"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># Sequence from 1 to 10 with step size 1</span></span>
+<span><span class="va">x</span> <span class="op">&lt;-</span> <span class="fl">1</span><span class="op">:</span><span class="fl">10</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Sequence from 1 to 10 with step size 0.5</span></span>
+<span><span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">10</span>, <span class="fl">0.5</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Vector that repeats the value one for ten times</span></span>
+<span><span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/rep.html">rep</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">10</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Random sequences with uniform distribution between zero and one</span></span>
+<span><span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/Uniform.html">runif</a></span><span class="op">(</span>n <span class="op">=</span> <span class="fl">5</span>, min <span class="op">=</span> <span class="fl">0</span>, max <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span></code></pre></div>
+<ul>
+<li>Generate 10 random values that range between 5 and 10</li>
+</ul>
+</div>
+<div id="defining-a-function" class="section level3" number="1.15.5">
+<h3>
+<span class="header-section-number">1.15.5</span> Defining a function<a class="anchor" aria-label="anchor" href="#defining-a-function"><i class="fas fa-link"></i></a>
+</h3>
+<ul>
+<li>Often you need to execute the same operation many times. To do this efficiently you can define a function and then apply this function whenever you need it.</li>
+</ul>
+<div class="sourceCode" id="cb40"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># Define a function to add two numbers</span></span>
+<span><span class="va">add_numbers</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">a</span>, <span class="va">b</span><span class="op">)</span> <span class="op">{</span></span>
+<span>  <span class="co"># Calculate the sum</span></span>
+<span>  <span class="va">sum</span> <span class="op">&lt;-</span> <span class="va">a</span> <span class="op">+</span> <span class="va">b</span></span>
+<span>  <span class="co"># Return the sum</span></span>
+<span>  <span class="kw"><a href="https://rdrr.io/r/base/function.html">return</a></span><span class="op">(</span><span class="va">sum</span><span class="op">)</span></span>
+<span><span class="op">}</span></span>
+<span></span>
+<span><span class="co"># Print the function definition</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="st">"Function Definition:"</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="va">add_numbers</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Call the function with arguments 3 and 5</span></span>
+<span><span class="va">result</span> <span class="op">&lt;-</span> <span class="fu">add_numbers</span><span class="op">(</span><span class="fl">3</span>, <span class="fl">5</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Print the result</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="st">"Result of add_numbers(3, 5):"</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="va">result</span><span class="op">)</span></span></code></pre></div>
+<ul>
+<li>Define a function that multiplies numbers</li>
+</ul>
+</div>
+<div id="plotting-data" class="section level3" number="1.15.6">
+<h3>
+<span class="header-section-number">1.15.6</span> Plotting data<a class="anchor" aria-label="anchor" href="#plotting-data"><i class="fas fa-link"></i></a>
+</h3>
+<div class="sourceCode" id="cb41"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">10</span><span class="op">)</span></span>
+<span><span class="va">y</span> <span class="op">&lt;-</span> <span class="va">x</span><span class="op">^</span><span class="fl">2</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">x</span>, <span class="va">y</span><span class="op">)</span></span></code></pre></div>
+<ul>
+<li>Add x and y labels using <code>xlab</code> and <code>ylab</code>
+</li>
+</ul>
+<div class="sourceCode" id="cb42"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">10</span><span class="op">)</span></span>
+<span><span class="va">y</span> <span class="op">&lt;-</span> <span class="va">x</span><span class="op">^</span><span class="fl">2</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">x</span>, <span class="va">y</span>, </span>
+<span>     xlab <span class="op">=</span> <span class="st">"ENSC430 lectures attended"</span>, </span>
+<span>     ylab <span class="op">=</span> <span class="st">"Academic Performance"</span><span class="op">)</span></span></code></pre></div>
+<ul>
+<li>Make it a line plot using <code>type = "l"</code>
+</li>
+</ul>
+<div class="sourceCode" id="cb43"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">10</span><span class="op">)</span></span>
+<span><span class="va">y</span> <span class="op">&lt;-</span> <span class="va">x</span><span class="op">^</span><span class="fl">2</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">x</span>, <span class="va">y</span>, type <span class="op">=</span> <span class="st">"l"</span><span class="op">)</span></span></code></pre></div>
+<ul>
+<li>Add more lines using <code><a href="https://rdrr.io/r/graphics/lines.html">lines()</a></code>
+</li>
+</ul>
+<div class="sourceCode" id="cb44"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">10</span><span class="op">)</span></span>
+<span><span class="va">y1</span> <span class="op">&lt;-</span> <span class="va">x</span><span class="op">^</span><span class="fl">2</span></span>
+<span><span class="va">y2</span> <span class="op">&lt;-</span> <span class="va">x</span><span class="op">^</span><span class="fl">3</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">x</span>, <span class="va">y1</span>, type <span class="op">=</span> <span class="st">"l"</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/lines.html">lines</a></span><span class="op">(</span><span class="va">x</span>, <span class="va">y2</span><span class="op">)</span></span></code></pre></div>
+<ul>
+<li>Make each line a different color using <code>col</code>
+</li>
+</ul>
+<div class="sourceCode" id="cb45"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">10</span><span class="op">)</span></span>
+<span><span class="va">y1</span> <span class="op">&lt;-</span> <span class="va">x</span><span class="op">^</span><span class="fl">2</span></span>
+<span><span class="va">y2</span> <span class="op">&lt;-</span> <span class="va">x</span><span class="op">^</span><span class="fl">3</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">x</span>, <span class="va">y1</span>, type <span class="op">=</span> <span class="st">"l"</span>, col <span class="op">=</span> <span class="st">"red"</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/lines.html">lines</a></span><span class="op">(</span><span class="va">x</span>, <span class="va">y2</span>, col <span class="op">=</span> <span class="st">"blue"</span><span class="op">)</span></span></code></pre></div>
+<ul>
+<li>Adjust x and y axis using <code>xlim</code> and <code>ylim</code>
+</li>
+</ul>
+<div class="sourceCode" id="cb46"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">10</span><span class="op">)</span></span>
+<span><span class="va">y1</span> <span class="op">&lt;-</span> <span class="va">x</span><span class="op">^</span><span class="fl">2</span></span>
+<span><span class="va">y2</span> <span class="op">&lt;-</span> <span class="va">x</span><span class="op">^</span><span class="fl">3</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">x</span>, <span class="va">y1</span>, type <span class="op">=</span> <span class="st">"l"</span>, </span>
+<span>     xlim <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="op">-</span><span class="fl">5</span>,<span class="fl">10</span><span class="op">)</span>, ylim <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="op">-</span><span class="fl">20</span>, <span class="fl">100</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/lines.html">lines</a></span><span class="op">(</span><span class="va">x</span>, <span class="va">y2</span><span class="op">)</span></span></code></pre></div>
+<ul>
+<li>Making square axis using <code>par(pty="s")</code> and <code>asp = 1</code>
+</li>
+</ul>
+<div class="sourceCode" id="cb47"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">10</span><span class="op">)</span></span>
+<span><span class="va">y1</span> <span class="op">&lt;-</span> <span class="va">x</span><span class="op">^</span><span class="fl">2</span></span>
+<span><span class="va">y2</span> <span class="op">&lt;-</span> <span class="va">x</span><span class="op">^</span><span class="fl">3</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/par.html">par</a></span><span class="op">(</span>pty<span class="op">=</span><span class="st">"s"</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">x</span>, <span class="va">y1</span>, type <span class="op">=</span> <span class="st">"l"</span>, asp <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/lines.html">lines</a></span><span class="op">(</span><span class="va">x</span>, <span class="va">y2</span><span class="op">)</span></span></code></pre></div>
+<ul>
+<li>Plot the sinus function with x values ranging from 0 to 10</li>
+</ul>
+<p>Many times we need to add fancy text that includes Greek letters, exponents, and subscripts in Figures. That can be done using the LaTeX language, which is made available in R through the <code>latex</code> package. Text written in LaTeX is enclosed by dollar signs. Here some examples:</p>
+<ul>
+<li><p>Greek letters: <code>$\alpha$</code> yields <span class="math inline">\(\alpha\)</span></p></li>
+<li><p>Exponents: <code>$m^{-2}$</code> yields <span class="math inline">\(m^{-2}\)</span></p></li>
+<li><p>Subscripts: <code>$x_i</code> yields <span class="math inline">\(x_i\)</span></p></li>
+</ul>
+</div>
+<div id="review" class="section level3" number="1.15.7">
+<h3>
+<span class="header-section-number">1.15.7</span> Review<a class="anchor" aria-label="anchor" href="#review"><i class="fas fa-link"></i></a>
+</h3>
+<p>Congratulations, you made it to the end of this tutorial. Let’s list the key concepts you have learned today:</p>
+<ul>
+<li>Operators: <code>+, -, *, /, ^</code>
+</li>
+<li>Objects: vector <code><a href="https://rdrr.io/r/base/c.html">c()</a></code>, data frame <code><a href="https://rdrr.io/r/base/data.frame.html">data.frame()</a></code>, matrix <code><a href="https://rdrr.io/r/base/matrix.html">matrix()</a></code>, array <code><a href="https://rdrr.io/r/base/array.html">array()</a></code>, list <code><a href="https://rdrr.io/r/base/list.html">list()</a></code>,</li>
+<li>Subset objects</li>
+<li>Control structure: loops, if-else statements</li>
+<li>Generating data: sequence and random data</li>
+<li>Defining a function</li>
+<li>Plotting data</li>
+</ul>
+</div>
 </div>
 </div>
   <div class="chapter-nav">
@@ -345,6 +815,17 @@
 <li><a class="nav-link" href="#quantifying-the-warming-trend"><span class="header-section-number">1.12</span> Quantifying the warming trend</a></li>
 <li><a class="nav-link" href="#has-the-rate-of-warming-changed"><span class="header-section-number">1.13</span> Has the rate of warming changed?</a></li>
 <li><a class="nav-link" href="#independent-analysis"><span class="header-section-number">1.14</span> Independent analysis</a></li>
+<li>
+<a class="nav-link" href="#appendix"><span class="header-section-number">1.15</span> Appendix</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#operators"><span class="header-section-number">1.15.1</span> Operators</a></li>
+<li><a class="nav-link" href="#objects"><span class="header-section-number">1.15.2</span> Objects</a></li>
+<li><a class="nav-link" href="#control-structure"><span class="header-section-number">1.15.3</span> Control structure</a></li>
+<li><a class="nav-link" href="#generating-data"><span class="header-section-number">1.15.4</span> Generating data</a></li>
+<li><a class="nav-link" href="#defining-a-function"><span class="header-section-number">1.15.5</span> Defining a function</a></li>
+<li><a class="nav-link" href="#plotting-data"><span class="header-section-number">1.15.6</span> Plotting data</a></li>
+<li><a class="nav-link" href="#review"><span class="header-section-number">1.15.7</span> Review</a></li>
+</ul>
+</li>
 </ul>
 
       <div class="book-extra">
@@ -361,7 +842,7 @@
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong></strong>" was written by . </p>
+    <p>"<strong>ENSC 430</strong>" was written by Christian Seiler. </p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">
@@ -369,6 +850,34 @@
   </div>
 
 </div></div>
-</footer>
+</footer><!-- dynamically load mathjax for compatibility with self-contained --><script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script><script type="text/x-mathjax-config">const popovers = document.querySelectorAll('a.footnote-ref[data-toggle="popover"]');
+for (let popover of popovers) {
+  const div = document.createElement('div');
+  div.setAttribute('style', 'position: absolute; top: 0, left:0; width:0, height:0, overflow: hidden; visibility: hidden;');
+  div.innerHTML = popover.getAttribute('data-content');
+
+  var has_math = div.querySelector("span.math");
+  if (has_math) {
+    document.body.appendChild(div);
+    MathJax.Hub.Queue(["Typeset", MathJax.Hub, div]);
+    MathJax.Hub.Queue(function() {
+      popover.setAttribute('data-content', div.innerHTML);
+      document.body.removeChild(div);
+    })
+  }
+}
+</script>
 </body>
 </html>

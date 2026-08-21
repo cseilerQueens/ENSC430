@@ -21,3 +21,10 @@ generating-data
 defining-a-function
 plotting-data
 review
+week-2-understanding-environmental-systems-i
+internal-oscillation
+savings-account
+lotka-volterra
+bifurcation
+chaotic-behaviour-lorenz-attractor
+early-warning-signal-ews-assessments

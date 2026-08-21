@@ -1,0 +1,478 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<title>Chapter 2 Week 2: Understanding Environmental Systems (I) | ENSC 430</title>
+<meta name="author" content="Christian Seiler">
+<meta name="generator" content="bookdown 0.47 with bs4_book()">
+<meta property="og:title" content="Chapter 2 Week 2: Understanding Environmental Systems (I) | ENSC 430">
+<meta property="og:type" content="book">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Chapter 2 Week 2: Understanding Environmental Systems (I) | ENSC 430">
+<!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
+<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.12.0/transition.js"></script><script src="libs/bs3compat-0.12.0/tabs.js"></script><script src="libs/bs3compat-0.12.0/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
+<script src="libs/bs4_book-1.0.0/bs4_book.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- CSS --><style type="text/css">
+    
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  </style>
+<meta name="description" content="This tutorial covers the following topics: Internal oscillation Bifurcation Chaotic behavior Early warning indicators Please document all steps of this tutorial in your Tutorial Report Load the...">
+<meta property="og:description" content="This tutorial covers the following topics: Internal oscillation Bifurcation Chaotic behavior Early warning indicators Please document all steps of this tutorial in your Tutorial Report Load the...">
+<meta name="twitter:description" content="This tutorial covers the following topics: Internal oscillation Bifurcation Chaotic behavior Early warning indicators Please document all steps of this tutorial in your Tutorial Report Load the...">
+</head>
+<body data-spy="scroll" data-target="#toc">
+
+<div class="container-fluid">
+<div class="row">
+  <header class="col-sm-12 col-lg-3 sidebar sidebar-book"><a class="sr-only sr-only-focusable" href="#content">Skip to main content</a>
+
+    <div class="d-flex align-items-start justify-content-between">
+      <h1>
+        <a href="index.html" title="">ENSC 430</a>
+      </h1>
+      <button class="btn btn-outline-primary d-lg-none ml-2 mt-1" type="button" data-toggle="collapse" data-target="#main-nav" aria-expanded="true" aria-controls="main-nav"><i class="fas fa-bars"></i><span class="sr-only">Show table of contents</span></button>
+    </div>
+
+    <div id="main-nav" class="collapse-lg">
+      <form role="search">
+        <input id="search" class="form-control" type="search" placeholder="Search" aria-label="Search">
+</form>
+
+      <nav aria-label="Table of contents"><h2>Table of contents</h2>
+        <ul class="book-toc list-unstyled">
+<li><a class="" href="index.html">ENSC 430A/B</a></li>
+<li><a class="" href="week-1-climate-change.html"><span class="header-section-number">1</span> Week 1: Climate Change</a></li>
+<li><a class="active" href="week-2-understanding-environmental-systems-i.html"><span class="header-section-number">2</span> Week 2: Understanding Environmental Systems (I)</a></li>
+</ul>
+
+        <div class="book-extra">
+          
+        </div>
+      </nav>
+</div>
+  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="week-2-understanding-environmental-systems-i" class="section level1" number="2">
+<h1>
+<span class="header-section-number">2</span> Week 2: Understanding Environmental Systems (I)<a class="anchor" aria-label="anchor" href="#week-2-understanding-environmental-systems-i"><i class="fas fa-link"></i></a>
+</h1>
+<p>This tutorial covers the following topics:</p>
+<ul>
+<li>Internal oscillation</li>
+<li>Bifurcation</li>
+<li>Chaotic behavior</li>
+<li>Early warning indicators</li>
+</ul>
+<p>Please document all steps of this tutorial in your Tutorial Report</p>
+<p>Load the required R packages:</p>
+<div class="sourceCode" id="cb48"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/tpetzoldt/deSolve/">deSolve</a></span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va">rootSolve</span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va">scatterplot3d</span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/duncanobrien/EWSmethods">EWSmethods</a></span><span class="op">)</span></span></code></pre></div>
+<div id="internal-oscillation" class="section level2" number="2.1">
+<h2>
+<span class="header-section-number">2.1</span> Internal Oscillation<a class="anchor" aria-label="anchor" href="#internal-oscillation"><i class="fas fa-link"></i></a>
+</h2>
+<div id="savings-account" class="section level3" number="2.1.1">
+<h3>
+<span class="header-section-number">2.1.1</span> Savings account<a class="anchor" aria-label="anchor" href="#savings-account"><i class="fas fa-link"></i></a>
+</h3>
+<p>Consider a savings account with an interest rate of 6%. Mathematically, this is expressed as an ordinary differential equation (ODE):</p>
+<p><span class="math display">\[
+\frac{dx}{dt} = 0.06 x.
+\]</span>
+The first term on the left-hand side expresses how <span class="math inline">\(x\)</span> changes with respect to time <span class="math inline">\(t\)</span>. In other words, <span class="math inline">\(dx/dt\)</span> is the time derivative of <span class="math inline">\(x\)</span>. Let’s integrate this equation with respect to time:</p>
+<p><span class="math display">\[
+\frac{1}{x} dx= 0.06 dt
+\]</span></p>
+<p><span class="math display">\[
+\int\frac{1}{x} dx= 0.06 \int dt
+\]</span></p>
+<p><span class="math display">\[
+\ln(x) = 0.06 t + c_1
+\]</span>
+<span class="math display">\[
+x = \exp(0.06 t + c_1)
+\]</span></p>
+<p><span class="math display">\[
+x = \exp(0.06 t) * \exp(c_1)
+\]</span></p>
+<p><span class="math display">\[
+x = c * \exp(0.06 t)
+\]</span></p>
+<p>where <span class="math inline">\(c\)</span> is the integration constant. This is called an analytically integration. Let’s plot <span class="math inline">\(x\)</span> as a function of <span class="math inline">\(t\)</span>:</p>
+<div class="sourceCode" id="cb49"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># Define function inputs</span></span>
+<span><span class="va">state</span> <span class="op">&lt;-</span> <span class="fl">100</span> </span>
+<span><span class="va">times</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">50</span>, <span class="fl">1</span><span class="op">)</span> <span class="co"># Time steps</span></span>
+<span><span class="va">x</span> <span class="op">&lt;-</span> <span class="va">state</span> <span class="op">*</span> <span class="fu"><a href="https://rdrr.io/r/base/Log.html">exp</a></span><span class="op">(</span><span class="fl">0.06</span> <span class="op">*</span> <span class="va">times</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Plot output</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/par.html">par</a></span><span class="op">(</span>pty <span class="op">=</span> <span class="st">"s"</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">times</span>, <span class="va">x</span>,</span>
+<span>     type <span class="op">=</span> <span class="st">"l"</span>,</span>
+<span>     xlab <span class="op">=</span> <span class="st">"Time Step"</span>,</span>
+<span>     ylab <span class="op">=</span> <span class="st">"x"</span><span class="op">)</span></span></code></pre></div>
+<div class="inline-figure"><img src="_main_files/figure-html/unnamed-chunk-65-1.png" alt="" width="672"></div>
+<p>Some equations are so complicated, that they cannot be integrated analytically. Instead, we can integrate them numerically. Let’s see how we can integrate the same equation numerically using the <code>ode</code> function. Have a look at the code.</p>
+<p><strong>Quiz Question 1:</strong> Which part of the code defines your initial value?</p>
+<p>Run this code in your markdown file:</p>
+<div class="sourceCode" id="cb50"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># Define the function</span></span>
+<span><span class="va">ode_function</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">t</span>, <span class="va">state</span>, <span class="va">parameters</span><span class="op">)</span></span>
+<span><span class="op">{</span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/base/with.html">with</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/list.html">as.list</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="va">state</span><span class="op">)</span><span class="op">)</span>, <span class="op">{</span></span>
+<span>    <span class="va">dx</span> <span class="op">&lt;-</span> <span class="fl">0.06</span> <span class="op">*</span> <span class="va">x</span></span>
+<span>    </span>
+<span>    <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="va">dx</span><span class="op">)</span><span class="op">)</span></span>
+<span>  <span class="op">}</span><span class="op">)</span></span>
+<span><span class="op">}</span></span>
+<span></span>
+<span><span class="co"># Define function inputs</span></span>
+<span><span class="va">state</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span>x <span class="op">=</span> <span class="fl">100</span><span class="op">)</span> <span class="co"># Initial condition (t = 0)</span></span>
+<span><span class="va">times</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">50</span>, <span class="fl">1</span><span class="op">)</span> <span class="co"># Time steps</span></span>
+<span></span>
+<span><span class="co"># Run function</span></span>
+<span><span class="va">out</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/as.data.frame.html">as.data.frame</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/deSolve/man/ode.html">ode</a></span><span class="op">(</span><span class="va">state</span>, <span class="va">times</span>, <span class="va">ode_function</span><span class="op">)</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Plot output</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/par.html">par</a></span><span class="op">(</span>pty <span class="op">=</span> <span class="st">"s"</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">out</span><span class="op">$</span><span class="va">time</span>,</span>
+<span>     <span class="va">out</span><span class="op">$</span><span class="va">x</span>,</span>
+<span>     type <span class="op">=</span> <span class="st">"l"</span>,</span>
+<span>     xlab <span class="op">=</span> <span class="st">"Time Step"</span>,</span>
+<span>     ylab <span class="op">=</span> <span class="st">"x"</span><span class="op">)</span></span></code></pre></div>
+<div class="inline-figure"><img src="_main_files/figure-html/unnamed-chunk-66-1.png" alt="" width="672"></div>
+<p><strong>Quiz Question 2:</strong> Which part of the code is your ODE?</p>
+</div>
+<div id="lotka-volterra" class="section level3" number="2.1.2">
+<h3>
+<span class="header-section-number">2.1.2</span> Lotka-Volterra<a class="anchor" aria-label="anchor" href="#lotka-volterra"><i class="fas fa-link"></i></a>
+</h3>
+<p>Now that you know how to conduct numerical integration, let’s apply your new skills to the Lotka-Volterra model:</p>
+<p><span class="math display">\[\frac{dY}{dt} = r_i * Y * (1 - Y / K) - \alpha * R * Y \]</span>
+<span class="math display">\[\frac{dR}{dt} = \alpha * \gamma * R * Y - m * R \]</span></p>
+<p>where <span class="math inline">\(Y\)</span> = prey, <span class="math inline">\(R\)</span> = predator, <span class="math inline">\(\alpha\)</span> = ingestion rate of predator (0.2), <span class="math inline">\(r_i\)</span> = rate of prey increase (1), <span class="math inline">\(m\)</span> = mortality rate (0.2), <span class="math inline">\(\gamma\)</span> = assimilation efficiency (0.5), <span class="math inline">\(K\)</span> = carrying capacity (10000). Adjust the code from your savings account above to reproduce the Figure below.</p>
+<div class="inline-figure"><img src="_main_files/figure-html/unnamed-chunk-67-1.png" alt="" width="672"></div>
+<p>Now adjust the code again to plot Predator versus Prey, reproducing the Figure below.</p>
+<div class="inline-figure"><img src="_main_files/figure-html/unnamed-chunk-68-1.png" alt="" width="672"></div>
+</div>
+</div>
+<div id="bifurcation" class="section level2" number="2.2">
+<h2>
+<span class="header-section-number">2.2</span> Bifurcation<a class="anchor" aria-label="anchor" href="#bifurcation"><i class="fas fa-link"></i></a>
+</h2>
+<p>The spruce budworm (<span class="math inline">\(\textit{Choristoneura fumiferana}\)</span>) is an insect pest that consumes the leaves of coniferous trees in North America. In some years, their populations explode and the excessive consumption of pine buds and needles causes massive damage to the trees. The equation below describes the density of the spruce budworm (<span class="math inline">\(B\)</span>), as a function of density-dependent growth (first term) and predatory mortality (second term):</p>
+<p><span class="math display">\[ \frac{dB}{dt} = r_i B \left( 1 - \frac{B}{K}\right) - \beta \frac{B^2}{B^2+k_s^2}\]</span>
+where <span class="math inline">\(t\)</span> is the time, <span class="math inline">\(r_i\)</span> is the rate of increase, <span class="math inline">\(K\)</span> is the carrying capacity of the environment, <span class="math inline">\(\beta\)</span> is the maximum mortality rate, and <span class="math inline">\(k_s\)</span> is the half-saturation density at which mortality is half of the maximal rate. This is an ordinary differential equation (ODE). Let’s plot the species density (<span class="math inline">\(B\)</span>) as a function of time (<span class="math inline">\(t\)</span>). To do that we will integrate the function above with respect to time using the <code>ode</code> function below.</p>
+<div class="sourceCode" id="cb51"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># Define the ODE function</span></span>
+<span><span class="va">ode_function</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">t</span>, <span class="va">B</span>, <span class="va">parameters</span><span class="op">)</span> <span class="op">{</span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/base/with.html">with</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/list.html">as.list</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="va">parameters</span>, <span class="va">B</span><span class="op">)</span><span class="op">)</span>, <span class="op">{</span></span>
+<span>    <span class="va">dBdt</span> <span class="op">&lt;-</span> <span class="va">ri</span><span class="op">*</span><span class="va">B</span><span class="op">*</span><span class="op">(</span><span class="fl">1</span><span class="op">-</span><span class="va">B</span><span class="op">/</span><span class="va">K</span><span class="op">)</span><span class="op">-</span><span class="va">beta</span><span class="op">*</span><span class="va">B</span><span class="op">^</span><span class="fl">2</span><span class="op">/</span><span class="op">(</span><span class="va">B</span><span class="op">^</span><span class="fl">2</span><span class="op">+</span><span class="va">ks</span><span class="op">^</span><span class="fl">2</span><span class="op">)</span></span>
+<span>    <span class="kw"><a href="https://rdrr.io/r/base/function.html">return</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="va">dBdt</span><span class="op">)</span><span class="op">)</span></span>
+<span>  <span class="op">}</span><span class="op">)</span></span>
+<span><span class="op">}</span></span>
+<span></span>
+<span><span class="co"># Set parameter values and initial conditions</span></span>
+<span><span class="va">parameters</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span>ri <span class="op">=</span> <span class="fl">0.05</span>, K <span class="op">=</span> <span class="fl">10</span>, beta <span class="op">=</span> <span class="fl">0.1</span>, ks <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></span>
+<span><span class="va">initial_conditions</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span>B <span class="op">=</span> <span class="fl">4</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Set your time axis</span></span>
+<span><span class="va">time_points</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">1000</span>, by <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Use the ode function to solve the ODE</span></span>
+<span><span class="va">solution</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/deSolve/man/ode.html">ode</a></span><span class="op">(</span>y <span class="op">=</span> <span class="va">initial_conditions</span>, times <span class="op">=</span> <span class="va">time_points</span>, func <span class="op">=</span> <span class="va">ode_function</span>, parms <span class="op">=</span> <span class="va">parameters</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Plot the solution</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/par.html">par</a></span><span class="op">(</span>pty<span class="op">=</span><span class="st">"s"</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">solution</span>, type <span class="op">=</span> <span class="st">"l"</span>, xlab <span class="op">=</span> <span class="st">"Time"</span>, ylab <span class="op">=</span> <span class="st">"B"</span>, main <span class="op">=</span> <span class="cn">NA</span><span class="op">)</span></span></code></pre></div>
+<p><strong>Quiz Question 3:</strong> Is the system in dynamic equilibrium?
+<!-- Yes, growth = mortality after about 300 time steps --></p>
+<p><strong>Quiz Question 4:</strong> What happens if you increase the rate of increase (<span class="math inline">\(r_i\)</span>) from 0.05 to 0.08?
+<!-- The dynamic equilibrium is reached much sooner, at about time step 100 --></p>
+<ul>
+<li>Next, let’s plot the rate of change (<span class="math inline">\(\frac{dB}{dt}\)</span>) as a function of the population density (<span class="math inline">\(B\)</span>)</li>
+</ul>
+<div class="sourceCode" id="cb52"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># Input values</span></span>
+<span> <span class="va">ri</span> <span class="op">&lt;-</span> <span class="fl">0.05</span></span>
+<span> <span class="va">K</span> <span class="op">&lt;-</span> <span class="fl">10</span></span>
+<span> <span class="va">beta</span> <span class="op">&lt;-</span> <span class="fl">0.1</span> </span>
+<span> <span class="va">ks</span> <span class="op">&lt;-</span> <span class="fl">1</span></span>
+<span> <span class="va">B</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">10</span>, <span class="fl">0.01</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Function </span></span>
+<span><span class="va">dBdt</span> <span class="op">&lt;-</span> <span class="va">ri</span><span class="op">*</span><span class="va">B</span><span class="op">*</span><span class="op">(</span><span class="fl">1</span><span class="op">-</span><span class="va">B</span><span class="op">/</span><span class="va">K</span><span class="op">)</span><span class="op">-</span><span class="va">beta</span><span class="op">*</span><span class="va">B</span><span class="op">^</span><span class="fl">2</span><span class="op">/</span><span class="op">(</span><span class="va">B</span><span class="op">^</span><span class="fl">2</span><span class="op">+</span><span class="va">ks</span><span class="op">^</span><span class="fl">2</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Plot</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/par.html">par</a></span><span class="op">(</span>pty<span class="op">=</span><span class="st">"s"</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">B</span>, y <span class="op">=</span> <span class="va">dBdt</span>, type <span class="op">=</span> <span class="st">"l"</span>, xlab <span class="op">=</span> <span class="st">"B"</span>, ylab <span class="op">=</span> <span class="st">"dBdt"</span>, main <span class="op">=</span> <span class="cn">NA</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/abline.html">abline</a></span><span class="op">(</span>h <span class="op">=</span> <span class="fl">0</span>, col <span class="op">=</span> <span class="st">"grey"</span><span class="op">)</span></span></code></pre></div>
+<p><strong>Quiz Question 5:</strong> How many equilibrium points are there?
+<!-- There are four equilibrium points (dB/dt = 0) --></p>
+<p><strong>Quiz Question 6:</strong> Are they stable or unstable?
+<!-- From left-to-right: unstable, stable, unstable, stable --></p>
+<ul>
+<li>Evaluate your answer by running the code below, trying different values for <span class="math inline">\(B\)</span> (e.g. 0, 1, 2, 5, 10) (<code>state &lt;- c(B = 10)</code>). Document your findings.</li>
+</ul>
+<div class="sourceCode" id="cb53"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">ri</span> <span class="op">&lt;-</span> <span class="fl">0.05</span></span>
+<span><span class="va">K</span> <span class="op">&lt;-</span> <span class="fl">10</span></span>
+<span><span class="va">beta</span> <span class="op">&lt;-</span> <span class="fl">0.1</span></span>
+<span><span class="va">ks</span> <span class="op">&lt;-</span> <span class="fl">1</span></span>
+<span></span>
+<span><span class="va">rate</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">t</span>, <span class="va">state</span>, <span class="va">parameters</span><span class="op">)</span></span>
+<span><span class="op">{</span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/base/with.html">with</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/list.html">as.list</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="va">state</span><span class="op">)</span><span class="op">)</span>, <span class="op">{</span></span>
+<span>    <span class="va">ri</span> <span class="op">&lt;-</span> <span class="fl">0.05</span></span>
+<span>    <span class="va">K</span> <span class="op">&lt;-</span> <span class="fl">10</span></span>
+<span>    <span class="va">beta</span> <span class="op">&lt;-</span> <span class="fl">0.1</span></span>
+<span>    <span class="va">ks</span> <span class="op">&lt;-</span> <span class="fl">1</span></span>
+<span>    </span>
+<span>    <span class="va">dB</span> <span class="op">&lt;-</span> <span class="va">ri</span> <span class="op">*</span> <span class="va">B</span> <span class="op">*</span> <span class="op">(</span><span class="fl">1</span> <span class="op">-</span> <span class="va">B</span> <span class="op">/</span> <span class="va">K</span><span class="op">)</span> <span class="op">-</span> <span class="va">beta</span> <span class="op">*</span> <span class="va">B</span> <span class="op">^</span> <span class="fl">2</span> <span class="op">/</span> <span class="op">(</span><span class="va">B</span> <span class="op">^</span> <span class="fl">2</span> <span class="op">+</span> <span class="va">ks</span> <span class="op">^</span> <span class="fl">2</span><span class="op">)</span></span>
+<span>    </span>
+<span>    <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="va">dB</span><span class="op">)</span><span class="op">)</span></span>
+<span>  <span class="op">}</span><span class="op">)</span></span>
+<span><span class="op">}</span></span>
+<span></span>
+<span><span class="va">state</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span>B <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></span>
+<span><span class="va">times</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">500</span>, <span class="fl">1</span><span class="op">)</span></span>
+<span><span class="va">out</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/as.data.frame.html">as.data.frame</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/deSolve/man/ode.html">ode</a></span><span class="op">(</span><span class="va">state</span>, <span class="va">times</span>, <span class="va">rate</span><span class="op">)</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/par.html">par</a></span><span class="op">(</span>pty <span class="op">=</span> <span class="st">"s"</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">out</span><span class="op">$</span><span class="va">time</span>,</span>
+<span>     <span class="va">out</span><span class="op">$</span><span class="va">B</span>,</span>
+<span>     type <span class="op">=</span> <span class="st">"l"</span>,</span>
+<span>     xlab <span class="op">=</span> <span class="st">"Time Step"</span>,</span>
+<span>     ylab <span class="op">=</span> <span class="st">"B"</span><span class="op">)</span></span></code></pre></div>
+<ul>
+<li>Run the code below to plot the bifurcation diagram</li>
+</ul>
+<div class="sourceCode" id="cb54"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">ri</span> <span class="op">&lt;-</span> <span class="fl">0.05</span></span>
+<span><span class="va">K</span> <span class="op">&lt;-</span> <span class="fl">10</span></span>
+<span><span class="va">beta</span> <span class="op">&lt;-</span> <span class="fl">0.1</span></span>
+<span><span class="va">ks</span> <span class="op">&lt;-</span> <span class="fl">1</span></span>
+<span><span class="va">rate</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">B</span>, <span class="va">ri</span> <span class="op">=</span> <span class="fl">0.05</span><span class="op">)</span></span>
+<span><span class="op">{</span></span>
+<span>  <span class="va">ri</span> <span class="op">*</span> <span class="va">B</span> <span class="op">*</span> <span class="op">(</span><span class="fl">1</span> <span class="op">-</span> <span class="va">B</span> <span class="op">/</span> <span class="va">K</span><span class="op">)</span> <span class="op">-</span> <span class="va">beta</span> <span class="op">*</span> <span class="va">B</span> <span class="op">^</span> <span class="fl">2</span> <span class="op">/</span> <span class="op">(</span><span class="va">B</span> <span class="op">^</span> <span class="fl">2</span> <span class="op">+</span> <span class="va">ks</span> <span class="op">^</span> <span class="fl">2</span><span class="op">)</span></span>
+<span><span class="op">}</span></span>
+<span></span>
+<span><span class="va">equilibrium</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">ri</span><span class="op">)</span></span>
+<span><span class="op">{</span></span>
+<span>  <span class="va">Eq</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/rootSolve/man/uniroot.all.html">uniroot.all</a></span><span class="op">(</span>f <span class="op">=</span> <span class="va">rate</span>,</span>
+<span>                    interval <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">10</span><span class="op">)</span>,</span>
+<span>                    ri <span class="op">=</span> <span class="va">ri</span><span class="op">)</span></span>
+<span>  <span class="kw">for</span> <span class="op">(</span><span class="va">i</span> <span class="kw">in</span> <span class="fl">1</span><span class="op">:</span><span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">Eq</span><span class="op">)</span><span class="op">)</span></span>
+<span>  <span class="op">{</span></span>
+<span>    <span class="va">jac</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/rootSolve/man/gradient.html">gradient</a></span><span class="op">(</span>f <span class="op">=</span> <span class="va">rate</span>, x <span class="op">=</span> <span class="va">Eq</span><span class="op">[</span><span class="va">i</span><span class="op">]</span>, ri <span class="op">=</span> <span class="va">ri</span><span class="op">)</span></span>
+<span>  <span class="op">}</span></span>
+<span>  <span class="kw"><a href="https://rdrr.io/r/base/function.html">return</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">Eq</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="op">}</span></span>
+<span></span>
+<span><span class="va">rseq</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span><span class="op">(</span><span class="fl">0.01</span>, <span class="fl">0.07</span>, by <span class="op">=</span> <span class="fl">0.0001</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/par.html">par</a></span><span class="op">(</span>pty <span class="op">=</span> <span class="st">"s"</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span></span>
+<span>  <span class="fl">0</span>,</span>
+<span>  xlim <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/range.html">range</a></span><span class="op">(</span><span class="va">rseq</span><span class="op">)</span>,</span>
+<span>  ylim <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">10</span><span class="op">)</span>,</span>
+<span>  type <span class="op">=</span> <span class="st">"n"</span>,</span>
+<span>  xlab <span class="op">=</span> <span class="st">"ri"</span>,</span>
+<span>  ylab <span class="op">=</span> <span class="st">"B"</span></span>
+<span><span class="op">)</span></span>
+<span><span class="kw">for</span> <span class="op">(</span><span class="va">ri</span> <span class="kw">in</span> <span class="va">rseq</span><span class="op">)</span> <span class="op">{</span></span>
+<span>  <span class="va">eq</span> <span class="op">&lt;-</span> <span class="fu">equilibrium</span><span class="op">(</span><span class="va">ri</span><span class="op">)</span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/graphics/points.html">points</a></span><span class="op">(</span></span>
+<span>    <span class="fu"><a href="https://rdrr.io/r/base/rep.html">rep</a></span><span class="op">(</span><span class="va">ri</span>, <span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">eq</span><span class="op">$</span><span class="va">x</span><span class="op">)</span><span class="op">)</span>,</span>
+<span>    <span class="va">eq</span><span class="op">$</span><span class="va">x</span></span>
+<span>  <span class="op">)</span></span>
+<span><span class="op">}</span></span></code></pre></div>
+<p><strong>Quiz Question 7:</strong> What does each point on the curve represent?
+<!-- Each point gives the equilibrium species density $B$ for a given value of $r_i$ --></p>
+<p>Assume the initial budworm population is close to zero and <span class="math inline">\(r_i\)</span> equals 0.05. A small perturbation causes <span class="math inline">\(B\)</span> to increase.</p>
+<p><strong>Quiz Question 8:</strong> What will the final population density be after some time?</p>
+<p><strong>Quiz Question 9:</strong> Next, let’s assume <span class="math inline">\(r_i\)</span> increases from 0.05 to 0.06. How will this affect the population density <span class="math inline">\(B\)</span> starting out at an initial population of 1?
+<!-- (a) B = 1, (b) B = 8 --></p>
+</div>
+<div id="chaotic-behaviour-lorenz-attractor" class="section level2" number="2.3">
+<h2>
+<span class="header-section-number">2.3</span> Chaotic behaviour: Lorenz Attractor<a class="anchor" aria-label="anchor" href="#chaotic-behaviour-lorenz-attractor"><i class="fas fa-link"></i></a>
+</h2>
+<p>The Lorenz equations were the first chaotic system to be discovered. They are three differential equations that were derived to represent idealized behavior of the earth’s atmosphere:</p>
+<p><span class="math inline">\(\frac{dx}{dt} = -\frac{8}{3}x+yz\)</span></p>
+<p><span class="math inline">\(\frac{dy}{dt} = -10 (y - z)\)</span></p>
+<p><span class="math inline">\(\frac{dz}{dt} = -xy + 28y-z\)</span></p>
+<ul>
+<li>Run the code below to visualize the Lorenz Attractor</li>
+</ul>
+<div class="sourceCode" id="cb55"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">Lorenz</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">t</span>, <span class="va">state</span>, <span class="va">parameters</span><span class="op">)</span></span>
+<span><span class="op">{</span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/base/with.html">with</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/list.html">as.list</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="va">state</span><span class="op">)</span><span class="op">)</span>, <span class="op">{</span></span>
+<span>    <span class="va">dx</span> <span class="op">&lt;-</span> <span class="op">-</span><span class="fl">8</span> <span class="op">/</span> <span class="fl">3</span> <span class="op">*</span> <span class="va">x</span> <span class="op">+</span> <span class="va">y</span> <span class="op">*</span> <span class="va">z</span></span>
+<span>    <span class="va">dy</span> <span class="op">&lt;-</span> <span class="op">-</span><span class="fl">10</span> <span class="op">*</span> <span class="op">(</span><span class="va">y</span> <span class="op">-</span> <span class="va">z</span><span class="op">)</span></span>
+<span>    <span class="va">dz</span> <span class="op">&lt;-</span> <span class="op">-</span><span class="va">x</span> <span class="op">*</span> <span class="va">y</span> <span class="op">+</span> <span class="fl">28</span> <span class="op">*</span> <span class="va">y</span> <span class="op">-</span> <span class="va">z</span></span>
+<span>    <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="va">dx</span>, <span class="va">dy</span>, <span class="va">dz</span><span class="op">)</span><span class="op">)</span></span>
+<span>  <span class="op">}</span><span class="op">)</span></span>
+<span><span class="op">}</span></span>
+<span><span class="va">state</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span>x <span class="op">=</span> <span class="fl">1.01</span>, y <span class="op">=</span> <span class="fl">1</span>, z <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></span>
+<span><span class="va">times</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">50</span>, <span class="fl">0.01</span><span class="op">)</span></span>
+<span><span class="va">out</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/as.data.frame.html">as.data.frame</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/deSolve/man/ode.html">ode</a></span><span class="op">(</span><span class="va">state</span>, <span class="va">times</span>, <span class="va">Lorenz</span>, <span class="fl">0</span><span class="op">)</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/par.html">par</a></span><span class="op">(</span>pty <span class="op">=</span> <span class="st">"s"</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/pkg/scatterplot3d/man/scatterplot3d.html">scatterplot3d</a></span><span class="op">(</span></span>
+<span>  <span class="va">out</span><span class="op">$</span><span class="va">x</span>,</span>
+<span>  <span class="va">out</span><span class="op">$</span><span class="va">y</span>,</span>
+<span>  <span class="va">out</span><span class="op">$</span><span class="va">z</span>,</span>
+<span>  type <span class="op">=</span> <span class="st">"l"</span>,</span>
+<span>  xlab <span class="op">=</span> <span class="st">"X"</span>,</span>
+<span>  ylab <span class="op">=</span> <span class="st">"Y"</span>,</span>
+<span>  zlab <span class="op">=</span> <span class="st">"Z"</span>,</span>
+<span>  grid <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>  box <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  color <span class="op">=</span> <span class="st">"blue"</span></span>
+<span><span class="op">)</span></span></code></pre></div>
+<ul>
+<li>Record the last <span class="math inline">\(x\)</span>, <span class="math inline">\(y\)</span>, and <span class="math inline">\(z\)</span> values using <code>tail(out)</code>
+</li>
+</ul>
+<p><strong>Quiz Question 10:</strong> Apply a small change to the initial conditions and rerun the code. How do your changes affect the final <span class="math inline">\(x\)</span>, <span class="math inline">\(y\)</span>, and <span class="math inline">\(z\)</span> values?</p>
+<!-- Small changes in initial conditions lead to large changes in the outcome -->
+</div>
+<div id="early-warning-signal-ews-assessments" class="section level2" number="2.4">
+<h2>
+<span class="header-section-number">2.4</span> Early warning signal (EWS) assessments<a class="anchor" aria-label="anchor" href="#early-warning-signal-ews-assessments"><i class="fas fa-link"></i></a>
+</h2>
+<p>Let’s see if we can detect a critical transition in the population of fish from a time series using the <code>EWSmethods</code> R package.</p>
+<div class="sourceCode" id="cb56"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/Random.html">set.seed</a></span><span class="op">(</span><span class="fl">123</span><span class="op">)</span> <span class="co"># Set seed to ensure reproducibility</span></span>
+<span></span>
+<span><span class="co"># Load data provided by the EWSmethods package</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/utils/data.html">data</a></span><span class="op">(</span><span class="st">"simTransComms"</span><span class="op">)</span></span>
+<span><span class="va">data</span> <span class="op">&lt;-</span> <span class="va">simTransComms</span></span>
+<span></span>
+<span><span class="co"># Let's look at community 1 only</span></span>
+<span><span class="va">data</span> <span class="op">&lt;-</span> <span class="va">data</span><span class="op">$</span><span class="va">community1</span></span>
+<span></span>
+<span><span class="va">time</span> <span class="op">&lt;-</span> <span class="va">data</span><span class="op">$</span><span class="va">time</span></span>
+<span><span class="va">population</span> <span class="op">&lt;-</span> <span class="va">data</span><span class="op">$</span><span class="va">spp_3</span></span>
+<span></span>
+<span><span class="va">data</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span><span class="va">time</span>, <span class="va">population</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span></span>
+<span>  <span class="va">data</span><span class="op">$</span><span class="va">time</span>,</span>
+<span>  <span class="va">data</span><span class="op">$</span><span class="va">population</span>,</span>
+<span>  type <span class="op">=</span> <span class="st">"l"</span>,</span>
+<span>  xlab <span class="op">=</span> <span class="st">"Time"</span>,</span>
+<span>  ylab <span class="op">=</span> <span class="st">"Population Density"</span></span>
+<span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/abline.html">abline</a></span><span class="op">(</span>v <span class="op">=</span> <span class="fl">190</span>, col <span class="op">=</span> <span class="st">"red"</span><span class="op">)</span></span></code></pre></div>
+<p>The Figure above shows a critical transition of the population occurring at time step 190. Let’s see if we can predict this transition by only looking at the data prior to this moment in time. To do this, let’s truncate our data set, excluding all data after 190.</p>
+<div class="sourceCode" id="cb57"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># Truncate data to prior inflection point</span></span>
+<span><span class="va">data</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/subset.html">subset</a></span><span class="op">(</span><span class="va">data</span> , <span class="va">time</span> <span class="op">&lt;</span> <span class="fl">191.5</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span></span>
+<span>  <span class="va">data</span><span class="op">$</span><span class="va">time</span>,</span>
+<span>  <span class="va">data</span><span class="op">$</span><span class="va">population</span>,</span>
+<span>  type <span class="op">=</span> <span class="st">"l"</span>,</span>
+<span>  xlab <span class="op">=</span> <span class="st">"Time"</span>,</span>
+<span>  ylab <span class="op">=</span> <span class="st">"Population Density"</span></span>
+<span><span class="op">)</span></span></code></pre></div>
+<p>Next, apply the Univariate Early Warning Signal Assessment <code>uniEWS</code></p>
+<div class="sourceCode" id="cb58"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">rolling_ews_eg</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://duncanobrien.github.io/EWSmethods/reference/uniEWS.html">uniEWS</a></span><span class="op">(</span></span>
+<span>  data <span class="op">=</span> <span class="va">data</span>,</span>
+<span>  metrics <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"ar1"</span>, <span class="st">"SD"</span>, <span class="st">"skew"</span><span class="op">)</span>,</span>
+<span>  method <span class="op">=</span> <span class="st">"rolling"</span>,</span>
+<span>  winsize <span class="op">=</span> <span class="fl">50</span></span>
+<span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">rolling_ews_eg</span>, y_lab <span class="op">=</span> <span class="st">"Density"</span><span class="op">)</span></span></code></pre></div>
+<p><strong>Quiz Question 11:</strong> What does the behavior of the EWS indicators lag1 Autocorrelation (ar1) and Standard deviation (SD) tell you?</p>
+<!-- 
+* Autocorrelation at lag1   Autocorrelation (ar1): increases approaching a transition
+* Standard deviation (SD): Increasing variance/standard deviation is observed approaching a transition
+* Skewness (skew):  At a transition, the distribution of values in the time series can become asymmetric
+
+The figure above shows that all EWS indicators begin to trend upwards at about 170 which results in the positive Kendall Tau correlation coefficient indicative of an oncoming critical transition. A warning is indicated when an EWS displays a strong positive Kendall Tau correlation with time.
+
+-->
+<p><strong>Quiz Reflection 1:</strong> What are the main things you learned in this tutorial?</p>
+<p><strong>Quiz Reflection 2:</strong> What concepts are you still struggling to understand?</p>
+
+</div>
+</div>
+  <div class="chapter-nav">
+<div class="prev"><a href="week-1-climate-change.html"><span class="header-section-number">1</span> Week 1: Climate Change</a></div>
+<div class="empty"></div>
+</div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
+    <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
+      <ul class="nav navbar-nav">
+<li><a class="nav-link" href="#week-2-understanding-environmental-systems-i"><span class="header-section-number">2</span> Week 2: Understanding Environmental Systems (I)</a></li>
+<li>
+<a class="nav-link" href="#internal-oscillation"><span class="header-section-number">2.1</span> Internal Oscillation</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#savings-account"><span class="header-section-number">2.1.1</span> Savings account</a></li>
+<li><a class="nav-link" href="#lotka-volterra"><span class="header-section-number">2.1.2</span> Lotka-Volterra</a></li>
+</ul>
+</li>
+<li><a class="nav-link" href="#bifurcation"><span class="header-section-number">2.2</span> Bifurcation</a></li>
+<li><a class="nav-link" href="#chaotic-behaviour-lorenz-attractor"><span class="header-section-number">2.3</span> Chaotic behaviour: Lorenz Attractor</a></li>
+<li><a class="nav-link" href="#early-warning-signal-ews-assessments"><span class="header-section-number">2.4</span> Early warning signal (EWS) assessments</a></li>
+</ul>
+
+      <div class="book-extra">
+        <ul class="list-unstyled">
+          
+        </ul>
+</div>
+    </nav>
+</div>
+
+</div>
+</div> <!-- .container -->
+
+<footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
+
+  <div class="col-12 col-md-6 mt-3">
+    <p>"<strong>ENSC 430</strong>" was written by Christian Seiler. </p>
+  </div>
+
+  <div class="col-12 col-md-6 mt-3">
+    <p>This book was built by the <a class="text-light" href="https://bookdown.org">bookdown</a> R package.</p>
+  </div>
+
+</div></div>
+</footer><!-- dynamically load mathjax for compatibility with self-contained --><script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script><script type="text/x-mathjax-config">const popovers = document.querySelectorAll('a.footnote-ref[data-toggle="popover"]');
+for (let popover of popovers) {
+  const div = document.createElement('div');
+  div.setAttribute('style', 'position: absolute; top: 0, left:0; width:0, height:0, overflow: hidden; visibility: hidden;');
+  div.innerHTML = popover.getAttribute('data-content');
+
+  var has_math = div.querySelector("span.math");
+  if (has_math) {
+    document.body.appendChild(div);
+    MathJax.Hub.Queue(["Typeset", MathJax.Hub, div]);
+    MathJax.Hub.Queue(function() {
+      popover.setAttribute('data-content', div.innerHTML);
+      document.body.removeChild(div);
+    })
+  }
+}
+</script>
+</body>
+</html>

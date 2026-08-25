@@ -1,0 +1,745 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<title>Chapter 8 Week 8: Observing Environmental Change (II) | ENSC 430</title>
+<meta name="author" content="Christian Seiler">
+<meta name="generator" content="bookdown 0.47 with bs4_book()">
+<meta property="og:title" content="Chapter 8 Week 8: Observing Environmental Change (II) | ENSC 430">
+<meta property="og:type" content="book">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Chapter 8 Week 8: Observing Environmental Change (II) | ENSC 430">
+<!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
+<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.12.0/transition.js"></script><script src="libs/bs3compat-0.12.0/tabs.js"></script><script src="libs/bs3compat-0.12.0/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
+<script src="libs/bs4_book-1.0.0/bs4_book.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- CSS --><style type="text/css">
+    
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  </style>
+<meta name="description" content="In this tutorial, you will explore how precipitation (PR), near-surface temperature (TAS), and incoming solar radiation (RSDS) influence anomalies in the enhanced vegetation index (EVI). You’ll...">
+<meta property="og:description" content="In this tutorial, you will explore how precipitation (PR), near-surface temperature (TAS), and incoming solar radiation (RSDS) influence anomalies in the enhanced vegetation index (EVI). You’ll...">
+<meta name="twitter:description" content="In this tutorial, you will explore how precipitation (PR), near-surface temperature (TAS), and incoming solar radiation (RSDS) influence anomalies in the enhanced vegetation index (EVI). You’ll...">
+</head>
+<body data-spy="scroll" data-target="#toc">
+
+<div class="container-fluid">
+<div class="row">
+  <header class="col-sm-12 col-lg-3 sidebar sidebar-book"><a class="sr-only sr-only-focusable" href="#content">Skip to main content</a>
+
+    <div class="d-flex align-items-start justify-content-between">
+      <h1>
+        <a href="index.html" title="">ENSC 430</a>
+      </h1>
+      <button class="btn btn-outline-primary d-lg-none ml-2 mt-1" type="button" data-toggle="collapse" data-target="#main-nav" aria-expanded="true" aria-controls="main-nav"><i class="fas fa-bars"></i><span class="sr-only">Show table of contents</span></button>
+    </div>
+
+    <div id="main-nav" class="collapse-lg">
+      <form role="search">
+        <input id="search" class="form-control" type="search" placeholder="Search" aria-label="Search">
+</form>
+
+      <nav aria-label="Table of contents"><h2>Table of contents</h2>
+        <ul class="book-toc list-unstyled">
+<li><a class="" href="index.html">ENSC 430A/B</a></li>
+<li><a class="" href="week-1-climate-change.html"><span class="header-section-number">1</span> Week 1: Climate Change</a></li>
+<li><a class="" href="week-2-understanding-environmental-systems-i.html"><span class="header-section-number">2</span> Week 2: Understanding Environmental Systems (I)</a></li>
+<li><a class="" href="week-3-understanding-environmental-systems-ii.html"><span class="header-section-number">3</span> Week 3: Understanding Environmental Systems (II)</a></li>
+<li><a class="" href="week-4-climate-projections-and-impacts-i.html"><span class="header-section-number">4</span> Week 4: Climate Projections and Impacts (I)</a></li>
+<li><a class="" href="week-5-climate-projections-and-impacts-ii.html"><span class="header-section-number">5</span> Week 5: Climate Projections and Impacts (II)</a></li>
+<li><a class="" href="week-6-climate-projections-and-impacts-iii.html"><span class="header-section-number">6</span> Week 6: Climate Projections and Impacts (III)</a></li>
+<li><a class="" href="week-7-observing-environmental-change-i.html"><span class="header-section-number">7</span> Week 7: Observing Environmental Change (I)</a></li>
+<li><a class="active" href="week-8-observing-environmental-change-ii.html"><span class="header-section-number">8</span> Week 8: Observing Environmental Change (II)</a></li>
+<li><a class="" href="week-9-observing-environmental-change-iii.html"><span class="header-section-number">9</span> Week 9: Observing Environmental Change (III)</a></li>
+<li><a class="" href="week-10-climate-futures-and-solutions-i.html"><span class="header-section-number">10</span> Week 10: Climate Futures and Solutions (I)</a></li>
+<li><a class="" href="week-11-climate-futures-and-solutions-ii.html"><span class="header-section-number">11</span> Week 11: Climate Futures and Solutions (II)</a></li>
+<li><a class="" href="week-12-capstone-project.html"><span class="header-section-number">12</span> Week 12: Capstone Project</a></li>
+</ul>
+
+        <div class="book-extra">
+          
+        </div>
+      </nav>
+</div>
+  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="week-8-observing-environmental-change-ii" class="section level1" number="8">
+<h1>
+<span class="header-section-number">8</span> Week 8: Observing Environmental Change (II)<a class="anchor" aria-label="anchor" href="#week-8-observing-environmental-change-ii"><i class="fas fa-link"></i></a>
+</h1>
+<p>In this tutorial, you will explore how precipitation (PR), near-surface temperature (TAS), and incoming solar radiation (RSDS) influence anomalies in the enhanced vegetation index (EVI). You’ll learn how to process the data to combine reanalysis data (PR, TAS, RSDS) with satellite data (EVI). The analysis is divided into two parts: first, you’ll conduct a Granger analysis, which you’re already familiar with, and second, you’ll perform a cross-correlation analysis to examine how correlations between variables shift with varying time lags. By the end of the tutorial, you’ll produce two maps: one showing the time lags at which correlations between meteorological variables and EVI are strongest, and another displaying the corresponding correlation coefficients. This information will allow you to assess which of the three meteorological variables most strongly influences EVI anomaly variability.</p>
+<div id="download-reanalysis-data-provided-by-the-european-centre-for-medium-range-weather-forecasts-ecmwf" class="section level2" number="8.1">
+<h2>
+<span class="header-section-number">8.1</span> Download reanalysis data provided by the European Centre for Medium-Range Weather Forecasts (ECMWF)<a class="anchor" aria-label="anchor" href="#download-reanalysis-data-provided-by-the-european-centre-for-medium-range-weather-forecasts-ecmwf"><i class="fas fa-link"></i></a>
+</h2>
+<ul>
+<li>Go to the <a href="https://cds.climate.copernicus.eu/datasets?q=era5&amp;kw=Variable+domain%3A+Atmosphere+%28surface%29&amp;kw=Variable+domain%3A+Atmosphere+%28upper+air%29&amp;kw=Variable+domain%3A+Atmosphere+%28upper+level%29&amp;kw=Variable+domain%3A+Ocean+%28physics%29">Copernicus Data Store</a>
+</li>
+<li>Click on <code>Login-Register</code>
+</li>
+<li>Create a ECMWF Account</li>
+<li>After you created your account, return to the data store and select <code>ERA5 monthly averaged data on single levels from 1940 to present</code>
+</li>
+<li>Click on <code>Download</code>
+</li>
+<li>Select <code>Monthly averaged reanalysis</code>
+</li>
+<li>Select “Popular” and “Total Precipitation”</li>
+<li>Select years 2001-2023</li>
+<li>Select all months (Jan - Dec)</li>
+<li>Select the time: 00:00</li>
+<li>Select the Whole available region</li>
+<li>Data format: NetCDF4 (not GRIB!)</li>
+<li>Hit the <code>Submit Form</code> button</li>
+<li>Wait a minute</li>
+<li>Once your request has been completed, you can hit the download button (379.33 MB)</li>
+<li>Once the download completed, rename your file to <code>ERA5_pr_2001-2023.nc</code> and move it to your working directory.</li>
+<li>Repeat the same for temperature and surface solar radiation downwards</li>
+</ul>
+</div>
+<div id="process-data" class="section level2" number="8.2">
+<h2>
+<span class="header-section-number">8.2</span> Process Data<a class="anchor" aria-label="anchor" href="#process-data"><i class="fas fa-link"></i></a>
+</h2>
+<p>Load the libraries that you will need for this tutorial</p>
+<div class="sourceCode" id="cb173"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://rspatial.org/">terra</a></span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://cirrus.ucsd.edu/~pierce/ncdf/">ncdf4</a></span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/adeckmyn/maps">maps</a></span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://r-gis.net/">climetrics</a></span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://www.pfaffikus.de">vars</a></span><span class="op">)</span></span></code></pre></div>
+</div>
+<div id="spatial-resolution" class="section level2" number="8.3">
+<h2>
+<span class="header-section-number">8.3</span> Spatial resolution<a class="anchor" aria-label="anchor" href="#spatial-resolution"><i class="fas fa-link"></i></a>
+</h2>
+<p>When combining data from different sources, you need to make sure that the data sets use the same spatial grid. Furthermore, you need to mask out all values that both data sets do not have in common. Finally, the analysis you will perform is computational expensive. Choose a relatively coarse grid so that the analysis does not take too long. Run the code below to create a common grid that is a little more coarse than the original one. The chunk below will take about a minute to complete.</p>
+<div class="sourceCode" id="cb174"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># Let's focus on Australia</span></span>
+<span><span class="co"># Focusing on a region will reduce the time required for running the code</span></span>
+<span><span class="va">domain</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">110</span>, <span class="fl">160</span>, <span class="op">-</span><span class="fl">45</span>, <span class="op">-</span><span class="fl">10</span><span class="op">)</span> <span class="co"># Australia</span></span>
+<span></span>
+<span><span class="co"># Enhanced Vegetation Index</span></span>
+<span><span class="va">data</span> <span class="op">&lt;-</span> <span class="fu">terra</span><span class="fu">::</span><span class="fu"><a href="https://rspatial.github.io/terra/reference/rast.html">rast</a></span><span class="op">(</span><span class="st">"/global/home/hpc5112/ENSC430/shared_files/MOD13C2061-EVI-0.25deg.nc"</span><span class="op">)</span></span>
+<span><span class="va">data</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rspatial.github.io/terra/reference/crop.html">crop</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">data</span>, y <span class="op">=</span> <span class="va">domain</span><span class="op">)</span></span>
+<span><span class="va">data</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rspatial.github.io/terra/reference/subset.html">subset</a></span><span class="op">(</span><span class="va">data</span>, <span class="fl">12</span><span class="op">:</span><span class="fl">287</span><span class="op">)</span> <span class="co"># Subset Jan 2001 to Dec 2023</span></span>
+<span><span class="va">data</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rspatial.github.io/terra/reference/aggregate.html">aggregate</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">data</span>, fact<span class="op">=</span><span class="fl">2</span>, fun<span class="op">=</span><span class="st">"mean"</span><span class="op">)</span> <span class="co"># More coarse spatial resolution</span></span>
+<span><span class="fu"><a href="https://rspatial.github.io/terra/reference/crs.html">crs</a></span><span class="op">(</span><span class="va">data</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="st">"EPSG:4326"</span> <span class="co"># assign a map projection (WGS84)</span></span>
+<span><span class="va">evi</span> <span class="op">&lt;-</span> <span class="va">data</span></span>
+<span><span class="va">mask</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rspatial.github.io/terra/reference/summarize-generics.html">mean</a></span><span class="op">(</span><span class="va">data</span><span class="op">)</span> <span class="co"># create mask</span></span>
+<span><span class="va">mask</span> <span class="op">&lt;-</span> <span class="va">mask</span> <span class="op">-</span> <span class="va">mask</span> <span class="op">+</span> <span class="fl">1</span> <span class="co"># make boolean mask</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/rm.html">rm</a></span><span class="op">(</span><span class="va">data</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Precipitation (m)</span></span>
+<span><span class="va">data</span> <span class="op">&lt;-</span> <span class="fu">terra</span><span class="fu">::</span><span class="fu"><a href="https://rspatial.github.io/terra/reference/rast.html">rast</a></span><span class="op">(</span><span class="st">"/global/home/hpc5112/ENSC430/shared_files/ERA5_pr_2001-2023.nc"</span><span class="op">)</span></span>
+<span><span class="va">data</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rspatial.github.io/terra/reference/crop.html">crop</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">data</span>, y <span class="op">=</span> <span class="va">domain</span><span class="op">)</span></span>
+<span><span class="va">data</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rspatial.github.io/terra/reference/aggregate.html">aggregate</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">data</span>, fact<span class="op">=</span><span class="fl">2</span>, fun<span class="op">=</span><span class="st">"mean"</span><span class="op">)</span> <span class="co"># More coarse spatial resolution</span></span>
+<span><span class="fu"><a href="https://rspatial.github.io/terra/reference/crs.html">crs</a></span><span class="op">(</span><span class="va">data</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="st">"EPSG:4326"</span> <span class="co"># assign a map projection (WGS84)</span></span>
+<span><span class="va">data</span> <span class="op">&lt;-</span> <span class="va">data</span> <span class="op">*</span> <span class="va">mask</span> <span class="co"># exclude gridcells that both data sets do not have in common</span></span>
+<span><span class="va">pr</span> <span class="op">&lt;-</span> <span class="va">data</span> <span class="op">*</span> <span class="fl">1000</span> <span class="co"># convert unit from m to mm</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/rm.html">rm</a></span><span class="op">(</span><span class="va">data</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Near-surface temperature (K)</span></span>
+<span><span class="va">data</span> <span class="op">&lt;-</span> <span class="fu">terra</span><span class="fu">::</span><span class="fu"><a href="https://rspatial.github.io/terra/reference/rast.html">rast</a></span><span class="op">(</span><span class="st">"/global/home/hpc5112/ENSC430/shared_files/ERA5_tas_2001-2023.nc"</span><span class="op">)</span></span>
+<span><span class="va">data</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rspatial.github.io/terra/reference/crop.html">crop</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">data</span>, y <span class="op">=</span> <span class="va">domain</span><span class="op">)</span></span>
+<span><span class="va">data</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rspatial.github.io/terra/reference/aggregate.html">aggregate</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">data</span>, fact<span class="op">=</span><span class="fl">2</span>, fun<span class="op">=</span><span class="st">"mean"</span><span class="op">)</span> <span class="co"># More coarse spatial resolution</span></span>
+<span><span class="fu"><a href="https://rspatial.github.io/terra/reference/crs.html">crs</a></span><span class="op">(</span><span class="va">data</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="st">"EPSG:4326"</span> <span class="co"># assign a map projection (WGS84)</span></span>
+<span><span class="va">data</span> <span class="op">&lt;-</span> <span class="va">data</span> <span class="op">*</span> <span class="va">mask</span> <span class="co"># exclude gridcells that both data sets do not have in common</span></span>
+<span><span class="va">tas</span> <span class="op">&lt;-</span> <span class="va">data</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/rm.html">rm</a></span><span class="op">(</span><span class="va">data</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Downwelling SW radiation (W m-2)</span></span>
+<span><span class="va">data</span> <span class="op">&lt;-</span> <span class="fu">terra</span><span class="fu">::</span><span class="fu"><a href="https://rspatial.github.io/terra/reference/rast.html">rast</a></span><span class="op">(</span><span class="st">"/global/home/hpc5112/ENSC430/shared_files/ERA5_rsds_2001-2023.nc"</span><span class="op">)</span></span>
+<span><span class="va">data</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rspatial.github.io/terra/reference/crop.html">crop</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">data</span>, y <span class="op">=</span> <span class="va">domain</span><span class="op">)</span></span>
+<span><span class="va">data</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rspatial.github.io/terra/reference/aggregate.html">aggregate</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">data</span>, fact<span class="op">=</span><span class="fl">2</span>, fun<span class="op">=</span><span class="st">"mean"</span><span class="op">)</span> <span class="co"># More coarse spatial resolution</span></span>
+<span><span class="fu"><a href="https://rspatial.github.io/terra/reference/crs.html">crs</a></span><span class="op">(</span><span class="va">data</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="st">"EPSG:4326"</span> <span class="co"># assign a map projection (WGS84)</span></span>
+<span><span class="va">data</span> <span class="op">&lt;-</span> <span class="va">data</span> <span class="op">*</span> <span class="va">mask</span> <span class="co"># exclude gridcells that both data sets do not have in common</span></span>
+<span><span class="va">rsds</span> <span class="op">&lt;-</span> <span class="va">data</span> <span class="op">/</span> <span class="fl">86400</span> <span class="co"># Convert unit from J m-2 day-1 to W m-2 </span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/rm.html">rm</a></span><span class="op">(</span><span class="va">data</span><span class="op">)</span></span></code></pre></div>
+<p>Next we need to compute detrended anomalies. We will do this step-by-step for precipitation, and then in a more concise manner for the other variables.</p>
+</div>
+<div id="detrended-anomalies" class="section level2" number="8.4">
+<h2>
+<span class="header-section-number">8.4</span> Detrended anomalies<a class="anchor" aria-label="anchor" href="#detrended-anomalies"><i class="fas fa-link"></i></a>
+</h2>
+<div id="precipitation" class="section level3" number="8.4.1">
+<h3>
+<span class="header-section-number">8.4.1</span> Precipitation<a class="anchor" aria-label="anchor" href="#precipitation"><i class="fas fa-link"></i></a>
+</h3>
+<ul>
+<li>Calculate 12-month climatological means</li>
+</ul>
+<div class="sourceCode" id="cb175"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">data</span> <span class="op">&lt;-</span> <span class="va">pr</span></span>
+<span></span>
+<span><span class="co"># Create a sequence of dates</span></span>
+<span><span class="va">start_date</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/as.Date.html">as.Date</a></span><span class="op">(</span><span class="st">"2001-01-15"</span><span class="op">)</span></span>
+<span><span class="va">end_date</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/as.Date.html">as.Date</a></span><span class="op">(</span><span class="st">"2023-12-15"</span><span class="op">)</span></span>
+<span><span class="va">dates</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span><span class="op">(</span>from <span class="op">=</span> <span class="va">start_date</span>, to <span class="op">=</span> <span class="va">end_date</span>, by <span class="op">=</span> <span class="st">"month"</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Create raster time series</span></span>
+<span><span class="va">data.ts</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/rts/man/rts.html">rts</a></span><span class="op">(</span><span class="va">data</span>, <span class="va">dates</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Calculate 12-month climatological means</span></span>
+<span><span class="va">data.12</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/climetrics/man/applyMonths.html">apply.months</a></span><span class="op">(</span><span class="va">data.ts</span>,<span class="st">'mean'</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Plot 12 months of data</span></span>
+<span><span class="va">my.col</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rspatial.github.io/terra/reference/flip.html">rev</a></span><span class="op">(</span><span class="fu"><a href="https://rspatial.github.io/terra/reference/mappal.html">map.pal</a></span><span class="op">(</span><span class="st">"magma"</span>, n <span class="op">=</span> <span class="fl">100</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rspatial.github.io/terra/reference/plot.html">plot</a></span><span class="op">(</span><span class="va">data.12</span>, col <span class="op">=</span> <span class="va">my.col</span><span class="op">)</span></span></code></pre></div>
+<div class="inline-figure"><img src="_main_files/figure-html/unnamed-chunk-180-1.png" alt="" width="672"></div>
+<ul>
+<li>Calculate precipitation anomalies</li>
+</ul>
+<div class="sourceCode" id="cb176"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># Get the number of years</span></span>
+<span><span class="va">n</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">dates</span><span class="op">)</span><span class="op">/</span><span class="fl">12</span></span>
+<span></span>
+<span><span class="co"># Create a time series where the 12-month climatological mean repeats for all years </span></span>
+<span><span class="va">data.clim</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/rep.html">rep</a></span><span class="op">(</span><span class="va">data.12</span>, <span class="va">n</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Calculate anomalies</span></span>
+<span><span class="va">data.anom</span> <span class="op">&lt;-</span> <span class="va">data</span> <span class="op">-</span> <span class="va">data.clim</span></span>
+<span></span>
+<span><span class="co"># Have a look at the data</span></span>
+<span><span class="va">my.col</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rspatial.github.io/terra/reference/flip.html">rev</a></span><span class="op">(</span><span class="fu"><a href="https://rspatial.github.io/terra/reference/mappal.html">map.pal</a></span><span class="op">(</span><span class="st">"magma"</span>, n <span class="op">=</span> <span class="fl">100</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rspatial.github.io/terra/reference/plot.html">plot</a></span><span class="op">(</span><span class="fu"><a href="https://rspatial.github.io/terra/reference/subset.html">subset</a></span><span class="op">(</span><span class="va">data.anom</span>, <span class="fl">1</span><span class="op">:</span><span class="fl">1</span><span class="op">)</span>, col <span class="op">=</span> <span class="va">my.col</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/pkg/maps/man/map.html">map</a></span><span class="op">(</span><span class="st">"world2"</span>, add <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
+<div class="inline-figure"><img src="_main_files/figure-html/unnamed-chunk-181-1.png" alt="" width="672"></div>
+<ul>
+<li>Detrend precipitation anomalies</li>
+</ul>
+<div class="sourceCode" id="cb177"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># Define a function that removes a linear trend</span></span>
+<span><span class="va">detrend.fun</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="op">{</span></span>
+<span>  <span class="va">time</span> <span class="op">&lt;-</span> <span class="fl">1</span><span class="op">:</span><span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span>
+<span>  <span class="co"># If a grid cell contains NA, then set the result to NA</span></span>
+<span>  <span class="kw">if</span> <span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/NA.html">is.na</a></span><span class="op">(</span><span class="fu"><a href="https://rspatial.github.io/terra/reference/summarize-generics.html">mean</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span>
+<span>    <span class="kw"><a href="https://rdrr.io/r/base/function.html">return</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/rep.html">rep</a></span><span class="op">(</span><span class="cn">NA</span>, <span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">time</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span>
+<span>  <span class="op">}</span> <span class="kw">else</span> <span class="op">{</span></span>
+<span>    <span class="va">time</span> <span class="op">&lt;-</span> <span class="fl">1</span><span class="op">:</span><span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span>
+<span>    <span class="va">linear.model</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span><span class="op">(</span><span class="va">x</span> <span class="op">~</span> <span class="va">time</span><span class="op">)</span></span>
+<span>    <span class="va">detrended.series</span> <span class="op">&lt;-</span> <span class="fu">stats</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/r/stats/residuals.html">residuals</a></span><span class="op">(</span><span class="va">linear.model</span><span class="op">)</span></span>
+<span>    <span class="kw"><a href="https://rdrr.io/r/base/function.html">return</a></span><span class="op">(</span><span class="va">detrended.series</span><span class="op">)</span></span>
+<span>  <span class="op">}</span></span>
+<span><span class="op">}</span></span>
+<span></span>
+<span><span class="va">data.anom.detrend</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rspatial.github.io/terra/reference/app.html">app</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">data.anom</span>, fun <span class="op">=</span> <span class="va">detrend.fun</span><span class="op">)</span></span>
+<span><span class="va">pr.anom.detrend</span> <span class="op">&lt;-</span> <span class="va">data.anom.detrend</span></span>
+<span></span>
+<span><span class="co"># Have a look at the data</span></span>
+<span><span class="va">my.col</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rspatial.github.io/terra/reference/flip.html">rev</a></span><span class="op">(</span><span class="fu"><a href="https://rspatial.github.io/terra/reference/mappal.html">map.pal</a></span><span class="op">(</span><span class="st">"magma"</span>, n <span class="op">=</span> <span class="fl">100</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rspatial.github.io/terra/reference/plot.html">plot</a></span><span class="op">(</span><span class="fu"><a href="https://rspatial.github.io/terra/reference/subset.html">subset</a></span><span class="op">(</span><span class="va">data.anom.detrend</span>, <span class="fl">1</span><span class="op">:</span><span class="fl">1</span><span class="op">)</span>, col <span class="op">=</span> <span class="va">my.col</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/pkg/maps/man/map.html">map</a></span><span class="op">(</span><span class="st">"world2"</span>, add <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
+<div class="inline-figure"><img src="_main_files/figure-html/unnamed-chunk-182-1.png" alt="" width="672"></div>
+<p>Now we need to do the same for the other variables (near-surface air temperature, net surface radiation, and EVI). We will do each variable in a single chunk. We will not plot any intermediate outputs.</p>
+</div>
+<div id="near-surface-air-temperature" class="section level3" number="8.4.2">
+<h3>
+<span class="header-section-number">8.4.2</span> Near-surface air temperature<a class="anchor" aria-label="anchor" href="#near-surface-air-temperature"><i class="fas fa-link"></i></a>
+</h3>
+<div class="sourceCode" id="cb178"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">data</span> <span class="op">&lt;-</span> <span class="va">tas</span></span>
+<span></span>
+<span><span class="co"># Get the dates</span></span>
+<span><span class="co"># Create a sequence of dates</span></span>
+<span><span class="va">start_date</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/as.Date.html">as.Date</a></span><span class="op">(</span><span class="st">"2001-01-15"</span><span class="op">)</span></span>
+<span><span class="va">end_date</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/as.Date.html">as.Date</a></span><span class="op">(</span><span class="st">"2023-12-15"</span><span class="op">)</span></span>
+<span><span class="va">dates</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span><span class="op">(</span>from <span class="op">=</span> <span class="va">start_date</span>, to <span class="op">=</span> <span class="va">end_date</span>, by <span class="op">=</span> <span class="st">"month"</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Create raster time series</span></span>
+<span><span class="va">data.ts</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/rts/man/rts.html">rts</a></span><span class="op">(</span><span class="va">data</span>, <span class="va">dates</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Calculate 12-month climatological means</span></span>
+<span><span class="va">data.12</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/climetrics/man/applyMonths.html">apply.months</a></span><span class="op">(</span><span class="va">data.ts</span>, <span class="st">'mean'</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Get the number of years</span></span>
+<span><span class="va">n</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">dates</span><span class="op">)</span> <span class="op">/</span> <span class="fl">12</span></span>
+<span></span>
+<span><span class="co"># Create a time series where the 12-month climatological mean repeats for all years</span></span>
+<span><span class="va">data.clim</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/rep.html">rep</a></span><span class="op">(</span><span class="va">data.12</span>, <span class="va">n</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Calculate anomalies</span></span>
+<span><span class="va">data.anom</span> <span class="op">&lt;-</span> <span class="va">data</span> <span class="op">-</span> <span class="va">data.clim</span></span>
+<span></span>
+<span><span class="co"># Define a function that calculates a linear trend</span></span>
+<span><span class="va">trend.fun</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="op">{</span></span>
+<span>  <span class="co"># If a grid cell contains NA, then set the result to NA</span></span>
+<span>  <span class="kw">if</span> <span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/NA.html">is.na</a></span><span class="op">(</span><span class="fu"><a href="https://rspatial.github.io/terra/reference/summarize-generics.html">mean</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span>
+<span>    <span class="kw"><a href="https://rdrr.io/r/base/function.html">return</a></span><span class="op">(</span><span class="cn">NA</span><span class="op">)</span></span>
+<span>  <span class="op">}</span> <span class="kw">else</span> <span class="op">{</span></span>
+<span>    <span class="va">time</span> <span class="op">&lt;-</span> <span class="fl">1</span><span class="op">:</span><span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span>
+<span>    <span class="va">linear.model</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span><span class="op">(</span><span class="va">x</span> <span class="op">~</span> <span class="va">time</span><span class="op">)</span></span>
+<span>    <span class="va">trend</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/coef.html">coef</a></span><span class="op">(</span><span class="va">linear.model</span><span class="op">)</span><span class="op">[</span><span class="st">"time"</span><span class="op">]</span></span>
+<span>    <span class="kw"><a href="https://rdrr.io/r/base/function.html">return</a></span><span class="op">(</span><span class="va">trend</span><span class="op">)</span></span>
+<span>  <span class="op">}</span></span>
+<span><span class="op">}</span></span>
+<span></span>
+<span><span class="va">data.anom.detrend</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rspatial.github.io/terra/reference/app.html">app</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">data.anom</span>, fun <span class="op">=</span> <span class="va">detrend.fun</span><span class="op">)</span></span>
+<span><span class="va">tas.anom.detrend</span> <span class="op">&lt;-</span> <span class="va">data.anom.detrend</span></span>
+<span></span>
+<span><span class="co"># Have a look at the data</span></span>
+<span><span class="va">my.col</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rspatial.github.io/terra/reference/flip.html">rev</a></span><span class="op">(</span><span class="fu"><a href="https://rspatial.github.io/terra/reference/mappal.html">map.pal</a></span><span class="op">(</span><span class="st">"magma"</span>, n <span class="op">=</span> <span class="fl">100</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rspatial.github.io/terra/reference/plot.html">plot</a></span><span class="op">(</span><span class="fu"><a href="https://rspatial.github.io/terra/reference/subset.html">subset</a></span><span class="op">(</span><span class="va">data.anom.detrend</span>, <span class="fl">1</span><span class="op">:</span><span class="fl">1</span><span class="op">)</span>, col <span class="op">=</span> <span class="va">my.col</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/pkg/maps/man/map.html">map</a></span><span class="op">(</span><span class="st">"world2"</span>, add <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
+<div class="inline-figure"><img src="_main_files/figure-html/unnamed-chunk-183-1.png" alt="" width="672"></div>
+</div>
+<div id="downwelling-solar-radiation" class="section level3" number="8.4.3">
+<h3>
+<span class="header-section-number">8.4.3</span> Downwelling solar radiation<a class="anchor" aria-label="anchor" href="#downwelling-solar-radiation"><i class="fas fa-link"></i></a>
+</h3>
+<div class="sourceCode" id="cb179"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">data</span> <span class="op">&lt;-</span> <span class="va">rsds</span></span>
+<span></span>
+<span><span class="co"># Get the dates</span></span>
+<span><span class="co"># Create a sequence of dates</span></span>
+<span><span class="va">start_date</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/as.Date.html">as.Date</a></span><span class="op">(</span><span class="st">"2001-01-15"</span><span class="op">)</span></span>
+<span><span class="va">end_date</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/as.Date.html">as.Date</a></span><span class="op">(</span><span class="st">"2023-12-15"</span><span class="op">)</span></span>
+<span><span class="va">dates</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span><span class="op">(</span>from <span class="op">=</span> <span class="va">start_date</span>, to <span class="op">=</span> <span class="va">end_date</span>, by <span class="op">=</span> <span class="st">"month"</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Create raster time series</span></span>
+<span><span class="va">data.ts</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/rts/man/rts.html">rts</a></span><span class="op">(</span><span class="va">data</span>, <span class="va">dates</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Calculate 12-month climatological means</span></span>
+<span><span class="va">data.12</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/climetrics/man/applyMonths.html">apply.months</a></span><span class="op">(</span><span class="va">data.ts</span>, <span class="st">'mean'</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Get the number of years</span></span>
+<span><span class="va">n</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">dates</span><span class="op">)</span> <span class="op">/</span> <span class="fl">12</span></span>
+<span></span>
+<span><span class="co"># Create a time series where the 12-month climatological mean repeats for all years</span></span>
+<span><span class="va">data.clim</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/rep.html">rep</a></span><span class="op">(</span><span class="va">data.12</span>, <span class="va">n</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Calculate anomalies</span></span>
+<span><span class="va">data.anom</span> <span class="op">&lt;-</span> <span class="va">data</span> <span class="op">-</span> <span class="va">data.clim</span></span>
+<span></span>
+<span><span class="co"># Define a function that calculates a linear trend</span></span>
+<span><span class="va">trend.fun</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="op">{</span></span>
+<span>  <span class="co"># If a grid cell contains NA, then set the result to NA</span></span>
+<span>  <span class="kw">if</span> <span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/NA.html">is.na</a></span><span class="op">(</span><span class="fu"><a href="https://rspatial.github.io/terra/reference/summarize-generics.html">mean</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span>
+<span>    <span class="kw"><a href="https://rdrr.io/r/base/function.html">return</a></span><span class="op">(</span><span class="cn">NA</span><span class="op">)</span></span>
+<span>  <span class="op">}</span> <span class="kw">else</span> <span class="op">{</span></span>
+<span>    <span class="va">time</span> <span class="op">&lt;-</span> <span class="fl">1</span><span class="op">:</span><span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span>
+<span>    <span class="va">linear.model</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span><span class="op">(</span><span class="va">x</span> <span class="op">~</span> <span class="va">time</span><span class="op">)</span></span>
+<span>    <span class="va">trend</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/coef.html">coef</a></span><span class="op">(</span><span class="va">linear.model</span><span class="op">)</span><span class="op">[</span><span class="st">"time"</span><span class="op">]</span></span>
+<span>    <span class="kw"><a href="https://rdrr.io/r/base/function.html">return</a></span><span class="op">(</span><span class="va">trend</span><span class="op">)</span></span>
+<span>  <span class="op">}</span></span>
+<span><span class="op">}</span></span>
+<span></span>
+<span><span class="va">data.anom.detrend</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rspatial.github.io/terra/reference/app.html">app</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">data.anom</span>, fun <span class="op">=</span> <span class="va">detrend.fun</span><span class="op">)</span></span>
+<span><span class="va">rsds.anom.detrend</span> <span class="op">&lt;-</span> <span class="va">data.anom.detrend</span></span>
+<span></span>
+<span><span class="co"># Plot data</span></span>
+<span><span class="va">min_val</span> <span class="op">&lt;-</span> <span class="op">-</span><span class="fl">50</span></span>
+<span><span class="va">max_val</span> <span class="op">&lt;-</span> <span class="fl">50</span></span>
+<span></span>
+<span><span class="co"># Have a look at the data</span></span>
+<span><span class="va">my.col</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rspatial.github.io/terra/reference/flip.html">rev</a></span><span class="op">(</span><span class="fu"><a href="https://rspatial.github.io/terra/reference/mappal.html">map.pal</a></span><span class="op">(</span><span class="st">"magma"</span>, n <span class="op">=</span> <span class="fl">100</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rspatial.github.io/terra/reference/plot.html">plot</a></span><span class="op">(</span><span class="fu"><a href="https://rspatial.github.io/terra/reference/subset.html">subset</a></span><span class="op">(</span><span class="va">data.anom.detrend</span>, <span class="fl">1</span><span class="op">:</span><span class="fl">1</span><span class="op">)</span>, col <span class="op">=</span> <span class="va">my.col</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/pkg/maps/man/map.html">map</a></span><span class="op">(</span><span class="st">"world2"</span>, add <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
+<div class="inline-figure"><img src="_main_files/figure-html/unnamed-chunk-184-1.png" alt="" width="672"></div>
+</div>
+<div id="enhanced-vegetation-index" class="section level3" number="8.4.4">
+<h3>
+<span class="header-section-number">8.4.4</span> Enhanced Vegetation Index<a class="anchor" aria-label="anchor" href="#enhanced-vegetation-index"><i class="fas fa-link"></i></a>
+</h3>
+<div class="sourceCode" id="cb180"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">data</span> <span class="op">&lt;-</span> <span class="va">evi</span></span>
+<span></span>
+<span><span class="co"># Get the dates</span></span>
+<span><span class="co"># Create a sequence of dates</span></span>
+<span><span class="va">start_date</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/as.Date.html">as.Date</a></span><span class="op">(</span><span class="st">"2001-01-15"</span><span class="op">)</span></span>
+<span><span class="va">end_date</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/as.Date.html">as.Date</a></span><span class="op">(</span><span class="st">"2023-12-15"</span><span class="op">)</span></span>
+<span><span class="va">dates</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span><span class="op">(</span>from <span class="op">=</span> <span class="va">start_date</span>, to <span class="op">=</span> <span class="va">end_date</span>, by <span class="op">=</span> <span class="st">"month"</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Create raster time series</span></span>
+<span><span class="va">data.ts</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/rts/man/rts.html">rts</a></span><span class="op">(</span><span class="va">data</span>, <span class="va">dates</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Calculate 12-month climatological means</span></span>
+<span><span class="va">data.12</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/climetrics/man/applyMonths.html">apply.months</a></span><span class="op">(</span><span class="va">data.ts</span>, <span class="st">'mean'</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Get the number of years</span></span>
+<span><span class="va">n</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">dates</span><span class="op">)</span> <span class="op">/</span> <span class="fl">12</span></span>
+<span></span>
+<span><span class="co"># Create a time series where the 12-month climatological mean repeats for all years</span></span>
+<span><span class="va">data.clim</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/rep.html">rep</a></span><span class="op">(</span><span class="va">data.12</span>, <span class="va">n</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Calculate anomalies</span></span>
+<span><span class="va">data.anom</span> <span class="op">&lt;-</span> <span class="va">data</span> <span class="op">-</span> <span class="va">data.clim</span></span>
+<span></span>
+<span><span class="co"># Define a function that calculates a linear trend</span></span>
+<span><span class="va">trend.fun</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="op">{</span></span>
+<span>  <span class="co"># If a grid cell contains NA, then set the result to NA</span></span>
+<span>  <span class="kw">if</span> <span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/NA.html">is.na</a></span><span class="op">(</span><span class="fu"><a href="https://rspatial.github.io/terra/reference/summarize-generics.html">mean</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span>
+<span>    <span class="kw"><a href="https://rdrr.io/r/base/function.html">return</a></span><span class="op">(</span><span class="cn">NA</span><span class="op">)</span></span>
+<span>  <span class="op">}</span> <span class="kw">else</span> <span class="op">{</span></span>
+<span>    <span class="va">time</span> <span class="op">&lt;-</span> <span class="fl">1</span><span class="op">:</span><span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span>
+<span>    <span class="va">linear.model</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span><span class="op">(</span><span class="va">x</span> <span class="op">~</span> <span class="va">time</span><span class="op">)</span></span>
+<span>    <span class="va">trend</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/coef.html">coef</a></span><span class="op">(</span><span class="va">linear.model</span><span class="op">)</span><span class="op">[</span><span class="st">"time"</span><span class="op">]</span></span>
+<span>    <span class="kw"><a href="https://rdrr.io/r/base/function.html">return</a></span><span class="op">(</span><span class="va">trend</span><span class="op">)</span></span>
+<span>  <span class="op">}</span></span>
+<span><span class="op">}</span></span>
+<span></span>
+<span><span class="va">data.anom.detrend</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rspatial.github.io/terra/reference/app.html">app</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">data.anom</span>, fun <span class="op">=</span> <span class="va">detrend.fun</span><span class="op">)</span></span>
+<span><span class="va">evi.anom.detrend</span> <span class="op">&lt;-</span> <span class="va">data.anom.detrend</span></span>
+<span></span>
+<span><span class="co"># Have a look at the data</span></span>
+<span><span class="va">my.col</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rspatial.github.io/terra/reference/flip.html">rev</a></span><span class="op">(</span><span class="fu"><a href="https://rspatial.github.io/terra/reference/mappal.html">map.pal</a></span><span class="op">(</span><span class="st">"magma"</span>, n <span class="op">=</span> <span class="fl">100</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rspatial.github.io/terra/reference/plot.html">plot</a></span><span class="op">(</span><span class="fu"><a href="https://rspatial.github.io/terra/reference/subset.html">subset</a></span><span class="op">(</span><span class="va">data.anom.detrend</span>, <span class="fl">1</span><span class="op">:</span><span class="fl">1</span><span class="op">)</span>, col <span class="op">=</span> <span class="va">my.col</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/pkg/maps/man/map.html">map</a></span><span class="op">(</span><span class="st">"world2"</span>, add <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
+<div class="inline-figure"><img src="_main_files/figure-html/unnamed-chunk-185-1.png" alt="" width="672"></div>
+</div>
+</div>
+<div id="causal-inference" class="section level2" number="8.5">
+<h2>
+<span class="header-section-number">8.5</span> Causal inference<a class="anchor" aria-label="anchor" href="#causal-inference"><i class="fas fa-link"></i></a>
+</h2>
+<p>With the detrended anomalies of the meteorological variables and EVI prepared, you can now assess their statistical associations using Granger causality. This analysis follows a similar approach to the causal inference we previously applied to temperature and albedo in climate model data. Begin by defining a Granger causality function that can be applied to each grid cell.</p>
+<div class="sourceCode" id="cb181"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">granger.fun</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="op">{</span></span>
+<span>  </span>
+<span>    <span class="co"># If a grid cell contains NA, then set the result to NA</span></span>
+<span>  <span class="kw">if</span> <span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/NA.html">is.na</a></span><span class="op">(</span><span class="fu"><a href="https://rspatial.github.io/terra/reference/summarize-generics.html">mean</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span>
+<span>    <span class="kw"><a href="https://rdrr.io/r/base/function.html">return</a></span><span class="op">(</span><span class="cn">NA</span><span class="op">)</span></span>
+<span>  <span class="op">}</span> <span class="kw">else</span> <span class="op">{</span></span>
+<span>    </span>
+<span>  <span class="va">n</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span>
+<span>  <span class="co"># Get first (a) and second (b) variable</span></span>
+<span>  <span class="va">a</span> <span class="op">&lt;-</span> <span class="va">x</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="op">(</span><span class="va">n</span><span class="op">/</span><span class="fl">2</span><span class="op">)</span><span class="op">]</span></span>
+<span>  <span class="va">b</span> <span class="op">&lt;-</span> <span class="va">x</span><span class="op">[</span><span class="op">(</span><span class="va">n</span><span class="op">/</span><span class="fl">2</span><span class="op">+</span><span class="fl">1</span><span class="op">)</span><span class="op">:</span><span class="va">n</span><span class="op">]</span></span>
+<span>  <span class="co"># Convert to time series</span></span>
+<span>  <span class="va">a</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/ts.html">ts</a></span><span class="op">(</span><span class="va">a</span><span class="op">)</span></span>
+<span>  <span class="va">b</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/ts.html">ts</a></span><span class="op">(</span><span class="va">b</span><span class="op">)</span></span>
+<span>  <span class="va">tsDat</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/ts.union.html">ts.union</a></span><span class="op">(</span><span class="va">a</span>, <span class="va">b</span><span class="op">)</span></span>
+<span>  <span class="va">tsVAR</span> <span class="op">&lt;-</span> <span class="fu">vars</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/vars/man/VAR.html">VAR</a></span><span class="op">(</span><span class="va">tsDat</span>, p <span class="op">=</span> <span class="fl">2</span><span class="op">)</span></span>
+<span>  <span class="co"># Apply Granger causality test </span></span>
+<span>  <span class="va">p.value</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fu">vars</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/vars/man/causality.html">causality</a></span><span class="op">(</span><span class="va">tsVAR</span>, cause <span class="op">=</span> <span class="st">"a"</span><span class="op">)</span><span class="op">$</span><span class="va">Granger</span><span class="op">[</span><span class="fl">3</span><span class="op">]</span><span class="op">$</span><span class="va">p.value</span><span class="op">)</span></span>
+<span>  <span class="kw"><a href="https://rdrr.io/r/base/function.html">return</a></span><span class="op">(</span><span class="va">p.value</span><span class="op">)</span></span>
+<span>  <span class="op">}</span></span>
+<span><span class="op">}</span></span></code></pre></div>
+<p>Check whether precipitation Granger-causes EVI anomalies.</p>
+<div class="sourceCode" id="cb182"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># Stack your raster objects, where the first part is the cause and the second the response</span></span>
+<span><span class="va">data</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="va">pr.anom.detrend</span>, <span class="va">evi.anom.detrend</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Assess Granger causality</span></span>
+<span><span class="va">p.value</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rspatial.github.io/terra/reference/app.html">app</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">data</span>, fun <span class="op">=</span> <span class="va">granger.fun</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Create a boolean map where all locations with p-values &lt; 0.01 equal 1 and all remaining gridcells equal zero</span></span>
+<span><span class="va">p.value</span><span class="op">[</span><span class="va">p.value</span> <span class="op">&gt;=</span> <span class="fl">0.05</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fl">0</span></span>
+<span><span class="va">p.value</span><span class="op">[</span><span class="va">p.value</span> <span class="op">&gt;</span> <span class="fl">0</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fl">1</span></span>
+<span></span>
+<span><span class="va">p.value.pr</span> <span class="op">&lt;-</span> <span class="va">p.value</span></span>
+<span></span>
+<span><span class="fu"><a href="https://rspatial.github.io/terra/reference/plot.html">plot</a></span><span class="op">(</span><span class="va">p.value</span>, col <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"white"</span>, <span class="st">"orange"</span><span class="op">)</span>, main <span class="op">=</span> <span class="st">"Precipitation Granger-causes EVI Anomalies"</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/pkg/maps/man/map.html">map</a></span><span class="op">(</span><span class="st">"world2"</span>, add <span class="op">=</span> <span class="cn">TRUE</span>, interior <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></code></pre></div>
+<div class="inline-figure"><img src="_main_files/figure-html/unnamed-chunk-187-1.png" alt="" width="672"></div>
+<p>Adjust the code above to check whether temperature Granger-causes EVI anomalies.</p>
+<div class="inline-figure"><img src="_main_files/figure-html/unnamed-chunk-188-1.png" alt="" width="672"></div>
+<p>Adjust the code above to check whether downwelling solar radiation Granger-causes EVI anomalies.</p>
+<div class="inline-figure"><img src="_main_files/figure-html/unnamed-chunk-189-1.png" alt="" width="672"></div>
+<p>Sum up the previous three results to identify gridcells where all three variables granger-cause EVI. What does the yellow color tell you?</p>
+<div class="sourceCode" id="cb183"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">p.value</span> <span class="op">&lt;-</span> <span class="va">p.value.pr</span> <span class="op">+</span> <span class="va">p.value.tas</span> <span class="op">+</span> <span class="va">p.value.rsds</span></span>
+<span><span class="fu"><a href="https://rspatial.github.io/terra/reference/plot.html">plot</a></span><span class="op">(</span><span class="va">p.value</span>, main <span class="op">=</span> <span class="st">"PR, TAS, and RSDS Granger-causes EVI Anomalies"</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/pkg/maps/man/map.html">map</a></span><span class="op">(</span><span class="st">"world2"</span>, add <span class="op">=</span> <span class="cn">TRUE</span>, interior <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></code></pre></div>
+<div class="inline-figure"><img src="_main_files/figure-html/unnamed-chunk-190-1.png" alt="" width="672"></div>
+</div>
+<div id="cross-correlation" class="section level2" number="8.6">
+<h2>
+<span class="header-section-number">8.6</span> Cross correlation<a class="anchor" aria-label="anchor" href="#cross-correlation"><i class="fas fa-link"></i></a>
+</h2>
+<p>Cross-correlation calculates the correlation coefficients between time series for different time lags. This allows us to identify the time lags at which the correlation between variables is strongest. To begin, we’ll apply this approach to a single grid cell by extracting data for a specific location.</p>
+<div class="sourceCode" id="cb184"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">lon</span> <span class="op">&lt;-</span> <span class="fl">131</span></span>
+<span><span class="va">lat</span> <span class="op">&lt;-</span> <span class="op">-</span><span class="fl">17</span></span>
+<span><span class="va">coords</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html">matrix</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="va">lon</span>, <span class="va">lat</span><span class="op">)</span>, ncol <span class="op">=</span> <span class="fl">2</span>, byrow <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
+<span><span class="va">location</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rspatial.github.io/terra/reference/vect.html">vect</a></span><span class="op">(</span><span class="va">coords</span>, type <span class="op">=</span> <span class="st">"points"</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu"><a href="https://rspatial.github.io/terra/reference/plot.html">plot</a></span><span class="op">(</span><span class="va">p.value</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/pkg/maps/man/map.html">map</a></span><span class="op">(</span><span class="st">"world2"</span>, add <span class="op">=</span> <span class="cn">TRUE</span>, interior <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rspatial.github.io/terra/reference/lines.html">points</a></span><span class="op">(</span><span class="va">location</span>, col <span class="op">=</span> <span class="st">"red"</span>, pch <span class="op">=</span> <span class="fl">16</span>, cex <span class="op">=</span> <span class="fl">1.0</span><span class="op">)</span></span></code></pre></div>
+<div class="inline-figure"><img src="_main_files/figure-html/unnamed-chunk-191-1.png" alt="" width="672"></div>
+<p>Extract the values for this location and convert them to a time series.</p>
+<div class="sourceCode" id="cb185"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># Extract data for the location</span></span>
+<span><span class="va">evi.anom.detrend.gc</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rspatial.github.io/terra/reference/extract.html">extract</a></span><span class="op">(</span><span class="va">evi.anom.detrend</span>, <span class="va">location</span><span class="op">)</span></span>
+<span><span class="va">pr.anom.detrend.gc</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rspatial.github.io/terra/reference/extract.html">extract</a></span><span class="op">(</span><span class="va">pr.anom.detrend</span>, <span class="va">location</span><span class="op">)</span></span>
+<span><span class="va">tas.anom.detrend.gc</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rspatial.github.io/terra/reference/extract.html">extract</a></span><span class="op">(</span><span class="va">tas.anom.detrend</span>, <span class="va">location</span><span class="op">)</span></span>
+<span><span class="va">rsds.anom.detrend.gc</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rspatial.github.io/terra/reference/extract.html">extract</a></span><span class="op">(</span><span class="va">rsds.anom.detrend</span>, <span class="va">location</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Get the values and drop the layer names</span></span>
+<span><span class="va">evi.anom.detrend.gc</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/unlist.html">unlist</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/unname.html">unname</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/vector.html">as.vector</a></span><span class="op">(</span><span class="va">evi.anom.detrend.gc</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="va">pr.anom.detrend.gc</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/unlist.html">unlist</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/unname.html">unname</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/vector.html">as.vector</a></span><span class="op">(</span><span class="va">pr.anom.detrend.gc</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="va">tas.anom.detrend.gc</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/unlist.html">unlist</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/unname.html">unname</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/vector.html">as.vector</a></span><span class="op">(</span><span class="va">tas.anom.detrend.gc</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="va">rsds.anom.detrend.gc</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/unlist.html">unlist</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/unname.html">unname</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/vector.html">as.vector</a></span><span class="op">(</span><span class="va">rsds.anom.detrend.gc</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Omit the first time step</span></span>
+<span><span class="va">n</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">evi.anom.detrend.gc</span><span class="op">)</span></span>
+<span><span class="va">evi.anom.detrend.gc</span> <span class="op">&lt;-</span> <span class="va">evi.anom.detrend.gc</span><span class="op">[</span><span class="fl">2</span><span class="op">:</span><span class="va">n</span><span class="op">]</span></span>
+<span><span class="va">pr.anom.detrend.gc</span> <span class="op">&lt;-</span> <span class="va">pr.anom.detrend.gc</span><span class="op">[</span><span class="fl">2</span><span class="op">:</span><span class="va">n</span><span class="op">]</span></span>
+<span><span class="va">tas.anom.detrend.gc</span> <span class="op">&lt;-</span> <span class="va">tas.anom.detrend.gc</span><span class="op">[</span><span class="fl">2</span><span class="op">:</span><span class="va">n</span><span class="op">]</span></span>
+<span><span class="va">rsds.anom.detrend.gc</span> <span class="op">&lt;-</span> <span class="va">rsds.anom.detrend.gc</span><span class="op">[</span><span class="fl">2</span><span class="op">:</span><span class="va">n</span><span class="op">]</span></span>
+<span></span>
+<span><span class="co"># Make a time series</span></span>
+<span><span class="va">evi.ts</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/ts.html">ts</a></span><span class="op">(</span><span class="va">evi.anom.detrend.gc</span><span class="op">)</span></span>
+<span><span class="va">pr.ts</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/ts.html">ts</a></span><span class="op">(</span><span class="va">pr.anom.detrend.gc</span><span class="op">)</span></span>
+<span><span class="va">tas.ts</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/ts.html">ts</a></span><span class="op">(</span><span class="va">tas.anom.detrend.gc</span><span class="op">)</span></span>
+<span><span class="va">rsds.ts</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/ts.html">ts</a></span><span class="op">(</span><span class="va">rsds.anom.detrend.gc</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">tsDat</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/ts.union.html">ts.union</a></span><span class="op">(</span><span class="va">evi.ts</span>, <span class="va">pr.ts</span>, <span class="va">tas.ts</span>, <span class="va">rsds.ts</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Plot time series</span></span>
+<span><span class="fu"><a href="https://rspatial.github.io/terra/reference/plot.html">plot</a></span><span class="op">(</span><span class="va">tsDat</span><span class="op">)</span></span></code></pre></div>
+<div class="inline-figure"><img src="_main_files/figure-html/unnamed-chunk-192-1.png" alt="" width="672"></div>
+<p>Cross correlation gives the correlation coefficients for different time lags. There are positive lags and negative lags:</p>
+<ul>
+<li>Positive lags: series1 is correlated with past values of series 2</li>
+<li>Negative lags: series2 is correlated with past values of series 1</li>
+</ul>
+<p>The Figure below shows you how the correlation coefficient R changes for different time lags.</p>
+<div class="sourceCode" id="cb186"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># Compute cross-correlation</span></span>
+<span><span class="va">ccf_result</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/acf.html">ccf</a></span><span class="op">(</span><span class="va">evi.ts</span>, <span class="va">pr.ts</span>, lag.max <span class="op">=</span> <span class="fl">12</span>, plot <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rspatial.github.io/terra/reference/plot.html">plot</a></span><span class="op">(</span><span class="va">ccf_result</span><span class="op">)</span></span></code></pre></div>
+<div class="inline-figure"><img src="_main_files/figure-html/unnamed-chunk-193-1.png" alt="" width="672"></div>
+<ul>
+<li>For what time lag is the correlation coefficient largest?</li>
+<li>Does this time lag apply to EVI or precipitation?</li>
+</ul>
+<p>Make a similar Figure but for temperature and then for downwelling shortwave radiation</p>
+<div class="inline-figure"><img src="_main_files/figure-html/unnamed-chunk-194-1.png" alt="" width="672"></div>
+<div class="inline-figure"><img src="_main_files/figure-html/unnamed-chunk-195-1.png" alt="" width="672"></div>
+<p>We now aim to create two figures: the first shows the time lags with the highest correlation coefficients, and the second displays the corresponding correlation coefficients. For our specific location, the results are as follows for precipitation:</p>
+<div class="sourceCode" id="cb187"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># Compute cross-correlation</span></span>
+<span><span class="va">ccf_result</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/acf.html">ccf</a></span><span class="op">(</span><span class="va">evi.ts</span>, <span class="va">pr.ts</span>, lag.max <span class="op">=</span> <span class="fl">12</span>, plot <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Find the index of the maximum correlation</span></span>
+<span><span class="va">max_index</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rspatial.github.io/terra/reference/summarize-generics.html">which.max</a></span><span class="op">(</span><span class="va">ccf_result</span><span class="op">$</span><span class="va">acf</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Extract the maximum correlation and corresponding lag</span></span>
+<span><span class="va">max_correlation</span> <span class="op">&lt;-</span> <span class="va">ccf_result</span><span class="op">$</span><span class="va">acf</span><span class="op">[</span><span class="va">max_index</span><span class="op">]</span></span>
+<span><span class="va">corresponding_lag</span> <span class="op">&lt;-</span> <span class="va">ccf_result</span><span class="op">$</span><span class="va">lag</span><span class="op">[</span><span class="va">max_index</span><span class="op">]</span></span>
+<span></span>
+<span><span class="co"># Combine results for display</span></span>
+<span><span class="va">result</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span>Max_Correlation <span class="op">=</span> <span class="va">max_correlation</span>, Lag <span class="op">=</span> <span class="va">corresponding_lag</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="va">result</span><span class="op">)</span></span></code></pre></div>
+<pre><code>##   Max_Correlation Lag
+## 1       0.4115275   1</code></pre>
+<p>Now we want to apply this approach to each grid cell. Let’s define a function that finds the time lag with the largest correlation coefficient.</p>
+<div class="sourceCode" id="cb189"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">findLag.fun</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="op">{</span></span>
+<span>  <span class="co"># If a grid cell contains NA, then set the result to NA</span></span>
+<span>  <span class="kw">if</span> <span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/NA.html">is.na</a></span><span class="op">(</span><span class="fu"><a href="https://rspatial.github.io/terra/reference/summarize-generics.html">mean</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span>
+<span>    <span class="kw"><a href="https://rdrr.io/r/base/function.html">return</a></span><span class="op">(</span><span class="cn">NA</span><span class="op">)</span></span>
+<span>  <span class="op">}</span> <span class="kw">else</span> <span class="op">{</span></span>
+<span>    <span class="va">n</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span>
+<span>    </span>
+<span>    <span class="co"># Get first (a) and second (b) variable</span></span>
+<span>    <span class="va">a</span> <span class="op">&lt;-</span> <span class="va">x</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="op">(</span><span class="va">n</span> <span class="op">/</span> <span class="fl">2</span><span class="op">)</span><span class="op">]</span></span>
+<span>    <span class="va">b</span> <span class="op">&lt;-</span> <span class="va">x</span><span class="op">[</span><span class="op">(</span><span class="va">n</span> <span class="op">/</span> <span class="fl">2</span> <span class="op">+</span> <span class="fl">1</span><span class="op">)</span><span class="op">:</span><span class="va">n</span><span class="op">]</span></span>
+<span>    </span>
+<span>    <span class="co"># Convert to time series</span></span>
+<span>    <span class="va">a</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/ts.html">ts</a></span><span class="op">(</span><span class="va">a</span><span class="op">)</span></span>
+<span>    <span class="va">b</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/ts.html">ts</a></span><span class="op">(</span><span class="va">b</span><span class="op">)</span></span>
+<span>    </span>
+<span>    <span class="co"># Conduct cross-correlation</span></span>
+<span>    <span class="va">ccf_result</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/acf.html">ccf</a></span><span class="op">(</span><span class="va">a</span>, <span class="va">b</span>, lag.max <span class="op">=</span> <span class="fl">12</span>, plot <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
+<span>    </span>
+<span>    <span class="co"># Find the index of the maximum correlation</span></span>
+<span>    <span class="va">max_index</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rspatial.github.io/terra/reference/summarize-generics.html">which.max</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/MathFun.html">abs</a></span><span class="op">(</span><span class="va">ccf_result</span><span class="op">$</span><span class="va">acf</span><span class="op">)</span><span class="op">)</span></span>
+<span>    </span>
+<span>    <span class="co"># Extract the maximum correlation and corresponding lag</span></span>
+<span>    <span class="va">max_correlation</span> <span class="op">&lt;-</span> <span class="va">ccf_result</span><span class="op">$</span><span class="va">acf</span><span class="op">[</span><span class="va">max_index</span><span class="op">]</span></span>
+<span>    <span class="va">corresponding_lag</span> <span class="op">&lt;-</span> <span class="va">ccf_result</span><span class="op">$</span><span class="va">lag</span><span class="op">[</span><span class="va">max_index</span><span class="op">]</span></span>
+<span>    </span>
+<span>    <span class="co"># Combine results for display</span></span>
+<span>    <span class="va">result</span> <span class="op">&lt;-</span> <span class="va">corresponding_lag</span></span>
+<span>    <span class="kw"><a href="https://rdrr.io/r/base/function.html">return</a></span><span class="op">(</span><span class="va">result</span><span class="op">)</span></span>
+<span>  <span class="op">}</span></span>
+<span><span class="op">}</span></span></code></pre></div>
+<p>Look at the function above. What does <code>max_index &lt;- which.max(abs(ccf_result$acf))</code> do?
+* Why does this line of code include the <code>abs</code> function? (To figure out what <code>abs</code> does, type <code><a href="https://rdrr.io/r/base/MathFun.html">?abs</a></code> in your console) and look at the Help tab on your right-hand-side.</p>
+<p>Nex, define a function that gives the corresponding correlation coefficient</p>
+<div class="sourceCode" id="cb190"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">findMaxCorr.fun</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="op">{</span></span>
+<span>  <span class="co"># If a grid cell contains NA, then set the result to NA</span></span>
+<span>  <span class="kw">if</span> <span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/NA.html">is.na</a></span><span class="op">(</span><span class="fu"><a href="https://rspatial.github.io/terra/reference/summarize-generics.html">mean</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span>
+<span>    <span class="kw"><a href="https://rdrr.io/r/base/function.html">return</a></span><span class="op">(</span><span class="cn">NA</span><span class="op">)</span></span>
+<span>  <span class="op">}</span> <span class="kw">else</span> <span class="op">{</span></span>
+<span>    <span class="va">n</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span>
+<span>    </span>
+<span>    <span class="co"># Get first (a) and second (b) variable</span></span>
+<span>    <span class="va">a</span> <span class="op">&lt;-</span> <span class="va">x</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="op">(</span><span class="va">n</span> <span class="op">/</span> <span class="fl">2</span><span class="op">)</span><span class="op">]</span></span>
+<span>    <span class="va">b</span> <span class="op">&lt;-</span> <span class="va">x</span><span class="op">[</span><span class="op">(</span><span class="va">n</span> <span class="op">/</span> <span class="fl">2</span> <span class="op">+</span> <span class="fl">1</span><span class="op">)</span><span class="op">:</span><span class="va">n</span><span class="op">]</span></span>
+<span>    </span>
+<span>    <span class="co"># Convert to time series</span></span>
+<span>    <span class="va">a</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/ts.html">ts</a></span><span class="op">(</span><span class="va">a</span><span class="op">)</span></span>
+<span>    <span class="va">b</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/ts.html">ts</a></span><span class="op">(</span><span class="va">b</span><span class="op">)</span></span>
+<span>    </span>
+<span>    <span class="co"># Conduct cross-correlation</span></span>
+<span>    <span class="va">ccf_result</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/acf.html">ccf</a></span><span class="op">(</span><span class="va">a</span>, <span class="va">b</span>, lag.max <span class="op">=</span> <span class="fl">6</span>, plot <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
+<span>    </span>
+<span>    <span class="co"># Find the index of the maximum correlation</span></span>
+<span>    <span class="va">max_index</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rspatial.github.io/terra/reference/summarize-generics.html">which.max</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/MathFun.html">abs</a></span><span class="op">(</span><span class="va">ccf_result</span><span class="op">$</span><span class="va">acf</span><span class="op">)</span><span class="op">)</span></span>
+<span>    </span>
+<span>    <span class="co"># Extract the maximum correlation and corresponding lag</span></span>
+<span>    <span class="va">max_correlation</span> <span class="op">&lt;-</span> <span class="va">ccf_result</span><span class="op">$</span><span class="va">acf</span><span class="op">[</span><span class="va">max_index</span><span class="op">]</span></span>
+<span>    <span class="va">corresponding_lag</span> <span class="op">&lt;-</span> <span class="va">ccf_result</span><span class="op">$</span><span class="va">lag</span><span class="op">[</span><span class="va">max_index</span><span class="op">]</span></span>
+<span>    </span>
+<span>    <span class="co"># Combine results for display</span></span>
+<span>    <span class="va">result</span> <span class="op">&lt;-</span> <span class="va">max_correlation</span></span>
+<span>    <span class="kw"><a href="https://rdrr.io/r/base/function.html">return</a></span><span class="op">(</span><span class="va">result</span><span class="op">)</span></span>
+<span>  <span class="op">}</span></span>
+<span><span class="op">}</span></span></code></pre></div>
+<p>Next, let’s apply these functions to our data.</p>
+<div id="precipitation-1" class="section level3" number="8.6.1">
+<h3>
+<span class="header-section-number">8.6.1</span> Precipitation<a class="anchor" aria-label="anchor" href="#precipitation-1"><i class="fas fa-link"></i></a>
+</h3>
+<div class="sourceCode" id="cb191"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># Stack your raster objects, where the first part is the cause and the second the response</span></span>
+<span><span class="va">data</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="va">evi.anom.detrend</span>, <span class="va">pr.anom.detrend</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Compute time lags with largest correlation coefficients</span></span>
+<span><span class="va">timeLags</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rspatial.github.io/terra/reference/app.html">app</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">data</span>, fun <span class="op">=</span> <span class="va">findLag.fun</span><span class="op">)</span></span>
+<span><span class="va">maxCorr</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rspatial.github.io/terra/reference/app.html">app</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">data</span>, fun <span class="op">=</span> <span class="va">findMaxCorr.fun</span><span class="op">)</span></span>
+<span><span class="va">maxCorr.pr</span> <span class="op">&lt;-</span> <span class="va">maxCorr</span></span>
+<span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/par.html">par</a></span><span class="op">(</span>mfrow <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">2</span><span class="op">)</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Plot time lags</span></span>
+<span><span class="va">breaks</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span><span class="op">(</span><span class="op">-</span><span class="fl">12</span>, <span class="fl">12</span>, <span class="fl">1</span><span class="op">)</span></span>
+<span><span class="va">my.col</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rspatial.github.io/terra/reference/flip.html">rev</a></span><span class="op">(</span><span class="fu"><a href="https://rspatial.github.io/terra/reference/mappal.html">map.pal</a></span><span class="op">(</span><span class="st">"differences"</span>, n <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">breaks</span><span class="op">)</span> <span class="op">-</span> <span class="fl">1</span><span class="op">)</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu"><a href="https://rspatial.github.io/terra/reference/plot.html">plot</a></span><span class="op">(</span></span>
+<span>  <span class="va">timeLags</span>,</span>
+<span>  main <span class="op">=</span> <span class="st">"Monthly time lags with largest correlation coefficient \n (Precipitation and EVI)"</span>,</span>
+<span>  cex.main <span class="op">=</span> <span class="fl">0.7</span>,</span>
+<span>  col <span class="op">=</span> <span class="va">my.col</span>,</span>
+<span>  breaks <span class="op">=</span> <span class="va">breaks</span>,</span>
+<span>  type <span class="op">=</span> <span class="st">"continuous"</span></span>
+<span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/pkg/maps/man/map.html">map</a></span><span class="op">(</span><span class="st">"world2"</span>, add <span class="op">=</span> <span class="cn">TRUE</span>, interior <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rspatial.github.io/terra/reference/lines.html">points</a></span><span class="op">(</span><span class="va">location</span>, pch <span class="op">=</span> <span class="fl">1</span>, cex <span class="op">=</span> <span class="fl">1.0</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Plot Correlation Coefficients</span></span>
+<span><span class="va">breaks</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span><span class="op">(</span><span class="op">-</span><span class="fl">1</span>, <span class="fl">1</span>, <span class="fl">0.1</span><span class="op">)</span></span>
+<span><span class="va">my.col</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rspatial.github.io/terra/reference/flip.html">rev</a></span><span class="op">(</span><span class="fu"><a href="https://rspatial.github.io/terra/reference/mappal.html">map.pal</a></span><span class="op">(</span><span class="st">"differences"</span>, n <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">breaks</span><span class="op">)</span> <span class="op">-</span> <span class="fl">1</span><span class="op">)</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu"><a href="https://rspatial.github.io/terra/reference/plot.html">plot</a></span><span class="op">(</span></span>
+<span>  <span class="va">maxCorr</span>,</span>
+<span>  main <span class="op">=</span> <span class="st">"Corresaponding Correlation coefficient \n (Precipitation and EVI)"</span>,</span>
+<span>  cex.main <span class="op">=</span> <span class="fl">0.7</span>,</span>
+<span>  col <span class="op">=</span> <span class="va">my.col</span>,</span>
+<span>  breaks <span class="op">=</span> <span class="va">breaks</span>,</span>
+<span>  type <span class="op">=</span> <span class="st">"continuous"</span></span>
+<span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/pkg/maps/man/map.html">map</a></span><span class="op">(</span><span class="st">"world2"</span>, add <span class="op">=</span> <span class="cn">TRUE</span>, interior <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rspatial.github.io/terra/reference/lines.html">points</a></span><span class="op">(</span><span class="va">location</span>, pch <span class="op">=</span> <span class="fl">1</span>, cex <span class="op">=</span> <span class="fl">1.0</span><span class="op">)</span></span></code></pre></div>
+<div class="inline-figure"><img src="_main_files/figure-html/unnamed-chunk-199-1.png" alt="" width="672"></div>
+<p>Copy the code from above and modify it as needed for temperature and downwelling solar radiation.</p>
+<div class="inline-figure"><img src="_main_files/figure-html/unnamed-chunk-200-1.png" alt="" width="672"></div>
+<div class="inline-figure"><img src="_main_files/figure-html/unnamed-chunk-201-1.png" alt="" width="672"></div>
+<p>The final step is to evaluate what meteorological variable has a dominatig influence on driving EVI anomalies in each grid cell. For this purpose we will combine the results from our Granger causality test and cross correlation.</p>
+<div class="sourceCode" id="cb192"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">maxR2.pr</span> <span class="op">&lt;-</span> <span class="va">maxCorr.pr</span><span class="op">^</span><span class="fl">2</span> <span class="op">*</span> <span class="va">p.value.pr</span></span>
+<span><span class="va">maxR2.tas</span> <span class="op">&lt;-</span> <span class="va">maxCorr.tas</span><span class="op">^</span><span class="fl">2</span> <span class="op">*</span> <span class="va">p.value.tas</span></span>
+<span><span class="va">maxR2.rsds</span> <span class="op">&lt;-</span> <span class="va">maxCorr.rsds</span><span class="op">^</span><span class="fl">2</span> <span class="op">*</span> <span class="va">p.value.rsds</span></span>
+<span></span>
+<span><span class="va">stacked_rasters</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="va">maxR2.pr</span>, <span class="va">maxR2.tas</span>, <span class="va">maxR2.rsds</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rspatial.github.io/terra/reference/names.html">names</a></span><span class="op">(</span><span class="va">stacked_rasters</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"PR"</span>, <span class="st">"TAS"</span>, <span class="st">"RSDS"</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Apply a function to find the index of the max value for each cell</span></span>
+<span><span class="va">highest_index</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rspatial.github.io/terra/reference/app.html">app</a></span><span class="op">(</span><span class="va">stacked_rasters</span>, <span class="va">which.max</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Set the levels to replace numeric values with the names of the rasters</span></span>
+<span><span class="fu"><a href="https://rspatial.github.io/terra/reference/factors.html">levels</a></span><span class="op">(</span><span class="va">highest_index</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span>id <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">3</span>, name <span class="op">=</span> <span class="fu"><a href="https://rspatial.github.io/terra/reference/names.html">names</a></span><span class="op">(</span><span class="va">stacked_rasters</span><span class="op">)</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Plot the result to visualize the highest value index for each cell</span></span>
+<span><span class="fu"><a href="https://rspatial.github.io/terra/reference/plot.html">plot</a></span><span class="op">(</span><span class="va">highest_index</span>, main <span class="op">=</span> <span class="st">"Met variables that dominate EVI anomaly variability"</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/pkg/maps/man/map.html">map</a></span><span class="op">(</span><span class="st">"world2"</span>, add <span class="op">=</span> <span class="cn">TRUE</span>, interior <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></code></pre></div>
+<div class="inline-figure"><img src="_main_files/figure-html/unnamed-chunk-202-1.png" alt="" width="672"></div>
+<p>What does this Figure tell you? Have a look at the code above. Explain how exactly we are combining our results from the Granger causality test and cross correlation. In your answers focus on the two lines:</p>
+<ul>
+<li><code>maxR2.pr &lt;- maxCorr.pr^2 * p.value.pr</code></li>
+<li><code>highest_index &lt;- app(stacked_rasters, which.max)</code></li>
+</ul>
+</div>
+</div>
+</div>
+  <div class="chapter-nav">
+<div class="prev"><a href="week-7-observing-environmental-change-i.html"><span class="header-section-number">7</span> Week 7: Observing Environmental Change (I)</a></div>
+<div class="next"><a href="week-9-observing-environmental-change-iii.html"><span class="header-section-number">9</span> Week 9: Observing Environmental Change (III)</a></div>
+</div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
+    <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
+      <ul class="nav navbar-nav">
+<li><a class="nav-link" href="#week-8-observing-environmental-change-ii"><span class="header-section-number">8</span> Week 8: Observing Environmental Change (II)</a></li>
+<li><a class="nav-link" href="#download-reanalysis-data-provided-by-the-european-centre-for-medium-range-weather-forecasts-ecmwf"><span class="header-section-number">8.1</span> Download reanalysis data provided by the European Centre for Medium-Range Weather Forecasts (ECMWF)</a></li>
+<li><a class="nav-link" href="#process-data"><span class="header-section-number">8.2</span> Process Data</a></li>
+<li><a class="nav-link" href="#spatial-resolution"><span class="header-section-number">8.3</span> Spatial resolution</a></li>
+<li>
+<a class="nav-link" href="#detrended-anomalies"><span class="header-section-number">8.4</span> Detrended anomalies</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#precipitation"><span class="header-section-number">8.4.1</span> Precipitation</a></li>
+<li><a class="nav-link" href="#near-surface-air-temperature"><span class="header-section-number">8.4.2</span> Near-surface air temperature</a></li>
+<li><a class="nav-link" href="#downwelling-solar-radiation"><span class="header-section-number">8.4.3</span> Downwelling solar radiation</a></li>
+<li><a class="nav-link" href="#enhanced-vegetation-index"><span class="header-section-number">8.4.4</span> Enhanced Vegetation Index</a></li>
+</ul>
+</li>
+<li><a class="nav-link" href="#causal-inference"><span class="header-section-number">8.5</span> Causal inference</a></li>
+<li>
+<a class="nav-link" href="#cross-correlation"><span class="header-section-number">8.6</span> Cross correlation</a><ul class="nav navbar-nav"><li><a class="nav-link" href="#precipitation-1"><span class="header-section-number">8.6.1</span> Precipitation</a></li></ul>
+</li>
+</ul>
+
+      <div class="book-extra">
+        <ul class="list-unstyled">
+          
+        </ul>
+</div>
+    </nav>
+</div>
+
+</div>
+</div> <!-- .container -->
+
+<footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
+
+  <div class="col-12 col-md-6 mt-3">
+    <p>"<strong>ENSC 430</strong>" was written by Christian Seiler. </p>
+  </div>
+
+  <div class="col-12 col-md-6 mt-3">
+    <p>This book was built by the <a class="text-light" href="https://bookdown.org">bookdown</a> R package.</p>
+  </div>
+
+</div></div>
+</footer><!-- dynamically load mathjax for compatibility with self-contained --><script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script><script type="text/x-mathjax-config">const popovers = document.querySelectorAll('a.footnote-ref[data-toggle="popover"]');
+for (let popover of popovers) {
+  const div = document.createElement('div');
+  div.setAttribute('style', 'position: absolute; top: 0, left:0; width:0, height:0, overflow: hidden; visibility: hidden;');
+  div.innerHTML = popover.getAttribute('data-content');
+
+  var has_math = div.querySelector("span.math");
+  if (has_math) {
+    document.body.appendChild(div);
+    MathJax.Hub.Queue(["Typeset", MathJax.Hub, div]);
+    MathJax.Hub.Queue(function() {
+      popover.setAttribute('data-content', div.innerHTML);
+      document.body.removeChild(div);
+    })
+  }
+}
+</script>
+</body>
+</html>

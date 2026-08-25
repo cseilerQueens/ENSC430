@@ -1,0 +1,600 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<title>Chapter 4 Week 4: Climate Projections and Impacts (I) | ENSC 430</title>
+<meta name="author" content="Christian Seiler">
+<meta name="generator" content="bookdown 0.47 with bs4_book()">
+<meta property="og:title" content="Chapter 4 Week 4: Climate Projections and Impacts (I) | ENSC 430">
+<meta property="og:type" content="book">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Chapter 4 Week 4: Climate Projections and Impacts (I) | ENSC 430">
+<!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
+<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.12.0/transition.js"></script><script src="libs/bs3compat-0.12.0/tabs.js"></script><script src="libs/bs3compat-0.12.0/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
+<script src="libs/bs4_book-1.0.0/bs4_book.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- CSS --><style type="text/css">
+    
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  </style>
+<meta name="description" content="Load the required R packages: rm(list = ls()) library(terra) ## terra 1.9.34 ## ## Attaching package: 'terra' ## The following object is masked from 'package:zoo': ## ##   time&lt;- ## The following...">
+<meta property="og:description" content="Load the required R packages: rm(list = ls()) library(terra) ## terra 1.9.34 ## ## Attaching package: 'terra' ## The following object is masked from 'package:zoo': ## ##   time&lt;- ## The following...">
+<meta name="twitter:description" content="Load the required R packages: rm(list = ls()) library(terra) ## terra 1.9.34 ## ## Attaching package: 'terra' ## The following object is masked from 'package:zoo': ## ##   time&lt;- ## The following...">
+</head>
+<body data-spy="scroll" data-target="#toc">
+
+<div class="container-fluid">
+<div class="row">
+  <header class="col-sm-12 col-lg-3 sidebar sidebar-book"><a class="sr-only sr-only-focusable" href="#content">Skip to main content</a>
+
+    <div class="d-flex align-items-start justify-content-between">
+      <h1>
+        <a href="index.html" title="">ENSC 430</a>
+      </h1>
+      <button class="btn btn-outline-primary d-lg-none ml-2 mt-1" type="button" data-toggle="collapse" data-target="#main-nav" aria-expanded="true" aria-controls="main-nav"><i class="fas fa-bars"></i><span class="sr-only">Show table of contents</span></button>
+    </div>
+
+    <div id="main-nav" class="collapse-lg">
+      <form role="search">
+        <input id="search" class="form-control" type="search" placeholder="Search" aria-label="Search">
+</form>
+
+      <nav aria-label="Table of contents"><h2>Table of contents</h2>
+        <ul class="book-toc list-unstyled">
+<li><a class="" href="index.html">ENSC 430A/B</a></li>
+<li><a class="" href="week-1-climate-change.html"><span class="header-section-number">1</span> Week 1: Climate Change</a></li>
+<li><a class="" href="week-2-understanding-environmental-systems-i.html"><span class="header-section-number">2</span> Week 2: Understanding Environmental Systems (I)</a></li>
+<li><a class="" href="week-3-understanding-environmental-systems-ii.html"><span class="header-section-number">3</span> Week 3: Understanding Environmental Systems (II)</a></li>
+<li><a class="active" href="week-4-climate-projections-and-impacts-i.html"><span class="header-section-number">4</span> Week 4: Climate Projections and Impacts (I)</a></li>
+<li><a class="" href="week-5-climate-projections-and-impacts-ii.html"><span class="header-section-number">5</span> Week 5: Climate Projections and Impacts (II)</a></li>
+<li><a class="" href="week-6-climate-projections-and-impacts-iii.html"><span class="header-section-number">6</span> Week 6: Climate Projections and Impacts (III)</a></li>
+<li><a class="" href="week-7-observing-environmental-change-i.html"><span class="header-section-number">7</span> Week 7: Observing Environmental Change (I)</a></li>
+<li><a class="" href="week-8-observing-environmental-change-ii.html"><span class="header-section-number">8</span> Week 8: Observing Environmental Change (II)</a></li>
+<li><a class="" href="week-9-observing-environmental-change-iii.html"><span class="header-section-number">9</span> Week 9: Observing Environmental Change (III)</a></li>
+<li><a class="" href="week-10-climate-futures-and-solutions-i.html"><span class="header-section-number">10</span> Week 10: Climate Futures and Solutions (I)</a></li>
+<li><a class="" href="week-11-climate-futures-and-solutions-ii.html"><span class="header-section-number">11</span> Week 11: Climate Futures and Solutions (II)</a></li>
+<li><a class="" href="week-12-capstone-project.html"><span class="header-section-number">12</span> Week 12: Capstone Project</a></li>
+</ul>
+
+        <div class="book-extra">
+          
+        </div>
+      </nav>
+</div>
+  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="week-4-climate-projections-and-impacts-i" class="section level1" number="4">
+<h1>
+<span class="header-section-number">4</span> Week 4: Climate Projections and Impacts (I)<a class="anchor" aria-label="anchor" href="#week-4-climate-projections-and-impacts-i"><i class="fas fa-link"></i></a>
+</h1>
+<p>Load the required R packages:</p>
+<div class="sourceCode" id="cb96"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/rm.html">rm</a></span><span class="op">(</span>list <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/ls.html">ls</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://rspatial.org/">terra</a></span><span class="op">)</span></span></code></pre></div>
+<pre><code>## terra 1.9.34</code></pre>
+<pre><code>## 
+## Attaching package: 'terra'</code></pre>
+<pre><code>## The following object is masked from 'package:zoo':
+## 
+##     time&lt;-</code></pre>
+<pre><code>## The following object is masked from 'package:MASS':
+## 
+##     area</code></pre>
+<div class="sourceCode" id="cb101"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/adeckmyn/maps">maps</a></span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://gitlab.com/indecis-eu/indecis">ClimInd</a></span><span class="op">)</span></span></code></pre></div>
+<pre><code>## Loading required package: SPEI</code></pre>
+<pre><code>## # Package SPEI (1.8.1) loaded [try SPEINews()].</code></pre>
+<pre><code>## Loading required package: chron</code></pre>
+<pre><code>## 
+## Attaching package: 'chron'</code></pre>
+<pre><code>## The following objects are masked from 'package:terra':
+## 
+##     origin, origin&lt;-</code></pre>
+<pre><code>## Loading required package: weathermetrics</code></pre>
+<div id="earth-system-grid-federation-esgf" class="section level2" number="4.1">
+<h2>
+<span class="header-section-number">4.1</span> Earth System Grid Federation (ESGF)<a class="anchor" aria-label="anchor" href="#earth-system-grid-federation-esgf"><i class="fas fa-link"></i></a>
+</h2>
+<ul>
+<li>Visit the <a href="https://esgf.llnl.gov/">ESGF website</a>
+</li>
+<li>Click on <a href="https://aims2.llnl.gov/search">Metagrid web application</a>
+</li>
+<li>We want to download monthly precipitation simulated by the Canadian Earth System Model for the historical period</li>
+<li>To find the file, you will need filter the data base by adding key words</li>
+<li>In the keyword section, add <code>CMIP</code> (Coupled Model Intercomparison Project), <code>CCCma</code> (Canadian Centre for Climate Modelling and Analysis), <code>CanESM5</code> (Canadian Earth System Model version 5), <code>historical</code> (historical period), <code>r10i1p1f1</code> (ensemble member ID), <code>Amon</code> (realm: atmosphere, time resolution: monthly), and <code>pr.gn</code> (precipitation)</li>
+<li>Once you find the file, download the corresponding wget script</li>
+<li>To find different files, clear keywords and re-enter new keywords:</li>
+</ul>
+<pre><code># Monthly precipitation
+CMIP6.CMIP.CCCma.CanESM5.historical.r10i1p1f1.Amon.pr.gn
+CMIP6.ScenarioMIP.CCCma.CanESM5.ssp585.r10i1p1f1.Amon.pr.gn
+
+# Daily precipitation
+CMIP6.CMIP.CCCma.CanESM5.historical.r10i1p1f1.day.pr.gn
+CMIP6.ScenarioMIP.CCCma.CanESM5.ssp585.r10i1p1f1.day.pr.gn</code></pre>
+<ul>
+<li><p>Variable names are listed <a href="https://pcmdi.llnl.gov/mips/cmip3/variableList.html">here</a></p></li>
+<li><p>For example, search for <code>precipitation</code> (Windows search: <code>Ctrl + F</code>, Mac search: <code>Command + F</code>), you will find the variable description, ID, and physical units <code>precipitation_flux, pr, kg m-2 s-1</code></p></li>
+<li><p>Open one of the wget files using a text editor and search for something that looks like this:</p></li>
+</ul>
+<pre><code>#These are the embedded files to be downloaded
+download_files="$(cat &lt;&lt;EOF--dataset.file.url.chksum_type.chksum
+'pr_Amon_CanESM5_historical_r10i1p1f1_gn_185001-201412.nc' 'http://crd-esgf-drc.ec.gc.ca/thredds/fileServer/esgC_dataroot/AR6/CMIP6/CMIP/CCCma/CanESM5/historical/r10i1p1f1/Amon/pr/gn/v20190429/pr_Amon_CanESM5_historical_r10i1p1f1_gn_185001-201412.nc' 'SHA256' '2eb2e7fa943902a9fd4f726a98e6ba5713b23558a8da5bda8c992ef374aca6d4'
+EOF--dataset.file.url.chksum_type.chksum
+)"</code></pre>
+<p>There you find the URL to the file that you want to download (it may look slightly different for you):</p>
+<pre><code>http://crd-esgf-drc.ec.gc.ca/thredds/fileServer/esgC_dataroot/AR6/CMIP6/CMIP/CCCma/CanESM5/historical/r10i1p1f1/Amon/pr/gn/v20190429/pr_Amon_CanESM5_historical_r10i1p1f1_gn_185001-201412.nc</code></pre>
+<ul>
+<li><p>Copy-paste the URL to another text file</p></li>
+<li><p>Repeat the same for all the other files you downloaded</p></li>
+<li><p>Additional information: You can also first add all your files to a cart and then download a single wget file that contains all URLs</p></li>
+<li><p>In your account, create a new folder called <code>data</code>. You can do this by clicking on <code>New Folder</code> on the right-hand-side panel of your posit R Studio.</p></li>
+<li><p>To download the netcdf files to your new <code>data</code> folder, use the <code>download.file</code> function in R, e.g.:</p></li>
+</ul>
+<div class="sourceCode" id="cb111"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># Specify the URL of the file you want to download</span></span>
+<span><span class="va">url</span> <span class="op">&lt;-</span> <span class="st">"http://crd-esgf-drc.ec.gc.ca/thredds/fileServer/esgC_dataroot/AR6/CMIP6/CMIP/CCCma/CanESM5/historical/r10i1p1f1/Amon/pr/gn/v20190429/pr_Amon_CanESM5_historical_r10i1p1f1_gn_185001-201412.nc"</span></span>
+<span></span>
+<span><span class="co"># Specify the file name and location where you want to save the file on your computer</span></span>
+<span><span class="va">file_name</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/basename.html">basename</a></span><span class="op">(</span><span class="va">url</span><span class="op">)</span></span>
+<span><span class="va">file_path</span> <span class="op">&lt;-</span> <span class="st">"/global/home/hpcXXXX/data/"</span></span>
+<span></span>
+<span><span class="co"># Call the download.file() function, passing in the URL and file name/location as arguments</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/utils/download.file.html">download.file</a></span><span class="op">(</span><span class="va">url</span>, <span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste</a></span><span class="op">(</span><span class="va">file_path</span>, <span class="va">file_name</span>, sep <span class="op">=</span> <span class="st">""</span><span class="op">)</span>, mode <span class="op">=</span> <span class="st">"wb"</span><span class="op">)</span></span></code></pre></div>
+<ul>
+<li><p>Note that <code>file_path</code> should contain <code>/</code> rather than <code>\</code> and may not contain white space or special characters.</p></li>
+<li><p>Now you know how to search and download climate model data. I have downloaded the same file to our <code>shared_files</code> from where you can access it as well.</p></li>
+</ul>
+</div>
+<div id="open-process-and-plot-netcdf-files" class="section level2" number="4.2">
+<h2>
+<span class="header-section-number">4.2</span> Open, process, and plot netcdf files<a class="anchor" aria-label="anchor" href="#open-process-and-plot-netcdf-files"><i class="fas fa-link"></i></a>
+</h2>
+<div class="sourceCode" id="cb112"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/rm.html">rm</a></span><span class="op">(</span>list <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/ls.html">ls</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="va">data</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rspatial.github.io/terra/reference/rast.html">rast</a></span><span class="op">(</span><span class="st">"/global/home/hpc5112/ENSC430/shared_files/pr_Amon_CanESM5_historical_r10i1p1f1_gn_185001-201412.nc"</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="va">data</span><span class="op">)</span></span></code></pre></div>
+<ul>
+<li>You see the spatial dimensions, spatial resolution, spatial extent in longitude and latitude, variable name, etc.</li>
+<li>Each layer is one time step, starting in Jan 1850</li>
+<li>Let’s calculate the mean value over all time steps and plot the data</li>
+</ul>
+<div class="sourceCode" id="cb113"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">data</span> <span class="op">&lt;-</span> <span class="fu">terra</span><span class="fu">::</span><span class="fu"><a href="https://rspatial.github.io/terra/reference/summarize-generics.html">mean</a></span><span class="op">(</span><span class="va">data</span><span class="op">)</span> <span class="co"># annual mean</span></span>
+<span><span class="fu">terra</span><span class="fu">::</span><span class="fu"><a href="https://rspatial.github.io/terra/reference/plot.html">plot</a></span><span class="op">(</span><span class="va">data</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/pkg/maps/man/map.html">map</a></span><span class="op">(</span><span class="st">"world2"</span>, add <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
+<div class="inline-figure"><img src="_main_files/figure-html/unnamed-chunk-103-1.png" alt="" width="672"></div>
+<ul>
+<li>The <code>terra</code> package comes with different colors (<code><a href="https://rspatial.github.io/terra/reference/mappal.html">?map.pal</a></code>), e.g.</li>
+</ul>
+<div class="sourceCode" id="cb114"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">my.col</span> <span class="op">=</span> <span class="fu"><a href="https://rspatial.github.io/terra/reference/mappal.html">map.pal</a></span><span class="op">(</span><span class="st">"blues"</span>, n<span class="op">=</span><span class="fl">100</span><span class="op">)</span></span>
+<span><span class="fu">terra</span><span class="fu">::</span><span class="fu"><a href="https://rspatial.github.io/terra/reference/plot.html">plot</a></span><span class="op">(</span><span class="va">data</span>, col <span class="op">=</span> <span class="va">my.col</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/pkg/maps/man/map.html">map</a></span><span class="op">(</span><span class="st">"world2"</span>, add <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
+<div class="inline-figure"><img src="_main_files/figure-html/unnamed-chunk-104-1.png" alt="" width="672"></div>
+<ul>
+<li>Let’s plot how precipitation is projected to change between the 1995-2014 and 2081-2100 periods</li>
+<li>Download future precipitation projections:</li>
+</ul>
+<div class="sourceCode" id="cb115"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># Get the URL for the SSP5-8.5 scenario</span></span>
+<span><span class="va">url</span> <span class="op">&lt;-</span> <span class="st">"http://crd-esgf-drc.ec.gc.ca/thredds/fileServer/esgD_dataroot/AR6/CMIP6/ScenarioMIP/CCCma/CanESM5/ssp585/r10i1p1f1/Amon/pr/gn/v20190429/pr_Amon_CanESM5_ssp585_r10i1p1f1_gn_201501-210012.nc"</span></span>
+<span></span>
+<span><span class="co"># Specify the file name and location where you want to save the file on your computer</span></span>
+<span><span class="va">file_name</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/basename.html">basename</a></span><span class="op">(</span><span class="va">url</span><span class="op">)</span></span>
+<span><span class="va">file_path</span> <span class="op">&lt;-</span> <span class="st">"/global/home/hpcXXX/ENSC430/data"</span></span>
+<span></span>
+<span><span class="co"># Call the download.file() function, passing in the URL and file name/location as arguments</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/utils/download.file.html">download.file</a></span><span class="op">(</span><span class="va">url</span>, <span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste</a></span><span class="op">(</span><span class="va">file_path</span>, <span class="va">file_name</span>, sep <span class="op">=</span> <span class="st">""</span><span class="op">)</span>, mode <span class="op">=</span> <span class="st">"wb"</span><span class="op">)</span></span></code></pre></div>
+<ul>
+<li>Load, process, and plot the data</li>
+</ul>
+<div class="sourceCode" id="cb116"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># Read in data</span></span>
+<span><span class="va">hist</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rspatial.github.io/terra/reference/rast.html">rast</a></span><span class="op">(</span><span class="st">"/global/home/hpc5112/ENSC430/shared_files/pr_Amon_CanESM5_historical_r10i1p1f1_gn_185001-201412.nc"</span><span class="op">)</span></span>
+<span><span class="va">ssp5</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rspatial.github.io/terra/reference/rast.html">rast</a></span><span class="op">(</span><span class="st">"/global/home/hpc5112/ENSC430/shared_files/pr_Amon_CanESM5_ssp585_r10i1p1f1_gn_201501-210012.nc"</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Subset last 20 years from both files</span></span>
+<span><span class="va">n</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rspatial.github.io/terra/reference/dimensions.html">nlyr</a></span><span class="op">(</span><span class="va">hist</span><span class="op">)</span> <span class="co"># nlyr = number of layers = number of time steps</span></span>
+<span><span class="va">hist</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rspatial.github.io/terra/reference/subset.html">subset</a></span><span class="op">(</span><span class="va">hist</span>, <span class="op">(</span><span class="va">n</span> <span class="op">-</span> <span class="fl">239</span><span class="op">)</span><span class="op">:</span><span class="va">n</span><span class="op">)</span> <span class="co"># last 240 months = 20 years</span></span>
+<span></span>
+<span><span class="va">n</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rspatial.github.io/terra/reference/dimensions.html">nlyr</a></span><span class="op">(</span><span class="va">ssp5</span><span class="op">)</span> <span class="co"># number of layers = number of time steps</span></span>
+<span><span class="va">ssp5</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rspatial.github.io/terra/reference/subset.html">subset</a></span><span class="op">(</span><span class="va">ssp5</span>, <span class="op">(</span><span class="va">n</span> <span class="op">-</span> <span class="fl">239</span><span class="op">)</span><span class="op">:</span><span class="va">n</span><span class="op">)</span> <span class="co"># last 240 months = 20 years</span></span>
+<span></span>
+<span><span class="va">delta</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rspatial.github.io/terra/reference/summarize-generics.html">mean</a></span><span class="op">(</span><span class="va">ssp5</span><span class="op">)</span> <span class="op">-</span> <span class="fu"><a href="https://rspatial.github.io/terra/reference/summarize-generics.html">mean</a></span><span class="op">(</span><span class="va">hist</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Let's change the unit of precipitation from kg m2 s-1 to kg m2 day-1</span></span>
+<span><span class="va">delta</span> <span class="op">&lt;-</span> <span class="va">delta</span> <span class="op">*</span> <span class="fl">86400</span></span>
+<span></span>
+<span><span class="va">my.col</span> <span class="op">=</span> <span class="fu"><a href="https://rspatial.github.io/terra/reference/mappal.html">map.pal</a></span><span class="op">(</span><span class="st">"differences"</span>, n <span class="op">=</span> <span class="fl">100</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rspatial.github.io/terra/reference/plot.html">plot</a></span><span class="op">(</span><span class="va">delta</span>, col <span class="op">=</span> <span class="va">my.col</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/pkg/maps/man/map.html">map</a></span><span class="op">(</span><span class="st">"world2"</span>, add <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
+<div class="inline-figure"><img src="_main_files/figure-html/unnamed-chunk-106-1.png" alt="" width="672"></div>
+<ul>
+<li>Nice, but we want to have the divergence from red to blue at zero</li>
+<li>To achieve this, we need to define the breaks of the color palette</li>
+<li>Also, we will reverse the color, so that blue implies a projected increase in precipitation</li>
+</ul>
+<div class="sourceCode" id="cb117"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># Set the desired range for the palette</span></span>
+<span><span class="va">min_val</span> <span class="op">&lt;-</span> <span class="op">-</span><span class="fl">8</span></span>
+<span><span class="va">max_val</span> <span class="op">&lt;-</span> <span class="fl">8</span></span>
+<span></span>
+<span><span class="co"># Define breaks to control the min and max of the palette</span></span>
+<span><span class="va">breaks</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span><span class="op">(</span><span class="va">min_val</span>, <span class="va">max_val</span>, <span class="fl">2</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">my.col</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rspatial.github.io/terra/reference/flip.html">rev</a></span><span class="op">(</span><span class="fu"><a href="https://rspatial.github.io/terra/reference/mappal.html">map.pal</a></span><span class="op">(</span><span class="st">"differences"</span>, n <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">breaks</span><span class="op">)</span> <span class="op">-</span> <span class="fl">1</span><span class="op">)</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu"><a href="https://rspatial.github.io/terra/reference/plot.html">plot</a></span><span class="op">(</span><span class="va">delta</span>,</span>
+<span>     type <span class="op">=</span> <span class="st">"continuous"</span>,</span>
+<span>     breaks <span class="op">=</span> <span class="va">breaks</span>,</span>
+<span>     col <span class="op">=</span> <span class="va">my.col</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/pkg/maps/man/map.html">map</a></span><span class="op">(</span><span class="st">"world2"</span>, add <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
+<div class="inline-figure"><img src="_main_files/figure-html/unnamed-chunk-107-1.png" alt="" width="672"></div>
+<ul>
+<li>Great, but are the projected changes statistically significant?</li>
+<li>Let’s apply a t-test for each grid cell and mark all grid cells where the projected change is statistically significant at the 0.05-level</li>
+<li>Before we do that, let’s practice how to do a t-test in the first place</li>
+</ul>
+<div class="sourceCode" id="cb118"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># Create two random data sets</span></span>
+<span><span class="va">a</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/Uniform.html">runif</a></span><span class="op">(</span>n <span class="op">=</span> <span class="fl">100</span>, min <span class="op">=</span> <span class="fl">10</span>, max <span class="op">=</span> <span class="fl">20</span><span class="op">)</span></span>
+<span><span class="va">b</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/Uniform.html">runif</a></span><span class="op">(</span>n <span class="op">=</span> <span class="fl">100</span>, min <span class="op">=</span> <span class="fl">11</span>, max <span class="op">=</span> <span class="fl">21</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Test whether the mean of both data sets is statistically different</span></span>
+<span><span class="va">pvalue</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/t.test.html">t.test</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">a</span>,</span>
+<span>                 y <span class="op">=</span> <span class="va">b</span>,</span>
+<span>                 alternative <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"two.sided"</span><span class="op">)</span><span class="op">)</span><span class="op">$</span><span class="va">p.value</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="va">pvalue</span><span class="op">)</span></span></code></pre></div>
+<pre><code>## [1] 0.001720864</code></pre>
+<ul>
+<li><p>Are the means statistically significant at the 0.05 level?</p></li>
+<li><p>OK, let’s apply this to the projected change in precipitation</p></li>
+</ul>
+<div class="sourceCode" id="cb120"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># Load data</span></span>
+<span><span class="va">hist</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rspatial.github.io/terra/reference/rast.html">rast</a></span><span class="op">(</span><span class="st">"/global/home/hpc5112/ENSC430/shared_files/pr_Amon_CanESM5_historical_r10i1p1f1_gn_185001-201412.nc"</span><span class="op">)</span></span>
+<span><span class="va">ssp5</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rspatial.github.io/terra/reference/rast.html">rast</a></span><span class="op">(</span><span class="st">"/global/home/hpc5112/ENSC430/shared_files/pr_Amon_CanESM5_ssp585_r10i1p1f1_gn_201501-210012.nc"</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Subset last 20 years from both files</span></span>
+<span><span class="va">n</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rspatial.github.io/terra/reference/dimensions.html">nlyr</a></span><span class="op">(</span><span class="va">hist</span><span class="op">)</span> <span class="co"># nlyr = number of layers = number of time steps</span></span>
+<span><span class="va">hist</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rspatial.github.io/terra/reference/subset.html">subset</a></span><span class="op">(</span><span class="va">hist</span>, <span class="op">(</span><span class="va">n</span> <span class="op">-</span> <span class="fl">239</span><span class="op">)</span><span class="op">:</span><span class="va">n</span><span class="op">)</span> <span class="co"># last 240 months = 20 years</span></span>
+<span></span>
+<span><span class="va">n</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rspatial.github.io/terra/reference/dimensions.html">nlyr</a></span><span class="op">(</span><span class="va">ssp5</span><span class="op">)</span> <span class="co"># number of layers = number of time steps</span></span>
+<span><span class="va">ssp5</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rspatial.github.io/terra/reference/subset.html">subset</a></span><span class="op">(</span><span class="va">ssp5</span>, <span class="op">(</span><span class="va">n</span> <span class="op">-</span> <span class="fl">239</span><span class="op">)</span><span class="op">:</span><span class="va">n</span><span class="op">)</span> <span class="co"># last 240 months = 20 years</span></span>
+<span></span>
+<span><span class="co"># Define a function that performs a t-test and returns the p-value</span></span>
+<span><span class="va">ttest.fun</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="op">{</span></span>
+<span>  <span class="va">n</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="op">/</span> <span class="fl">2</span></span>
+<span>  <span class="va">a</span> <span class="op">&lt;-</span> <span class="va">x</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="va">n</span><span class="op">]</span></span>
+<span>  <span class="va">b</span> <span class="op">&lt;-</span> <span class="va">x</span><span class="op">[</span><span class="op">(</span><span class="va">n</span> <span class="op">+</span> <span class="fl">1</span><span class="op">)</span><span class="op">:</span><span class="op">(</span><span class="fl">2</span> <span class="op">*</span> <span class="va">n</span><span class="op">)</span><span class="op">]</span></span>
+<span>  <span class="va">pvalue</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/t.test.html">t.test</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">a</span>,</span>
+<span>                   y <span class="op">=</span> <span class="va">b</span>,</span>
+<span>                   alternative <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"two.sided"</span><span class="op">)</span><span class="op">)</span><span class="op">$</span><span class="va">p.value</span></span>
+<span>  <span class="kw"><a href="https://rdrr.io/r/base/function.html">return</a></span><span class="op">(</span><span class="va">pvalue</span><span class="op">)</span></span>
+<span><span class="op">}</span></span>
+<span></span>
+<span><span class="co"># Apply the t-test function to each cell in the raster stacks</span></span>
+<span><span class="va">pvalue.gridCell</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rspatial.github.io/terra/reference/app.html">app</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="va">hist</span>, <span class="va">ssp5</span><span class="op">)</span>, fun <span class="op">=</span> <span class="va">ttest.fun</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Plot the p-values raster</span></span>
+<span><span class="fu"><a href="https://rspatial.github.io/terra/reference/plot.html">plot</a></span><span class="op">(</span><span class="va">pvalue.gridCell</span><span class="op">)</span></span></code></pre></div>
+<div class="inline-figure"><img src="_main_files/figure-html/unnamed-chunk-109-1.png" alt="" width="672"></div>
+<ul>
+<li>Now let’s create a mask where all grid cells with statistically significant changes have no value (NA) while all others have a value of one</li>
+</ul>
+<div class="sourceCode" id="cb121"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">pvalue.gridCell</span><span class="op">[</span><span class="va">pvalue.gridCell</span><span class="op">&lt;</span><span class="fl">0.05</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="cn">NA</span> <span class="co"># statistically significant changes = NA</span></span>
+<span><span class="va">mask</span> <span class="op">&lt;-</span> <span class="va">pvalue.gridCell</span> <span class="op">-</span> <span class="va">pvalue.gridCell</span> <span class="op">+</span> <span class="fl">1</span> <span class="co"># no statistically significant changes = 1</span></span></code></pre></div>
+<ul>
+<li>Great, now let’s plot our previous map that shows the projected change in precipitation and mask out all grid cells where the projected changes are not statistically significant</li>
+</ul>
+<div class="sourceCode" id="cb122"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rspatial.github.io/terra/reference/plot.html">plot</a></span><span class="op">(</span></span>
+<span>  <span class="va">delta</span>,</span>
+<span>  type <span class="op">=</span> <span class="st">"continuous"</span>,</span>
+<span>  breaks <span class="op">=</span> <span class="va">breaks</span>,</span>
+<span>  col <span class="op">=</span> <span class="va">my.col</span>,</span>
+<span>  main <span class="op">=</span> <span class="st">"Projected Changes in Annual Mean Precipitation \n from 1995-2014 to 2081-2100 (CanESM5, SSP5-8.5)"</span>,</span>
+<span>  font.main <span class="op">=</span> <span class="fl">1</span></span>
+<span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu"><a href="https://rspatial.github.io/terra/reference/plot.html">plot</a></span><span class="op">(</span><span class="va">mask</span>,</span>
+<span>     add <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>     legend <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>     col <span class="op">=</span> <span class="st">"white"</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/pkg/maps/man/map.html">map</a></span><span class="op">(</span><span class="st">"world2"</span>, add <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/mtext.html">mtext</a></span><span class="op">(</span><span class="st">"mm per day"</span>, side <span class="op">=</span> <span class="fl">4</span>, line <span class="op">=</span> <span class="fl">0.75</span><span class="op">)</span></span></code></pre></div>
+<div class="inline-figure"><img src="_main_files/figure-html/unnamed-chunk-111-1.png" alt="" width="672"></div>
+<ul>
+<li>Why do we assess the changes between two periods (1995-2014 and 2081-2100) rather than two years (e.g. 1995 and 2100)?</li>
+</ul>
+</div>
+<div id="climate-extremes" class="section level2" number="4.3">
+<h2>
+<span class="header-section-number">4.3</span> Climate Extremes<a class="anchor" aria-label="anchor" href="#climate-extremes"><i class="fas fa-link"></i></a>
+</h2>
+<ul>
+<li>Next we will use the <a href="https://cran.r-project.org/web/packages/ClimInd/index.html">ClimInd</a> R-package to compute climate indices</li>
+<li>The package contains 138 standard climate indices at monthly, seasonal and annual resolution</li>
+<li>The indices characterize different aspects of the frequency, intensity and duration of extreme events</li>
+<li>Input variables consist of surface air temperature, precipitation, relative humidity, wind speed, cloudiness, solar radiation, and snow cover</li>
+<li>The package includes Temperature based indices (42), Precipitation based indices (22), Bioclimatic indices (21), Wind-based indices (5), Aridity/continentality indices (10), Snow-based indices (13), Cloud/radiation based indices (6), Drought indices (8), Fire indices (5), and Tourism indices (5)</li>
+<li>Let’s first practice a simple example using random data</li>
+</ul>
+<div class="sourceCode" id="cb123"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># Generate random data with dates in month/day/year format</span></span>
+<span><span class="va">dates</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/as.Date.html">as.Date</a></span><span class="op">(</span><span class="st">"1990/1/1"</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/as.Date.html">as.Date</a></span><span class="op">(</span><span class="st">"1999/12/31"</span><span class="op">)</span>, <span class="st">"days"</span><span class="op">)</span></span>
+<span><span class="va">dates</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/format.html">format</a></span><span class="op">(</span><span class="va">dates</span>, <span class="st">"%m/%d/%Y"</span><span class="op">)</span></span>
+<span><span class="va">data</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/Uniform.html">runif</a></span><span class="op">(</span>n<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">dates</span><span class="op">)</span>, min <span class="op">=</span> <span class="fl">0</span>, max <span class="op">=</span> <span class="fl">5</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rspatial.github.io/terra/reference/names.html">names</a></span><span class="op">(</span><span class="va">data</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="va">dates</span></span>
+<span></span>
+<span><span class="co"># Let's pretend our data consists of daily precipitation in mm/day</span></span>
+<span><span class="co"># Let's compute consecutive dry days</span></span>
+<span></span>
+<span><span class="va">my.cdd</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/ClimInd/man/cdd.html">cdd</a></span><span class="op">(</span><span class="va">data</span>, data_names <span class="op">=</span> <span class="cn">NULL</span>, time.scale <span class="op">=</span> <span class="st">"YEAR"</span>, na.rm <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="va">my.cdd</span><span class="op">)</span></span></code></pre></div>
+<pre><code>## 1990 1991 1992 1993 1994 1995 1996 1997 1998 1999 
+##    3    5    4    3    4    3    5    4    3    3</code></pre>
+<ul>
+<li>Great, now let’s apply our new skill to climate model data</li>
+<li>Download future daily temperature and precipitation data (CanESM5, SSP5-8.5, r10i1p1f1)</li>
+</ul>
+<div class="sourceCode" id="cb125"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># Daily future precipitation</span></span>
+<span><span class="va">file_path</span> <span class="op">&lt;-</span> <span class="st">"/global/home/hpcXXXX"</span></span>
+<span><span class="va">url</span> <span class="op">&lt;-</span> <span class="st">"http://crd-esgf-drc.ec.gc.ca/thredds/fileServer/esgD_dataroot/AR6/CMIP6/ScenarioMIP/CCCma/CanESM5/ssp585/r10i1p1f1/day/pr/gn/v20190429/pr_day_CanESM5_ssp585_r10i1p1f1_gn_20150101-21001231.nc"</span></span>
+<span><span class="va">file_name</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/basename.html">basename</a></span><span class="op">(</span><span class="va">url</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/utils/download.file.html">download.file</a></span><span class="op">(</span><span class="va">url</span>, <span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste</a></span><span class="op">(</span><span class="va">file_path</span>, <span class="va">file_name</span>, sep <span class="op">=</span> <span class="st">""</span><span class="op">)</span>, mode <span class="op">=</span> <span class="st">"wb"</span>, timeout<span class="op">=</span><span class="fl">300</span><span class="op">)</span></span>
+<span></span>
+<span></span>
+<span><span class="co"># Daily future temperature</span></span>
+<span><span class="va">url</span> <span class="op">&lt;-</span> <span class="st">"http://crd-esgf-drc.ec.gc.ca/thredds/fileServer/esgD_dataroot/AR6/CMIP6/ScenarioMIP/CCCma/CanESM5/ssp585/r10i1p1f1/day/tas/gn/v20190429/tas_day_CanESM5_ssp585_r10i1p1f1_gn_20150101-21001231.nc"</span></span>
+<span><span class="va">file_name</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/basename.html">basename</a></span><span class="op">(</span><span class="va">url</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/utils/download.file.html">download.file</a></span><span class="op">(</span><span class="va">url</span>, <span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste</a></span><span class="op">(</span><span class="va">file_path</span>, <span class="va">file_name</span>, sep <span class="op">=</span> <span class="st">""</span><span class="op">)</span>, mode <span class="op">=</span> <span class="st">"wb"</span><span class="op">)</span></span></code></pre></div>
+</div>
+<div id="consecutive-wet-days" class="section level2" number="4.4">
+<h2>
+<span class="header-section-number">4.4</span> Consecutive Wet Days<a class="anchor" aria-label="anchor" href="#consecutive-wet-days"><i class="fas fa-link"></i></a>
+</h2>
+<ul>
+<li>Compute consecutive dry days using the <code>cdd</code> function provided by the <a href="https://cran.r-project.org/web/packages/ClimInd/index.html">ClimInd</a> R-package</li>
+</ul>
+<div class="sourceCode" id="cb126"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># Load daily precipitation data</span></span>
+<span><span class="va">pr</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rspatial.github.io/terra/reference/rast.html">rast</a></span><span class="op">(</span><span class="st">"/global/home/hpc5112/ENSC430/shared_files/pr_day_CanESM5_ssp585_r10i1p1f1_gn_20150101-21001231.nc"</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Let's subset four years for testing purposes</span></span>
+<span><span class="va">data</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rspatial.github.io/terra/reference/subset.html">subset</a></span><span class="op">(</span><span class="va">pr</span>, <span class="fl">1</span><span class="op">:</span><span class="fl">1460</span><span class="op">)</span></span>
+<span><span class="va">data</span> <span class="op">&lt;-</span> <span class="va">data</span> <span class="op">*</span> <span class="fl">86400</span> <span class="co"># convert from kg m-2 s-1 to mm day-1</span></span>
+<span></span>
+<span>  <span class="va">dates</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rspatial.github.io/terra/reference/time.html">time</a></span><span class="op">(</span><span class="va">data</span><span class="op">)</span></span>
+<span>  <span class="va">dates</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/format.html">format</a></span><span class="op">(</span><span class="va">dates</span>, <span class="st">"%m/%d/%Y"</span><span class="op">)</span></span>
+<span>  <span class="fu"><a href="https://rspatial.github.io/terra/reference/names.html">names</a></span><span class="op">(</span><span class="va">data</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="va">dates</span></span>
+<span>  </span>
+<span><span class="co"># Define a function that calculated consecutive dry days</span></span>
+<span><span class="va">cdd.fun</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="op">{</span></span>
+<span>   <span class="va">my.cdd</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/ClimInd/man/cdd.html">cdd</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">x</span>, time.scale <span class="op">=</span> <span class="st">"YEAR"</span>, na.rm <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
+<span>  <span class="kw"><a href="https://rdrr.io/r/base/function.html">return</a></span><span class="op">(</span><span class="va">my.cdd</span><span class="op">)</span></span>
+<span><span class="op">}</span></span>
+<span></span>
+<span><span class="co"># Apply function to each gridcell</span></span>
+<span><span class="va">cdd.gridCell</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rspatial.github.io/terra/reference/app.html">app</a></span><span class="op">(</span><span class="va">data</span>, fun <span class="op">=</span> <span class="va">cdd.fun</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># You now have a raster stack with one layer for each year</span></span>
+<span><span class="co"># print(cdd.gridCell)</span></span>
+<span></span>
+<span><span class="co"># Let's plot the first year</span></span>
+<span><span class="va">my.col</span> <span class="op">=</span> <span class="fu"><a href="https://rspatial.github.io/terra/reference/flip.html">rev</a></span><span class="op">(</span><span class="fu"><a href="https://rspatial.github.io/terra/reference/mappal.html">map.pal</a></span><span class="op">(</span><span class="st">"magma"</span>, n<span class="op">=</span><span class="fl">100</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="va">firstLayer</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rspatial.github.io/terra/reference/subset.html">subset</a></span><span class="op">(</span><span class="va">cdd.gridCell</span>, <span class="fl">1</span><span class="op">:</span><span class="fl">1</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rspatial.github.io/terra/reference/plot.html">plot</a></span><span class="op">(</span><span class="va">firstLayer</span>, col <span class="op">=</span> <span class="va">my.col</span>, main <span class="op">=</span> <span class="st">"Consecutive Dry Days"</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/pkg/maps/man/map.html">map</a></span><span class="op">(</span><span class="st">"world2"</span>, add <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
+<div class="inline-figure"><img src="_main_files/figure-html/unnamed-chunk-114-1.png" alt="" width="672"></div>
+</div>
+<div id="consecutive-wet-days-1" class="section level2" number="4.5">
+<h2>
+<span class="header-section-number">4.5</span> Consecutive Wet Days<a class="anchor" aria-label="anchor" href="#consecutive-wet-days-1"><i class="fas fa-link"></i></a>
+</h2>
+<ul>
+<li>Compute consecutive wet days using the <code>cwd</code> function provided by the <a href="https://cran.r-project.org/web/packages/ClimInd/index.html">ClimInd</a> R-package</li>
+<li>Use the script above as a template</li>
+<li>Your results should look similar to the Figure below</li>
+</ul>
+<div class="inline-figure"><img src="_main_files/figure-html/unnamed-chunk-115-1.png" alt="" width="672"></div>
+</div>
+<div id="linear-trend-of-consecutive-dry-days" class="section level2" number="4.6">
+<h2>
+<span class="header-section-number">4.6</span> Linear trend of consecutive dry days<a class="anchor" aria-label="anchor" href="#linear-trend-of-consecutive-dry-days"><i class="fas fa-link"></i></a>
+</h2>
+<ul>
+<li>Compute the linear trend in consecutive dry days from 2015 to 2100</li>
+<li>Before you start, let me briefly show you how you calculate the linear trend of a variable</li>
+</ul>
+<div class="sourceCode" id="cb127"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># Sample time series data</span></span>
+<span><span class="va">time</span> <span class="op">&lt;-</span> <span class="fl">1</span><span class="op">:</span><span class="fl">10</span>  <span class="co"># Independent variable (e.g., time in years)</span></span>
+<span><span class="va">temperature</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/Uniform.html">runif</a></span><span class="op">(</span>n <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">time</span><span class="op">)</span>, min <span class="op">=</span> <span class="fl">1</span>, max <span class="op">=</span> <span class="fl">3</span><span class="op">)</span> <span class="op">*</span> <span class="va">time</span></span>
+<span></span>
+<span><span class="co"># Fit a linear model (trend)</span></span>
+<span><span class="va">trend_model</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span><span class="op">(</span><span class="va">temperature</span> <span class="op">~</span> <span class="va">time</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Extract the slope (coefficient for 'time')</span></span>
+<span><span class="va">slope</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/coef.html">coef</a></span><span class="op">(</span><span class="va">trend_model</span><span class="op">)</span><span class="op">[</span><span class="st">"time"</span><span class="op">]</span></span>
+<span></span>
+<span><span class="co"># Print the slope</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="va">slope</span><span class="op">)</span></span></code></pre></div>
+<pre><code>##     time 
+## 2.014124</code></pre>
+<div class="sourceCode" id="cb129"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># Plot time series</span></span>
+<span><span class="fu"><a href="https://rspatial.github.io/terra/reference/plot.html">plot</a></span><span class="op">(</span><span class="va">time</span>, <span class="va">temperature</span>,type <span class="op">=</span> <span class="st">"l"</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/abline.html">abline</a></span><span class="op">(</span><span class="va">trend_model</span>, col<span class="op">=</span><span class="st">"red"</span>, lwd<span class="op">=</span><span class="fl">2</span><span class="op">)</span></span></code></pre></div>
+<div class="inline-figure"><img src="_main_files/figure-html/unnamed-chunk-116-1.png" alt="" width="672"></div>
+<ul>
+<li>Calculating climate extremes from daily data is computationally expensive</li>
+<li>To speed things up, let’s focus on one region</li>
+<li>Let’s first crop Australia and then perform the calculation for the region</li>
+</ul>
+<div class="sourceCode" id="cb130"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># Load daily precipitation data</span></span>
+<span><span class="va">data</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rspatial.github.io/terra/reference/rast.html">rast</a></span><span class="op">(</span><span class="st">"/global/home/hpc5112/ENSC430/shared_files/pr_day_CanESM5_ssp585_r10i1p1f1_gn_20150101-21001231.nc"</span><span class="op">)</span></span>
+<span><span class="co"># Let's focus on Australia</span></span>
+<span><span class="va">data</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rspatial.github.io/terra/reference/crop.html">crop</a></span><span class="op">(</span>x<span class="op">=</span><span class="va">data</span>, y <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">100</span>,<span class="fl">170</span>,<span class="op">-</span><span class="fl">50</span>,<span class="fl">0</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<ul>
+<li>Now, calculate the trend of consecutive dry days for each grid cell</li>
+<li>To achieve this, define a function that calculates the slope of a linear regression</li>
+<li>Apply this function to each grid cell</li>
+<li>Your results should look similar to the Figure below</li>
+</ul>
+<div class="sourceCode" id="cb131"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># Load daily precipitation data</span></span>
+<span><span class="va">data</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rspatial.github.io/terra/reference/rast.html">rast</a></span><span class="op">(</span><span class="st">"/global/home/hpc5112/ENSC430/shared_files/pr_day_CanESM5_ssp585_r10i1p1f1_gn_20150101-21001231.nc"</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Let's focus on Australia</span></span>
+<span><span class="va">data</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rspatial.github.io/terra/reference/crop.html">crop</a></span><span class="op">(</span>x<span class="op">=</span><span class="va">data</span>, y <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">100</span>,<span class="fl">170</span>,<span class="op">-</span><span class="fl">50</span>,<span class="fl">0</span><span class="op">)</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">data</span> <span class="op">&lt;-</span> <span class="va">data</span> <span class="op">*</span> <span class="fl">86400</span> <span class="co"># convert from kg m-2 s-1 to mm day-1</span></span>
+<span></span>
+<span>  <span class="va">dates</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rspatial.github.io/terra/reference/time.html">time</a></span><span class="op">(</span><span class="va">data</span><span class="op">)</span></span>
+<span>  <span class="va">dates</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/format.html">format</a></span><span class="op">(</span><span class="va">dates</span>, <span class="st">"%m/%d/%Y"</span><span class="op">)</span></span>
+<span>  <span class="fu"><a href="https://rspatial.github.io/terra/reference/names.html">names</a></span><span class="op">(</span><span class="va">data</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="va">dates</span></span>
+<span>  </span>
+<span><span class="co"># Define a function that calculates consecutive dry days</span></span>
+<span><span class="va">cdd.fun</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="op">{</span></span>
+<span>   <span class="va">my.cdd</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/ClimInd/man/cdd.html">cdd</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">x</span>, time.scale <span class="op">=</span> <span class="st">"YEAR"</span>, na.rm <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
+<span>  <span class="kw"><a href="https://rdrr.io/r/base/function.html">return</a></span><span class="op">(</span><span class="va">my.cdd</span><span class="op">)</span></span>
+<span><span class="op">}</span></span>
+<span></span>
+<span><span class="co"># Apply function to each gridcell</span></span>
+<span><span class="va">cdd.gridCell</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rspatial.github.io/terra/reference/app.html">app</a></span><span class="op">(</span><span class="va">data</span>, fun <span class="op">=</span> <span class="va">cdd.fun</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">n</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rspatial.github.io/terra/reference/dimensions.html">nlyr</a></span><span class="op">(</span><span class="va">cdd.gridCell</span><span class="op">)</span></span>
+<span><span class="va">time</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span><span class="op">(</span><span class="fl">1</span>, <span class="va">n</span>, <span class="fl">1</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Define a function that calculates a linear trend</span></span>
+<span><span class="va">trend.fun</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="op">{</span></span>
+<span>   <span class="va">linear.model</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span><span class="op">(</span><span class="va">x</span> <span class="op">~</span> <span class="va">time</span><span class="op">)</span></span>
+<span>   <span class="va">trend</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/coef.html">coef</a></span><span class="op">(</span><span class="va">linear.model</span><span class="op">)</span><span class="op">[</span><span class="st">"time"</span><span class="op">]</span></span>
+<span>  <span class="kw"><a href="https://rdrr.io/r/base/function.html">return</a></span><span class="op">(</span><span class="va">trend</span><span class="op">)</span></span>
+<span><span class="op">}</span></span>
+<span></span>
+<span><span class="co"># Apply function to each gridcell</span></span>
+<span><span class="va">trend</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rspatial.github.io/terra/reference/app.html">app</a></span><span class="op">(</span><span class="va">cdd.gridCell</span>, fun <span class="op">=</span> <span class="va">trend.fun</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Set the desired range for the palette</span></span>
+<span><span class="va">min_val</span> <span class="op">&lt;-</span> <span class="op">-</span><span class="fl">1</span></span>
+<span><span class="va">max_val</span> <span class="op">&lt;-</span> <span class="fl">1</span></span>
+<span></span>
+<span><span class="co"># Define breaks to control the min and max of the palette</span></span>
+<span><span class="va">breaks</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span><span class="op">(</span><span class="va">min_val</span>, <span class="va">max_val</span>, <span class="fl">0.1</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">my.col</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rspatial.github.io/terra/reference/mappal.html">map.pal</a></span><span class="op">(</span><span class="st">"differences"</span>, n <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">breaks</span><span class="op">)</span> <span class="op">-</span> <span class="fl">1</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu"><a href="https://rspatial.github.io/terra/reference/plot.html">plot</a></span><span class="op">(</span><span class="va">trend</span>, col <span class="op">=</span> <span class="va">my.col</span>, </span>
+<span>  type <span class="op">=</span> <span class="st">"continuous"</span>,</span>
+<span>  breaks <span class="op">=</span> <span class="va">breaks</span>,</span>
+<span>  main <span class="op">=</span> <span class="st">"Change in Consecutive Dry Days per year (2015-2100)"</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/pkg/maps/man/map.html">map</a></span><span class="op">(</span><span class="st">"world2"</span>, add <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
+<div class="inline-figure"><img src="_main_files/figure-html/unnamed-chunk-118-1.png" alt="" width="672"></div>
+</div>
+<div id="consecutive-dry-days-time-series" class="section level2" number="4.7">
+<h2>
+<span class="header-section-number">4.7</span> Consecutive dry days time series<a class="anchor" aria-label="anchor" href="#consecutive-dry-days-time-series"><i class="fas fa-link"></i></a>
+</h2>
+<ul>
+<li>Next, plot a time series of consecutive dry days for the cropped region</li>
+<li>To do that, use the <code>global</code> function in the <code>terra</code> package</li>
+<li>Your results should look like the Figure below</li>
+</ul>
+<div class="sourceCode" id="cb132"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">cdd.mean</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rspatial.github.io/terra/reference/global.html">global</a></span><span class="op">(</span><span class="va">cdd.gridCell</span>, <span class="va">mean</span>, na.rm <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">years</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/colnames.html">rownames</a></span><span class="op">(</span><span class="va">cdd.mean</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rspatial.github.io/terra/reference/plot.html">plot</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">years</span>, y <span class="op">=</span> <span class="va">cdd.mean</span><span class="op">$</span><span class="va">mean</span>, </span>
+<span>     type <span class="op">=</span> <span class="st">"l"</span>,</span>
+<span>     ylab <span class="op">=</span> <span class="st">"CDD in Australia"</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/abline.html">abline</a></span><span class="op">(</span><span class="va">trend_model</span>, col<span class="op">=</span><span class="st">"red"</span>, lwd<span class="op">=</span><span class="fl">2</span><span class="op">)</span></span></code></pre></div>
+<div class="inline-figure"><img src="_main_files/figure-html/unnamed-chunk-119-1.png" alt="" width="672"></div>
+</div>
+<div id="analysis-of-an-extreme-climate-index-of-your-choice-and-region" class="section level2" number="4.8">
+<h2>
+<span class="header-section-number">4.8</span> Analysis of an extreme climate index of your choice and region<a class="anchor" aria-label="anchor" href="#analysis-of-an-extreme-climate-index-of-your-choice-and-region"><i class="fas fa-link"></i></a>
+</h2>
+<ul>
+<li>Repeat the previous two exercises but for a different region of the globe and a different climate index</li>
+<li>The climate indices are provided by the <a href="https://cran.r-project.org/web/packages/ClimInd/index.html">ClimInd</a> package</li>
+</ul>
+</div>
+</div>
+  <div class="chapter-nav">
+<div class="prev"><a href="week-3-understanding-environmental-systems-ii.html"><span class="header-section-number">3</span> Week 3: Understanding Environmental Systems (II)</a></div>
+<div class="next"><a href="week-5-climate-projections-and-impacts-ii.html"><span class="header-section-number">5</span> Week 5: Climate Projections and Impacts (II)</a></div>
+</div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
+    <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
+      <ul class="nav navbar-nav">
+<li><a class="nav-link" href="#week-4-climate-projections-and-impacts-i"><span class="header-section-number">4</span> Week 4: Climate Projections and Impacts (I)</a></li>
+<li><a class="nav-link" href="#earth-system-grid-federation-esgf"><span class="header-section-number">4.1</span> Earth System Grid Federation (ESGF)</a></li>
+<li><a class="nav-link" href="#open-process-and-plot-netcdf-files"><span class="header-section-number">4.2</span> Open, process, and plot netcdf files</a></li>
+<li><a class="nav-link" href="#climate-extremes"><span class="header-section-number">4.3</span> Climate Extremes</a></li>
+<li><a class="nav-link" href="#consecutive-wet-days"><span class="header-section-number">4.4</span> Consecutive Wet Days</a></li>
+<li><a class="nav-link" href="#consecutive-wet-days-1"><span class="header-section-number">4.5</span> Consecutive Wet Days</a></li>
+<li><a class="nav-link" href="#linear-trend-of-consecutive-dry-days"><span class="header-section-number">4.6</span> Linear trend of consecutive dry days</a></li>
+<li><a class="nav-link" href="#consecutive-dry-days-time-series"><span class="header-section-number">4.7</span> Consecutive dry days time series</a></li>
+<li><a class="nav-link" href="#analysis-of-an-extreme-climate-index-of-your-choice-and-region"><span class="header-section-number">4.8</span> Analysis of an extreme climate index of your choice and region</a></li>
+</ul>
+
+      <div class="book-extra">
+        <ul class="list-unstyled">
+          
+        </ul>
+</div>
+    </nav>
+</div>
+
+</div>
+</div> <!-- .container -->
+
+<footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
+
+  <div class="col-12 col-md-6 mt-3">
+    <p>"<strong>ENSC 430</strong>" was written by Christian Seiler. </p>
+  </div>
+
+  <div class="col-12 col-md-6 mt-3">
+    <p>This book was built by the <a class="text-light" href="https://bookdown.org">bookdown</a> R package.</p>
+  </div>
+
+</div></div>
+</footer><!-- dynamically load mathjax for compatibility with self-contained --><script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script><script type="text/x-mathjax-config">const popovers = document.querySelectorAll('a.footnote-ref[data-toggle="popover"]');
+for (let popover of popovers) {
+  const div = document.createElement('div');
+  div.setAttribute('style', 'position: absolute; top: 0, left:0; width:0, height:0, overflow: hidden; visibility: hidden;');
+  div.innerHTML = popover.getAttribute('data-content');
+
+  var has_math = div.querySelector("span.math");
+  if (has_math) {
+    document.body.appendChild(div);
+    MathJax.Hub.Queue(["Typeset", MathJax.Hub, div]);
+    MathJax.Hub.Queue(function() {
+      popover.setAttribute('data-content', div.innerHTML);
+      document.body.removeChild(div);
+    })
+  }
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,671 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<title>Chapter 5 Week 5: Climate Projections and Impacts (II) | ENSC 430</title>
+<meta name="author" content="Christian Seiler">
+<meta name="generator" content="bookdown 0.47 with bs4_book()">
+<meta property="og:title" content="Chapter 5 Week 5: Climate Projections and Impacts (II) | ENSC 430">
+<meta property="og:type" content="book">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Chapter 5 Week 5: Climate Projections and Impacts (II) | ENSC 430">
+<!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
+<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.12.0/transition.js"></script><script src="libs/bs3compat-0.12.0/tabs.js"></script><script src="libs/bs3compat-0.12.0/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
+<script src="libs/bs4_book-1.0.0/bs4_book.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- CSS --><style type="text/css">
+    
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  </style>
+<meta name="description" content="Load the required R packages: rm(list = ls()) library(terra) library(maps) library(ClimInd) library(climetrics) library(rts) Today you will work with the following climate model data from ESGF:...">
+<meta property="og:description" content="Load the required R packages: rm(list = ls()) library(terra) library(maps) library(ClimInd) library(climetrics) library(rts) Today you will work with the following climate model data from ESGF:...">
+<meta name="twitter:description" content="Load the required R packages: rm(list = ls()) library(terra) library(maps) library(ClimInd) library(climetrics) library(rts) Today you will work with the following climate model data from ESGF:...">
+</head>
+<body data-spy="scroll" data-target="#toc">
+
+<div class="container-fluid">
+<div class="row">
+  <header class="col-sm-12 col-lg-3 sidebar sidebar-book"><a class="sr-only sr-only-focusable" href="#content">Skip to main content</a>
+
+    <div class="d-flex align-items-start justify-content-between">
+      <h1>
+        <a href="index.html" title="">ENSC 430</a>
+      </h1>
+      <button class="btn btn-outline-primary d-lg-none ml-2 mt-1" type="button" data-toggle="collapse" data-target="#main-nav" aria-expanded="true" aria-controls="main-nav"><i class="fas fa-bars"></i><span class="sr-only">Show table of contents</span></button>
+    </div>
+
+    <div id="main-nav" class="collapse-lg">
+      <form role="search">
+        <input id="search" class="form-control" type="search" placeholder="Search" aria-label="Search">
+</form>
+
+      <nav aria-label="Table of contents"><h2>Table of contents</h2>
+        <ul class="book-toc list-unstyled">
+<li><a class="" href="index.html">ENSC 430A/B</a></li>
+<li><a class="" href="week-1-climate-change.html"><span class="header-section-number">1</span> Week 1: Climate Change</a></li>
+<li><a class="" href="week-2-understanding-environmental-systems-i.html"><span class="header-section-number">2</span> Week 2: Understanding Environmental Systems (I)</a></li>
+<li><a class="" href="week-3-understanding-environmental-systems-ii.html"><span class="header-section-number">3</span> Week 3: Understanding Environmental Systems (II)</a></li>
+<li><a class="" href="week-4-climate-projections-and-impacts-i.html"><span class="header-section-number">4</span> Week 4: Climate Projections and Impacts (I)</a></li>
+<li><a class="active" href="week-5-climate-projections-and-impacts-ii.html"><span class="header-section-number">5</span> Week 5: Climate Projections and Impacts (II)</a></li>
+<li><a class="" href="week-6-climate-projections-and-impacts-iii.html"><span class="header-section-number">6</span> Week 6: Climate Projections and Impacts (III)</a></li>
+<li><a class="" href="week-7-observing-environmental-change-i.html"><span class="header-section-number">7</span> Week 7: Observing Environmental Change (I)</a></li>
+<li><a class="" href="week-8-observing-environmental-change-ii.html"><span class="header-section-number">8</span> Week 8: Observing Environmental Change (II)</a></li>
+<li><a class="" href="week-9-observing-environmental-change-iii.html"><span class="header-section-number">9</span> Week 9: Observing Environmental Change (III)</a></li>
+<li><a class="" href="week-10-climate-futures-and-solutions-i.html"><span class="header-section-number">10</span> Week 10: Climate Futures and Solutions (I)</a></li>
+<li><a class="" href="week-11-climate-futures-and-solutions-ii.html"><span class="header-section-number">11</span> Week 11: Climate Futures and Solutions (II)</a></li>
+<li><a class="" href="week-12-capstone-project.html"><span class="header-section-number">12</span> Week 12: Capstone Project</a></li>
+</ul>
+
+        <div class="book-extra">
+          
+        </div>
+      </nav>
+</div>
+  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="week-5-climate-projections-and-impacts-ii" class="section level1" number="5">
+<h1>
+<span class="header-section-number">5</span> Week 5: Climate Projections and Impacts (II)<a class="anchor" aria-label="anchor" href="#week-5-climate-projections-and-impacts-ii"><i class="fas fa-link"></i></a>
+</h1>
+<p>Load the required R packages:</p>
+<div class="sourceCode" id="cb133"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/rm.html">rm</a></span><span class="op">(</span>list <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/ls.html">ls</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://rspatial.org/">terra</a></span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/adeckmyn/maps">maps</a></span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://gitlab.com/indecis-eu/indecis">ClimInd</a></span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://r-gis.net/">climetrics</a></span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://r-gis.net/">rts</a></span><span class="op">)</span></span></code></pre></div>
+<p>Today you will work with the following climate model data from ESGF:</p>
+<ul>
+<li><a href="http://crd-esgf-drc.ec.gc.ca/thredds/fileServer/esgC_dataroot/AR6/CMIP6/CMIP/CCCma/CanESM5/historical/r10i1p1f1/Amon/tas/gn/v20190429/tas_Amon_CanESM5_historical_r10i1p1f1_gn_185001-201412.nc">Monthly mean temperature, historical</a></li>
+<li><a href="http://crd-esgf-drc.ec.gc.ca/thredds/fileServer/esgC_dataroot/AR6/CMIP6/CMIP/CCCma/CanESM5/historical/r10i1p1f1/Amon/tasmin/gn/v20190429/tasmin_Amon_CanESM5_historical_r10i1p1f1_gn_185001-201412.nc">Monthly min temperature, historical</a></li>
+<li><a href="http://crd-esgf-drc.ec.gc.ca/thredds/fileServer/esgC_dataroot/AR6/CMIP6/CMIP/CCCma/CanESM5/historical/r10i1p1f1/Amon/tasmax/gn/v20190429/tasmax_Amon_CanESM5_historical_r10i1p1f1_gn_185001-201412.nc">Monthly max temperature, historical</a></li>
+<li><a href="http://crd-esgf-drc.ec.gc.ca/thredds/fileServer/esgD_dataroot/AR6/CMIP6/ScenarioMIP/CCCma/CanESM5/ssp585/r10i1p1f1/Amon/tas/gn/v20190429/tas_Amon_CanESM5_ssp585_r10i1p1f1_gn_201501-210012.nc">Monthly mean temperature, SSP585</a></li>
+<li><a href="http://crd-esgf-drc.ec.gc.ca/thredds/fileServer/esgD_dataroot/AR6/CMIP6/ScenarioMIP/CCCma/CanESM5/ssp585/r10i1p1f1/Amon/tasmin/gn/v20190429/tasmin_Amon_CanESM5_ssp585_r10i1p1f1_gn_201501-210012.nc">Monthly min temperature, SSP585</a></li>
+<li><a href="http://crd-esgf-drc.ec.gc.ca/thredds/fileServer/esgD_dataroot/AR6/CMIP6/ScenarioMIP/CCCma/CanESM5/ssp585/r10i1p1f1/Amon/tasmax/gn/v20190429/tasmax_Amon_CanESM5_ssp585_r10i1p1f1_gn_201501-210012.nc">Monthly max temperature, SSP585</a></li>
+<li><a href="http://crd-esgf-drc.ec.gc.ca/thredds/fileServer/esgC_dataroot/AR6/CMIP6/CMIP/CCCma/CanESM5/historical/r10i1p1f1/Amon/pr/gn/v20190429/pr_Amon_CanESM5_historical_r10i1p1f1_gn_185001-201412.nc">Monthly mean precipitation, historical</a></li>
+<li><a href="http://crd-esgf-drc.ec.gc.ca/thredds/fileServer/esgD_dataroot/AR6/CMIP6/ScenarioMIP/CCCma/CanESM5/ssp585/r10i1p1f1/Amon/pr/gn/v20190429/pr_Amon_CanESM5_ssp585_r10i1p1f1_gn_201501-210012.nc">Monthly mean precipitation, SSP585</a></li>
+<li><a href="http://esgf.nci.org.au/thredds/fileServer/replica/CMIP6/CMIP/CCCma/CanESM5/historical/r10i1p1f1/fx/sftlf/gn/v20190429/sftlf_fx_CanESM5_historical_r10i1p1f1_gn.nc">Land Cover Fraction</a></li>
+</ul>
+<p>I have added those files to our <code>shared_files</code> folder. In the Winter term you will need to download your own data sets. Here is how you would download the files to your home directory:</p>
+<div id="koeppen-geiger-climate-classification" class="section level2" number="5.1">
+<h2>
+<span class="header-section-number">5.1</span> Koeppen-Geiger Climate Classification<a class="anchor" aria-label="anchor" href="#koeppen-geiger-climate-classification"><i class="fas fa-link"></i></a>
+</h2>
+<p>Create a Koeppen-Geiger climate classification for the historical period</p>
+<div class="sourceCode" id="cb134"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># Read data</span></span>
+<span><span class="co">## Temperature:</span></span>
+<span><span class="va">tmean</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rspatial.github.io/terra/reference/rast.html">rast</a></span><span class="op">(</span><span class="st">"/global/home/hpc5112/ENSC430/shared_files/tas_Amon_CanESM5_historical_r10i1p1f1_gn_185001-201412.nc"</span><span class="op">)</span></span>
+<span><span class="va">tmin</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rspatial.github.io/terra/reference/rast.html">rast</a></span><span class="op">(</span><span class="st">"/global/home/hpc5112/ENSC430/shared_files/tasmin_Amon_CanESM5_historical_r10i1p1f1_gn_185001-201412.nc"</span><span class="op">)</span></span>
+<span><span class="va">tmax</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rspatial.github.io/terra/reference/rast.html">rast</a></span><span class="op">(</span><span class="st">"/global/home/hpc5112/ENSC430/shared_files/tasmax_Amon_CanESM5_historical_r10i1p1f1_gn_185001-201412.nc"</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co">## Precipitation</span></span>
+<span><span class="va">pr</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rspatial.github.io/terra/reference/rast.html">rast</a></span><span class="op">(</span><span class="st">"/global/home/hpc5112/ENSC430/shared_files/pr_Amon_CanESM5_historical_r10i1p1f1_gn_185001-201412.nc"</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co">## Land Cover Fraction:</span></span>
+<span><span class="va">lcf</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rspatial.github.io/terra/reference/rast.html">rast</a></span><span class="op">(</span><span class="st">"/global/home/hpc5112/ENSC430/shared_files/sftlf_fx_CanESM5_historical_r10i1p1f1_gn.nc"</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Get the dates</span></span>
+<span><span class="va">dates</span> <span class="op">&lt;-</span> <span class="fu">terra</span><span class="fu">::</span><span class="fu"><a href="https://rspatial.github.io/terra/reference/time.html">time</a></span><span class="op">(</span><span class="va">tmean</span><span class="op">)</span></span>
+<span><span class="va">dates</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/format.html">format</a></span><span class="op">(</span><span class="va">dates</span>, <span class="st">"%Y-%m-%d"</span><span class="op">)</span></span>
+<span><span class="va">dates</span> <span class="op">&lt;-</span> <span class="fu">base</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/r/base/as.Date.html">as.Date</a></span><span class="op">(</span><span class="va">dates</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Create raster time series</span></span>
+<span><span class="va">tmean</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/rts/man/rts.html">rts</a></span><span class="op">(</span><span class="va">tmean</span>, <span class="va">dates</span><span class="op">)</span></span>
+<span><span class="va">tmin</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/rts/man/rts.html">rts</a></span><span class="op">(</span><span class="va">tmin</span>, <span class="va">dates</span><span class="op">)</span></span>
+<span><span class="va">tmax</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/rts/man/rts.html">rts</a></span><span class="op">(</span><span class="va">tmax</span>, <span class="va">dates</span><span class="op">)</span></span>
+<span><span class="va">pr</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/rts/man/rts.html">rts</a></span><span class="op">(</span><span class="va">pr</span>, <span class="va">dates</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Create a 12-month climatological mean dataset for the 30-year period 1971-01-16 to 2000-12-16</span></span>
+<span><span class="va">tmean12</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/climetrics/man/applyMonths.html">apply.months</a></span><span class="op">(</span><span class="va">tmean</span><span class="op">[[</span><span class="st">'1971/2000'</span><span class="op">]</span><span class="op">]</span>,<span class="st">'mean'</span><span class="op">)</span></span>
+<span><span class="va">tmin12</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/climetrics/man/applyMonths.html">apply.months</a></span><span class="op">(</span><span class="va">tmin</span><span class="op">[[</span><span class="st">'1971/2000'</span><span class="op">]</span><span class="op">]</span>,<span class="st">'mean'</span><span class="op">)</span></span>
+<span><span class="va">tmax12</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/climetrics/man/applyMonths.html">apply.months</a></span><span class="op">(</span><span class="va">tmax</span><span class="op">[[</span><span class="st">'1971/2000'</span><span class="op">]</span><span class="op">]</span>,<span class="st">'mean'</span><span class="op">)</span></span>
+<span><span class="va">pr12</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/climetrics/man/applyMonths.html">apply.months</a></span><span class="op">(</span><span class="va">pr</span><span class="op">[[</span><span class="st">'1971/2000'</span><span class="op">]</span><span class="op">]</span>,<span class="st">'mean'</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Convert units from K to C</span></span>
+<span><span class="va">tmean12</span> <span class="op">&lt;-</span> <span class="va">tmean12</span> <span class="op">-</span> <span class="fl">273.15</span></span>
+<span><span class="va">tmin12</span> <span class="op">&lt;-</span> <span class="va">tmin12</span> <span class="op">-</span> <span class="fl">273.15</span></span>
+<span><span class="va">tmax12</span> <span class="op">&lt;-</span> <span class="va">tmax12</span> <span class="op">-</span> <span class="fl">273.15</span></span>
+<span></span>
+<span><span class="co"># Convert units from kg m-2 s-1 to mm per month</span></span>
+<span><span class="va">pr12</span> <span class="op">&lt;-</span> <span class="va">pr12</span> <span class="op">*</span> <span class="fl">86400</span> <span class="op">*</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">31</span>, <span class="fl">28.25</span>, <span class="fl">31</span>, <span class="fl">30</span>, <span class="fl">31</span>, <span class="fl">30</span>, <span class="fl">31</span>, <span class="fl">31</span>, <span class="fl">30</span>, <span class="fl">31</span>, <span class="fl">30</span>, <span class="fl">31</span><span class="op">)</span> </span>
+<span></span>
+<span><span class="co"># Create a mask that masks out the ocean</span></span>
+<span><span class="co">## Set all grid cells with a land cover fraction equal to zero to NA:</span></span>
+<span><span class="va">lcf</span><span class="op">[</span><span class="va">lcf</span> <span class="op">==</span> <span class="fl">0</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="cn">NA</span></span>
+<span><span class="co">## Set all other values equal to one</span></span>
+<span><span class="va">lcf</span> <span class="op">&lt;-</span> <span class="va">lcf</span> <span class="op">-</span> <span class="va">lcf</span> <span class="op">+</span> <span class="fl">1</span></span>
+<span></span>
+<span><span class="va">k1</span> <span class="op">&lt;-</span> <span class="fu">climetrics</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/climetrics/man/kgc.html">kgc</a></span><span class="op">(</span>p<span class="op">=</span><span class="va">pr12</span> ,tmin <span class="op">=</span> <span class="va">tmin12</span> ,tmax<span class="op">=</span><span class="va">tmax12</span>, tmean <span class="op">=</span> <span class="va">tmean12</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Mask out the ocean</span></span>
+<span><span class="va">k1</span> <span class="op">&lt;-</span> <span class="va">k1</span> <span class="op">*</span> <span class="va">lcf</span></span>
+<span></span>
+<span><span class="co"># Plot data</span></span>
+<span><span class="va">my.col</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rspatial.github.io/terra/reference/mappal.html">map.pal</a></span><span class="op">(</span><span class="st">"elevation"</span>, n <span class="op">=</span> <span class="fl">30</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu"><a href="https://rspatial.github.io/terra/reference/plot.html">plot</a></span><span class="op">(</span><span class="va">k1</span>, col <span class="op">=</span> <span class="va">my.col</span>, main <span class="op">=</span> <span class="st">"Koeppen-Geiger Climate Classification \n (CanESM5, historical)"</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/pkg/maps/man/map.html">map</a></span><span class="op">(</span><span class="st">"world2"</span>, add <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
+<div class="inline-figure"><img src="_main_files/figure-html/unnamed-chunk-123-1.png" alt="" width="672"></div>
+<p>The numbers in the Figure above refer to the following Koeppen-Geiger climate classification</p>
+<div class="inline-table"><table class="table table-sm">
+<colgroup>
+<col width="8%">
+<col width="10%">
+<col width="8%">
+<col width="72%">
+</colgroup>
+<thead><tr class="header">
+<th>Code</th>
+<th>Class</th>
+<th>Name</th>
+<th>Description</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td>1</td>
+<td>1</td>
+<td>Af</td>
+<td>Tropical, rainforest</td>
+</tr>
+<tr class="even">
+<td>2</td>
+<td>1</td>
+<td>Am</td>
+<td>Tropical, monsoon</td>
+</tr>
+<tr class="odd">
+<td>3</td>
+<td>1</td>
+<td>Aw</td>
+<td>Tropical, savannah</td>
+</tr>
+<tr class="even">
+<td>4</td>
+<td>2</td>
+<td>BWh</td>
+<td>Arid, desert hot</td>
+</tr>
+<tr class="odd">
+<td>5</td>
+<td>2</td>
+<td>BWk</td>
+<td>Arid, desert cold</td>
+</tr>
+<tr class="even">
+<td>6</td>
+<td>2</td>
+<td>BSh</td>
+<td>Arid, steppe hot</td>
+</tr>
+<tr class="odd">
+<td>7</td>
+<td>2</td>
+<td>BSk</td>
+<td>Arid, steppe cold</td>
+</tr>
+<tr class="even">
+<td>8</td>
+<td>3</td>
+<td>Csa</td>
+<td>Temperate, dry and hot summer</td>
+</tr>
+<tr class="odd">
+<td>9</td>
+<td>3</td>
+<td>Csb</td>
+<td>Temperate, dry and warm summer</td>
+</tr>
+<tr class="even">
+<td>10</td>
+<td>3</td>
+<td>Csc</td>
+<td>Temperate, dry and cold summer</td>
+</tr>
+<tr class="odd">
+<td>11</td>
+<td>3</td>
+<td>Cwa</td>
+<td>Temperate, dry winter and hot summer</td>
+</tr>
+<tr class="even">
+<td>12</td>
+<td>3</td>
+<td>Cwb</td>
+<td>Temperate, dry winter and warm summer</td>
+</tr>
+<tr class="odd">
+<td>13</td>
+<td>3</td>
+<td>Cwc</td>
+<td>Temperate, dry winter and cold summer</td>
+</tr>
+<tr class="even">
+<td>14</td>
+<td>3</td>
+<td>Cfa</td>
+<td>Temperate, without dry season and hot summer</td>
+</tr>
+<tr class="odd">
+<td>15</td>
+<td>3</td>
+<td>Cfb</td>
+<td>Temperate, without dry season and warm summer</td>
+</tr>
+<tr class="even">
+<td>16</td>
+<td>3</td>
+<td>Cfc</td>
+<td>Temperate, without dry season and cold summer</td>
+</tr>
+<tr class="odd">
+<td>17</td>
+<td>4</td>
+<td>Dsa</td>
+<td>Cold, dry and hot summer</td>
+</tr>
+<tr class="even">
+<td>18</td>
+<td>4</td>
+<td>Dsb</td>
+<td>Cold, dry and warm summer</td>
+</tr>
+<tr class="odd">
+<td>19</td>
+<td>4</td>
+<td>Dsc</td>
+<td>Cold, dry and cool summer</td>
+</tr>
+<tr class="even">
+<td>20</td>
+<td>4</td>
+<td>Dsd</td>
+<td>Cold, dry summer and very cold winter</td>
+</tr>
+<tr class="odd">
+<td>21</td>
+<td>4</td>
+<td>Dwa</td>
+<td>Cold, dry winter and hot summer</td>
+</tr>
+<tr class="even">
+<td>22</td>
+<td>4</td>
+<td>Dwb</td>
+<td>Cold, dry winter and warm summer</td>
+</tr>
+<tr class="odd">
+<td>23</td>
+<td>4</td>
+<td>Dwc</td>
+<td>Cold, dry winter and cool summer</td>
+</tr>
+<tr class="even">
+<td>24</td>
+<td>4</td>
+<td>Dwd</td>
+<td>Cold, dry winter and very cold winter</td>
+</tr>
+<tr class="odd">
+<td>25</td>
+<td>4</td>
+<td>Dfa</td>
+<td>Cold, without dry season and hot summer</td>
+</tr>
+<tr class="even">
+<td>26</td>
+<td>4</td>
+<td>Dfb</td>
+<td>Cold, without dry season and warm summer</td>
+</tr>
+<tr class="odd">
+<td>27</td>
+<td>4</td>
+<td>Dfc</td>
+<td>Cold, without dry season and cool summer</td>
+</tr>
+<tr class="even">
+<td>28</td>
+<td>4</td>
+<td>Dfd</td>
+<td>Cold, without dry season and very cold winter</td>
+</tr>
+<tr class="odd">
+<td>29</td>
+<td>5</td>
+<td>ET</td>
+<td>Polar, tundra</td>
+</tr>
+<tr class="even">
+<td>30</td>
+<td>5</td>
+<td>EF</td>
+<td>Polar, frost</td>
+</tr>
+</tbody>
+</table></div>
+<p>Create a Koeppen-Geiger climate classification for the future based on CanESM5 SSP5 for the 2071-2100 period. Call the Koeppen-Geiger climate classification <code>k2</code> rather than <code>k1</code>. Your output should look similar to the Figure below</p>
+<div class="inline-figure"><img src="_main_files/figure-html/unnamed-chunk-124-1.png" alt="" width="672"></div>
+<p>Let’s plot them next to each other:</p>
+<div class="sourceCode" id="cb135"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/par.html">par</a></span><span class="op">(</span>mfrow <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">2</span>,<span class="fl">1</span><span class="op">)</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">my.col</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rspatial.github.io/terra/reference/mappal.html">map.pal</a></span><span class="op">(</span><span class="st">"elevation"</span>, n <span class="op">=</span> <span class="fl">30</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu"><a href="https://rspatial.github.io/terra/reference/plot.html">plot</a></span><span class="op">(</span><span class="va">k1</span>, col <span class="op">=</span> <span class="va">my.col</span>, main <span class="op">=</span> <span class="st">"Koeppen-Geiger (CanESM5, historical)"</span>, cex.main <span class="op">=</span> <span class="fl">0.75</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/pkg/maps/man/map.html">map</a></span><span class="op">(</span><span class="st">"world2"</span>, add <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu"><a href="https://rspatial.github.io/terra/reference/plot.html">plot</a></span><span class="op">(</span><span class="va">k2</span>, col <span class="op">=</span> <span class="va">my.col</span>, main <span class="op">=</span> <span class="st">"Koeppen-Geiger (CanESM5, SSP585)"</span>, cex.main <span class="op">=</span> <span class="fl">0.75</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/pkg/maps/man/map.html">map</a></span><span class="op">(</span><span class="st">"world2"</span>, add <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
+<div class="inline-figure"><img src="_main_files/figure-html/unnamed-chunk-125-1.png" alt="" width="672"></div>
+<p>Let’s evaluate how the Tundra changes. From the table above you can see that the Tundra corresponds to class <code>29</code>. Isolate class 29 in both <code>k1</code>, and <code>k2</code>, convert them to polygons, and plot them on top of each other using hatched areas.</p>
+<div class="sourceCode" id="cb136"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">k1.class</span> <span class="op">&lt;-</span> <span class="va">k1</span></span>
+<span><span class="va">k1.class</span><span class="op">[</span><span class="va">k1.class</span> <span class="op">!=</span> <span class="fl">29</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="cn">NA</span></span>
+<span><span class="va">k1.class</span> <span class="op">&lt;-</span> <span class="va">k1.class</span> <span class="op">-</span> <span class="va">k1.class</span> <span class="op">+</span> <span class="fl">1</span></span>
+<span></span>
+<span></span>
+<span><span class="va">k2.class</span> <span class="op">&lt;-</span> <span class="va">k2</span></span>
+<span><span class="va">k2.class</span><span class="op">[</span><span class="va">k2.class</span> <span class="op">!=</span> <span class="fl">29</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="cn">NA</span></span>
+<span><span class="va">k2.class</span> <span class="op">&lt;-</span> <span class="va">k2.class</span> <span class="op">-</span> <span class="va">k2.class</span> <span class="op">+</span> <span class="fl">1</span></span>
+<span></span>
+<span><span class="co"># Convert to polygon</span></span>
+<span><span class="va">k1.class</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rspatial.github.io/terra/reference/as.polygons.html">as.polygons</a></span><span class="op">(</span><span class="va">k1.class</span>, dissolve <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
+<span><span class="va">k2.class</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rspatial.github.io/terra/reference/as.polygons.html">as.polygons</a></span><span class="op">(</span><span class="va">k2.class</span>, dissolve <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Crop region (Extratropics, Northern Hemisphere)</span></span>
+<span><span class="va">region</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">360</span>, <span class="fl">40</span>, <span class="fl">90</span><span class="op">)</span></span>
+<span><span class="va">k1.class</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rspatial.github.io/terra/reference/crop.html">crop</a></span><span class="op">(</span><span class="va">k1.class</span>, <span class="va">region</span><span class="op">)</span></span>
+<span><span class="va">k2.class</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rspatial.github.io/terra/reference/crop.html">crop</a></span><span class="op">(</span><span class="va">k2.class</span>, <span class="va">region</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu"><a href="https://rdrr.io/pkg/maps/man/map.html">map</a></span><span class="op">(</span></span>
+<span>  <span class="st">"world2"</span>,</span>
+<span>  interior <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>  boundary <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  fill <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  col <span class="op">=</span> <span class="st">"grey"</span>,</span>
+<span>  border <span class="op">=</span> <span class="st">"grey"</span>,</span>
+<span>  bg <span class="op">=</span> <span class="st">"NA"</span>,</span>
+<span>  add <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>  ylim <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">40</span>, <span class="fl">90</span><span class="op">)</span></span>
+<span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/box.html">box</a></span><span class="op">(</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu"><a href="https://rspatial.github.io/terra/reference/plot.html">plot</a></span><span class="op">(</span></span>
+<span>  <span class="va">k1.class</span>,</span>
+<span>  density <span class="op">=</span> <span class="fl">15</span>,</span>
+<span>  add <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  col <span class="op">=</span> <span class="st">"blue"</span>,</span>
+<span>  border <span class="op">=</span> <span class="st">"blue"</span></span>
+<span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rspatial.github.io/terra/reference/plot.html">plot</a></span><span class="op">(</span></span>
+<span>  <span class="va">k2.class</span>,</span>
+<span>  density <span class="op">=</span> <span class="fl">15</span>,</span>
+<span>  add <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  col <span class="op">=</span> <span class="st">"red"</span>,</span>
+<span>  border <span class="op">=</span> <span class="st">"red"</span>,</span>
+<span>  angle <span class="op">=</span> <span class="op">-</span><span class="fl">45</span></span>
+<span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/legend.html">legend</a></span><span class="op">(</span></span>
+<span>  <span class="st">"topleft"</span>,</span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Current Tundra"</span>, <span class="st">"Future Tundra"</span><span class="op">)</span> ,</span>
+<span>  pch <span class="op">=</span> <span class="fl">16</span>,</span>
+<span>  col <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"blue"</span>, <span class="st">"red"</span><span class="op">)</span> ,</span>
+<span>  bty <span class="op">=</span> <span class="st">"n"</span></span>
+<span><span class="op">)</span></span></code></pre></div>
+<div class="inline-figure"><img src="_main_files/figure-html/unnamed-chunk-126-1.png" alt="" width="672"></div>
+<ul>
+<li>Repeat the same exercise for a different climate class</li>
+</ul>
+</div>
+<div id="climate-change-metrics" class="section level2" number="5.2">
+<h2>
+<span class="header-section-number">5.2</span> Climate Change Metrics<a class="anchor" aria-label="anchor" href="#climate-change-metrics"><i class="fas fa-link"></i></a>
+</h2>
+<ul>
+<li>Create raster time series used for computing climate change metrics below</li>
+</ul>
+<div class="sourceCode" id="cb137"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/rm.html">rm</a></span><span class="op">(</span>list <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/ls.html">ls</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="co"># Read data</span></span>
+<span><span class="va">tmean.hist</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rspatial.github.io/terra/reference/rast.html">rast</a></span><span class="op">(</span><span class="st">"/global/home/hpc5112/ENSC430/shared_files/tas_Amon_CanESM5_historical_r10i1p1f1_gn_185001-201412.nc"</span><span class="op">)</span></span>
+<span><span class="va">tmin.hist</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rspatial.github.io/terra/reference/rast.html">rast</a></span><span class="op">(</span><span class="st">"/global/home/hpc5112/ENSC430/shared_files/tasmin_Amon_CanESM5_historical_r10i1p1f1_gn_185001-201412.nc"</span><span class="op">)</span></span>
+<span><span class="va">tmax.hist</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rspatial.github.io/terra/reference/rast.html">rast</a></span><span class="op">(</span><span class="st">"/global/home/hpc5112/ENSC430/shared_files/tasmax_Amon_CanESM5_historical_r10i1p1f1_gn_185001-201412.nc"</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">tmean.ssp</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rspatial.github.io/terra/reference/rast.html">rast</a></span><span class="op">(</span><span class="st">"/global/home/hpc5112/ENSC430/shared_files/tas_Amon_CanESM5_ssp585_r10i1p1f1_gn_201501-210012.nc"</span><span class="op">)</span></span>
+<span><span class="va">tmin.ssp</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rspatial.github.io/terra/reference/rast.html">rast</a></span><span class="op">(</span><span class="st">"/global/home/hpc5112/ENSC430/shared_files/tasmin_Amon_CanESM5_ssp585_r10i1p1f1_gn_201501-210012.nc"</span><span class="op">)</span></span>
+<span><span class="va">tmax.ssp</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rspatial.github.io/terra/reference/rast.html">rast</a></span><span class="op">(</span><span class="st">"/global/home/hpc5112/ENSC430/shared_files/tasmax_Amon_CanESM5_ssp585_r10i1p1f1_gn_201501-210012.nc"</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">pr.hist</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rspatial.github.io/terra/reference/rast.html">rast</a></span><span class="op">(</span><span class="st">"/global/home/hpc5112/ENSC430/shared_files/pr_Amon_CanESM5_historical_r10i1p1f1_gn_185001-201412.nc"</span><span class="op">)</span></span>
+<span><span class="va">pr.ssp</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rspatial.github.io/terra/reference/rast.html">rast</a></span><span class="op">(</span><span class="st">"/global/home/hpc5112/ENSC430/shared_files/pr_Amon_CanESM5_ssp585_r10i1p1f1_gn_201501-210012.nc"</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Stack past and future together</span></span>
+<span><span class="va">tmean</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="va">tmean.hist</span>, <span class="va">tmean.ssp</span><span class="op">)</span></span>
+<span><span class="va">tmin</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="va">tmin.hist</span>, <span class="va">tmin.ssp</span><span class="op">)</span></span>
+<span><span class="va">tmax</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="va">tmax.hist</span>, <span class="va">tmax.ssp</span><span class="op">)</span></span>
+<span><span class="va">pr</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="va">pr.hist</span>, <span class="va">pr.ssp</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/rm.html">rm</a></span><span class="op">(</span><span class="va">tmean.hist</span>, <span class="va">tmean.ssp</span>,</span>
+<span>   <span class="va">tmin.hist</span>, <span class="va">tmin.ssp</span>,</span>
+<span>   <span class="va">tmax.hist</span>, <span class="va">tmax.ssp</span>,</span>
+<span>   <span class="va">pr.hist</span>, <span class="va">pr.ssp</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Get the dates</span></span>
+<span><span class="va">dates</span> <span class="op">&lt;-</span> <span class="fu">terra</span><span class="fu">::</span><span class="fu"><a href="https://rspatial.github.io/terra/reference/time.html">time</a></span><span class="op">(</span><span class="va">tmin</span><span class="op">)</span></span>
+<span><span class="va">dates</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/format.html">format</a></span><span class="op">(</span><span class="va">dates</span>, <span class="st">"%Y-%m-%d"</span><span class="op">)</span></span>
+<span><span class="va">dates</span> <span class="op">&lt;-</span> <span class="fu">base</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/r/base/as.Date.html">as.Date</a></span><span class="op">(</span><span class="va">dates</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Convert units from K to C</span></span>
+<span><span class="va">tmean</span> <span class="op">&lt;-</span> <span class="va">tmean</span> <span class="op">-</span> <span class="fl">273.15</span></span>
+<span><span class="va">tmin</span> <span class="op">&lt;-</span> <span class="va">tmin</span> <span class="op">-</span> <span class="fl">273.15</span></span>
+<span><span class="va">tmax</span> <span class="op">&lt;-</span> <span class="va">tmax</span> <span class="op">-</span> <span class="fl">273.15</span></span>
+<span></span>
+<span><span class="co"># Convert units from kg m-2 s-1 to mm per month</span></span>
+<span><span class="va">days_per_month</span> <span class="op">&lt;-</span> <span class="fu">lubridate</span><span class="fu">::</span><span class="fu"><a href="https://lubridate.tidyverse.org/reference/days_in_month.html">days_in_month</a></span><span class="op">(</span><span class="va">dates</span><span class="op">)</span></span>
+<span><span class="va">pr</span> <span class="op">&lt;-</span> <span class="va">pr</span> <span class="op">*</span> <span class="fl">86400</span> <span class="op">*</span> <span class="va">days_per_month</span></span>
+<span></span>
+<span><span class="co"># Create raster time series</span></span>
+<span><span class="va">tmean</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/rts/man/rts.html">rts</a></span><span class="op">(</span><span class="va">tmean</span>, <span class="va">dates</span><span class="op">)</span></span>
+<span><span class="va">tmin</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/rts/man/rts.html">rts</a></span><span class="op">(</span><span class="va">tmin</span>, <span class="va">dates</span><span class="op">)</span></span>
+<span><span class="va">tmax</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/rts/man/rts.html">rts</a></span><span class="op">(</span><span class="va">tmax</span>, <span class="va">dates</span><span class="op">)</span></span>
+<span><span class="va">pr</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/rts/man/rts.html">rts</a></span><span class="op">(</span><span class="va">pr</span>, <span class="va">dates</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Ocean mask</span></span>
+<span><span class="va">lcf</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rspatial.github.io/terra/reference/rast.html">rast</a></span><span class="op">(</span><span class="st">"/global/home/hpc5112/ENSC430/shared_files/sftlf_fx_CanESM5_historical_r10i1p1f1_gn.nc"</span><span class="op">)</span></span>
+<span><span class="co"># Create a mask that masks out the ocean</span></span>
+<span><span class="co">## Set all grid cells with a land cover fraction equal to zero to NA:</span></span>
+<span><span class="va">lcf</span><span class="op">[</span><span class="va">lcf</span> <span class="op">==</span> <span class="fl">0</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="cn">NA</span></span>
+<span><span class="co">## Set all other values equal to one</span></span>
+<span><span class="va">lcf</span> <span class="op">&lt;-</span> <span class="va">lcf</span> <span class="op">-</span> <span class="va">lcf</span> <span class="op">+</span> <span class="fl">1</span></span></code></pre></div>
+<div id="climate-metric-1-standardized-local-anomalies" class="section level3" number="5.2.1">
+<h3>
+<span class="header-section-number">5.2.1</span> Climate Metric (1): Standardized local anomalies<a class="anchor" aria-label="anchor" href="#climate-metric-1-standardized-local-anomalies"><i class="fas fa-link"></i></a>
+</h3>
+<p>Standardized local anomalies give the difference of a variable divided by its historical interannual variability expressed in terms of standard deviation. High standardized anomaly values correspond to large changes compared to its historical inter-annual variability.</p>
+<div class="sourceCode" id="cb138"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">cm1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/climetrics/man/sed.html">sed</a></span><span class="op">(</span><span class="va">pr</span> ,<span class="va">tmin</span> ,<span class="va">tmax</span> , t1<span class="op">=</span><span class="st">'1971/2000'</span>,t2<span class="op">=</span><span class="st">'2071/2100'</span><span class="op">)</span></span>
+<span><span class="va">cm1</span> <span class="op">&lt;-</span> <span class="va">cm1</span> <span class="op">*</span> <span class="va">lcf</span></span>
+<span><span class="fu"><a href="https://rspatial.github.io/terra/reference/plot.html">plot</a></span><span class="op">(</span><span class="va">cm1</span>, col<span class="op">=</span><span class="fu"><a href="https://rspatial.github.io/terra/reference/mappal.html">map.pal</a></span><span class="op">(</span><span class="st">"elevation"</span>, n <span class="op">=</span> <span class="fl">100</span><span class="op">)</span>, main<span class="op">=</span><span class="st">'Standardized Local Anomalies (-)'</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/pkg/maps/man/map.html">map</a></span><span class="op">(</span><span class="st">"world2"</span>, add <span class="op">=</span> <span class="cn">TRUE</span>, interior <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></code></pre></div>
+<div class="inline-figure"><img src="_main_files/figure-html/unnamed-chunk-128-1.png" alt="" width="672"></div>
+<ul>
+<li>In what regions are the projected changes particularly large?</li>
+<li>Are these large changes due to changes in temperature or precipitation?</li>
+<li>To answer this question, calculate the same climate metric for temperature and precipitation separately.</li>
+</ul>
+</div>
+<div id="climate-metric-2-changes-in-probability-of-local-climate-extremes" class="section level3" number="5.2.2">
+<h3>
+<span class="header-section-number">5.2.2</span> Climate Metric (2): Changes in probability of local climate extremes<a class="anchor" aria-label="anchor" href="#climate-metric-2-changes-in-probability-of-local-climate-extremes"><i class="fas fa-link"></i></a>
+</h3>
+<p>This climate metric shows how the probability of climate extremes, expressed as percentiles, are projected to change in the future. The example below assesses the change in the probability of hot (0.95 percentile of monthly mean temperature) and dry (0.05 percentile of precipitation) climate conditions</p>
+<div class="sourceCode" id="cb139"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">cm2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/climetrics/man/localExtreme.html">localExtreme</a></span><span class="op">(</span><span class="va">tmean</span> , <span class="va">pr</span>, t1<span class="op">=</span><span class="st">'1971/2000'</span>,t2<span class="op">=</span><span class="st">'2071/2100'</span>, extreme <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0.95</span>,<span class="fl">0.05</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="va">cm2</span> <span class="op">&lt;-</span> <span class="va">cm2</span> <span class="op">*</span> <span class="va">lcf</span></span>
+<span><span class="fu"><a href="https://rspatial.github.io/terra/reference/plot.html">plot</a></span><span class="op">(</span><span class="va">cm2</span>, col <span class="op">=</span> <span class="fu"><a href="https://rspatial.github.io/terra/reference/mappal.html">map.pal</a></span><span class="op">(</span><span class="st">"elevation"</span>, n <span class="op">=</span> <span class="fl">100</span><span class="op">)</span>, main<span class="op">=</span><span class="st">'Changes in probability of local climate extremes (hot and dry) (-)'</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/pkg/maps/man/map.html">map</a></span><span class="op">(</span><span class="st">"world2"</span>, add <span class="op">=</span> <span class="cn">TRUE</span>, interior <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></code></pre></div>
+<div class="inline-figure"><img src="_main_files/figure-html/unnamed-chunk-131-1.png" alt="" width="672"></div>
+<ul>
+<li>Calculate the same climate metric but for wet extremes</li>
+</ul>
+</div>
+<div id="climate-metric-3-change-in-area-of-analogous-climates" class="section level3" number="5.2.3">
+<h3>
+<span class="header-section-number">5.2.3</span> Climate Metric (3): Change in area of analogous climates<a class="anchor" aria-label="anchor" href="#climate-metric-3-change-in-area-of-analogous-climates"><i class="fas fa-link"></i></a>
+</h3>
+<p>This climate metric gives the relative change in the area of a given climate class in percentage.</p>
+<div class="sourceCode" id="cb140"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">cm3</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/climetrics/man/aaClimate.html">aaClimate</a></span><span class="op">(</span><span class="va">pr</span>, <span class="va">tmin</span>, <span class="va">tmax</span>, <span class="va">tmean</span>, t1<span class="op">=</span><span class="st">'1971/2000'</span>,t2<span class="op">=</span><span class="st">'2071/2100'</span><span class="op">)</span></span>
+<span><span class="va">cm3</span> <span class="op">&lt;-</span> <span class="va">cm3</span> <span class="op">*</span> <span class="va">lcf</span></span>
+<span></span>
+<span><span class="va">breaks</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span><span class="op">(</span><span class="op">-</span><span class="fl">125</span>, <span class="fl">125</span>, <span class="fl">25</span><span class="op">)</span></span>
+<span><span class="va">my.col</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rspatial.github.io/terra/reference/flip.html">rev</a></span><span class="op">(</span><span class="fu"><a href="https://rspatial.github.io/terra/reference/mappal.html">map.pal</a></span><span class="op">(</span><span class="st">"differences"</span>, n <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">breaks</span><span class="op">)</span> <span class="op">-</span> <span class="fl">1</span><span class="op">)</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu"><a href="https://rspatial.github.io/terra/reference/plot.html">plot</a></span><span class="op">(</span><span class="va">cm3</span>, type <span class="op">=</span> <span class="st">"continuous"</span>, col <span class="op">=</span> <span class="va">my.col</span>, breaks <span class="op">=</span> <span class="va">breaks</span>, main<span class="op">=</span><span class="st">'Changes in the Area of Analogous Climate (%)'</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/pkg/maps/man/map.html">map</a></span><span class="op">(</span><span class="st">"world2"</span>, add <span class="op">=</span> <span class="cn">TRUE</span>, interior <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></code></pre></div>
+<div class="inline-figure"><img src="_main_files/figure-html/unnamed-chunk-133-1.png" alt="" width="672"></div>
+</div>
+<div id="climate-metric-4-change-in-the-distance-to-analogous-climates" class="section level3" number="5.2.4">
+<h3>
+<span class="header-section-number">5.2.4</span> Climate Metric (4): Change in the distance to analogous climates<a class="anchor" aria-label="anchor" href="#climate-metric-4-change-in-the-distance-to-analogous-climates"><i class="fas fa-link"></i></a>
+</h3>
+<p>This metric expresses the change in distance to locations with an analogous climate as follows:</p>
+<ul>
+<li><p>Quantify the distances to all cells with analogous climates in the time periods 1 and 2</p></li>
+<li><p>For each cell, calculate the median of the great-circle distances below the 10th percentile of the distribution of all values for time periods 1 and 2</p></li>
+<li><p>Calculate the change in the distances</p></li>
+<li><p>Negative values indicate a decrease in distance</p></li>
+<li><p>Positive values indicate an increase in distance</p></li>
+</ul>
+<div class="sourceCode" id="cb141"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">cm4</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/climetrics/man/daClimate.html">daClimate</a></span><span class="op">(</span>precip <span class="op">=</span> <span class="va">pr</span>, tmin <span class="op">=</span> <span class="va">tmin</span>, tmax <span class="op">=</span> <span class="va">tmax</span>, tmean <span class="op">=</span> <span class="va">tmean</span>, t1<span class="op">=</span><span class="st">'1971/2000'</span>,t2<span class="op">=</span><span class="st">'2071/2100'</span><span class="op">)</span></span>
+<span><span class="va">cm4</span> <span class="op">&lt;-</span> <span class="va">cm4</span><span class="op">/</span><span class="fl">1000</span> <span class="op">*</span> <span class="va">lcf</span></span>
+<span></span>
+<span><span class="va">breaks</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span><span class="op">(</span><span class="op">-</span><span class="fl">2000</span>, <span class="fl">2000</span>, <span class="fl">10</span><span class="op">)</span></span>
+<span><span class="va">my.col</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rspatial.github.io/terra/reference/flip.html">rev</a></span><span class="op">(</span><span class="fu"><a href="https://rspatial.github.io/terra/reference/mappal.html">map.pal</a></span><span class="op">(</span><span class="st">"differences"</span>, n <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">breaks</span><span class="op">)</span> <span class="op">-</span> <span class="fl">1</span><span class="op">)</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu"><a href="https://rspatial.github.io/terra/reference/plot.html">plot</a></span><span class="op">(</span><span class="va">cm4</span>, type <span class="op">=</span> <span class="st">"continuous"</span>, col <span class="op">=</span> <span class="va">my.col</span>, breaks <span class="op">=</span> <span class="va">breaks</span>, main<span class="op">=</span><span class="st">'Change in the distance to analogous climates (km)'</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/pkg/maps/man/map.html">map</a></span><span class="op">(</span><span class="st">"world2"</span>, add <span class="op">=</span> <span class="cn">TRUE</span>, interior <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></code></pre></div>
+<div class="inline-figure"><img src="_main_files/figure-html/unnamed-chunk-134-1.png" alt="" width="672"></div>
+</div>
+<div id="climate-metric-5-novel-climates" class="section level3" number="5.2.5">
+<h3>
+<span class="header-section-number">5.2.5</span> Climate Metric (5): Novel climates<a class="anchor" aria-label="anchor" href="#climate-metric-5-novel-climates"><i class="fas fa-link"></i></a>
+</h3>
+<p>This climate metric quantifies the dissimilarities between climate variables of two time periods. This metric uses standard euclidean distance between each cell in Time 2 and all cells in Time 1 and retains the minimum of those distances. The inter-annual standard deviation for each variable is used for the standardization. The larger the value, the more dissimilar the climate in Time 2 is in relation to the global pool of potential climatic analogues.</p>
+<div class="sourceCode" id="cb142"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">cm5</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/climetrics/man/novelClimate.html">novelClimate</a></span><span class="op">(</span><span class="va">pr</span>, <span class="va">tmin</span>, <span class="va">tmax</span>, t1<span class="op">=</span><span class="st">'1971/2000'</span>,t2<span class="op">=</span><span class="st">'2071/2100'</span><span class="op">)</span></span>
+<span><span class="va">cm5</span> <span class="op">&lt;-</span> <span class="va">cm5</span> <span class="op">*</span> <span class="va">lcf</span></span>
+<span></span>
+<span><span class="fu"><a href="https://rspatial.github.io/terra/reference/plot.html">plot</a></span><span class="op">(</span><span class="va">cm5</span>, col <span class="op">=</span> <span class="fu"><a href="https://rspatial.github.io/terra/reference/mappal.html">map.pal</a></span><span class="op">(</span><span class="st">"elevation"</span>, n <span class="op">=</span> <span class="fl">100</span><span class="op">)</span>, main<span class="op">=</span><span class="st">'Novel Climates'</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/pkg/maps/man/map.html">map</a></span><span class="op">(</span><span class="st">"world2"</span>, add <span class="op">=</span> <span class="cn">TRUE</span>, interior <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></code></pre></div>
+<div class="inline-figure"><img src="_main_files/figure-html/unnamed-chunk-135-1.png" alt="" width="672"></div>
+<ul>
+<li>Is the novel climate in the Amazon due to changes in temperature or precipitation?</li>
+</ul>
+</div>
+<div id="climate-metric-5-climate-change-velocity" class="section level3" number="5.2.6">
+<h3>
+<span class="header-section-number">5.2.6</span> Climate Metric (5): Climate Change Velocity<a class="anchor" aria-label="anchor" href="#climate-metric-5-climate-change-velocity"><i class="fas fa-link"></i></a>
+</h3>
+<ul>
+<li>Ratio of the temporal climatic gradient at a given locality to the spatial climatic gradient across
+neighboring cells</li>
+<li>Example: (Celsius per unit of time) / (Celsius per unit of distance) = distance per unit of time</li>
+<li>The metric represents the speed along Earth’s surface needed to maintain a constant climate</li>
+</ul>
+<div class="sourceCode" id="cb143"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">dv</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/climetrics/man/dVelocity.html">dVelocity</a></span><span class="op">(</span><span class="va">pr</span>, <span class="va">tmin</span>, <span class="va">tmax</span>, t1<span class="op">=</span><span class="st">'1971/2000'</span>,t2<span class="op">=</span><span class="st">'2071/2100'</span><span class="op">)</span></span>
+<span><span class="va">dv</span> <span class="op">&lt;-</span> <span class="va">dv</span> <span class="op">*</span> <span class="va">lcf</span></span>
+<span></span>
+<span><span class="fu"><a href="https://rspatial.github.io/terra/reference/plot.html">plot</a></span><span class="op">(</span><span class="va">dv</span>, col<span class="op">=</span><span class="fu"><a href="https://rspatial.github.io/terra/reference/mappal.html">map.pal</a></span><span class="op">(</span><span class="st">"elevation"</span>, n <span class="op">=</span> <span class="fl">100</span><span class="op">)</span>, main<span class="op">=</span><span class="st">'Velocity of Climate Change (km per year)'</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/pkg/maps/man/map.html">map</a></span><span class="op">(</span><span class="st">"world2"</span>, add <span class="op">=</span> <span class="cn">TRUE</span>, interior <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></code></pre></div>
+<div class="inline-figure"><img src="_main_files/figure-html/unnamed-chunk-138-1.png" alt="" width="672"></div>
+<ul>
+<li>Is climate change velocity generally larger or smaller in mountains? Explain your answer.</li>
+<li>Consider a frog species living in the Amazon of Southern Colombia. Let’s further assume that the frog species is intolerant to changes in climate. How fast does the frog species need to migrate to avoid extinction? Have a look at the map below to find the answer.</li>
+</ul>
+<div class="sourceCode" id="cb144"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">breaks</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">60</span>, <span class="fl">5</span><span class="op">)</span></span>
+<span><span class="va">my.col</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rspatial.github.io/terra/reference/mappal.html">map.pal</a></span><span class="op">(</span><span class="st">"elevation"</span>, n <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">breaks</span><span class="op">)</span> <span class="op">-</span> <span class="fl">1</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rspatial.github.io/terra/reference/plot.html">plot</a></span><span class="op">(</span><span class="va">dv</span>, type <span class="op">=</span> <span class="st">"continuous"</span>, col<span class="op">=</span><span class="va">my.col</span>, breaks <span class="op">=</span> <span class="va">breaks</span>, main<span class="op">=</span><span class="st">'Velocity of Climate Change (km per year)'</span>, xlim <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">280</span>, <span class="fl">320</span><span class="op">)</span>, ylim <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="op">-</span><span class="fl">20</span>, <span class="fl">10</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/pkg/maps/man/map.html">map</a></span><span class="op">(</span><span class="st">"world2"</span>, add <span class="op">=</span> <span class="cn">TRUE</span>, interior <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
+<div class="inline-figure"><img src="_main_files/figure-html/unnamed-chunk-139-1.png" alt="" width="672"></div>
+
+</div>
+</div>
+</div>
+  <div class="chapter-nav">
+<div class="prev"><a href="week-4-climate-projections-and-impacts-i.html"><span class="header-section-number">4</span> Week 4: Climate Projections and Impacts (I)</a></div>
+<div class="next"><a href="week-6-climate-projections-and-impacts-iii.html"><span class="header-section-number">6</span> Week 6: Climate Projections and Impacts (III)</a></div>
+</div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
+    <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
+      <ul class="nav navbar-nav">
+<li><a class="nav-link" href="#week-5-climate-projections-and-impacts-ii"><span class="header-section-number">5</span> Week 5: Climate Projections and Impacts (II)</a></li>
+<li><a class="nav-link" href="#koeppen-geiger-climate-classification"><span class="header-section-number">5.1</span> Koeppen-Geiger Climate Classification</a></li>
+<li>
+<a class="nav-link" href="#climate-change-metrics"><span class="header-section-number">5.2</span> Climate Change Metrics</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#climate-metric-1-standardized-local-anomalies"><span class="header-section-number">5.2.1</span> Climate Metric (1): Standardized local anomalies</a></li>
+<li><a class="nav-link" href="#climate-metric-2-changes-in-probability-of-local-climate-extremes"><span class="header-section-number">5.2.2</span> Climate Metric (2): Changes in probability of local climate extremes</a></li>
+<li><a class="nav-link" href="#climate-metric-3-change-in-area-of-analogous-climates"><span class="header-section-number">5.2.3</span> Climate Metric (3): Change in area of analogous climates</a></li>
+<li><a class="nav-link" href="#climate-metric-4-change-in-the-distance-to-analogous-climates"><span class="header-section-number">5.2.4</span> Climate Metric (4): Change in the distance to analogous climates</a></li>
+<li><a class="nav-link" href="#climate-metric-5-novel-climates"><span class="header-section-number">5.2.5</span> Climate Metric (5): Novel climates</a></li>
+<li><a class="nav-link" href="#climate-metric-5-climate-change-velocity"><span class="header-section-number">5.2.6</span> Climate Metric (5): Climate Change Velocity</a></li>
+</ul>
+</li>
+</ul>
+
+      <div class="book-extra">
+        <ul class="list-unstyled">
+          
+        </ul>
+</div>
+    </nav>
+</div>
+
+</div>
+</div> <!-- .container -->
+
+<footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
+
+  <div class="col-12 col-md-6 mt-3">
+    <p>"<strong>ENSC 430</strong>" was written by Christian Seiler. </p>
+  </div>
+
+  <div class="col-12 col-md-6 mt-3">
+    <p>This book was built by the <a class="text-light" href="https://bookdown.org">bookdown</a> R package.</p>
+  </div>
+
+</div></div>
+</footer><!-- dynamically load mathjax for compatibility with self-contained --><script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script><script type="text/x-mathjax-config">const popovers = document.querySelectorAll('a.footnote-ref[data-toggle="popover"]');
+for (let popover of popovers) {
+  const div = document.createElement('div');
+  div.setAttribute('style', 'position: absolute; top: 0, left:0; width:0, height:0, overflow: hidden; visibility: hidden;');
+  div.innerHTML = popover.getAttribute('data-content');
+
+  var has_math = div.querySelector("span.math");
+  if (has_math) {
+    document.body.appendChild(div);
+    MathJax.Hub.Queue(["Typeset", MathJax.Hub, div]);
+    MathJax.Hub.Queue(function() {
+      popover.setAttribute('data-content', div.innerHTML);
+      document.body.removeChild(div);
+    })
+  }
+}
+</script>
+</body>
+</html>

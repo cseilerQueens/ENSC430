@@ -1,0 +1,551 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<title>Chapter 3 Week 3: Understanding Environmental Systems (II) | ENSC 430</title>
+<meta name="author" content="Christian Seiler">
+<meta name="generator" content="bookdown 0.47 with bs4_book()">
+<meta property="og:title" content="Chapter 3 Week 3: Understanding Environmental Systems (II) | ENSC 430">
+<meta property="og:type" content="book">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Chapter 3 Week 3: Understanding Environmental Systems (II) | ENSC 430">
+<!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
+<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.12.0/transition.js"></script><script src="libs/bs3compat-0.12.0/tabs.js"></script><script src="libs/bs3compat-0.12.0/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
+<script src="libs/bs4_book-1.0.0/bs4_book.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- CSS --><style type="text/css">
+    
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  </style>
+<meta name="description" content="This tutorial covers the following topics: Autoregression Vector autoregression (VAR) Granger Causality Convergent Cross Mapping (CCM) Load the required R packages: library(stats) library(vars) ##...">
+<meta property="og:description" content="This tutorial covers the following topics: Autoregression Vector autoregression (VAR) Granger Causality Convergent Cross Mapping (CCM) Load the required R packages: library(stats) library(vars) ##...">
+<meta name="twitter:description" content="This tutorial covers the following topics: Autoregression Vector autoregression (VAR) Granger Causality Convergent Cross Mapping (CCM) Load the required R packages: library(stats) library(vars) ##...">
+</head>
+<body data-spy="scroll" data-target="#toc">
+
+<div class="container-fluid">
+<div class="row">
+  <header class="col-sm-12 col-lg-3 sidebar sidebar-book"><a class="sr-only sr-only-focusable" href="#content">Skip to main content</a>
+
+    <div class="d-flex align-items-start justify-content-between">
+      <h1>
+        <a href="index.html" title="">ENSC 430</a>
+      </h1>
+      <button class="btn btn-outline-primary d-lg-none ml-2 mt-1" type="button" data-toggle="collapse" data-target="#main-nav" aria-expanded="true" aria-controls="main-nav"><i class="fas fa-bars"></i><span class="sr-only">Show table of contents</span></button>
+    </div>
+
+    <div id="main-nav" class="collapse-lg">
+      <form role="search">
+        <input id="search" class="form-control" type="search" placeholder="Search" aria-label="Search">
+</form>
+
+      <nav aria-label="Table of contents"><h2>Table of contents</h2>
+        <ul class="book-toc list-unstyled">
+<li><a class="" href="index.html">ENSC 430A/B</a></li>
+<li><a class="" href="week-1-climate-change.html"><span class="header-section-number">1</span> Week 1: Climate Change</a></li>
+<li><a class="" href="week-2-understanding-environmental-systems-i.html"><span class="header-section-number">2</span> Week 2: Understanding Environmental Systems (I)</a></li>
+<li><a class="active" href="week-3-understanding-environmental-systems-ii.html"><span class="header-section-number">3</span> Week 3: Understanding Environmental Systems (II)</a></li>
+<li><a class="" href="week-4-climate-projections-and-impacts-i.html"><span class="header-section-number">4</span> Week 4: Climate Projections and Impacts (I)</a></li>
+<li><a class="" href="week-5-climate-projections-and-impacts-ii.html"><span class="header-section-number">5</span> Week 5: Climate Projections and Impacts (II)</a></li>
+<li><a class="" href="week-6-climate-projections-and-impacts-iii.html"><span class="header-section-number">6</span> Week 6: Climate Projections and Impacts (III)</a></li>
+<li><a class="" href="week-7-observing-environmental-change-i.html"><span class="header-section-number">7</span> Week 7: Observing Environmental Change (I)</a></li>
+<li><a class="" href="week-8-observing-environmental-change-ii.html"><span class="header-section-number">8</span> Week 8: Observing Environmental Change (II)</a></li>
+<li><a class="" href="week-9-observing-environmental-change-iii.html"><span class="header-section-number">9</span> Week 9: Observing Environmental Change (III)</a></li>
+<li><a class="" href="week-10-climate-futures-and-solutions-i.html"><span class="header-section-number">10</span> Week 10: Climate Futures and Solutions (I)</a></li>
+<li><a class="" href="week-11-climate-futures-and-solutions-ii.html"><span class="header-section-number">11</span> Week 11: Climate Futures and Solutions (II)</a></li>
+<li><a class="" href="week-12-capstone-project.html"><span class="header-section-number">12</span> Week 12: Capstone Project</a></li>
+</ul>
+
+        <div class="book-extra">
+          
+        </div>
+      </nav>
+</div>
+  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="week-3-understanding-environmental-systems-ii" class="section level1" number="3">
+<h1>
+<span class="header-section-number">3</span> Week 3: Understanding Environmental Systems (II)<a class="anchor" aria-label="anchor" href="#week-3-understanding-environmental-systems-ii"><i class="fas fa-link"></i></a>
+</h1>
+<p>This tutorial covers the following topics:</p>
+<ul>
+<li>Autoregression</li>
+<li>Vector autoregression (VAR)</li>
+<li>Granger Causality</li>
+<li>Convergent Cross Mapping (CCM)</li>
+</ul>
+<p>Load the required R packages:</p>
+<div class="sourceCode" id="cb59"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va">stats</span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://www.pfaffikus.de">vars</a></span><span class="op">)</span></span></code></pre></div>
+<pre><code>## Loading required package: MASS</code></pre>
+<pre><code>## Loading required package: strucchange</code></pre>
+<pre><code>## Loading required package: zoo</code></pre>
+<pre><code>## 
+## Attaching package: 'zoo'</code></pre>
+<pre><code>## The following objects are masked from 'package:base':
+## 
+##     as.Date, as.Date.numeric</code></pre>
+<pre><code>## Loading required package: sandwich</code></pre>
+<pre><code>## Loading required package: urca</code></pre>
+<pre><code>## Loading required package: lmtest</code></pre>
+<div class="sourceCode" id="cb68"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/tpetzoldt/deSolve/">deSolve</a></span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://stscl.github.io/tEDM/">tEDM</a></span><span class="op">)</span></span></code></pre></div>
+<div id="autoregression" class="section level2" number="3.1">
+<h2>
+<span class="header-section-number">3.1</span> Autoregression<a class="anchor" aria-label="anchor" href="#autoregression"><i class="fas fa-link"></i></a>
+</h2>
+<p>A first-order autoregressive model (AR1) is defined as:</p>
+<p><span class="math display">\[ y_t = \beta_0 + \beta_1y_{t-1} + \epsilon_t\]</span>
+The response variable in the previous time period (<span class="math inline">\(y_t\)</span>) is the predictor. If we want to predict <span class="math inline">\(y\)</span> this year (<span class="math inline">\(y_t\)</span>) using measurements from two (rather than one) previous time steps, then we use a second order autoregressive model (AR2):</p>
+<p><span class="math display">\[ y_t = \beta_0 + \beta_1y_{t-1} + \beta_2y_{t-2}+ \epsilon_t\]</span>
+More, generally, a <span class="math inline">\(p\)</span>-order autoregressive model is defined as:</p>
+<p><span class="math display">\[ y_t = \beta_0 + \beta_1y_{t-1} + \beta_2y_{t-2}+...+ \beta_py_{t-p} + \epsilon_t\]</span></p>
+<p>Let’s use a AR2 to forecast an oscillating function.</p>
+<div class="sourceCode" id="cb69"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># Create a sinusoidal time series</span></span>
+<span><span class="va">t</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">20</span>, <span class="fl">0.1</span><span class="op">)</span> <span class="co"># time axis</span></span>
+<span><span class="va">n</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">t</span><span class="op">)</span> <span class="co"># number of time steps</span></span>
+<span><span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/Trig.html">sin</a></span><span class="op">(</span><span class="va">t</span><span class="op">)</span></span>
+<span><span class="va">time_series</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/ts.html">ts</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/plot.html">plot</a></span><span class="op">(</span><span class="va">time_series</span><span class="op">)</span></span></code></pre></div>
+<div class="inline-figure"><img src="_main_files/figure-html/unnamed-chunk-79-1.png" alt="" width="672"></div>
+<p>Next, fit an second-order autoregressive model using Ordinary Least Squares regression (OLS)</p>
+<div class="sourceCode" id="cb70"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">ar_model</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/ar.ols.html">ar.ols</a></span><span class="op">(</span><span class="va">time_series</span>, order.max <span class="op">=</span> <span class="fl">2</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="va">ar_model</span><span class="op">)</span></span></code></pre></div>
+<pre><code>## 
+## Call:
+## ar.ols(x = time_series, order.max = 2)
+## 
+## Coefficients:
+##     1      2  
+##  1.99  -1.00  
+## 
+## Intercept: -0.0003167 (5.822e-16) 
+## 
+## Order selected 2  sigma^2 estimated as  6.72e-29</code></pre>
+<p>The Intercept refers to <span class="math inline">\(\beta_0\)</span> and the coefficients 1 and 2 refer to <span class="math inline">\(\beta_1\)</span> and <span class="math inline">\(\beta_2\)</span>. Our AR2 is therefore:</p>
+<p><span class="math display">\[ y_t = -0.0003167 + 1.99y_{t-1} - 1.00y_{t-2} \]</span></p>
+<p>Let’s plot this function:</p>
+<ul>
+<li>Set parameters</li>
+</ul>
+<div class="sourceCode" id="cb72"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">beta0</span> <span class="op">&lt;-</span> <span class="op">-</span><span class="fl">0.0003167</span> <span class="co"># intercept</span></span>
+<span><span class="va">beta1</span> <span class="op">&lt;-</span> <span class="fl">1.99</span>    <span class="co"># Coefficient of y_{t-1}</span></span>
+<span><span class="va">beta2</span> <span class="op">&lt;-</span> <span class="op">-</span> <span class="fl">1.00</span> <span class="co"># Coefficient of y_{t-2}</span></span></code></pre></div>
+<ul>
+<li>Set the initial values of the time series</li>
+<li>We will need two initial values because we are predicting <span class="math inline">\(y_t\)</span> from <span class="math inline">\(y_{t-1}\)</span> and <span class="math inline">\(y_{t-2}\)</span>
+</li>
+</ul>
+<div class="sourceCode" id="cb73"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">y</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/numeric.html">numeric</a></span><span class="op">(</span><span class="va">n</span><span class="op">)</span></span>
+<span><span class="va">y3</span> <span class="op">&lt;-</span> <span class="va">time_series</span><span class="op">[</span><span class="fl">3</span><span class="op">]</span></span>
+<span><span class="va">y2</span> <span class="op">&lt;-</span> <span class="va">time_series</span><span class="op">[</span><span class="fl">2</span><span class="op">]</span></span>
+<span><span class="va">y</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">2</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="va">y2</span>, <span class="va">y3</span><span class="op">)</span>  <span class="co"># Initial value</span></span></code></pre></div>
+<ul>
+<li>Generate the time series using AR2</li>
+</ul>
+<div class="sourceCode" id="cb74"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="kw">for</span> <span class="op">(</span><span class="va">t</span> <span class="kw">in</span> <span class="fl">3</span><span class="op">:</span><span class="va">n</span><span class="op">)</span> <span class="op">{</span></span>
+<span>  <span class="va">epsilon_t</span> <span class="op">&lt;-</span> <span class="fl">0</span>  <span class="co"># Random error term</span></span>
+<span>  <span class="va">y</span><span class="op">[</span><span class="va">t</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="va">beta0</span> <span class="op">+</span> <span class="va">beta1</span> <span class="op">*</span> <span class="va">y</span><span class="op">[</span><span class="va">t</span><span class="op">-</span><span class="fl">1</span><span class="op">]</span> <span class="op">+</span> <span class="va">beta2</span> <span class="op">*</span> <span class="va">y</span><span class="op">[</span><span class="va">t</span><span class="op">-</span><span class="fl">2</span><span class="op">]</span> <span class="op">+</span> <span class="va">epsilon_t</span></span>
+<span><span class="op">}</span></span></code></pre></div>
+<ul>
+<li>Plot the generated time series</li>
+</ul>
+<div class="sourceCode" id="cb75"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/plot.html">plot</a></span><span class="op">(</span><span class="va">y</span>, type <span class="op">=</span> <span class="st">"l"</span>, col <span class="op">=</span> <span class="st">"blue"</span>, lwd <span class="op">=</span> <span class="fl">2</span>, </span>
+<span>     xlab <span class="op">=</span> <span class="st">"Time"</span>, ylab <span class="op">=</span> <span class="st">"Y_t"</span>, main <span class="op">=</span> <span class="st">"Time Series Generated with AR2"</span><span class="op">)</span></span></code></pre></div>
+<div class="inline-figure"><img src="_main_files/figure-html/unnamed-chunk-84-1.png" alt="" width="672"></div>
+<ul>
+<li>You can reproduce a sinusoidal function using AR, amazing! Given that each <span class="math inline">\(y_t\)</span> depends on previous time steps (in our case <span class="math inline">\(y_{t-1}\)</span> and <span class="math inline">\(y_{t-2}\)</span>), we should be able to use AR to predict the future. Let’s try that next using the <code><a href="https://rdrr.io/r/stats/predict.html">stats::predict</a></code> function.</li>
+</ul>
+<div class="sourceCode" id="cb76"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># Forecast the next 100 steps</span></span>
+<span><span class="va">forecast_length</span> <span class="op">&lt;-</span> <span class="fl">100</span></span>
+<span><span class="va">pred</span> <span class="op">&lt;-</span> <span class="fu">stats</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/r/stats/predict.html">predict</a></span><span class="op">(</span><span class="va">ar_model</span>, n.ahead <span class="op">=</span> <span class="va">forecast_length</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Combine actual and forecasted values</span></span>
+<span><span class="va">combined_series</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="va">time_series</span>, <span class="va">pred</span><span class="op">$</span><span class="va">pred</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Plot the actual time series and the forecast</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/plot.html">plot</a></span><span class="op">(</span></span>
+<span>  <span class="va">combined_series</span>,</span>
+<span>  type <span class="op">=</span> <span class="st">"l"</span>,</span>
+<span>  col <span class="op">=</span> <span class="st">"red"</span>,</span>
+<span>  lwd <span class="op">=</span> <span class="fl">2</span>,</span>
+<span>  xlab <span class="op">=</span> <span class="st">"Time"</span>,</span>
+<span>  ylab <span class="op">=</span> <span class="st">"Value"</span>,</span>
+<span>  main <span class="op">=</span> <span class="st">"Autoregression with OLS"</span></span>
+<span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/lines.html">lines</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="va">n</span>, <span class="va">time_series</span>, col <span class="op">=</span> <span class="st">"black"</span>, lwd <span class="op">=</span> <span class="fl">2</span><span class="op">)</span>  <span class="co"># Actual time series in black</span></span>
+<span></span>
+<span><span class="co"># Add a legend</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/legend.html">legend</a></span><span class="op">(</span></span>
+<span>  <span class="st">"bottomleft"</span>,</span>
+<span>  legend <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Actual"</span>, <span class="st">"Forecast"</span><span class="op">)</span>,</span>
+<span>  col <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"black"</span>, <span class="st">"red"</span><span class="op">)</span>,</span>
+<span>  lwd <span class="op">=</span> <span class="fl">2</span></span>
+<span><span class="op">)</span></span></code></pre></div>
+<div class="inline-figure"><img src="_main_files/figure-html/unnamed-chunk-85-1.png" alt="" width="672"></div>
+<ul>
+<li>The result matches what you intuitively expect. Let’s now see how we can work with multiple variables.</li>
+</ul>
+</div>
+<div id="vector-autoregression-var" class="section level2" number="3.2">
+<h2>
+<span class="header-section-number">3.2</span> Vector autoregression (VAR)<a class="anchor" aria-label="anchor" href="#vector-autoregression-var"><i class="fas fa-link"></i></a>
+</h2>
+<p>Vector autoregression (VAR) extends the idea of autoregression to multivariate time series. Each variable is a linear function of past lags of itself and past lags of the other variables. Suppose we measure two different time series variables, denoted by <span class="math inline">\(x_{t}\)</span> and <span class="math inline">\(y_{t}\)</span>. The first-order vector autoregressive model (VAR(1)) then is:</p>
+<p><span class="math display">\[ x_{t} = \beta_{1} + \beta_{11}  x_{t-1} +  \beta_{12}  y_{t-1} + \epsilon_{1,t} \]</span>
+<span class="math display">\[ y_{t} = \beta_{2} + \beta_{21}  x_{t-1} +  \beta_{22}  y_{t-1} + \epsilon_{2,t} \]</span></p>
+<p>You can see that the variable <span class="math inline">\(x_t\)</span> depends on the 1-lag of itself (<span class="math inline">\(x_{t-1}\)</span>) and of the other variable (<span class="math inline">\(y_{t-1}\)</span>). As for AR, the order of VAR can be increased by including more time lags. Let’s apply VAR to two time series.</p>
+<div class="sourceCode" id="cb77"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/Random.html">set.seed</a></span><span class="op">(</span><span class="fl">1</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Create time-series objects</span></span>
+<span><span class="va">ts1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/ts.html">ts</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">rnorm</a></span><span class="op">(</span>n<span class="op">=</span><span class="fl">5000</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="va">ts2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/ts.html">ts</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">rnorm</a></span><span class="op">(</span>n<span class="op">=</span><span class="fl">5000</span><span class="op">)</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Bind time series and plot them</span></span>
+<span><span class="va">tsDat</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/ts.union.html">ts.union</a></span><span class="op">(</span><span class="va">ts1</span>, <span class="va">ts2</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/plot.html">plot</a></span><span class="op">(</span><span class="va">tsDat</span><span class="op">)</span></span></code></pre></div>
+<div class="inline-figure"><img src="_main_files/figure-html/unnamed-chunk-86-1.png" alt="" width="672"></div>
+<ul>
+<li>Calculate the coefficients for both time series using a time lag order of 1</li>
+</ul>
+<div class="sourceCode" id="cb78"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">tsVAR</span> <span class="op">&lt;-</span> <span class="fu">vars</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/vars/man/VAR.html">VAR</a></span><span class="op">(</span><span class="va">tsDat</span>, p <span class="op">=</span> <span class="fl">1</span><span class="op">)</span> <span class="co"># p gives the lag order</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="va">tsVAR</span><span class="op">)</span></span></code></pre></div>
+<ul>
+<li>The output gives you the coefficients and the y-intercept. The <code>tsVAR</code> object serves as an input when testing for Granger causality.</li>
+</ul>
+<p><strong>Quiz Question 1:</strong> What is the y-intercept of time series 1?
+<!-- -0.003034618 --></p>
+<p>But before we move on to Granger, let’s brielfy recap what we have learned so far:</p>
+<ul>
+<li>Create a autoregression model (AR): <code>stats::ar.ols(time_series, order.max = 2)</code>
+</li>
+<li>Predict the future using AR: <code>stats::predict(ar_model, n.ahead = forecast_length)</code>
+</li>
+<li>Create a vector autoregression model (VAR): <code>vars::VAR(tsDat, p = 3)</code>
+</li>
+</ul>
+<p><strong>Quiz Question 2:</strong> What is the difference between an autoregression model (AR) and a vector autoregression model (VAR)?
+<!-- AR: one variable, VAR: multiple variables --></p>
+<p>Now we have the necessary skills for conducting causal inference, as explained next.</p>
+</div>
+<div id="granger-causality" class="section level2" number="3.3">
+<h2>
+<span class="header-section-number">3.3</span> Granger Causality<a class="anchor" aria-label="anchor" href="#granger-causality"><i class="fas fa-link"></i></a>
+</h2>
+<p>Using our time series above, we can now ask whether <span class="math inline">\(x\)</span> cause <span class="math inline">\(y\)</span>. To address this question, we define two models.</p>
+<ul>
+<li><ol style="list-style-type: decimal">
+<li>Restricted model: univariate autoregression of <span class="math inline">\(y\)</span>:</li>
+</ol></li>
+</ul>
+<p><span class="math display">\[ y_{t} = \alpha_{0} + \alpha_{1}  y_{t-1} + \epsilon_{1,t} \]</span></p>
+<ul>
+<li><ol start="2" style="list-style-type: decimal">
+<li>Unrestricted model: multivariate autoregression of <span class="math inline">\(y\)</span>:</li>
+</ol></li>
+</ul>
+<p><span class="math display">\[ y_{t} = \beta_{0} + \beta_{1}  x_{t-1} +  \beta_{2}  y_{t-1} + \epsilon_{2,t} \]</span></p>
+<p>The restricted model is an autoregressive model where <span class="math inline">\(y_t\)</span> depends only on <span class="math inline">\(y\)</span> lags. The unrestricted model is an autoregressive model where <span class="math inline">\(y_t\)</span> depends on <span class="math inline">\(y\)</span> and <span class="math inline">\(x\)</span> lags. If the unrestricted model outperforms the restricted model, then <span class="math inline">\(x\)</span> precedes <span class="math inline">\(y\)</span>. The performance is measured via an <span class="math inline">\(F\)</span>-test that compares the error terms of both models.</p>
+<p><strong>Quiz Question 3:</strong> What is the difference between a restricted and an unrestricted model?</p>
+<ul>
+<li>Conduct Granger causality:</li>
+</ul>
+<div class="sourceCode" id="cb79"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu">vars</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/vars/man/causality.html">causality</a></span><span class="op">(</span><span class="va">tsVAR</span>, cause <span class="op">=</span> <span class="st">"ts1"</span><span class="op">)</span><span class="op">$</span><span class="va">Granger</span></span></code></pre></div>
+<pre><code>## 
+##  Granger causality H0: ts1 do not Granger-cause ts2
+## 
+## data:  VAR object tsVAR
+## F-Test = 0.040775, df1 = 1, df2 = 9992, p-value = 0.84</code></pre>
+<ul>
+<li>The null hypothesis <code>H0</code> says that the first time series does not Granger-cause the second time series.</li>
+<li>The <span class="math inline">\(p\)</span>-value exceeds 0.05, confirming the null hypothesis.</li>
+<li>You can safely assume that time series 1 does not Granger-cause time series 2</li>
+<li>Does that surprise you or did you expect this to happen? Explain why.</li>
+<li>Check for the reverse and see if time series 2 Granger-causes time series 1</li>
+</ul>
+<p>Let’s apply Granger causality to a different set of time series that do have a statistical association.</p>
+<ul>
+<li>Create two sinusoidal time series that differ by random noise and that are lagged</li>
+</ul>
+<div class="sourceCode" id="cb81"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">t</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">20</span>, <span class="fl">0.1</span><span class="op">)</span> <span class="co"># time axis</span></span>
+<span><span class="va">n</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">t</span><span class="op">)</span> <span class="co"># number of time steps</span></span>
+<span></span>
+<span><span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/Trig.html">sin</a></span><span class="op">(</span><span class="va">t</span><span class="op">)</span></span>
+<span><span class="va">y</span> <span class="op">&lt;-</span> <span class="va">x</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="op">(</span><span class="va">n</span><span class="op">-</span><span class="fl">9</span><span class="op">)</span><span class="op">]</span></span>
+<span><span class="va">x</span> <span class="op">&lt;-</span> <span class="va">x</span><span class="op">[</span><span class="fl">10</span><span class="op">:</span><span class="va">n</span><span class="op">]</span></span>
+<span></span>
+<span><span class="co"># Add noise to y</span></span>
+<span><span class="va">noise</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/Uniform.html">runif</a></span><span class="op">(</span>n<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">y</span><span class="op">)</span>, min <span class="op">=</span> <span class="op">-</span><span class="fl">0.5</span>, max <span class="op">=</span> <span class="fl">0.5</span><span class="op">)</span></span>
+<span><span class="va">y</span> <span class="op">&lt;-</span> <span class="va">y</span> <span class="op">+</span> <span class="va">noise</span></span>
+<span></span>
+<span><span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/ts.html">ts</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span>
+<span><span class="va">y</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/ts.html">ts</a></span><span class="op">(</span><span class="va">y</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">tsDat</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/ts.union.html">ts.union</a></span><span class="op">(</span><span class="va">x</span>, <span class="va">y</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/plot.html">plot</a></span><span class="op">(</span><span class="va">tsDat</span><span class="op">)</span></span></code></pre></div>
+<div class="inline-figure"><img src="_main_files/figure-html/unnamed-chunk-90-1.png" alt="" width="672"></div>
+<ul>
+<li>Create a vector autoregression model and apply Granger causation</li>
+</ul>
+<div class="sourceCode" id="cb82"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">tsVAR</span> <span class="op">&lt;-</span> <span class="fu">vars</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/vars/man/VAR.html">VAR</a></span><span class="op">(</span><span class="va">tsDat</span>, p <span class="op">=</span> <span class="fl">2</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Apply Granger </span></span>
+<span><span class="fu">vars</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/vars/man/causality.html">causality</a></span><span class="op">(</span><span class="va">tsVAR</span>, cause <span class="op">=</span> <span class="st">"x"</span><span class="op">)</span><span class="op">$</span><span class="va">Granger</span></span></code></pre></div>
+<pre><code>## 
+##  Granger causality H0: x do not Granger-cause y
+## 
+## data:  VAR object tsVAR
+## F-Test = 59.866, df1 = 2, df2 = 370, p-value &lt; 2.2e-16</code></pre>
+<div class="sourceCode" id="cb84"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu">vars</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/vars/man/causality.html">causality</a></span><span class="op">(</span><span class="va">tsVAR</span>, cause <span class="op">=</span> <span class="st">"y"</span><span class="op">)</span><span class="op">$</span><span class="va">Granger</span></span></code></pre></div>
+<pre><code>## 
+##  Granger causality H0: y do not Granger-cause x
+## 
+## data:  VAR object tsVAR
+## F-Test = 7.4927, df1 = 2, df2 = 370, p-value = 0.0006458</code></pre>
+<ul>
+<li>What is your interpretation of the results?</li>
+</ul>
+<p>Now let’s apply our new skills to the Lotka-Volterra model.</p>
+<ul>
+<li>Create two time series, one for predator, the other for prey</li>
+</ul>
+<div class="sourceCode" id="cb86"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/rm.html">rm</a></span><span class="op">(</span>list <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/ls.html">ls</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># (1) Create Predator-Prey time series</span></span>
+<span><span class="va">ode_function</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">t</span>, <span class="va">state</span>, <span class="va">parameters</span><span class="op">)</span></span>
+<span><span class="op">{</span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/base/with.html">with</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/list.html">as.list</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="va">state</span><span class="op">)</span><span class="op">)</span>, <span class="op">{</span></span>
+<span>    <span class="va">alpha</span> <span class="op">&lt;-</span> <span class="fl">0.2</span></span>
+<span>    <span class="va">ri</span> <span class="op">&lt;-</span> <span class="fl">1</span></span>
+<span>    <span class="va">m</span> <span class="op">&lt;-</span> <span class="fl">0.2</span></span>
+<span>    <span class="va">gamma</span> <span class="op">&lt;-</span> <span class="fl">0.5</span></span>
+<span>    <span class="va">K</span> <span class="op">&lt;-</span> <span class="fl">10000</span></span>
+<span>    </span>
+<span>    <span class="va">dY</span> <span class="op">&lt;-</span> <span class="va">ri</span> <span class="op">*</span> <span class="va">Y</span> <span class="op">*</span> <span class="op">(</span><span class="fl">1</span> <span class="op">-</span> <span class="va">Y</span> <span class="op">/</span> <span class="va">K</span><span class="op">)</span> <span class="op">-</span> <span class="va">alpha</span> <span class="op">*</span> <span class="va">R</span> <span class="op">*</span> <span class="va">Y</span></span>
+<span>    <span class="va">dR</span> <span class="op">&lt;-</span> <span class="va">alpha</span> <span class="op">*</span> <span class="va">gamma</span> <span class="op">*</span> <span class="va">R</span> <span class="op">*</span> <span class="va">Y</span> <span class="op">-</span> <span class="va">m</span> <span class="op">*</span> <span class="va">R</span></span>
+<span>    </span>
+<span>    <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="va">dY</span>, <span class="va">dR</span><span class="op">)</span><span class="op">)</span></span>
+<span>  <span class="op">}</span><span class="op">)</span></span>
+<span><span class="op">}</span></span>
+<span><span class="va">state</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span>Y <span class="op">=</span> <span class="fl">1</span>, R <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></span>
+<span><span class="va">times</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">70</span>, <span class="fl">0.5</span><span class="op">)</span></span>
+<span><span class="va">out</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/as.data.frame.html">as.data.frame</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/deSolve/man/ode.html">ode</a></span><span class="op">(</span><span class="va">state</span>, <span class="va">times</span>, <span class="va">ode_function</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="va">predator</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/ts.html">ts</a></span><span class="op">(</span><span class="va">out</span><span class="op">$</span><span class="va">R</span><span class="op">)</span></span>
+<span><span class="va">prey</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/ts.html">ts</a></span><span class="op">(</span><span class="va">out</span><span class="op">$</span><span class="va">Y</span><span class="op">)</span></span>
+<span><span class="va">tsDat</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/ts.union.html">ts.union</a></span><span class="op">(</span><span class="va">predator</span>, <span class="va">prey</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/plot.html">plot</a></span><span class="op">(</span><span class="va">tsDat</span><span class="op">)</span></span></code></pre></div>
+<div class="inline-figure"><img src="_main_files/figure-html/unnamed-chunk-92-1.png" alt="" width="672"></div>
+<ul>
+<li>Conduct Granger causality</li>
+</ul>
+<div class="sourceCode" id="cb87"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">tsVAR</span> <span class="op">&lt;-</span> <span class="fu">vars</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/vars/man/VAR.html">VAR</a></span><span class="op">(</span><span class="va">tsDat</span>, p <span class="op">=</span> <span class="fl">3</span><span class="op">)</span></span>
+<span><span class="fu">vars</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/vars/man/causality.html">causality</a></span><span class="op">(</span><span class="va">tsVAR</span>, cause <span class="op">=</span> <span class="st">"predator"</span><span class="op">)</span><span class="op">$</span><span class="va">Granger</span></span></code></pre></div>
+<pre><code>## 
+##  Granger causality H0: predator do not Granger-cause prey
+## 
+## data:  VAR object tsVAR
+## F-Test = 454.2, df1 = 3, df2 = 262, p-value &lt; 2.2e-16</code></pre>
+<div class="sourceCode" id="cb89"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu">vars</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/vars/man/causality.html">causality</a></span><span class="op">(</span><span class="va">tsVAR</span>, cause <span class="op">=</span> <span class="st">"prey"</span><span class="op">)</span><span class="op">$</span><span class="va">Granger</span></span></code></pre></div>
+<pre><code>## 
+##  Granger causality H0: prey do not Granger-cause predator
+## 
+## data:  VAR object tsVAR
+## F-Test = 1132.3, df1 = 3, df2 = 262, p-value &lt; 2.2e-16</code></pre>
+<ul>
+<li><p>Interpret the results</p></li>
+<li><p>Let’s repeat the same exercise but using Convergent Cross Mapping (CCM). Recall that in CCM, if variable <span class="math inline">\(x\)</span> can be predicted using the reconstructed system based on the time-delay embedding of variable <span class="math inline">\(y\)</span>, then we know that <span class="math inline">\(x\)</span> had a causal effect on <span class="math inline">\(y\)</span>.</p></li>
+</ul>
+<div class="sourceCode" id="cb91"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">data</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span><span class="va">predator</span>, <span class="va">prey</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">result</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://stscl.github.io/tEDM/reference/ccm.html">ccm</a></span><span class="op">(</span><span class="va">data</span>, <span class="st">"predator"</span>,<span class="st">"prey"</span>,libsizes <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span><span class="op">(</span><span class="fl">10</span>,<span class="fl">50</span>,<span class="fl">5</span><span class="op">)</span>, E <span class="op">=</span> <span class="fl">10</span>, k <span class="op">=</span> <span class="fl">7</span>,threads <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></span></code></pre></div>
+<pre><code>## Computing: [========================================] 100% (done)                         
+## Computing: [========================================] 100% (done)</code></pre>
+<div class="sourceCode" id="cb93"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">libs</span> <span class="op">&lt;-</span> <span class="va">result</span><span class="op">$</span><span class="va">xmap</span><span class="op">$</span><span class="va">libsizes</span></span>
+<span><span class="va">x_drives_y</span> <span class="op">&lt;-</span> <span class="va">result</span><span class="op">$</span><span class="va">xmap</span><span class="op">$</span><span class="va">x_xmap_y_mean</span></span>
+<span><span class="va">y_drives_x</span> <span class="op">&lt;-</span> <span class="va">result</span><span class="op">$</span><span class="va">xmap</span><span class="op">$</span><span class="va">y_xmap_x_mean</span></span>
+<span></span>
+<span><span class="co"># Plot</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/par.html">par</a></span><span class="op">(</span>pty <span class="op">=</span> <span class="st">"s"</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/plot.html">plot</a></span><span class="op">(</span><span class="va">libs</span>, <span class="va">x_drives_y</span>, col <span class="op">=</span> <span class="st">"blue"</span>, type <span class="op">=</span> <span class="st">"l"</span>,</span>
+<span>     ylim <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/range.html">range</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="va">x_drives_y</span>, <span class="va">y_drives_x</span><span class="op">)</span><span class="op">)</span>,</span>
+<span>     xlab <span class="op">=</span> <span class="st">"Library size (L)"</span>, ylab <span class="op">=</span> <span class="st">"Pearson Correlation Coefficient (rho)"</span>,</span>
+<span>     main <span class="op">=</span> <span class="st">"Convergent Cross Mapping (CCM)"</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Add the other direction</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/lines.html">lines</a></span><span class="op">(</span><span class="va">libs</span>, <span class="va">y_drives_x</span>, col <span class="op">=</span> <span class="st">"red"</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Add legend</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/legend.html">legend</a></span><span class="op">(</span><span class="st">"bottomright"</span>, legend <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Predator drives Prey"</span>, <span class="st">"Prey drives Predator"</span><span class="op">)</span>,</span>
+<span>       col <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"blue"</span>, <span class="st">"red"</span><span class="op">)</span>, lwd <span class="op">=</span> <span class="fl">2</span>, bty <span class="op">=</span> <span class="st">"n"</span><span class="op">)</span></span></code></pre></div>
+<div class="inline-figure"><img src="_main_files/figure-html/unnamed-chunk-94-1.png" alt="" width="672"></div>
+<ul>
+<li>Who is the stronger driver?</li>
+</ul>
+</div>
+<div id="evaluate-the-statistical-association-between-x-y-and-z-in-the-lorenz-equations-using-granger-causality" class="section level2" number="3.4">
+<h2>
+<span class="header-section-number">3.4</span> Evaluate the statistical association between <span class="math inline">\(x\)</span>, <span class="math inline">\(y\)</span>, and <span class="math inline">\(z\)</span> in the Lorenz equations using Granger causality<a class="anchor" aria-label="anchor" href="#evaluate-the-statistical-association-between-x-y-and-z-in-the-lorenz-equations-using-granger-causality"><i class="fas fa-link"></i></a>
+</h2>
+<p>To recall, the Lorenz equations were the first chaotic system to be discovered. They are three differential equations that were derived to represent idealized behavior of the earth’s atmosphere:</p>
+<p><span class="math inline">\(\frac{dx}{dt} = -\frac{8}{3}x+yz\)</span></p>
+<p><span class="math inline">\(\frac{dy}{dt} = -10 (y - z)\)</span></p>
+<p><span class="math inline">\(\frac{dz}{dt} = -xy + 28y-z\)</span></p>
+<ul>
+<li>Good luck!</li>
+</ul>
+</div>
+<div id="evaluate-the-statistical-association-between-x-y-and-z-in-the-lorenz-equations-using-convergent-cross-mapping-ccm" class="section level2" number="3.5">
+<h2>
+<span class="header-section-number">3.5</span> Evaluate the statistical association between <span class="math inline">\(x\)</span>, <span class="math inline">\(y\)</span>, and <span class="math inline">\(z\)</span> in the Lorenz equations using Convergent Cross Mapping (CCM)<a class="anchor" aria-label="anchor" href="#evaluate-the-statistical-association-between-x-y-and-z-in-the-lorenz-equations-using-convergent-cross-mapping-ccm"><i class="fas fa-link"></i></a>
+</h2>
+<p>Granger causality is most appropriate for linear systems. For non-linear systems, we can use Convergent Cross Mapping (CCM). Assess the relationship between <span class="math inline">\(y\)</span> and <span class="math inline">\(z\)</span> using CCM. Interpret your results.</p>
+<div class="sourceCode" id="cb94"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># Assess the relationship between y and z</span></span>
+<span></span>
+<span><span class="co"># Subset to omit the initial transient part</span></span>
+<span><span class="co"># This will also reduce computational time</span></span>
+<span></span>
+<span><span class="va">x</span> <span class="op">&lt;-</span> <span class="va">x</span><span class="op">[</span><span class="fl">1001</span><span class="op">:</span><span class="fl">1500</span><span class="op">]</span></span>
+<span><span class="va">y</span> <span class="op">&lt;-</span> <span class="va">y</span><span class="op">[</span><span class="fl">1001</span><span class="op">:</span><span class="fl">1500</span><span class="op">]</span></span>
+<span><span class="va">z</span> <span class="op">&lt;-</span> <span class="va">z</span><span class="op">[</span><span class="fl">1001</span><span class="op">:</span><span class="fl">1500</span><span class="op">]</span></span>
+<span></span>
+<span><span class="va">data</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span><span class="va">y</span>, <span class="va">z</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">result</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://stscl.github.io/tEDM/reference/ccm.html">ccm</a></span><span class="op">(</span><span class="va">data</span>, <span class="st">"y"</span>, <span class="st">"z"</span>, libsizes <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span><span class="op">(</span><span class="fl">10</span>,<span class="fl">150</span>,<span class="fl">10</span><span class="op">)</span>, E <span class="op">=</span> <span class="fl">3</span>, k <span class="op">=</span> <span class="fl">7</span>,threads <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">libs</span> <span class="op">&lt;-</span> <span class="va">result</span><span class="op">$</span><span class="va">xmap</span><span class="op">$</span><span class="va">libsizes</span></span>
+<span><span class="va">y_drives_z</span> <span class="op">&lt;-</span> <span class="va">result</span><span class="op">$</span><span class="va">xmap</span><span class="op">$</span><span class="va">x_xmap_y_mean</span></span>
+<span><span class="va">z_drives_y</span> <span class="op">&lt;-</span> <span class="va">result</span><span class="op">$</span><span class="va">xmap</span><span class="op">$</span><span class="va">y_xmap_x_mean</span></span>
+<span></span>
+<span><span class="co"># Plot</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/par.html">par</a></span><span class="op">(</span>pty <span class="op">=</span> <span class="st">"s"</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/plot.html">plot</a></span><span class="op">(</span><span class="va">libs</span>, <span class="va">y_drives_z</span>, col <span class="op">=</span> <span class="st">"blue"</span>, type <span class="op">=</span> <span class="st">"l"</span>,</span>
+<span>     ylim <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/range.html">range</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="va">y_drives_z</span>, <span class="va">z_drives_y</span><span class="op">)</span><span class="op">)</span>,</span>
+<span>     xlab <span class="op">=</span> <span class="st">"Library size (L)"</span>, ylab <span class="op">=</span> <span class="st">"Pearson Correlation Coefficient (rho)"</span>,</span>
+<span>     main <span class="op">=</span> <span class="st">"Convergent Cross Mapping (CCM)"</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Add the other direction</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/lines.html">lines</a></span><span class="op">(</span><span class="va">libs</span>, <span class="va">z_drives_y</span>, col <span class="op">=</span> <span class="st">"red"</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Add legend</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/legend.html">legend</a></span><span class="op">(</span><span class="st">"bottomright"</span>, legend <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"y drives z"</span>, <span class="st">"z drives y"</span><span class="op">)</span>,</span>
+<span>       col <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"blue"</span>, <span class="st">"red"</span><span class="op">)</span>, lwd <span class="op">=</span> <span class="fl">2</span>, bty <span class="op">=</span> <span class="st">"n"</span><span class="op">)</span></span></code></pre></div>
+<p>Let us now assess x and y and contrast the result with Granger causality</p>
+<div class="sourceCode" id="cb95"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># Assess the relationship between y and z</span></span>
+<span></span>
+<span><span class="co"># Subset to omit the initial transient part</span></span>
+<span><span class="co"># This will also reduce computational time</span></span>
+<span></span>
+<span><span class="va">data</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span><span class="va">x</span>, <span class="va">y</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">cause_x</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://stscl.github.io/tEDM/reference/ccm.html">ccm</a></span><span class="op">(</span><span class="va">data</span>, cause <span class="op">=</span> <span class="st">"x"</span>, effect <span class="op">=</span> <span class="st">"y"</span>, libsizes <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span><span class="op">(</span><span class="fl">10</span>,<span class="fl">150</span>,<span class="fl">10</span><span class="op">)</span>, E <span class="op">=</span> <span class="fl">3</span>, k <span class="op">=</span> <span class="fl">7</span>, threads <span class="op">=</span> <span class="fl">1</span>, bidirectional <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
+<span><span class="va">cause_y</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://stscl.github.io/tEDM/reference/ccm.html">ccm</a></span><span class="op">(</span><span class="va">data</span>, cause <span class="op">=</span> <span class="st">"y"</span>, effect <span class="op">=</span> <span class="st">"x"</span>, libsizes <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span><span class="op">(</span><span class="fl">10</span>,<span class="fl">150</span>,<span class="fl">10</span><span class="op">)</span>, E <span class="op">=</span> <span class="fl">3</span>, k <span class="op">=</span> <span class="fl">7</span>, threads <span class="op">=</span> <span class="fl">1</span>, bidirectional <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">libs</span> <span class="op">&lt;-</span> <span class="va">result</span><span class="op">$</span><span class="va">xmap</span><span class="op">$</span><span class="va">libsizes</span></span>
+<span><span class="va">x_drives_y</span> <span class="op">&lt;-</span> <span class="va">cause_x</span><span class="op">$</span><span class="va">xmap</span><span class="op">$</span><span class="va">y_xmap_x_mean</span></span>
+<span><span class="va">y_drives_x</span> <span class="op">&lt;-</span> <span class="va">cause_y</span><span class="op">$</span><span class="va">xmap</span><span class="op">$</span><span class="va">y_xmap_x_mean</span></span>
+<span></span>
+<span><span class="co"># Plot</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/par.html">par</a></span><span class="op">(</span>pty <span class="op">=</span> <span class="st">"s"</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/plot.html">plot</a></span><span class="op">(</span><span class="va">libs</span>, <span class="va">x_drives_y</span>, col <span class="op">=</span> <span class="st">"blue"</span>, type <span class="op">=</span> <span class="st">"l"</span>,</span>
+<span>     ylim <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/range.html">range</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="va">x_drives_y</span>, <span class="va">y_drives_x</span><span class="op">)</span><span class="op">)</span>,</span>
+<span>     xlab <span class="op">=</span> <span class="st">"Library size (L)"</span>, ylab <span class="op">=</span> <span class="st">"Pearson Correlation Coefficient (rho)"</span>,</span>
+<span>     main <span class="op">=</span> <span class="st">"Convergent Cross Mapping (CCM)"</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Add the other direction</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/lines.html">lines</a></span><span class="op">(</span><span class="va">libs</span>, <span class="va">y_drives_x</span>, col <span class="op">=</span> <span class="st">"red"</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Add legend</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/legend.html">legend</a></span><span class="op">(</span><span class="st">"bottomright"</span>, legend <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"x drives y"</span>, <span class="st">"y drives x"</span><span class="op">)</span>,</span>
+<span>       col <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"blue"</span>, <span class="st">"red"</span><span class="op">)</span>, lwd <span class="op">=</span> <span class="fl">2</span>, bty <span class="op">=</span> <span class="st">"n"</span><span class="op">)</span></span></code></pre></div>
+
+</div>
+</div>
+  <div class="chapter-nav">
+<div class="prev"><a href="week-2-understanding-environmental-systems-i.html"><span class="header-section-number">2</span> Week 2: Understanding Environmental Systems (I)</a></div>
+<div class="next"><a href="week-4-climate-projections-and-impacts-i.html"><span class="header-section-number">4</span> Week 4: Climate Projections and Impacts (I)</a></div>
+</div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
+    <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
+      <ul class="nav navbar-nav">
+<li><a class="nav-link" href="#week-3-understanding-environmental-systems-ii"><span class="header-section-number">3</span> Week 3: Understanding Environmental Systems (II)</a></li>
+<li><a class="nav-link" href="#autoregression"><span class="header-section-number">3.1</span> Autoregression</a></li>
+<li><a class="nav-link" href="#vector-autoregression-var"><span class="header-section-number">3.2</span> Vector autoregression (VAR)</a></li>
+<li><a class="nav-link" href="#granger-causality"><span class="header-section-number">3.3</span> Granger Causality</a></li>
+<li><a class="nav-link" href="#evaluate-the-statistical-association-between-x-y-and-z-in-the-lorenz-equations-using-granger-causality"><span class="header-section-number">3.4</span> Evaluate the statistical association between \(x\), \(y\), and \(z\) in the Lorenz equations using Granger causality</a></li>
+<li><a class="nav-link" href="#evaluate-the-statistical-association-between-x-y-and-z-in-the-lorenz-equations-using-convergent-cross-mapping-ccm"><span class="header-section-number">3.5</span> Evaluate the statistical association between \(x\), \(y\), and \(z\) in the Lorenz equations using Convergent Cross Mapping (CCM)</a></li>
+</ul>
+
+      <div class="book-extra">
+        <ul class="list-unstyled">
+          
+        </ul>
+</div>
+    </nav>
+</div>
+
+</div>
+</div> <!-- .container -->
+
+<footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
+
+  <div class="col-12 col-md-6 mt-3">
+    <p>"<strong>ENSC 430</strong>" was written by Christian Seiler. </p>
+  </div>
+
+  <div class="col-12 col-md-6 mt-3">
+    <p>This book was built by the <a class="text-light" href="https://bookdown.org">bookdown</a> R package.</p>
+  </div>
+
+</div></div>
+</footer><!-- dynamically load mathjax for compatibility with self-contained --><script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script><script type="text/x-mathjax-config">const popovers = document.querySelectorAll('a.footnote-ref[data-toggle="popover"]');
+for (let popover of popovers) {
+  const div = document.createElement('div');
+  div.setAttribute('style', 'position: absolute; top: 0, left:0; width:0, height:0, overflow: hidden; visibility: hidden;');
+  div.innerHTML = popover.getAttribute('data-content');
+
+  var has_math = div.querySelector("span.math");
+  if (has_math) {
+    document.body.appendChild(div);
+    MathJax.Hub.Queue(["Typeset", MathJax.Hub, div]);
+    MathJax.Hub.Queue(function() {
+      popover.setAttribute('data-content', div.innerHTML);
+      document.body.removeChild(div);
+    })
+  }
+}
+</script>
+</body>
+</html>

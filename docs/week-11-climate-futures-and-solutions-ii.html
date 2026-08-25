@@ -1,0 +1,547 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<title>Chapter 11 Week 11: Climate Futures and Solutions (II) | ENSC 430</title>
+<meta name="author" content="Christian Seiler">
+<meta name="generator" content="bookdown 0.47 with bs4_book()">
+<meta property="og:title" content="Chapter 11 Week 11: Climate Futures and Solutions (II) | ENSC 430">
+<meta property="og:type" content="book">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Chapter 11 Week 11: Climate Futures and Solutions (II) | ENSC 430">
+<!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
+<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.12.0/transition.js"></script><script src="libs/bs3compat-0.12.0/tabs.js"></script><script src="libs/bs3compat-0.12.0/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
+<script src="libs/bs4_book-1.0.0/bs4_book.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- CSS --><style type="text/css">
+    
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  </style>
+<meta name="description" content="In this exercise you will run a simple global climate model called Hector. Hector is the default carbon cycle module for the integrated assessment model GCAM (Global Change Assessment Model). The...">
+<meta property="og:description" content="In this exercise you will run a simple global climate model called Hector. Hector is the default carbon cycle module for the integrated assessment model GCAM (Global Change Assessment Model). The...">
+<meta name="twitter:description" content="In this exercise you will run a simple global climate model called Hector. Hector is the default carbon cycle module for the integrated assessment model GCAM (Global Change Assessment Model). The...">
+</head>
+<body data-spy="scroll" data-target="#toc">
+
+<div class="container-fluid">
+<div class="row">
+  <header class="col-sm-12 col-lg-3 sidebar sidebar-book"><a class="sr-only sr-only-focusable" href="#content">Skip to main content</a>
+
+    <div class="d-flex align-items-start justify-content-between">
+      <h1>
+        <a href="index.html" title="">ENSC 430</a>
+      </h1>
+      <button class="btn btn-outline-primary d-lg-none ml-2 mt-1" type="button" data-toggle="collapse" data-target="#main-nav" aria-expanded="true" aria-controls="main-nav"><i class="fas fa-bars"></i><span class="sr-only">Show table of contents</span></button>
+    </div>
+
+    <div id="main-nav" class="collapse-lg">
+      <form role="search">
+        <input id="search" class="form-control" type="search" placeholder="Search" aria-label="Search">
+</form>
+
+      <nav aria-label="Table of contents"><h2>Table of contents</h2>
+        <ul class="book-toc list-unstyled">
+<li><a class="" href="index.html">ENSC 430A/B</a></li>
+<li><a class="" href="week-1-climate-change.html"><span class="header-section-number">1</span> Week 1: Climate Change</a></li>
+<li><a class="" href="week-2-understanding-environmental-systems-i.html"><span class="header-section-number">2</span> Week 2: Understanding Environmental Systems (I)</a></li>
+<li><a class="" href="week-3-understanding-environmental-systems-ii.html"><span class="header-section-number">3</span> Week 3: Understanding Environmental Systems (II)</a></li>
+<li><a class="" href="week-4-climate-projections-and-impacts-i.html"><span class="header-section-number">4</span> Week 4: Climate Projections and Impacts (I)</a></li>
+<li><a class="" href="week-5-climate-projections-and-impacts-ii.html"><span class="header-section-number">5</span> Week 5: Climate Projections and Impacts (II)</a></li>
+<li><a class="" href="week-6-climate-projections-and-impacts-iii.html"><span class="header-section-number">6</span> Week 6: Climate Projections and Impacts (III)</a></li>
+<li><a class="" href="week-7-observing-environmental-change-i.html"><span class="header-section-number">7</span> Week 7: Observing Environmental Change (I)</a></li>
+<li><a class="" href="week-8-observing-environmental-change-ii.html"><span class="header-section-number">8</span> Week 8: Observing Environmental Change (II)</a></li>
+<li><a class="" href="week-9-observing-environmental-change-iii.html"><span class="header-section-number">9</span> Week 9: Observing Environmental Change (III)</a></li>
+<li><a class="" href="week-10-climate-futures-and-solutions-i.html"><span class="header-section-number">10</span> Week 10: Climate Futures and Solutions (I)</a></li>
+<li><a class="active" href="week-11-climate-futures-and-solutions-ii.html"><span class="header-section-number">11</span> Week 11: Climate Futures and Solutions (II)</a></li>
+<li><a class="" href="week-12-capstone-project.html"><span class="header-section-number">12</span> Week 12: Capstone Project</a></li>
+</ul>
+
+        <div class="book-extra">
+          
+        </div>
+      </nav>
+</div>
+  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="week-11-climate-futures-and-solutions-ii" class="section level1" number="11">
+<h1>
+<span class="header-section-number">11</span> Week 11: Climate Futures and Solutions (II)<a class="anchor" aria-label="anchor" href="#week-11-climate-futures-and-solutions-ii"><i class="fas fa-link"></i></a>
+</h1>
+<p>In this exercise you will run a simple global climate model called <a href="https://jgcri.github.io/hector/index.html">Hector</a>. Hector is the default carbon cycle module for the integrated assessment model GCAM (Global Change Assessment Model). The section below will show you how to run Hector.</p>
+<ul>
+<li>Load libraries</li>
+</ul>
+<div class="sourceCode" id="cb220"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/JGCRI/hector">hector</a></span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/JGCRI/hectordata">hectordata</a></span><span class="op">)</span></span></code></pre></div>
+<div id="exercise-1" class="section level2" number="11.1">
+<h2>
+<span class="header-section-number">11.1</span> Exercise (1)<a class="anchor" aria-label="anchor" href="#exercise-1"><i class="fas fa-link"></i></a>
+</h2>
+<ul>
+<li>Run the model
+To run Hector you need to initialize a Hector core. The core is a self-contained object that contains information about all of Hector’s inputs and outputs:</li>
+</ul>
+<div class="sourceCode" id="cb221"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># Initialize hector core</span></span>
+<span><span class="va">ini_file</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html">system.file</a></span><span class="op">(</span><span class="st">"input/hector_ssp585.ini"</span>, package <span class="op">=</span> <span class="st">"hector"</span><span class="op">)</span></span>
+<span><span class="va">core</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://jgcri.github.io/hector/reference/newcore.html">newcore</a></span><span class="op">(</span><span class="va">ini_file</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Run the model</span></span>
+<span><span class="fu"><a href="https://jgcri.github.io/hector/reference/run.html">run</a></span><span class="op">(</span><span class="va">core</span><span class="op">)</span></span></code></pre></div>
+<pre><code>## Hector core: Unnamed Hector core
+## Start date:  1745
+## End date:    2300
+## Current date:    2300
+## Input file:  /global/home/hpc5112/ENSC430/Rlib/hector/input/hector_ssp585.ini</code></pre>
+<div class="sourceCode" id="cb223"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># Obtain the results</span></span>
+<span><span class="va">results_default</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://jgcri.github.io/hector/reference/fetchvars.html">fetchvars</a></span><span class="op">(</span><span class="va">core</span>, <span class="fl">1950</span><span class="op">:</span><span class="fl">2300</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Have a look at the results</span></span>
+<span><span class="fu"><a href="https://rspatial.github.io/terra/reference/headtail.html">head</a></span><span class="op">(</span><span class="va">results_default</span><span class="op">)</span></span></code></pre></div>
+<pre><code>##              scenario year          variable    value    units
+## 1 Unnamed Hector core 1950 CO2_concentration 308.6290 ppmv CO2
+## 2 Unnamed Hector core 1951 CO2_concentration 309.0920 ppmv CO2
+## 3 Unnamed Hector core 1952 CO2_concentration 309.6882 ppmv CO2
+## 4 Unnamed Hector core 1953 CO2_concentration 310.2826 ppmv CO2
+## 5 Unnamed Hector core 1954 CO2_concentration 310.8757 ppmv CO2
+## 6 Unnamed Hector core 1955 CO2_concentration 311.4941 ppmv CO2</code></pre>
+<ul>
+<li>Plot model output</li>
+</ul>
+<div class="sourceCode" id="cb225"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># Rename your results "df" (data frame). This is just for giving it a shorter name</span></span>
+<span><span class="va">df</span> <span class="op">&lt;-</span> <span class="va">results_default</span></span>
+<span></span>
+<span><span class="co"># There are four output variables</span></span>
+<span><span class="va">categories</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rspatial.github.io/terra/reference/unique.html">unique</a></span><span class="op">(</span><span class="va">df</span><span class="op">$</span><span class="va">variable</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Set up a layout for multiple plots</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/par.html">par</a></span><span class="op">(</span>mfrow <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">2</span>,<span class="fl">2</span><span class="op">)</span>, mar <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">4</span>,<span class="fl">4</span>,<span class="fl">1</span>,<span class="fl">1</span><span class="op">)</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Loop through each category and create a plot for each category</span></span>
+<span><span class="kw">for</span> <span class="op">(</span><span class="va">i</span> <span class="kw">in</span> <span class="fl">1</span><span class="op">:</span><span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">categories</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span>
+<span>  </span>
+<span>  <span class="co"># Subset data frame </span></span>
+<span>  <span class="va">data</span> <span class="op">&lt;-</span> <span class="va">df</span><span class="op">[</span><span class="va">df</span><span class="op">$</span><span class="va">variable</span> <span class="op">==</span> <span class="va">categories</span><span class="op">[</span><span class="va">i</span><span class="op">]</span>, <span class="op">]</span></span>
+<span>  <span class="va">unit</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rspatial.github.io/terra/reference/unique.html">unique</a></span><span class="op">(</span><span class="va">data</span><span class="op">$</span><span class="va">units</span><span class="op">)</span></span>
+<span>  <span class="co"># Plot data</span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/base/plot.html">plot</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">data</span><span class="op">$</span><span class="va">year</span>, y <span class="op">=</span> <span class="va">data</span><span class="op">$</span><span class="va">value</span>, ylab <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste</a></span><span class="op">(</span><span class="va">categories</span><span class="op">[</span><span class="va">i</span><span class="op">]</span>, <span class="va">unit</span><span class="op">)</span>, xlab <span class="op">=</span> <span class="st">"Year"</span>, type <span class="op">=</span> <span class="st">"l"</span><span class="op">)</span></span>
+<span><span class="op">}</span></span></code></pre></div>
+<div class="inline-figure"><img src="_main_files/figure-html/unnamed-chunk-241-1.png" alt="" width="576"></div>
+<p>Hector is configured via an input file, which defines run metadata, inputs (e.g. emissions scenarios), and parameters. Let’s find out where this file is located:</p>
+<div class="sourceCode" id="cb226"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="va">ini_file</span><span class="op">)</span></span></code></pre></div>
+<pre><code>## [1] "/global/home/hpc5112/ENSC430/Rlib/hector/input/hector_ssp585.ini"</code></pre>
+<p>You can open this file by copying the path and then click on <code>File/Open File ...</code> and then paste the path of the file. Scroll through the file to gain a sense of what information it contains. What is the value of the heterotrophic respiration temperature sensitivity factor?</p>
+</div>
+<div id="exercise-2" class="section level2" number="11.2">
+<h2>
+<span class="header-section-number">11.2</span> Exercise (2)<a class="anchor" aria-label="anchor" href="#exercise-2"><i class="fas fa-link"></i></a>
+</h2>
+<p>The model accounts for the CO<sub>2</sub> fertilization effect using a multiplier <span class="math inline">\(f\)</span>:</p>
+<p><span class="math display">\[ f = 1 + \beta_i \left( \log \left( \frac{C_{atm}}{C0}\right) \right) \]</span></p>
+<ul>
+<li>Let’s increase the parameter <span class="math inline">\(\beta_i\)</span> from its default value of 0.53 to 0.8 and run the model again</li>
+</ul>
+<div class="sourceCode" id="cb228"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">ini_file</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html">system.file</a></span><span class="op">(</span><span class="st">"input/hector_ssp585.ini"</span>, package <span class="op">=</span> <span class="st">"hector"</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">core</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://jgcri.github.io/hector/reference/newcore.html">newcore</a></span><span class="op">(</span><span class="va">ini_file</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Run the model</span></span>
+<span><span class="fu"><a href="https://jgcri.github.io/hector/reference/run.html">run</a></span><span class="op">(</span><span class="va">core</span><span class="op">)</span></span></code></pre></div>
+<pre><code>## Hector core: Unnamed Hector core
+## Start date:  1745
+## End date:    2300
+## Current date:    2300
+## Input file:  /global/home/hpc5112/ENSC430/Rlib/hector/input/hector_ssp585.ini</code></pre>
+<div class="sourceCode" id="cb230"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># Obtain the results</span></span>
+<span><span class="va">results_default</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://jgcri.github.io/hector/reference/fetchvars.html">fetchvars</a></span><span class="op">(</span><span class="va">core</span>, <span class="fl">1950</span><span class="op">:</span><span class="fl">2300</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># The current value for beta is</span></span>
+<span><span class="va">beta</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://jgcri.github.io/hector/reference/fetchvars.html">fetchvars</a></span><span class="op">(</span><span class="va">core</span>, <span class="cn">NA</span>, <span class="fu"><a href="https://jgcri.github.io/hector/reference/parameters.html">BETA</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Let's increase this to 0.8</span></span>
+<span><span class="fu"><a href="https://jgcri.github.io/hector/reference/setvar.html">setvar</a></span><span class="op">(</span><span class="va">core</span>, <span class="cn">NA</span>, <span class="fu"><a href="https://jgcri.github.io/hector/reference/parameters.html">BETA</a></span><span class="op">(</span><span class="op">)</span>, <span class="fl">0.8</span>, <span class="st">"(unitless)"</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Reset the core with the new value</span></span>
+<span><span class="fu"><a href="https://jgcri.github.io/hector/reference/reset.html">reset</a></span><span class="op">(</span><span class="va">core</span><span class="op">)</span></span></code></pre></div>
+<pre><code>## Hector core: Unnamed Hector core
+## Start date:  1745
+## End date:    2300
+## Current date:    1745
+## Input file:  /global/home/hpc5112/ENSC430/Rlib/hector/input/hector_ssp585.ini</code></pre>
+<div class="sourceCode" id="cb232"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># run the model</span></span>
+<span><span class="fu"><a href="https://jgcri.github.io/hector/reference/run.html">run</a></span><span class="op">(</span><span class="va">core</span><span class="op">)</span></span></code></pre></div>
+<pre><code>## Hector core: Unnamed Hector core
+## Start date:  1745
+## End date:    2300
+## Current date:    2300
+## Input file:  /global/home/hpc5112/ENSC430/Rlib/hector/input/hector_ssp585.ini</code></pre>
+<div class="sourceCode" id="cb234"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># Get the results</span></span>
+<span><span class="va">results_beta</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://jgcri.github.io/hector/reference/fetchvars.html">fetchvars</a></span><span class="op">(</span><span class="va">core</span>, <span class="fl">1950</span><span class="op">:</span><span class="fl">2300</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Show the impact by plotting the results from the default run and from the new run.</span></span>
+<span></span>
+<span><span class="va">df01</span> <span class="op">&lt;-</span> <span class="va">results_default</span></span>
+<span><span class="va">df02</span> <span class="op">&lt;-</span> <span class="va">results_beta</span></span>
+<span></span>
+<span><span class="va">categories</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rspatial.github.io/terra/reference/unique.html">unique</a></span><span class="op">(</span><span class="va">df01</span><span class="op">$</span><span class="va">variable</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Set up a layout for multiple plots</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/par.html">par</a></span><span class="op">(</span>mfrow <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">2</span>,<span class="fl">2</span><span class="op">)</span>, mar <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">4</span>,<span class="fl">4</span>,<span class="fl">1</span>,<span class="fl">1</span><span class="op">)</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Loop through each category and create a plot for each category</span></span>
+<span><span class="kw">for</span> <span class="op">(</span><span class="va">i</span> <span class="kw">in</span> <span class="fl">1</span><span class="op">:</span><span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">categories</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span>
+<span>  </span>
+<span>  <span class="co"># Subset data frame </span></span>
+<span>  <span class="va">data</span> <span class="op">&lt;-</span> <span class="va">df01</span><span class="op">[</span><span class="va">df01</span><span class="op">$</span><span class="va">variable</span> <span class="op">==</span> <span class="va">categories</span><span class="op">[</span><span class="va">i</span><span class="op">]</span>, <span class="op">]</span></span>
+<span>  <span class="va">unit</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rspatial.github.io/terra/reference/unique.html">unique</a></span><span class="op">(</span><span class="va">data</span><span class="op">$</span><span class="va">units</span><span class="op">)</span></span>
+<span>  <span class="co"># Plot data</span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/base/plot.html">plot</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">data</span><span class="op">$</span><span class="va">year</span>, y <span class="op">=</span> <span class="va">data</span><span class="op">$</span><span class="va">value</span>, ylab <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste</a></span><span class="op">(</span><span class="va">categories</span><span class="op">[</span><span class="va">i</span><span class="op">]</span>, <span class="va">unit</span><span class="op">)</span>, xlab <span class="op">=</span> <span class="st">"Year"</span>, type <span class="op">=</span> <span class="st">"l"</span><span class="op">)</span></span>
+<span>  </span>
+<span>  <span class="va">data</span> <span class="op">&lt;-</span> <span class="va">df02</span><span class="op">[</span><span class="va">df02</span><span class="op">$</span><span class="va">variable</span> <span class="op">==</span> <span class="va">categories</span><span class="op">[</span><span class="va">i</span><span class="op">]</span>, <span class="op">]</span></span>
+<span>  <span class="fu"><a href="https://rspatial.github.io/terra/reference/lines.html">lines</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">data</span><span class="op">$</span><span class="va">year</span>, y <span class="op">=</span> <span class="va">data</span><span class="op">$</span><span class="va">value</span>, type <span class="op">=</span> <span class="st">"l"</span>, col <span class="op">=</span> <span class="st">"red"</span><span class="op">)</span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/graphics/abline.html">abline</a></span><span class="op">(</span>v <span class="op">=</span> <span class="fl">2100</span><span class="op">)</span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/graphics/legend.html">legend</a></span><span class="op">(</span><span class="st">"bottomright"</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"beta = 0.53"</span>, <span class="st">"beta = 0.8"</span><span class="op">)</span>, col <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"black"</span>, <span class="st">"red"</span><span class="op">)</span>, pch <span class="op">=</span> <span class="fl">16</span>, bty <span class="op">=</span> <span class="st">"n"</span><span class="op">)</span></span>
+<span><span class="op">}</span></span></code></pre></div>
+<div class="inline-figure"><img src="_main_files/figure-html/unnamed-chunk-243-1.png" alt="" width="576"></div>
+<ul>
+<li>How does the increase in <span class="math inline">\(\beta_i\)</span> affect the atmospheric CO<sub>2</sub> concentration, radiative forcing, and global mean surface temperature?</li>
+</ul>
+</div>
+<div id="exercise-3" class="section level2" number="11.3">
+<h2>
+<span class="header-section-number">11.3</span> Exercise (3)<a class="anchor" aria-label="anchor" href="#exercise-3"><i class="fas fa-link"></i></a>
+</h2>
+<p>Repeat the same exercise as above but increase the heterotrophic respiration temperature sensitivity factor (<code>q10_rh</code>) to a value of 3.</p>
+<pre><code>## Hector core: Unnamed Hector core
+## Start date:  1745
+## End date:    2300
+## Current date:    2300
+## Input file:  /global/home/hpc5112/ENSC430/Rlib/hector/input/hector_ssp585.ini</code></pre>
+<pre><code>## Hector core: Unnamed Hector core
+## Start date:  1745
+## End date:    2300
+## Current date:    1745
+## Input file:  /global/home/hpc5112/ENSC430/Rlib/hector/input/hector_ssp585.ini</code></pre>
+<pre><code>## Hector core: Unnamed Hector core
+## Start date:  1745
+## End date:    2300
+## Current date:    2300
+## Input file:  /global/home/hpc5112/ENSC430/Rlib/hector/input/hector_ssp585.ini</code></pre>
+<div class="inline-figure"><img src="_main_files/figure-html/unnamed-chunk-244-1.png" alt="" width="576"></div>
+<ul>
+<li>Interpret your result.</li>
+</ul>
+</div>
+<div id="exercise-4" class="section level2" number="11.4">
+<h2>
+<span class="header-section-number">11.4</span> Exercise (4)<a class="anchor" aria-label="anchor" href="#exercise-4"><i class="fas fa-link"></i></a>
+</h2>
+<p>Next you will run Hector to see how CO<sub>2</sub> concentrations, radiative forcing and global mean surface temperature differ among Shared Socioeconomic Pathways.</p>
+<div class="sourceCode" id="cb238"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/JGCRI/hector">hector</a></span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># SSP5-8.5</span></span>
+<span><span class="co"># Initialize a Hector core.</span></span>
+<span><span class="va">ini_file</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html">system.file</a></span><span class="op">(</span><span class="st">"input/hector_ssp585.ini"</span>, package <span class="op">=</span> <span class="st">"hector"</span><span class="op">)</span></span>
+<span><span class="va">core</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://jgcri.github.io/hector/reference/newcore.html">newcore</a></span><span class="op">(</span><span class="va">ini_file</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Run the model</span></span>
+<span><span class="fu"><a href="https://jgcri.github.io/hector/reference/run.html">run</a></span><span class="op">(</span><span class="va">core</span><span class="op">)</span></span></code></pre></div>
+<pre><code>## Hector core: Unnamed Hector core
+## Start date:  1745
+## End date:    2300
+## Current date:    2300
+## Input file:  /global/home/hpc5112/ENSC430/Rlib/hector/input/hector_ssp585.ini</code></pre>
+<div class="sourceCode" id="cb240"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># Obtain the results</span></span>
+<span><span class="va">results_ssp585</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://jgcri.github.io/hector/reference/fetchvars.html">fetchvars</a></span><span class="op">(</span><span class="va">core</span>, <span class="fl">1950</span><span class="op">:</span><span class="fl">2300</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Reset the core with the new value</span></span>
+<span><span class="fu"><a href="https://jgcri.github.io/hector/reference/reset.html">reset</a></span><span class="op">(</span><span class="va">core</span><span class="op">)</span></span></code></pre></div>
+<pre><code>## Hector core: Unnamed Hector core
+## Start date:  1745
+## End date:    2300
+## Current date:    1745
+## Input file:  /global/home/hpc5112/ENSC430/Rlib/hector/input/hector_ssp585.ini</code></pre>
+<div class="sourceCode" id="cb242"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># SSP3-7.0</span></span>
+<span><span class="co"># Initialize a Hector core.</span></span>
+<span><span class="va">ini_file</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html">system.file</a></span><span class="op">(</span><span class="st">"input/hector_ssp370.ini"</span>, package <span class="op">=</span> <span class="st">"hector"</span><span class="op">)</span></span>
+<span><span class="va">core</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://jgcri.github.io/hector/reference/newcore.html">newcore</a></span><span class="op">(</span><span class="va">ini_file</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Run the model</span></span>
+<span><span class="fu"><a href="https://jgcri.github.io/hector/reference/run.html">run</a></span><span class="op">(</span><span class="va">core</span><span class="op">)</span></span></code></pre></div>
+<pre><code>## Hector core: Unnamed Hector core
+## Start date:  1745
+## End date:    2300
+## Current date:    2300
+## Input file:  /global/home/hpc5112/ENSC430/Rlib/hector/input/hector_ssp370.ini</code></pre>
+<div class="sourceCode" id="cb244"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># Obtain the results</span></span>
+<span><span class="va">results_ssp370</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://jgcri.github.io/hector/reference/fetchvars.html">fetchvars</a></span><span class="op">(</span><span class="va">core</span>, <span class="fl">1950</span><span class="op">:</span><span class="fl">2300</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Reset the core with the new value</span></span>
+<span><span class="fu"><a href="https://jgcri.github.io/hector/reference/reset.html">reset</a></span><span class="op">(</span><span class="va">core</span><span class="op">)</span></span></code></pre></div>
+<pre><code>## Hector core: Unnamed Hector core
+## Start date:  1745
+## End date:    2300
+## Current date:    1745
+## Input file:  /global/home/hpc5112/ENSC430/Rlib/hector/input/hector_ssp370.ini</code></pre>
+<div class="sourceCode" id="cb246"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># SSP1-1.9</span></span>
+<span><span class="co"># Initialize a Hector core.</span></span>
+<span><span class="va">ini_file</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html">system.file</a></span><span class="op">(</span><span class="st">"input/hector_ssp119.ini"</span>, package <span class="op">=</span> <span class="st">"hector"</span><span class="op">)</span></span>
+<span><span class="va">core</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://jgcri.github.io/hector/reference/newcore.html">newcore</a></span><span class="op">(</span><span class="va">ini_file</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Run the model</span></span>
+<span><span class="fu"><a href="https://jgcri.github.io/hector/reference/run.html">run</a></span><span class="op">(</span><span class="va">core</span><span class="op">)</span></span></code></pre></div>
+<pre><code>## Hector core: Unnamed Hector core
+## Start date:  1745
+## End date:    2300
+## Current date:    2300
+## Input file:  /global/home/hpc5112/ENSC430/Rlib/hector/input/hector_ssp119.ini</code></pre>
+<div class="sourceCode" id="cb248"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># Obtain the results</span></span>
+<span><span class="va">results_ssp119</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://jgcri.github.io/hector/reference/fetchvars.html">fetchvars</a></span><span class="op">(</span><span class="va">core</span>, <span class="fl">1950</span><span class="op">:</span><span class="fl">2300</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Reset the core with the new value</span></span>
+<span><span class="fu"><a href="https://jgcri.github.io/hector/reference/reset.html">reset</a></span><span class="op">(</span><span class="va">core</span><span class="op">)</span></span></code></pre></div>
+<pre><code>## Hector core: Unnamed Hector core
+## Start date:  1745
+## End date:    2300
+## Current date:    1745
+## Input file:  /global/home/hpc5112/ENSC430/Rlib/hector/input/hector_ssp119.ini</code></pre>
+<div class="sourceCode" id="cb250"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">df01</span> <span class="op">&lt;-</span> <span class="va">results_ssp585</span></span>
+<span><span class="va">df02</span> <span class="op">&lt;-</span> <span class="va">results_ssp370</span></span>
+<span><span class="va">df03</span> <span class="op">&lt;-</span> <span class="va">results_ssp119</span></span>
+<span></span>
+<span><span class="va">categories</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rspatial.github.io/terra/reference/unique.html">unique</a></span><span class="op">(</span><span class="va">df01</span><span class="op">$</span><span class="va">variable</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Set up a layout for multiple plots</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/par.html">par</a></span><span class="op">(</span>mfrow <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">2</span>,<span class="fl">2</span><span class="op">)</span>, mar <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">4</span>,<span class="fl">4</span>,<span class="fl">1</span>,<span class="fl">1</span><span class="op">)</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Loop through each category and create a plot for each category</span></span>
+<span><span class="kw">for</span> <span class="op">(</span><span class="va">i</span> <span class="kw">in</span> <span class="fl">1</span><span class="op">:</span><span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">categories</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span>
+<span>  </span>
+<span>  <span class="co"># Subset data frame </span></span>
+<span>  <span class="va">data</span> <span class="op">&lt;-</span> <span class="va">df01</span><span class="op">[</span><span class="va">df01</span><span class="op">$</span><span class="va">variable</span> <span class="op">==</span> <span class="va">categories</span><span class="op">[</span><span class="va">i</span><span class="op">]</span>, <span class="op">]</span></span>
+<span>  <span class="va">unit</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rspatial.github.io/terra/reference/unique.html">unique</a></span><span class="op">(</span><span class="va">data</span><span class="op">$</span><span class="va">units</span><span class="op">)</span></span>
+<span>  <span class="co"># Plot data</span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/base/plot.html">plot</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">data</span><span class="op">$</span><span class="va">year</span>, y <span class="op">=</span> <span class="va">data</span><span class="op">$</span><span class="va">value</span>, ylab <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste</a></span><span class="op">(</span><span class="va">categories</span><span class="op">[</span><span class="va">i</span><span class="op">]</span>, <span class="va">unit</span><span class="op">)</span>, xlab <span class="op">=</span> <span class="st">"Year"</span>, type <span class="op">=</span> <span class="st">"l"</span>, col <span class="op">=</span> <span class="st">"red"</span><span class="op">)</span></span>
+<span>  </span>
+<span>  <span class="va">data</span> <span class="op">&lt;-</span> <span class="va">df02</span><span class="op">[</span><span class="va">df02</span><span class="op">$</span><span class="va">variable</span> <span class="op">==</span> <span class="va">categories</span><span class="op">[</span><span class="va">i</span><span class="op">]</span>, <span class="op">]</span></span>
+<span>  <span class="fu"><a href="https://rspatial.github.io/terra/reference/lines.html">lines</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">data</span><span class="op">$</span><span class="va">year</span>, y <span class="op">=</span> <span class="va">data</span><span class="op">$</span><span class="va">value</span>, type <span class="op">=</span> <span class="st">"l"</span>, col <span class="op">=</span> <span class="st">"blue"</span><span class="op">)</span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/graphics/abline.html">abline</a></span><span class="op">(</span>v <span class="op">=</span> <span class="fl">2100</span><span class="op">)</span></span>
+<span>  </span>
+<span>  <span class="va">data</span> <span class="op">&lt;-</span> <span class="va">df03</span><span class="op">[</span><span class="va">df03</span><span class="op">$</span><span class="va">variable</span> <span class="op">==</span> <span class="va">categories</span><span class="op">[</span><span class="va">i</span><span class="op">]</span>, <span class="op">]</span></span>
+<span>  <span class="fu"><a href="https://rspatial.github.io/terra/reference/lines.html">lines</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">data</span><span class="op">$</span><span class="va">year</span>, y <span class="op">=</span> <span class="va">data</span><span class="op">$</span><span class="va">value</span>, type <span class="op">=</span> <span class="st">"l"</span>, col <span class="op">=</span> <span class="st">"green"</span><span class="op">)</span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/graphics/abline.html">abline</a></span><span class="op">(</span>v <span class="op">=</span> <span class="fl">2100</span><span class="op">)</span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/graphics/legend.html">legend</a></span><span class="op">(</span><span class="st">"topleft"</span>, col <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"red"</span>, <span class="st">"blue"</span>, <span class="st">"green"</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"SSP5-8.5"</span>, <span class="st">"SSP3-7.0"</span>, <span class="st">"SSP1-1.9"</span><span class="op">)</span>, pch <span class="op">=</span> <span class="fl">16</span>, bty <span class="op">=</span> <span class="st">"n"</span><span class="op">)</span></span>
+<span><span class="op">}</span></span></code></pre></div>
+<div class="inline-figure"><img src="_main_files/figure-html/unnamed-chunk-245-1.png" alt="" width="576"></div>
+<ul>
+<li>Which of the scenarios is consistent with the goal of the 2015 Paris Agreement?</li>
+<li>How do the radiative forcings and temperature change after the year 100?</li>
+</ul>
+</div>
+<div id="exercise-5" class="section level2" number="11.5">
+<h2>
+<span class="header-section-number">11.5</span> Exercise (5)<a class="anchor" aria-label="anchor" href="#exercise-5"><i class="fas fa-link"></i></a>
+</h2>
+<ul>
+<li>The SSPs above have prescribed emissions that are stored in CSV files. Let’s open one of those files and see what data they contain:</li>
+</ul>
+<div class="sourceCode" id="cb251"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">data</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/utils/read.table.html">read.csv</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/system.file.html">system.file</a></span><span class="op">(</span><span class="st">"input/tables/ssp119_emiss-constraints_rf.csv"</span>, package <span class="op">=</span> <span class="st">"hector"</span><span class="op">)</span>, skip <span class="op">=</span> <span class="fl">5</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/colnames.html">colnames</a></span><span class="op">(</span><span class="va">data</span><span class="op">)</span></span></code></pre></div>
+<pre><code>##  [1] "Date"                "ffi_emissions"       "luc_emissions"      
+##  [4] "daccs_uptake"        "luc_uptake"          "BC_emissions"       
+##  [7] "C2F6_constrain"      "C2F6_emissions"      "CCl4_constrain"     
+## [10] "CCl4_emissions"      "CF4_constrain"       "CF4_emissions"      
+## [13] "CFC113_constrain"    "CFC113_emissions"    "CFC114_constrain"   
+## [16] "CFC114_emissions"    "CFC115_constrain"    "CFC115_emissions"   
+## [19] "CFC11_constrain"     "CFC11_emissions"     "CFC12_constrain"    
+## [22] "CFC12_emissions"     "CH3Br_constrain"     "CH3Br_emissions"    
+## [25] "CH3CCl3_emissions"   "CH3Cl_constrain"     "CH3Cl_emissions"    
+## [28] "CH4_constrain"       "CH4_emissions"       "CO2_constrain"      
+## [31] "CO_emissions"        "HCFC141b_constrain"  "HCFC141b_emissions" 
+## [34] "HCFC142b_constrain"  "HCFC142b_emissions"  "HCFC22_constrain"   
+## [37] "HCFC22_emissions"    "HFC125_constrain"    "HFC125_emissions"   
+## [40] "HFC134a_constrain"   "HFC134a_emissions"   "HFC143a_constrain"  
+## [43] "HFC143a_emissions"   "HFC227ea_constrain"  "HFC227ea_emissions" 
+## [46] "HFC23_constrain"     "HFC23_emissions"     "HFC245_constrain"   
+## [49] "HFC245fa_emissions"  "HFC32_constrain"     "HFC32_emissions"    
+## [52] "HFC4310_constrain"   "HFC4310_emissions"   "N2O_constrain"      
+## [55] "N2O_emissions"       "NH3_emissions"       "NMVOC_emissions"    
+## [58] "NOX_emissions"       "OC_emissions"        "RF_albedo"          
+## [61] "SF6_constrain"       "SF6_emissions"       "SO2_emissions"      
+## [64] "halon1211_constrain" "halon1211_emissions" "halon1301_constrain"
+## [67] "halon1301_emissions" "halon2402_constrain" "halon2402_emissions"</code></pre>
+<p>Now, let’s plot CO<sub>2</sub> emissions from (a) fossil fuel and industry (FFI) and (b) land-use change (LUC), as well as carbon uptake from (c) direct air carbon capture and storage (DACCS), and (d) land-use change (LUC).</p>
+<div class="sourceCode" id="cb253"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># Set up a layout for multiple plots</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/par.html">par</a></span><span class="op">(</span>mar <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">4</span>,<span class="fl">4</span>,<span class="fl">1</span>,<span class="fl">1</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/plot.html">plot</a></span><span class="op">(</span><span class="va">data</span><span class="op">$</span><span class="va">Date</span>, <span class="va">data</span><span class="op">$</span><span class="va">ffi_emissions</span>, type <span class="op">=</span> <span class="st">"l"</span>,</span>
+<span>     main <span class="op">=</span> <span class="st">"SSP1-1.9"</span>,</span>
+<span>     xlab <span class="op">=</span> <span class="st">"Year"</span>,</span>
+<span>     ylab <span class="op">=</span> <span class="st">"PgC per year"</span></span>
+<span>     <span class="op">)</span></span>
+<span><span class="fu"><a href="https://rspatial.github.io/terra/reference/lines.html">lines</a></span><span class="op">(</span><span class="va">data</span><span class="op">$</span><span class="va">Date</span>, <span class="va">data</span><span class="op">$</span><span class="va">luc_emissions</span>, col <span class="op">=</span> <span class="st">"red"</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rspatial.github.io/terra/reference/lines.html">lines</a></span><span class="op">(</span><span class="va">data</span><span class="op">$</span><span class="va">Date</span>, <span class="va">data</span><span class="op">$</span><span class="va">daccs_uptake</span>, col <span class="op">=</span> <span class="st">"blue"</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rspatial.github.io/terra/reference/lines.html">lines</a></span><span class="op">(</span><span class="va">data</span><span class="op">$</span><span class="va">Date</span>, <span class="va">data</span><span class="op">$</span><span class="va">luc_uptake</span>, col <span class="op">=</span> <span class="st">"green"</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/legend.html">legend</a></span><span class="op">(</span><span class="st">"topright"</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"FFI emissions"</span>, <span class="st">"LUC emissions"</span>, <span class="st">"DACCS"</span>, <span class="st">"LUC uptake"</span><span class="op">)</span>, col <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"black"</span>, <span class="st">"red"</span>, <span class="st">"blue"</span>, <span class="st">"green"</span><span class="op">)</span>, pch <span class="op">=</span> <span class="fl">16</span>, bty <span class="op">=</span> <span class="st">"n"</span><span class="op">)</span></span></code></pre></div>
+<div class="inline-figure"><img src="_main_files/figure-html/unnamed-chunk-247-1.png" alt="" width="384"></div>
+<ul>
+<li>Let’s compare the amount of direct air carbon capture and storage (DACCS) required in 2100 with today’s fossil fuel and industrial (FFI) emissions, which are about 10 PgC per year. What fraction of current emissions does the maximum DACCS represent?</li>
+</ul>
+</div>
+<div id="exercise-6" class="section level2" number="11.6">
+<h2>
+<span class="header-section-number">11.6</span> Exercise (6)<a class="anchor" aria-label="anchor" href="#exercise-6"><i class="fas fa-link"></i></a>
+</h2>
+<p>Let us now explore what would happen if CO2 emissions were to remain constant after 2025. For this purpose we need to create a new input file with a reference to a new emission file:</p>
+<ul>
+<li><p>Open <code>ssp370_emiss-constraints_rf.csv</code>. Copy the content and paste it into an excel spreadsheet on your computer. Inspect the column <code>ffi_emissions</code> and set the values to the emissions of 2025 for all years after 2025. Save the file as a .csv file under a different name (ssp370_emiss-constraints_rf_CO2-constant.csv) and upload it into your posit data folder. Open ssp370_emiss-constraints_rf_CO2-constant.csv in posit cloud and delete all commas in lines 1-4.</p></li>
+<li><p>Open <code>hector_ssp370.ini</code> and save it as <code>hector_ssp370-constant.ini</code>. In <code>hector_ssp370-constant.ini</code> replace all <code>csv:tables/ssp370_emiss-constraints_rf.csv</code> with <code>csv:/global/home/hpc5112/ENSC430/shared_files/ssp370_emiss-constraints_rf_CO2-constant.csv</code></p></li>
+<li><p>Next, run the code chunk below.</p></li>
+</ul>
+<div class="sourceCode" id="cb254"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># Initialize hector core</span></span>
+<span><span class="va">ini_file</span> <span class="op">&lt;-</span> <span class="st">"/global/home/hpc5112/ENSC430/shared_files/input/hector_ssp370-constant.ini"</span></span>
+<span><span class="va">core</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://jgcri.github.io/hector/reference/newcore.html">newcore</a></span><span class="op">(</span><span class="va">ini_file</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Run the model</span></span>
+<span><span class="fu"><a href="https://jgcri.github.io/hector/reference/run.html">run</a></span><span class="op">(</span><span class="va">core</span><span class="op">)</span></span></code></pre></div>
+<pre><code>## Hector core: Unnamed Hector core
+## Start date:  1745
+## End date:    2300
+## Current date:    2300
+## Input file:  /global/home/hpc5112/ENSC430/shared_files/input/hector_ssp370-constant.ini</code></pre>
+<div class="sourceCode" id="cb256"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># Obtain the results</span></span>
+<span><span class="va">results_default</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://jgcri.github.io/hector/reference/fetchvars.html">fetchvars</a></span><span class="op">(</span><span class="va">core</span>, <span class="fl">1950</span><span class="op">:</span><span class="fl">2300</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Rename your results "df" (data frame). This is just for giving it a shorter name</span></span>
+<span><span class="va">df</span> <span class="op">&lt;-</span> <span class="va">results_default</span></span>
+<span></span>
+<span><span class="co"># There are four output variables</span></span>
+<span><span class="va">categories</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rspatial.github.io/terra/reference/unique.html">unique</a></span><span class="op">(</span><span class="va">df</span><span class="op">$</span><span class="va">variable</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Set up a layout for multiple plots</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/par.html">par</a></span><span class="op">(</span>mfrow <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">3</span>,<span class="fl">2</span><span class="op">)</span>, mar <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">4</span>,<span class="fl">4</span>,<span class="fl">1</span>,<span class="fl">1</span><span class="op">)</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Loop through each category and create a plot for each category</span></span>
+<span><span class="kw">for</span> <span class="op">(</span><span class="va">i</span> <span class="kw">in</span> <span class="fl">1</span><span class="op">:</span><span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">categories</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span>
+<span>  </span>
+<span>  <span class="co"># Subset data frame </span></span>
+<span>  <span class="va">data</span> <span class="op">&lt;-</span> <span class="va">df</span><span class="op">[</span><span class="va">df</span><span class="op">$</span><span class="va">variable</span> <span class="op">==</span> <span class="va">categories</span><span class="op">[</span><span class="va">i</span><span class="op">]</span>, <span class="op">]</span></span>
+<span>  <span class="va">unit</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rspatial.github.io/terra/reference/unique.html">unique</a></span><span class="op">(</span><span class="va">data</span><span class="op">$</span><span class="va">units</span><span class="op">)</span></span>
+<span>  <span class="co"># Plot data</span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/base/plot.html">plot</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">data</span><span class="op">$</span><span class="va">year</span>, y <span class="op">=</span> <span class="va">data</span><span class="op">$</span><span class="va">value</span>, ylab <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste</a></span><span class="op">(</span><span class="va">categories</span><span class="op">[</span><span class="va">i</span><span class="op">]</span>, <span class="va">unit</span><span class="op">)</span>, xlab <span class="op">=</span> <span class="st">"Year"</span>, type <span class="op">=</span> <span class="st">"l"</span><span class="op">)</span></span>
+<span><span class="op">}</span></span>
+<span></span>
+<span><span class="co"># Plot corresponding emissions:</span></span>
+<span><span class="va">data</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/utils/read.table.html">read.csv</a></span><span class="op">(</span><span class="st">"/global/home/hpc5112/ENSC430/shared_files/input/tables/ssp370_emiss-constraints_rf_CO2-constant.csv"</span>, skip <span class="op">=</span> <span class="fl">5</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/plot.html">plot</a></span><span class="op">(</span><span class="va">data</span><span class="op">$</span><span class="va">Date</span>, <span class="va">data</span><span class="op">$</span><span class="va">ffi_emissions</span>, type <span class="op">=</span> <span class="st">"l"</span>,</span>
+<span>     main <span class="op">=</span> <span class="st">"Constant CO2 emissions after 2025"</span>,</span>
+<span>     xlab <span class="op">=</span> <span class="st">"Year"</span>,</span>
+<span>     ylab <span class="op">=</span> <span class="st">"PgC per year"</span></span>
+<span>     <span class="op">)</span></span></code></pre></div>
+<div class="inline-figure"><img src="_main_files/figure-html/unnamed-chunk-248-1.png" alt="" width="576"></div>
+<ul>
+<li>Interpret your results</li>
+</ul>
+</div>
+<div id="exercise-7" class="section level2" number="11.7">
+<h2>
+<span class="header-section-number">11.7</span> Exercise (7)<a class="anchor" aria-label="anchor" href="#exercise-7"><i class="fas fa-link"></i></a>
+</h2>
+<p>Repeat the exercise above but set all emission and uptake values to zero after 2025. Explain your results.</p>
+<pre><code>## Hector core: Unnamed Hector core
+## Start date:  1745
+## End date:    2300
+## Current date:    2300
+## Input file:  /global/home/hpc5112/ENSC430/shared_files/input/hector_ssp370-zero.ini</code></pre>
+<div class="inline-figure"><img src="_main_files/figure-html/unnamed-chunk-249-1.png" alt="" width="576"></div>
+
+</div>
+</div>
+  <div class="chapter-nav">
+<div class="prev"><a href="week-10-climate-futures-and-solutions-i.html"><span class="header-section-number">10</span> Week 10: Climate Futures and Solutions (I)</a></div>
+<div class="next"><a href="week-12-capstone-project.html"><span class="header-section-number">12</span> Week 12: Capstone Project</a></div>
+</div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
+    <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
+      <ul class="nav navbar-nav">
+<li><a class="nav-link" href="#week-11-climate-futures-and-solutions-ii"><span class="header-section-number">11</span> Week 11: Climate Futures and Solutions (II)</a></li>
+<li><a class="nav-link" href="#exercise-1"><span class="header-section-number">11.1</span> Exercise (1)</a></li>
+<li><a class="nav-link" href="#exercise-2"><span class="header-section-number">11.2</span> Exercise (2)</a></li>
+<li><a class="nav-link" href="#exercise-3"><span class="header-section-number">11.3</span> Exercise (3)</a></li>
+<li><a class="nav-link" href="#exercise-4"><span class="header-section-number">11.4</span> Exercise (4)</a></li>
+<li><a class="nav-link" href="#exercise-5"><span class="header-section-number">11.5</span> Exercise (5)</a></li>
+<li><a class="nav-link" href="#exercise-6"><span class="header-section-number">11.6</span> Exercise (6)</a></li>
+<li><a class="nav-link" href="#exercise-7"><span class="header-section-number">11.7</span> Exercise (7)</a></li>
+</ul>
+
+      <div class="book-extra">
+        <ul class="list-unstyled">
+          
+        </ul>
+</div>
+    </nav>
+</div>
+
+</div>
+</div> <!-- .container -->
+
+<footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
+
+  <div class="col-12 col-md-6 mt-3">
+    <p>"<strong>ENSC 430</strong>" was written by Christian Seiler. </p>
+  </div>
+
+  <div class="col-12 col-md-6 mt-3">
+    <p>This book was built by the <a class="text-light" href="https://bookdown.org">bookdown</a> R package.</p>
+  </div>
+
+</div></div>
+</footer><!-- dynamically load mathjax for compatibility with self-contained --><script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script><script type="text/x-mathjax-config">const popovers = document.querySelectorAll('a.footnote-ref[data-toggle="popover"]');
+for (let popover of popovers) {
+  const div = document.createElement('div');
+  div.setAttribute('style', 'position: absolute; top: 0, left:0; width:0, height:0, overflow: hidden; visibility: hidden;');
+  div.innerHTML = popover.getAttribute('data-content');
+
+  var has_math = div.querySelector("span.math");
+  if (has_math) {
+    document.body.appendChild(div);
+    MathJax.Hub.Queue(["Typeset", MathJax.Hub, div]);
+    MathJax.Hub.Queue(function() {
+      popover.setAttribute('data-content', div.innerHTML);
+      document.body.removeChild(div);
+    })
+  }
+}
+</script>
+</body>
+</html>

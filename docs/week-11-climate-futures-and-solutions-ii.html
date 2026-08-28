@@ -411,12 +411,12 @@ To run Hector you need to initialize a Hector core. The core is a self-contained
 <p>Let us now explore what would happen if CO2 emissions were to remain constant after 2025. For this purpose we need to create a new input file with a reference to a new emission file:</p>
 <ul>
 <li><p>Open <code>ssp370_emiss-constraints_rf.csv</code>. Copy the content and paste it into an excel spreadsheet on your computer. Inspect the column <code>ffi_emissions</code> and set the values to the emissions of 2025 for all years after 2025. Save the file as a .csv file under a different name (ssp370_emiss-constraints_rf_CO2-constant.csv) and upload it into your posit data folder. Open ssp370_emiss-constraints_rf_CO2-constant.csv in posit cloud and delete all commas in lines 1-4.</p></li>
-<li><p>Open <code>hector_ssp370.ini</code> and save it as <code>hector_ssp370-constant.ini</code>. In <code>hector_ssp370-constant.ini</code> replace all <code>csv:tables/ssp370_emiss-constraints_rf.csv</code> with <code>csv:/global/home/hpc5112/ENSC430/shared_files/ssp370_emiss-constraints_rf_CO2-constant.csv</code></p></li>
+<li><p>Open <code>hector_ssp370.ini</code> and save it as <code>hector_ssp370-constant.ini</code>. In <code>hector_ssp370-constant.ini</code> replace all <code>csv:tables/ssp370_emiss-constraints_rf.csv</code> with <code>csv:/global/teaching-project/sg51122000/shared_files/ssp370_emiss-constraints_rf_CO2-constant.csv</code></p></li>
 <li><p>Next, run the code chunk below.</p></li>
 </ul>
 <div class="sourceCode" id="cb254"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Initialize hector core</span></span>
-<span><span class="va">ini_file</span> <span class="op">&lt;-</span> <span class="st">"/global/home/hpc5112/ENSC430/shared_files/input/hector_ssp370-constant.ini"</span></span>
+<span><span class="va">ini_file</span> <span class="op">&lt;-</span> <span class="st">"/global/teaching-project/sg51122000/shared_files/input/hector_ssp370-constant.ini"</span></span>
 <span><span class="va">core</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://jgcri.github.io/hector/reference/newcore.html">newcore</a></span><span class="op">(</span><span class="va">ini_file</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># Run the model</span></span>
@@ -425,7 +425,7 @@ To run Hector you need to initialize a Hector core. The core is a self-contained
 ## Start date:  1745
 ## End date:    2300
 ## Current date:    2300
-## Input file:  /global/home/hpc5112/ENSC430/shared_files/input/hector_ssp370-constant.ini</code></pre>
+## Input file:  /global/teaching-project/sg51122000/shared_files/input/hector_ssp370-constant.ini</code></pre>
 <div class="sourceCode" id="cb256"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Obtain the results</span></span>
 <span><span class="va">results_default</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://jgcri.github.io/hector/reference/fetchvars.html">fetchvars</a></span><span class="op">(</span><span class="va">core</span>, <span class="fl">1950</span><span class="op">:</span><span class="fl">2300</span><span class="op">)</span></span>
@@ -450,7 +450,7 @@ To run Hector you need to initialize a Hector core. The core is a self-contained
 <span><span class="op">}</span></span>
 <span></span>
 <span><span class="co"># Plot corresponding emissions:</span></span>
-<span><span class="va">data</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/utils/read.table.html">read.csv</a></span><span class="op">(</span><span class="st">"/global/home/hpc5112/ENSC430/shared_files/input/tables/ssp370_emiss-constraints_rf_CO2-constant.csv"</span>, skip <span class="op">=</span> <span class="fl">5</span><span class="op">)</span></span>
+<span><span class="va">data</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/utils/read.table.html">read.csv</a></span><span class="op">(</span><span class="st">"/global/teaching-project/sg51122000/shared_files/input/tables/ssp370_emiss-constraints_rf_CO2-constant.csv"</span>, skip <span class="op">=</span> <span class="fl">5</span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/plot.html">plot</a></span><span class="op">(</span><span class="va">data</span><span class="op">$</span><span class="va">Date</span>, <span class="va">data</span><span class="op">$</span><span class="va">ffi_emissions</span>, type <span class="op">=</span> <span class="st">"l"</span>,</span>
 <span>     main <span class="op">=</span> <span class="st">"Constant CO2 emissions after 2025"</span>,</span>
@@ -471,7 +471,7 @@ To run Hector you need to initialize a Hector core. The core is a self-contained
 ## Start date:  1745
 ## End date:    2300
 ## Current date:    2300
-## Input file:  /global/home/hpc5112/ENSC430/shared_files/input/hector_ssp370-zero.ini</code></pre>
+## Input file:  /global/teaching-project/sg51122000/shared_files/input/hector_ssp370-zero.ini</code></pre>
 <div class="inline-figure"><img src="_main_files/figure-html/unnamed-chunk-249-1.png" alt="" width="576"></div>
 
 </div>

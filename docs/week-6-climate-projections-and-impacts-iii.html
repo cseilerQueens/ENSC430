@@ -93,14 +93,14 @@
 <p>I have added those files to our <code>shared_files</code> folder. In the Winter term you will need to download your own data sets. Here is how you would download the files to your home directory:</p>
 <p>Read in data</p>
 <div class="sourceCode" id="cb146"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">tas</span> <span class="op">&lt;-</span> <span class="fu">terra</span><span class="fu">::</span><span class="fu"><a href="https://rspatial.github.io/terra/reference/rast.html">rast</a></span><span class="op">(</span><span class="st">"/global/home/hpc5112/ENSC430/shared_files/tas_Amon_CanESM5_historical_r1i1p1f1_gn_185001-201412.nc"</span><span class="op">)</span></span>
-<span><span class="va">rsus</span> <span class="op">&lt;-</span> <span class="fu">terra</span><span class="fu">::</span><span class="fu"><a href="https://rspatial.github.io/terra/reference/rast.html">rast</a></span><span class="op">(</span><span class="st">"/global/home/hpc5112/ENSC430/shared_files/rsus_Amon_CanESM5_historical_r1i1p1f1_gn_185001-201412.nc"</span><span class="op">)</span></span>
-<span><span class="va">rsds</span> <span class="op">&lt;-</span> <span class="fu">terra</span><span class="fu">::</span><span class="fu"><a href="https://rspatial.github.io/terra/reference/rast.html">rast</a></span><span class="op">(</span><span class="st">"/global/home/hpc5112/ENSC430/shared_files/rsds_Amon_CanESM5_historical_r1i1p1f1_gn_185001-201412.nc"</span><span class="op">)</span></span>
+<code class="sourceCode R"><span><span class="va">tas</span> <span class="op">&lt;-</span> <span class="fu">terra</span><span class="fu">::</span><span class="fu"><a href="https://rspatial.github.io/terra/reference/rast.html">rast</a></span><span class="op">(</span><span class="st">"/global/teaching-project/sg51122000/shared_files/tas_Amon_CanESM5_historical_r1i1p1f1_gn_185001-201412.nc"</span><span class="op">)</span></span>
+<span><span class="va">rsus</span> <span class="op">&lt;-</span> <span class="fu">terra</span><span class="fu">::</span><span class="fu"><a href="https://rspatial.github.io/terra/reference/rast.html">rast</a></span><span class="op">(</span><span class="st">"/global/teaching-project/sg51122000/shared_files/rsus_Amon_CanESM5_historical_r1i1p1f1_gn_185001-201412.nc"</span><span class="op">)</span></span>
+<span><span class="va">rsds</span> <span class="op">&lt;-</span> <span class="fu">terra</span><span class="fu">::</span><span class="fu"><a href="https://rspatial.github.io/terra/reference/rast.html">rast</a></span><span class="op">(</span><span class="st">"/global/teaching-project/sg51122000/shared_files/rsds_Amon_CanESM5_historical_r1i1p1f1_gn_185001-201412.nc"</span><span class="op">)</span></span>
 <span><span class="va">albs</span> <span class="op">&lt;-</span> <span class="va">rsus</span><span class="op">/</span><span class="va">rsds</span></span>
 <span></span>
-<span><span class="co"># tas &lt;- terra::rast("/global/home/hpc5112/ENSC430/shared_files/tas_Amon_CanESM5_ssp585_r1i1p1f1_gn_201501-210012.nc")</span></span>
-<span><span class="co"># rsds &lt;- terra::rast("/global/home/hpc5112/ENSC430/shared_files/rsds_Amon_CanESM5_ssp585_r1i1p1f1_gn_201501-210012.nc")</span></span>
-<span><span class="co"># rsus &lt;- terra::rast("/global/home/hpc5112/ENSC430/shared_files/rsus_Amon_CanESM5_ssp585_r1i1p1f1_gn_201501-210012.nc")</span></span>
+<span><span class="co"># tas &lt;- terra::rast("/global/teaching-project/sg51122000/shared_files/tas_Amon_CanESM5_ssp585_r1i1p1f1_gn_201501-210012.nc")</span></span>
+<span><span class="co"># rsds &lt;- terra::rast("/global/teaching-project/sg51122000/shared_files/rsds_Amon_CanESM5_ssp585_r1i1p1f1_gn_201501-210012.nc")</span></span>
+<span><span class="co"># rsus &lt;- terra::rast("/global/teaching-project/sg51122000/shared_files/rsus_Amon_CanESM5_ssp585_r1i1p1f1_gn_201501-210012.nc")</span></span>
 <span><span class="co"># albs &lt;- rsus/rsds</span></span>
 <span></span>
 <span><span class="co"># Plot first time step of tas and albedo to see if they look OK</span></span>

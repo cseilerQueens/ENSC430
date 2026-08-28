@@ -95,7 +95,7 @@
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://www.pfaffikus.de">vars</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/duncanobrien/EWSmethods">EWSmethods</a></span><span class="op">)</span></span></code></pre></div>
 <div class="sourceCode" id="cb194"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">data.sa3</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/utils/read.table.html">read.csv</a></span><span class="op">(</span><span class="st">"/global/home/hpc5112/ENSC430/shared_files/FLX_BR-Sa3_FLUXNET2015_SUBSET_2000-2004_1-4/FLX_BR-Sa3_FLUXNET2015_SUBSET_DD_2000-2004_1-4.csv"</span><span class="op">)</span></span>
+<code class="sourceCode R"><span><span class="va">data.sa3</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/utils/read.table.html">read.csv</a></span><span class="op">(</span><span class="st">"/global/teaching-project/sg51122000/shared_files/FLX_BR-Sa3_FLUXNET2015_SUBSET_2000-2004_1-4/FLX_BR-Sa3_FLUXNET2015_SUBSET_DD_2000-2004_1-4.csv"</span><span class="op">)</span></span>
 <span><span class="va">data</span> <span class="op">&lt;-</span> <span class="va">data.sa3</span><span class="op">[</span><span class="fl">250</span><span class="op">:</span><span class="fl">1500</span>,<span class="op">]</span> <span class="co"># We will use a subset that excludes dates with unreasonable values</span></span></code></pre></div>
 <ul>
 <li>Have a look at the column names:</li>
@@ -366,7 +366,7 @@
 <li>Next, repeat the same analysis for the Australian site <code>AU-GWW</code>.</li>
 </ul>
 <div class="sourceCode" id="cb209"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">data</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/utils/read.table.html">read.csv</a></span><span class="op">(</span><span class="st">"/global/home/hpc5112/ENSC430/shared_files/FLX_AU-GWW_FLUXNET2015_SUBSET_2013-2014_1-4/FLX_AU-GWW_FLUXNET2015_SUBSET_DD_2013-2014_1-4.csv"</span><span class="op">)</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">data</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/utils/read.table.html">read.csv</a></span><span class="op">(</span><span class="st">"/global/teaching-project/sg51122000/shared_files/FLX_AU-GWW_FLUXNET2015_SUBSET_2013-2014_1-4/FLX_AU-GWW_FLUXNET2015_SUBSET_DD_2013-2014_1-4.csv"</span><span class="op">)</span></span></code></pre></div>
 <div class="inline-figure"><img src="_main_files/figure-html/unnamed-chunk-218-1.png" alt="" width="672"></div>
 <ul>
 <li>Compute detrended anomalies.</li>

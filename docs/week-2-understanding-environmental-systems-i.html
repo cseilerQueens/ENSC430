@@ -126,7 +126,8 @@ x = c * \exp(0.06 t)
 <span>     ylab <span class="op">=</span> <span class="st">"x"</span><span class="op">)</span></span></code></pre></div>
 <div class="inline-figure"><img src="_main_files/figure-html/unnamed-chunk-65-1.png" alt="" width="672"></div>
 <p>Some equations are so complicated, that they cannot be integrated analytically. Instead, we can integrate them numerically. Let’s see how we can integrate the same equation numerically using the <code>ode</code> function. Have a look at the code.</p>
-<p><strong>Quiz Question 1:</strong> Which part of the code defines your initial value?</p>
+<p><strong>Quiz Question 1:</strong> Which part of the code defines your initial value?
+<!-- state --></p>
 <p>Run this code in your markdown file:</p>
 <div class="sourceCode" id="cb50"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Define the function</span></span>
@@ -154,7 +155,8 @@ x = c * \exp(0.06 t)
 <span>     xlab <span class="op">=</span> <span class="st">"Time Step"</span>,</span>
 <span>     ylab <span class="op">=</span> <span class="st">"x"</span><span class="op">)</span></span></code></pre></div>
 <div class="inline-figure"><img src="_main_files/figure-html/unnamed-chunk-66-1.png" alt="" width="672"></div>
-<p><strong>Quiz Question 2:</strong> Which part of the code is your ODE?</p>
+<p><strong>Quiz Question 2:</strong> Which part of the code is your ODE?
+<!-- dx <- 0.06 * x --></p>
 </div>
 <div id="lotka-volterra" class="section level3" number="2.1.2">
 <h3>
@@ -163,10 +165,13 @@ x = c * \exp(0.06 t)
 <p>Now that you know how to conduct numerical integration, let’s apply your new skills to the Lotka-Volterra model:</p>
 <p><span class="math display">\[\frac{dY}{dt} = r_i * Y * (1 - Y / K) - \alpha * R * Y \]</span>
 <span class="math display">\[\frac{dR}{dt} = \alpha * \gamma * R * Y - m * R \]</span></p>
-<p>where <span class="math inline">\(Y\)</span> = prey, <span class="math inline">\(R\)</span> = predator, <span class="math inline">\(\alpha\)</span> = ingestion rate of predator (0.2), <span class="math inline">\(r_i\)</span> = rate of prey increase (1), <span class="math inline">\(m\)</span> = mortality rate (0.2), <span class="math inline">\(\gamma\)</span> = assimilation efficiency (0.5), <span class="math inline">\(K\)</span> = carrying capacity (10000). Adjust the code from your savings account above to reproduce the Figure below.</p>
+<p>where <span class="math inline">\(Y\)</span> = prey, <span class="math inline">\(R\)</span> = predator, <span class="math inline">\(\alpha\)</span> = ingestion rate of predator (0.2), <span class="math inline">\(r_i\)</span> = rate of prey increase (1), <span class="math inline">\(m\)</span> = mortality rate (0.2), <span class="math inline">\(\gamma\)</span> = assimilation efficiency (0.5), <span class="math inline">\(K\)</span> = carrying capacity (10000). Adjust the code from your savings account above to reproduce the Figure below. Set your initial state to <span class="math inline">\(Y = 1\)</span> and <span class="math inline">\(R = 1\)</span> and your time axis to <code>times &lt;- seq(0, 70, 0.1)</code>.</p>
 <div class="inline-figure"><img src="_main_files/figure-html/unnamed-chunk-67-1.png" alt="" width="672"></div>
+<p><strong>Quiz Question 3:</strong> What value do you get for <code>out$Y[100]</code>?
+<!-- 0.01434187 --></p>
 <p>Now adjust the code again to plot Predator versus Prey, reproducing the Figure below.</p>
-<div class="inline-figure"><img src="_main_files/figure-html/unnamed-chunk-68-1.png" alt="" width="672"></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-68-1.png" alt="" width="672"><strong>Quiz Question 4:</strong> What does this Figure tell you?
+<!-- Predator and prey are dynamically linked --></p>
 </div>
 </div>
 <div id="bifurcation" class="section level2" number="2.2">
@@ -198,9 +203,9 @@ where <span class="math inline">\(t\)</span> is the time, <span class="math inli
 <span><span class="co"># Plot the solution</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/par.html">par</a></span><span class="op">(</span>pty<span class="op">=</span><span class="st">"s"</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">solution</span>, type <span class="op">=</span> <span class="st">"l"</span>, xlab <span class="op">=</span> <span class="st">"Time"</span>, ylab <span class="op">=</span> <span class="st">"B"</span>, main <span class="op">=</span> <span class="cn">NA</span><span class="op">)</span></span></code></pre></div>
-<p><strong>Quiz Question 3:</strong> Is the system in dynamic equilibrium?
+<p><strong>Quiz Question 5:</strong> Is the system in dynamic equilibrium?
 <!-- Yes, growth = mortality after about 300 time steps --></p>
-<p><strong>Quiz Question 4:</strong> What happens if you increase the rate of increase (<span class="math inline">\(r_i\)</span>) from 0.05 to 0.08?
+<p><strong>Quiz Question 6:</strong> What happens if you increase the rate of increase (<span class="math inline">\(r_i\)</span>) from 0.05 to 0.08?
 <!-- The dynamic equilibrium is reached much sooner, at about time step 100 --></p>
 <ul>
 <li>Next, let’s plot the rate of change (<span class="math inline">\(\frac{dB}{dt}\)</span>) as a function of the population density (<span class="math inline">\(B\)</span>)</li>
@@ -220,13 +225,11 @@ where <span class="math inline">\(t\)</span> is the time, <span class="math inli
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/par.html">par</a></span><span class="op">(</span>pty<span class="op">=</span><span class="st">"s"</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">B</span>, y <span class="op">=</span> <span class="va">dBdt</span>, type <span class="op">=</span> <span class="st">"l"</span>, xlab <span class="op">=</span> <span class="st">"B"</span>, ylab <span class="op">=</span> <span class="st">"dBdt"</span>, main <span class="op">=</span> <span class="cn">NA</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/abline.html">abline</a></span><span class="op">(</span>h <span class="op">=</span> <span class="fl">0</span>, col <span class="op">=</span> <span class="st">"grey"</span><span class="op">)</span></span></code></pre></div>
-<p><strong>Quiz Question 5:</strong> How many equilibrium points are there?
+<p><strong>Quiz Question 7:</strong> How many equilibrium points are there?
 <!-- There are four equilibrium points (dB/dt = 0) --></p>
-<p><strong>Quiz Question 6:</strong> Are they stable or unstable?
+<p><strong>Quiz Question 8:</strong> Are they stable or unstable?
 <!-- From left-to-right: unstable, stable, unstable, stable --></p>
-<ul>
-<li>Evaluate your answer by running the code below, trying different values for <span class="math inline">\(B\)</span> (e.g. 0, 1, 2, 5, 10) (<code>state &lt;- c(B = 10)</code>). Document your findings.</li>
-</ul>
+<p>Evaluate your answer by running the code below, trying different values for <span class="math inline">\(B\)</span> (e.g. 0, 1, 2, 5, 10) (<code>state &lt;- c(B = 10)</code>). Document your findings.</p>
 <div class="sourceCode" id="cb53"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">ri</span> <span class="op">&lt;-</span> <span class="fl">0.05</span></span>
 <span><span class="va">K</span> <span class="op">&lt;-</span> <span class="fl">10</span></span>
@@ -300,18 +303,16 @@ where <span class="math inline">\(t\)</span> is the time, <span class="math inli
 <span>    <span class="va">eq</span><span class="op">$</span><span class="va">x</span></span>
 <span>  <span class="op">)</span></span>
 <span><span class="op">}</span></span></code></pre></div>
-<p><strong>Quiz Question 7:</strong> What does each point on the curve represent?
+<p><strong>Quiz Question 9:</strong> What does each point on the curve represent?
 <!-- Each point gives the equilibrium species density $B$ for a given value of $r_i$ --></p>
-<p>Assume the initial budworm population is close to zero and <span class="math inline">\(r_i\)</span> equals 0.05. A small perturbation causes <span class="math inline">\(B\)</span> to increase.</p>
-<p><strong>Quiz Question 8:</strong> What will the final population density be after some time?</p>
-<p><strong>Quiz Question 9:</strong> Next, let’s assume <span class="math inline">\(r_i\)</span> increases from 0.05 to 0.06. How will this affect the population density <span class="math inline">\(B\)</span> starting out at an initial population of 1?
-<!-- (a) B = 1, (b) B = 8 --></p>
+<p><strong>Quiz Question 10:</strong> Assume the initial budworm population is close to 5 and <span class="math inline">\(r_i\)</span> equals about 0.04. Then <span class="math inline">\(r_i\)</span> slowly begins to decrease. What happens to the budworm population?
+<!-- The population will collapse --></p>
 </div>
 <div id="chaotic-behaviour-lorenz-attractor" class="section level2" number="2.3">
 <h2>
 <span class="header-section-number">2.3</span> Chaotic behaviour: Lorenz Attractor<a class="anchor" aria-label="anchor" href="#chaotic-behaviour-lorenz-attractor"><i class="fas fa-link"></i></a>
 </h2>
-<p>The Lorenz equations were the first chaotic system to be discovered. They are three differential equations that were derived to represent idealized behavior of the earth’s atmosphere:</p>
+<p>The Lorenz equations were the first chaotic system to be discovered. The system consists of three differential equations that were derived to represent idealized behavior of the earth’s atmosphere:</p>
 <p><span class="math inline">\(\frac{dx}{dt} = -\frac{8}{3}x+yz\)</span></p>
 <p><span class="math inline">\(\frac{dy}{dt} = -10 (y - z)\)</span></p>
 <p><span class="math inline">\(\frac{dz}{dt} = -xy + 28y-z\)</span></p>
@@ -345,12 +346,11 @@ where <span class="math inline">\(t\)</span> is the time, <span class="math inli
 <span>  box <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>  color <span class="op">=</span> <span class="st">"blue"</span></span>
 <span><span class="op">)</span></span></code></pre></div>
-<ul>
-<li>Record the last <span class="math inline">\(x\)</span>, <span class="math inline">\(y\)</span>, and <span class="math inline">\(z\)</span> values using <code>tail(out)</code>
-</li>
-</ul>
-<p><strong>Quiz Question 10:</strong> Apply a small change to the initial conditions and rerun the code. How do your changes affect the final <span class="math inline">\(x\)</span>, <span class="math inline">\(y\)</span>, and <span class="math inline">\(z\)</span> values?</p>
-<!-- Small changes in initial conditions lead to large changes in the outcome -->
+<p>Record the last <span class="math inline">\(x\)</span>, <span class="math inline">\(y\)</span>, and <span class="math inline">\(z\)</span> values using <code>tail(out)</code></p>
+<p><strong>Quiz Question 11:</strong> What is the value of <span class="math inline">\(z\)</span> for the last time step?
+<!-- z = 17.40767 --></p>
+<p><strong>Quiz Question 12:</strong> Apply a small change to the initial conditions and rerun the code. How do your changes affect the final <span class="math inline">\(x\)</span>, <span class="math inline">\(y\)</span>, and <span class="math inline">\(z\)</span> values?
+<!-- Small changes in initial conditions lead to large changes in the outcome --></p>
 </div>
 <div id="early-warning-signal-ews-assessments" class="section level2" number="2.4">
 <h2>
@@ -401,7 +401,7 @@ where <span class="math inline">\(t\)</span> is the time, <span class="math inli
 <span>  winsize <span class="op">=</span> <span class="fl">50</span></span>
 <span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">rolling_ews_eg</span>, y_lab <span class="op">=</span> <span class="st">"Density"</span><span class="op">)</span></span></code></pre></div>
-<p><strong>Quiz Question 11:</strong> What does the behavior of the EWS indicators lag1 Autocorrelation (ar1) and Standard deviation (SD) tell you?</p>
+<p><strong>Quiz Question 13:</strong> What does the behavior of the EWS indicators lag1 Autocorrelation (ar1) and Standard deviation (SD) tell you?</p>
 <!-- 
 * Autocorrelation at lag1   Autocorrelation (ar1): increases approaching a transition
 * Standard deviation (SD): Increasing variance/standard deviation is observed approaching a transition

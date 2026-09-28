@@ -32,8 +32,8 @@ week-3-understanding-environmental-systems-ii
 autoregression
 vector-autoregression-var
 granger-causality
-evaluate-the-statistical-association-between-x-y-and-z-in-the-lorenz-equations-using-granger-causality
-evaluate-the-statistical-association-between-x-y-and-z-in-the-lorenz-equations-using-convergent-cross-mapping-ccm
+lorenz-equations
+convergent-cross-mapping-ccm
 week-4-climate-projections-and-impacts-i
 earth-system-grid-federation-esgf
 open-process-and-plot-netcdf-files

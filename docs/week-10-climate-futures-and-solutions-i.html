@@ -71,7 +71,7 @@
 <span class="header-section-number">10.1</span> Scenario database<a class="anchor" aria-label="anchor" href="#scenario-database"><i class="fas fa-link"></i></a>
 </h2>
 <p>In this exercise you will explore a database with global impact assessment model outputs that were used in the most recent IPCC report (<a href="https://www.ipcc.ch/report/sixth-assessment-report-working-group-3/">AR6, Working Group III</a>). You will explore the distinction between baseline and mitigation scenarios and assess how well current trends and policies align with the goal of limiting global warming to 1.5 Degrees Celsius. You can access this data through the <a href="https://data.ece.iiasa.ac.at/ar6/#/downloads">AR6 Scenario Explorer</a>. Let’s open and explore the scenario database and see how many scenarios, models, and variables it contains.</p>
-<div class="sourceCode" id="cb212"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb215"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/rm.html">rm</a></span><span class="op">(</span>list <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/ls.html">ls</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="co"># Read in data</span></span>
 <span><span class="va">data.all</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/utils/read.table.html">read.csv</a></span><span class="op">(</span><span class="st">"/global/teaching-project/sg51122000/shared_files/AR6_Scenarios_Database_World_v1.1.csv"</span><span class="op">)</span></span>
@@ -97,7 +97,7 @@
 ##  [97] "X2086"    "X2087"    "X2088"    "X2089"    "X2090"    "X2091"   
 ## [103] "X2092"    "X2093"    "X2094"    "X2095"    "X2096"    "X2097"   
 ## [109] "X2098"    "X2099"    "X2100"</code></pre>
-<div class="sourceCode" id="cb214"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb217"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Number of available scenarios</span></span>
 <span><span class="va">n.scenarios</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="op">(</span><span class="fu"><a href="https://rspatial.github.io/terra/reference/unique.html">unique</a></span><span class="op">(</span><span class="va">data.all</span><span class="op">$</span><span class="va">Scenario</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span>
 <span></span>
@@ -110,7 +110,7 @@
 <pre><code>## [1] "Number of Scnearios:" "939"                  "Number of models:"   
 ## [4] "109"                  "Number of variables:" "1393"</code></pre>
 <p>There are numerous scenarios, models, and variables to consider. However, not all models have been run for every scenario, and the variables often differ across models. Let’s identify which models are used in one of the fundamental scenarios: SSP2.</p>
-<div class="sourceCode" id="cb216"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb219"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">models</span> <span class="op">&lt;-</span> <span class="va">data.all</span><span class="op">$</span><span class="va">Model</span></span>
 <span><span class="va">models</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rspatial.github.io/terra/reference/subset.html">subset</a></span><span class="op">(</span><span class="va">data.all</span>, <span class="va">Scenario</span> <span class="op">==</span> <span class="st">"SSP2-Baseline"</span><span class="op">)</span></span>
 <span><span class="va">models</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rspatial.github.io/terra/reference/unique.html">unique</a></span><span class="op">(</span><span class="va">models</span><span class="op">$</span><span class="va">Model</span><span class="op">)</span></span>
@@ -118,7 +118,7 @@
 <pre><code>## [1] "AIM/CGE 2.0"         "GCAM 4.2"            "IMAGE 3.0.1"        
 ## [4] "MESSAGE-GLOBIOM 1.0" "REMIND-MAgPIE 1.5"   "WITCH-GLOBIOM 3.1"</code></pre>
 <p>To navigate the database effectively, we will concentrate on a few number of scenarios and variables. We’ll define a function to visualize all model results for a chosen subset of variables within a specific scenario. Here is this function:</p>
-<div class="sourceCode" id="cb218"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb221"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">plot.iams</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">scenario</span>, <span class="va">variables</span><span class="op">)</span> <span class="op">{</span></span>
 <span>  <span class="co"># Subset data</span></span>
 <span>  <span class="va">data</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rspatial.github.io/terra/reference/subset.html">subset</a></span><span class="op">(</span><span class="va">data.all</span>, <span class="va">Scenario</span> <span class="op">==</span> <span class="va">scenario</span><span class="op">)</span></span>
@@ -189,7 +189,7 @@
 <span class="header-section-number">10.2</span> Middle-of-the-road baseline sceanrio (SSP2)<a class="anchor" aria-label="anchor" href="#middle-of-the-road-baseline-sceanrio-ssp2"><i class="fas fa-link"></i></a>
 </h2>
 <p>Let’s focus for now on the Shared Socioeconomic Pathway (SSP) baseline scenarios. We have five baseline scenarios: SSP1-Baseline, SSP2-Baseline, SSP3-Baseline, SSP4-Baseline, SSP5-Baseline. Let’s plot results for the SSP2 (middle-of-the-road) scenario. When you add this chunk to your Markdownfile, you can control the size of the figures as follows: instead of starting your chunk with <code>{r}</code> you write: <code>{r, fig.width=7, fig.height=14}</code>. You can control the size of the figure by changing the figure width and height numbers.</p>
-<div class="sourceCode" id="cb219"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb222"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">scenario</span> <span class="op">&lt;-</span> <span class="st">"SSP2-Baseline"</span></span>
 <span><span class="va">variables</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span></span>
 <span>  <span class="st">"Population"</span>,</span>
@@ -204,7 +204,7 @@
 <span>  <span class="st">"Price|Carbon"</span></span>
 <span><span class="op">)</span></span>
 <span><span class="fu">plot.iams</span><span class="op">(</span>scenario <span class="op">=</span> <span class="va">scenario</span>, <span class="va">variables</span><span class="op">)</span></span></code></pre></div>
-<div class="inline-figure"><img src="_main_files/figure-html/unnamed-chunk-232-1.png" alt="" width="672"></div>
+<div class="inline-figure"><img src="_main_files/figure-html/unnamed-chunk-234-1.png" alt="" width="672"></div>
 <ul>
 <li><p>Does the scenario contain a climate change mitigation policy that puts a price carbon emissions?</p></li>
 <li><p>What is the radiative forcing and temperature change in the year 2100?</p></li>
@@ -215,7 +215,7 @@
 <h2>
 <span class="header-section-number">10.3</span> Middle-of-the-road sceanrio (SSP2-45)<a class="anchor" aria-label="anchor" href="#middle-of-the-road-sceanrio-ssp2-45"><i class="fas fa-link"></i></a>
 </h2>
-<div class="inline-figure"><img src="_main_files/figure-html/unnamed-chunk-233-1.png" alt="" width="672"></div>
+<div class="inline-figure"><img src="_main_files/figure-html/unnamed-chunk-235-1.png" alt="" width="672"></div>
 <ul>
 <li>Describe the differences between SSP2 and SSP2-45 for all ten variables</li>
 <li>Which of the two scenarios has climate change mitigation policies?</li>
@@ -228,7 +228,7 @@
 <span class="header-section-number">10.4</span> Current Policies and trends scenario (CO_CurPol)<a class="anchor" aria-label="anchor" href="#current-policies-and-trends-scenario-co_curpol"><i class="fas fa-link"></i></a>
 </h2>
 <p>SSP2 is often described as a ‘middle-of-the-road’ scenario, representing a pathway where social, economic, and technological trends continue without significant deviations from historical patterns. Let’s assess how closely current conditions align with SSP2-4.5. To do this, we’ll examine the CO_CurPol scenario, which reflects current trends and policies. We’ll plot the output from CO_CurPol and compare it to SSP2-4.5</p>
-<div class="inline-figure"><img src="_main_files/figure-html/unnamed-chunk-235-1.png" alt="" width="672"></div>
+<div class="inline-figure"><img src="_main_files/figure-html/unnamed-chunk-237-1.png" alt="" width="672"></div>
 <ul>
 <li>What is the raditive forcing by the year 2100?</li>
 <li>What is the approximate range of temperature change by the year 2100 in the current policies and trend scenario?</li>
@@ -241,7 +241,7 @@
 <span class="header-section-number">10.5</span> Sustainable Development Scenario (SSP1)<a class="anchor" aria-label="anchor" href="#sustainable-development-scenario-ssp1"><i class="fas fa-link"></i></a>
 </h2>
 <p>Next, we will turn our attention to SSP1, the sustainability scenario. In SSP1, the world gradually transitions toward a more sustainable pathway, prioritizing inclusive development that respects environmental boundaries. Global commons management improves, investments in education and healthcare accelerate demographic transitions, and the focus on economic growth broadens to emphasize overall human well-being. With a heightened commitment to development goals, inequalities are reduced both within and between countries. Consumption patterns shift toward low material growth, with reduced resource and energy intensity</p>
-<div class="inline-figure"><img src="_main_files/figure-html/unnamed-chunk-236-1.png" alt="" width="672"></div>
+<div class="inline-figure"><img src="_main_files/figure-html/unnamed-chunk-238-1.png" alt="" width="672"></div>
 <ul>
 <li>Will the SSP1-Baseline scenario be enough to implement the 2015 Paris Agreement?</li>
 </ul>
@@ -251,7 +251,7 @@
 <span class="header-section-number">10.6</span> Mitigation scenarios<a class="anchor" aria-label="anchor" href="#mitigation-scenarios"><i class="fas fa-link"></i></a>
 </h2>
 <p>Next, we will examine a climate change mitigation scenario that outlines the changes needed to meet the targets of the 2015 Paris Agreement. One example is SSP1-19, a scenario based on the SSP1 storyline, which incorporates emissions reductions to limit radiative forcing to no more than 1.9 W m<sup>-2</sup> by the year 2100.</p>
-<div class="inline-figure"><img src="_main_files/figure-html/unnamed-chunk-237-1.png" alt="" width="672"></div>
+<div class="inline-figure"><img src="_main_files/figure-html/unnamed-chunk-239-1.png" alt="" width="672"></div>
 <ul>
 <li>Describe how emissions need to change in order to stay blow the 1.5 Degree global warming target.</li>
 <li>You can see that CO<sub>2</sub> emissions become negative after the year we reach net-zero. How is this possible?</li>

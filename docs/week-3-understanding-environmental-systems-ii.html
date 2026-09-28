@@ -192,9 +192,7 @@ More, generally, a <span class="math inline">\(p\)</span>-order autoregressive m
 <span>  lwd <span class="op">=</span> <span class="fl">2</span></span>
 <span><span class="op">)</span></span></code></pre></div>
 <div class="inline-figure"><img src="_main_files/figure-html/unnamed-chunk-85-1.png" alt="" width="672"></div>
-<ul>
-<li>The result matches what you intuitively expect. Let’s now see how we can work with multiple variables.</li>
-</ul>
+<p>The result matches what you would intuitively expect. Let’s now see how we can work with multiple variables.</p>
 </div>
 <div id="vector-autoregression-var" class="section level2" number="3.2">
 <h2>
@@ -207,7 +205,7 @@ More, generally, a <span class="math inline">\(p\)</span>-order autoregressive m
 <div class="sourceCode" id="cb77"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/Random.html">set.seed</a></span><span class="op">(</span><span class="fl">1</span><span class="op">)</span></span>
 <span></span>
-<span><span class="co"># Create time-series objects</span></span>
+<span><span class="co"># Create two random time-series objects</span></span>
 <span><span class="va">ts1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/ts.html">ts</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">rnorm</a></span><span class="op">(</span>n<span class="op">=</span><span class="fl">5000</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="va">ts2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/ts.html">ts</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">rnorm</a></span><span class="op">(</span>n<span class="op">=</span><span class="fl">5000</span><span class="op">)</span><span class="op">)</span></span>
 <span></span>
@@ -257,10 +255,9 @@ More, generally, a <span class="math inline">\(p\)</span>-order autoregressive m
 </ul>
 <p><span class="math display">\[ y_{t} = \beta_{0} + \beta_{1}  x_{t-1} +  \beta_{2}  y_{t-1} + \epsilon_{2,t} \]</span></p>
 <p>The restricted model is an autoregressive model where <span class="math inline">\(y_t\)</span> depends only on <span class="math inline">\(y\)</span> lags. The unrestricted model is an autoregressive model where <span class="math inline">\(y_t\)</span> depends on <span class="math inline">\(y\)</span> and <span class="math inline">\(x\)</span> lags. If the unrestricted model outperforms the restricted model, then <span class="math inline">\(x\)</span> precedes <span class="math inline">\(y\)</span>. The performance is measured via an <span class="math inline">\(F\)</span>-test that compares the error terms of both models.</p>
-<p><strong>Quiz Question 3:</strong> What is the difference between a restricted and an unrestricted model?</p>
-<ul>
-<li>Conduct Granger causality:</li>
-</ul>
+<p><strong>Quiz Question 3:</strong> What is the difference between a restricted and an unrestricted model?
+<!-- A restricted model includes one variable only, while an unrestricted model contains multiple variables. --></p>
+<p>To conduct the Granger causality, we do:</p>
 <div class="sourceCode" id="cb79"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">vars</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/vars/man/causality.html">causality</a></span><span class="op">(</span><span class="va">tsVAR</span>, cause <span class="op">=</span> <span class="st">"ts1"</span><span class="op">)</span><span class="op">$</span><span class="va">Granger</span></span></code></pre></div>
 <pre><code>## 
@@ -268,14 +265,15 @@ More, generally, a <span class="math inline">\(p\)</span>-order autoregressive m
 ## 
 ## data:  VAR object tsVAR
 ## F-Test = 0.040775, df1 = 1, df2 = 9992, p-value = 0.84</code></pre>
+<p>The null hypothesis <code>H0</code> says that the first time series does not Granger-cause the second time series. The <span class="math inline">\(p\)</span>-value exceeds 0.05, confirming the null hypothesis. You can safely assume that time series 1 does not Granger-cause time series 2.</p>
+<p><strong>Quiz Question 4:</strong> Why does time series 1 not Granger-cause time series 2?
+<!-- Because both time series consist of random numbers that are unrelated --></p>
 <ul>
-<li>The null hypothesis <code>H0</code> says that the first time series does not Granger-cause the second time series.</li>
-<li>The <span class="math inline">\(p\)</span>-value exceeds 0.05, confirming the null hypothesis.</li>
-<li>You can safely assume that time series 1 does not Granger-cause time series 2</li>
-<li>Does that surprise you or did you expect this to happen? Explain why.</li>
 <li>Check for the reverse and see if time series 2 Granger-causes time series 1</li>
 </ul>
-<p>Let’s apply Granger causality to a different set of time series that do have a statistical association.</p>
+<p><strong>Quiz Question 5:</strong> Does time series 2 Granger-causes time series 1?
+<!-- No, because both time series consist of random numbers that are unrelated --></p>
+<p>Let’s apply Granger causality to a different set of time series that have a statistical association.</p>
 <ul>
 <li>Create two sinusoidal time series that differ by random noise and that are lagged</li>
 </ul>
@@ -288,6 +286,7 @@ More, generally, a <span class="math inline">\(p\)</span>-order autoregressive m
 <span><span class="va">x</span> <span class="op">&lt;-</span> <span class="va">x</span><span class="op">[</span><span class="fl">10</span><span class="op">:</span><span class="va">n</span><span class="op">]</span></span>
 <span></span>
 <span><span class="co"># Add noise to y</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/Random.html">set.seed</a></span><span class="op">(</span>seed <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></span>
 <span><span class="va">noise</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/Uniform.html">runif</a></span><span class="op">(</span>n<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">y</span><span class="op">)</span>, min <span class="op">=</span> <span class="op">-</span><span class="fl">0.5</span>, max <span class="op">=</span> <span class="fl">0.5</span><span class="op">)</span></span>
 <span><span class="va">y</span> <span class="op">&lt;-</span> <span class="va">y</span> <span class="op">+</span> <span class="va">noise</span></span>
 <span></span>
@@ -309,21 +308,19 @@ More, generally, a <span class="math inline">\(p\)</span>-order autoregressive m
 ##  Granger causality H0: x do not Granger-cause y
 ## 
 ## data:  VAR object tsVAR
-## F-Test = 59.866, df1 = 2, df2 = 370, p-value &lt; 2.2e-16</code></pre>
+## F-Test = 50.21, df1 = 2, df2 = 370, p-value &lt; 2.2e-16</code></pre>
 <div class="sourceCode" id="cb84"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">vars</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/vars/man/causality.html">causality</a></span><span class="op">(</span><span class="va">tsVAR</span>, cause <span class="op">=</span> <span class="st">"y"</span><span class="op">)</span><span class="op">$</span><span class="va">Granger</span></span></code></pre></div>
 <pre><code>## 
 ##  Granger causality H0: y do not Granger-cause x
 ## 
 ## data:  VAR object tsVAR
-## F-Test = 7.4927, df1 = 2, df2 = 370, p-value = 0.0006458</code></pre>
-<ul>
-<li>What is your interpretation of the results?</li>
-</ul>
-<p>Now let’s apply our new skills to the Lotka-Volterra model.</p>
-<ul>
-<li>Create two time series, one for predator, the other for prey</li>
-</ul>
+## F-Test = 0.014664, df1 = 2, df2 = 370, p-value = 0.9854</code></pre>
+<p><strong>Quiz Question 6:</strong> Does <span class="math inline">\(x\)</span> Granger-cause <span class="math inline">\(y\)</span>?
+<!-- Yes --></p>
+<p><strong>Quiz Question 7:</strong> Does <span class="math inline">\(y\)</span> Granger-cause <span class="math inline">\(x\)</span>?
+<!-- No --></p>
+<p>Now let’s apply our new skills to the Lotka-Volterra model. Create two time series, one for predator, the other for prey</p>
 <div class="sourceCode" id="cb86"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/rm.html">rm</a></span><span class="op">(</span>list <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/ls.html">ls</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span>
 <span></span>
@@ -369,10 +366,11 @@ More, generally, a <span class="math inline">\(p\)</span>-order autoregressive m
 ## 
 ## data:  VAR object tsVAR
 ## F-Test = 1132.3, df1 = 3, df2 = 262, p-value &lt; 2.2e-16</code></pre>
-<ul>
-<li><p>Interpret the results</p></li>
-<li><p>Let’s repeat the same exercise but using Convergent Cross Mapping (CCM). Recall that in CCM, if variable <span class="math inline">\(x\)</span> can be predicted using the reconstructed system based on the time-delay embedding of variable <span class="math inline">\(y\)</span>, then we know that <span class="math inline">\(x\)</span> had a causal effect on <span class="math inline">\(y\)</span>.</p></li>
-</ul>
+<p><strong>Quiz Question 8:</strong> Does the predator population Granger-cause the prey population?
+<!-- Yes --></p>
+<p><strong>Quiz Question 9:</strong> Does the prey population Granger-cause the predator population?
+<!-- Yes --></p>
+<p>Let’s repeat the same exercise but using Convergent Cross Mapping (CCM). Recall that in CCM, if variable <span class="math inline">\(x\)</span> can be predicted using the reconstructed system based on the time-delay embedding of variable <span class="math inline">\(y\)</span>, then we know that <span class="math inline">\(x\)</span> had a causal effect on <span class="math inline">\(y\)</span>.</p>
 <div class="sourceCode" id="cb91"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">data</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span><span class="va">predator</span>, <span class="va">prey</span><span class="op">)</span></span>
 <span></span>
@@ -398,40 +396,58 @@ More, generally, a <span class="math inline">\(p\)</span>-order autoregressive m
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/legend.html">legend</a></span><span class="op">(</span><span class="st">"bottomright"</span>, legend <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Predator drives Prey"</span>, <span class="st">"Prey drives Predator"</span><span class="op">)</span>,</span>
 <span>       col <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"blue"</span>, <span class="st">"red"</span><span class="op">)</span>, lwd <span class="op">=</span> <span class="fl">2</span>, bty <span class="op">=</span> <span class="st">"n"</span><span class="op">)</span></span></code></pre></div>
 <div class="inline-figure"><img src="_main_files/figure-html/unnamed-chunk-94-1.png" alt="" width="672"></div>
-<ul>
-<li>Who is the stronger driver?</li>
-</ul>
+<p><strong>Quiz Question 10:</strong> Does the prey population affect the predator population, and vice versa?
+<!-- Yes --></p>
 </div>
-<div id="evaluate-the-statistical-association-between-x-y-and-z-in-the-lorenz-equations-using-granger-causality" class="section level2" number="3.4">
+<div id="lorenz-equations" class="section level2" number="3.4">
 <h2>
-<span class="header-section-number">3.4</span> Evaluate the statistical association between <span class="math inline">\(x\)</span>, <span class="math inline">\(y\)</span>, and <span class="math inline">\(z\)</span> in the Lorenz equations using Granger causality<a class="anchor" aria-label="anchor" href="#evaluate-the-statistical-association-between-x-y-and-z-in-the-lorenz-equations-using-granger-causality"><i class="fas fa-link"></i></a>
+<span class="header-section-number">3.4</span> Lorenz Equations<a class="anchor" aria-label="anchor" href="#lorenz-equations"><i class="fas fa-link"></i></a>
 </h2>
-<p>To recall, the Lorenz equations were the first chaotic system to be discovered. They are three differential equations that were derived to represent idealized behavior of the earth’s atmosphere:</p>
+<p>Evaluate the statistical association between <span class="math inline">\(x\)</span>, <span class="math inline">\(y\)</span>, and <span class="math inline">\(z\)</span> in the Lorenz equations using Granger causality. To recall, the Lorenz equations were the first chaotic system to be discovered. They are three differential equations that were derived to represent idealized behavior of the earth’s atmosphere.</p>
 <p><span class="math inline">\(\frac{dx}{dt} = -\frac{8}{3}x+yz\)</span></p>
 <p><span class="math inline">\(\frac{dy}{dt} = -10 (y - z)\)</span></p>
 <p><span class="math inline">\(\frac{dz}{dt} = -xy + 28y-z\)</span></p>
-<ul>
-<li>Good luck!</li>
-</ul>
-</div>
-<div id="evaluate-the-statistical-association-between-x-y-and-z-in-the-lorenz-equations-using-convergent-cross-mapping-ccm" class="section level2" number="3.5">
-<h2>
-<span class="header-section-number">3.5</span> Evaluate the statistical association between <span class="math inline">\(x\)</span>, <span class="math inline">\(y\)</span>, and <span class="math inline">\(z\)</span> in the Lorenz equations using Convergent Cross Mapping (CCM)<a class="anchor" aria-label="anchor" href="#evaluate-the-statistical-association-between-x-y-and-z-in-the-lorenz-equations-using-convergent-cross-mapping-ccm"><i class="fas fa-link"></i></a>
-</h2>
-<p>Granger causality is most appropriate for linear systems. For non-linear systems, we can use Convergent Cross Mapping (CCM). Assess the relationship between <span class="math inline">\(y\)</span> and <span class="math inline">\(z\)</span> using CCM. Interpret your results.</p>
+<p>Set the initial conditions of <span class="math inline">\(x\)</span>, <span class="math inline">\(y\)</span>, and <span class="math inline">\(z\)</span> to a value of 1. Set the time axis to <code>times &lt;- seq(0, 1000, 0.1)</code>.</p>
 <div class="sourceCode" id="cb94"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co"># Assess the relationship between y and z</span></span>
+<code class="sourceCode R"><span><span class="va">Lorenz</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">t</span>, <span class="va">state</span>, <span class="va">parameters</span><span class="op">)</span></span>
+<span><span class="op">{</span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/base/with.html">with</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/list.html">as.list</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="va">state</span><span class="op">)</span><span class="op">)</span>, <span class="op">{</span></span>
+<span>    <span class="va">dx</span> <span class="op">&lt;-</span> <span class="op">-</span><span class="op">(</span><span class="fl">8</span> <span class="op">/</span> <span class="fl">3</span><span class="op">)</span> <span class="op">*</span> <span class="va">x</span> <span class="op">+</span> <span class="va">y</span> <span class="op">*</span> <span class="va">z</span></span>
+<span>    <span class="va">dy</span> <span class="op">&lt;-</span> <span class="op">-</span><span class="fl">10</span> <span class="op">*</span> <span class="op">(</span><span class="va">y</span> <span class="op">-</span> <span class="va">z</span><span class="op">)</span></span>
+<span>    <span class="va">dz</span> <span class="op">&lt;-</span> <span class="op">-</span><span class="va">x</span> <span class="op">*</span> <span class="va">y</span> <span class="op">+</span> <span class="fl">28</span> <span class="op">*</span> <span class="va">y</span> <span class="op">-</span> <span class="va">z</span></span>
+<span>    <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="va">dx</span>, <span class="va">dy</span>, <span class="va">dz</span><span class="op">)</span><span class="op">)</span></span>
+<span>  <span class="op">}</span><span class="op">)</span></span>
+<span><span class="op">}</span></span>
+<span><span class="va">state</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span>x <span class="op">=</span> <span class="fl">1</span>, y <span class="op">=</span> <span class="fl">1</span>, z <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></span>
+<span><span class="va">times</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">1000</span>, <span class="fl">0.01</span><span class="op">)</span></span>
+<span><span class="va">out</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/as.data.frame.html">as.data.frame</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/deSolve/man/ode.html">ode</a></span><span class="op">(</span><span class="va">state</span>, <span class="va">times</span>, <span class="va">Lorenz</span>, <span class="fl">0</span><span class="op">)</span><span class="op">)</span></span>
 <span></span>
-<span><span class="co"># Subset to omit the initial transient part</span></span>
-<span><span class="co"># This will also reduce computational time</span></span>
+<span><span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/ts.html">ts</a></span><span class="op">(</span><span class="va">out</span><span class="op">$</span><span class="va">x</span><span class="op">)</span></span>
+<span><span class="va">y</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/ts.html">ts</a></span><span class="op">(</span><span class="va">out</span><span class="op">$</span><span class="va">y</span><span class="op">)</span></span>
+<span><span class="va">z</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/ts.html">ts</a></span><span class="op">(</span><span class="va">out</span><span class="op">$</span><span class="va">z</span><span class="op">)</span></span>
 <span></span>
-<span><span class="va">x</span> <span class="op">&lt;-</span> <span class="va">x</span><span class="op">[</span><span class="fl">1001</span><span class="op">:</span><span class="fl">1500</span><span class="op">]</span></span>
+<span><span class="va">tsDat</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/ts.union.html">ts.union</a></span><span class="op">(</span><span class="va">x</span>,<span class="va">y</span>,<span class="va">z</span><span class="op">)</span></span></code></pre></div>
+<p>Now apply Granger causality to each variable pair. For instance for <span class="math inline">\(x \rigtarrow y\)</span> you write:</p>
+<div class="sourceCode" id="cb95"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">tsDat.xy</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/ts.union.html">ts.union</a></span><span class="op">(</span><span class="va">x</span>,<span class="va">y</span><span class="op">)</span></span>
+<span><span class="va">tsVAR.xy</span> <span class="op">&lt;-</span> <span class="fu">vars</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/vars/man/VAR.html">VAR</a></span><span class="op">(</span><span class="va">tsDat.xy</span>, p <span class="op">=</span> <span class="fl">3</span><span class="op">)</span></span>
+<span><span class="fu">vars</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/vars/man/causality.html">causality</a></span><span class="op">(</span><span class="va">tsVAR.xy</span>, cause <span class="op">=</span> <span class="st">"x"</span><span class="op">)</span><span class="op">$</span><span class="va">Granger</span></span></code></pre></div>
+<p><strong>Quiz Question 11:</strong> Which variables Granger-cause each other?</p>
+</div>
+<div id="convergent-cross-mapping-ccm" class="section level2" number="3.5">
+<h2>
+<span class="header-section-number">3.5</span> Convergent Cross Mapping (CCM)<a class="anchor" aria-label="anchor" href="#convergent-cross-mapping-ccm"><i class="fas fa-link"></i></a>
+</h2>
+<p>Evaluate the statistical association between <span class="math inline">\(x\)</span>, <span class="math inline">\(y\)</span>, and <span class="math inline">\(z\)</span> in the Lorenz equations using Convergent Cross Mapping (CCM) Granger causality is most appropriate for linear systems. For non-linear systems, we can use CCM. Assess the relationship between <span class="math inline">\(y\)</span> and <span class="math inline">\(z\)</span> using CCM. Let us begin by subsetting the time series to omit the initial transient part and to reduce computational time.</p>
+<div class="sourceCode" id="cb96"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">x</span> <span class="op">&lt;-</span> <span class="va">x</span><span class="op">[</span><span class="fl">1001</span><span class="op">:</span><span class="fl">1500</span><span class="op">]</span></span>
 <span><span class="va">y</span> <span class="op">&lt;-</span> <span class="va">y</span><span class="op">[</span><span class="fl">1001</span><span class="op">:</span><span class="fl">1500</span><span class="op">]</span></span>
-<span><span class="va">z</span> <span class="op">&lt;-</span> <span class="va">z</span><span class="op">[</span><span class="fl">1001</span><span class="op">:</span><span class="fl">1500</span><span class="op">]</span></span>
+<span><span class="va">z</span> <span class="op">&lt;-</span> <span class="va">z</span><span class="op">[</span><span class="fl">1001</span><span class="op">:</span><span class="fl">1500</span><span class="op">]</span></span></code></pre></div>
+<p>Let us now assess the relationship between <span class="math inline">\(y\)</span> and <span class="math inline">\(z\)</span>.</p>
+<div class="sourceCode" id="cb97"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">data</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span><span class="va">y</span>, <span class="va">z</span><span class="op">)</span></span>
 <span></span>
-<span><span class="va">data</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span><span class="va">y</span>, <span class="va">z</span><span class="op">)</span></span>
-<span></span>
-<span><span class="va">result</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://stscl.github.io/tEDM/reference/ccm.html">ccm</a></span><span class="op">(</span><span class="va">data</span>, <span class="st">"y"</span>, <span class="st">"z"</span>, libsizes <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span><span class="op">(</span><span class="fl">10</span>,<span class="fl">150</span>,<span class="fl">10</span><span class="op">)</span>, E <span class="op">=</span> <span class="fl">3</span>, k <span class="op">=</span> <span class="fl">7</span>,threads <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></span>
+<span><span class="va">result</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://stscl.github.io/tEDM/reference/ccm.html">ccm</a></span><span class="op">(</span><span class="va">data</span>, <span class="st">"y"</span>, <span class="st">"z"</span>, libsizes <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span><span class="op">(</span><span class="fl">10</span>,<span class="fl">250</span>,<span class="fl">10</span><span class="op">)</span>, E <span class="op">=</span> <span class="fl">3</span>, k <span class="op">=</span> <span class="fl">7</span>,threads <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></span>
 <span></span>
 <span><span class="va">libs</span> <span class="op">&lt;-</span> <span class="va">result</span><span class="op">$</span><span class="va">xmap</span><span class="op">$</span><span class="va">libsizes</span></span>
 <span><span class="va">y_drives_z</span> <span class="op">&lt;-</span> <span class="va">result</span><span class="op">$</span><span class="va">xmap</span><span class="op">$</span><span class="va">x_xmap_y_mean</span></span>
@@ -450,19 +466,14 @@ More, generally, a <span class="math inline">\(p\)</span>-order autoregressive m
 <span><span class="co"># Add legend</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/legend.html">legend</a></span><span class="op">(</span><span class="st">"bottomright"</span>, legend <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"y drives z"</span>, <span class="st">"z drives y"</span><span class="op">)</span>,</span>
 <span>       col <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"blue"</span>, <span class="st">"red"</span><span class="op">)</span>, lwd <span class="op">=</span> <span class="fl">2</span>, bty <span class="op">=</span> <span class="st">"n"</span><span class="op">)</span></span></code></pre></div>
-<p>Let us now assess x and y and contrast the result with Granger causality</p>
-<div class="sourceCode" id="cb95"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co"># Assess the relationship between y and z</span></span>
+<p>Let us now assess x and y:</p>
+<div class="sourceCode" id="cb98"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">data</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span><span class="va">x</span>, <span class="va">y</span><span class="op">)</span></span>
 <span></span>
-<span><span class="co"># Subset to omit the initial transient part</span></span>
-<span><span class="co"># This will also reduce computational time</span></span>
+<span><span class="va">cause_x</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://stscl.github.io/tEDM/reference/ccm.html">ccm</a></span><span class="op">(</span><span class="va">data</span>, cause <span class="op">=</span> <span class="st">"x"</span>, effect <span class="op">=</span> <span class="st">"y"</span>, libsizes <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span><span class="op">(</span><span class="fl">10</span>,<span class="fl">250</span>,<span class="fl">10</span><span class="op">)</span>, E <span class="op">=</span> <span class="fl">3</span>, k <span class="op">=</span> <span class="fl">7</span>, threads <span class="op">=</span> <span class="fl">1</span>, bidirectional <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
+<span><span class="va">cause_y</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://stscl.github.io/tEDM/reference/ccm.html">ccm</a></span><span class="op">(</span><span class="va">data</span>, cause <span class="op">=</span> <span class="st">"y"</span>, effect <span class="op">=</span> <span class="st">"x"</span>, libsizes <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span><span class="op">(</span><span class="fl">10</span>,<span class="fl">250</span>,<span class="fl">10</span><span class="op">)</span>, E <span class="op">=</span> <span class="fl">3</span>, k <span class="op">=</span> <span class="fl">7</span>, threads <span class="op">=</span> <span class="fl">1</span>, bidirectional <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
 <span></span>
-<span><span class="va">data</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span><span class="va">x</span>, <span class="va">y</span><span class="op">)</span></span>
-<span></span>
-<span><span class="va">cause_x</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://stscl.github.io/tEDM/reference/ccm.html">ccm</a></span><span class="op">(</span><span class="va">data</span>, cause <span class="op">=</span> <span class="st">"x"</span>, effect <span class="op">=</span> <span class="st">"y"</span>, libsizes <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span><span class="op">(</span><span class="fl">10</span>,<span class="fl">150</span>,<span class="fl">10</span><span class="op">)</span>, E <span class="op">=</span> <span class="fl">3</span>, k <span class="op">=</span> <span class="fl">7</span>, threads <span class="op">=</span> <span class="fl">1</span>, bidirectional <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
-<span><span class="va">cause_y</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://stscl.github.io/tEDM/reference/ccm.html">ccm</a></span><span class="op">(</span><span class="va">data</span>, cause <span class="op">=</span> <span class="st">"y"</span>, effect <span class="op">=</span> <span class="st">"x"</span>, libsizes <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span><span class="op">(</span><span class="fl">10</span>,<span class="fl">150</span>,<span class="fl">10</span><span class="op">)</span>, E <span class="op">=</span> <span class="fl">3</span>, k <span class="op">=</span> <span class="fl">7</span>, threads <span class="op">=</span> <span class="fl">1</span>, bidirectional <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
-<span></span>
-<span><span class="va">libs</span> <span class="op">&lt;-</span> <span class="va">result</span><span class="op">$</span><span class="va">xmap</span><span class="op">$</span><span class="va">libsizes</span></span>
+<span><span class="va">libs</span> <span class="op">&lt;-</span> <span class="va">cause_x</span><span class="op">$</span><span class="va">xmap</span><span class="op">$</span><span class="va">libsizes</span></span>
 <span><span class="va">x_drives_y</span> <span class="op">&lt;-</span> <span class="va">cause_x</span><span class="op">$</span><span class="va">xmap</span><span class="op">$</span><span class="va">y_xmap_x_mean</span></span>
 <span><span class="va">y_drives_x</span> <span class="op">&lt;-</span> <span class="va">cause_y</span><span class="op">$</span><span class="va">xmap</span><span class="op">$</span><span class="va">y_xmap_x_mean</span></span>
 <span></span>
@@ -479,6 +490,10 @@ More, generally, a <span class="math inline">\(p\)</span>-order autoregressive m
 <span><span class="co"># Add legend</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/legend.html">legend</a></span><span class="op">(</span><span class="st">"bottomright"</span>, legend <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"x drives y"</span>, <span class="st">"y drives x"</span><span class="op">)</span>,</span>
 <span>       col <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"blue"</span>, <span class="st">"red"</span><span class="op">)</span>, lwd <span class="op">=</span> <span class="fl">2</span>, bty <span class="op">=</span> <span class="st">"n"</span><span class="op">)</span></span></code></pre></div>
+<p><strong>Quiz Question 12:</strong> Does the CCM analysis suggest an influence of <span class="math inline">\(x\)</span> on <span class="math inline">\(y\)</span> and vice versa, contrary to the Granger analysis?</p>
+<!-- Yes -->
+<p><strong>Quiz Reflection 1:</strong> What are the main things you learned in this tutorial?</p>
+<p><strong>Quiz Reflection 2:</strong> What concepts are you still struggling to understand?</p>
 
 </div>
 </div>
@@ -492,8 +507,8 @@ More, generally, a <span class="math inline">\(p\)</span>-order autoregressive m
 <li><a class="nav-link" href="#autoregression"><span class="header-section-number">3.1</span> Autoregression</a></li>
 <li><a class="nav-link" href="#vector-autoregression-var"><span class="header-section-number">3.2</span> Vector autoregression (VAR)</a></li>
 <li><a class="nav-link" href="#granger-causality"><span class="header-section-number">3.3</span> Granger Causality</a></li>
-<li><a class="nav-link" href="#evaluate-the-statistical-association-between-x-y-and-z-in-the-lorenz-equations-using-granger-causality"><span class="header-section-number">3.4</span> Evaluate the statistical association between \(x\), \(y\), and \(z\) in the Lorenz equations using Granger causality</a></li>
-<li><a class="nav-link" href="#evaluate-the-statistical-association-between-x-y-and-z-in-the-lorenz-equations-using-convergent-cross-mapping-ccm"><span class="header-section-number">3.5</span> Evaluate the statistical association between \(x\), \(y\), and \(z\) in the Lorenz equations using Convergent Cross Mapping (CCM)</a></li>
+<li><a class="nav-link" href="#lorenz-equations"><span class="header-section-number">3.4</span> Lorenz Equations</a></li>
+<li><a class="nav-link" href="#convergent-cross-mapping-ccm"><span class="header-section-number">3.5</span> Convergent Cross Mapping (CCM)</a></li>
 </ul>
 
       <div class="book-extra">

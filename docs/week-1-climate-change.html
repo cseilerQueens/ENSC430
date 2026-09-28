@@ -98,7 +98,7 @@
 <li>A new window appears with RStudio</li>
 <li>Copy the tutorial template to your home directory:</li>
 </ul>
-<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/files.html">file.copy</a></span><span class="op">(</span></span>
 <span>  from <span class="op">=</span> <span class="st">"/global/teaching-project/sg51122000/shared_files/W01_FirstName_LastName.Rmd"</span>,</span>
 <span>  to <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/getwd.html">getwd</a></span><span class="op">(</span><span class="op">)</span>,</span>
@@ -127,7 +127,7 @@
 <li>Plots: Where R displays figures that you create.</li>
 </ul>
 <p>To write your first R command, enter the following in the console:</p>
-<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">x</span> <span class="op">&lt;-</span> <span class="fl">3</span></span></code></pre></div>
 <p>Now look at the Environment pane. You should see an object called <code>x</code> with a value of 3. The symbol <code>&lt;-</code> assigns a value to an object. In this case, we have created an object called x and assigned it the value 3. Throughout this course, you will generally write your code in the Source pane and run it in the Console. This allows you to save your analysis and reproduce it later.</p>
 </div>
@@ -136,7 +136,7 @@
 <span class="header-section-number">1.4</span> R Markdown<a class="anchor" aria-label="anchor" href="#r-markdown"><i class="fas fa-link"></i></a>
 </h2>
 <p>You will complete the tutorials using R Markdown. R Markdown allows you to combine text, R code, and figures in a single document. This makes it possible to document your analysis and produce a complete report from the same file. R Markdown uses simple formatting rules. For example, one hash symbol (<code>#</code>) creates a large heading. Two hash symbols (<code>##</code>) creates a smaller heading. An asterisk (<code>*</code>) creates a bullet point. R code is placed inside code chunks. A code chunk begins with three backticks followed by the letter r enclosed in curly brackets and ends with three backticks. Add the following code chunk to your R Markdown document and run it:</p>
-<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">x</span> <span class="op">&lt;-</span> <span class="fl">4</span></span></code></pre></div>
 <p>You can run the code line-by-line by putting the cursor in the first line and then hit <code>Ctrl Enter</code>. The instructions appear in the console at the bottom. This technique is very helpful for trying to understand what the code is doing. Another way to run the code is by clicking on the icons on the top-right of each code chunk. Click on the those items to see what they do.</p>
 </div>
@@ -145,7 +145,7 @@
 <span class="header-section-number">1.5</span> Import data<a class="anchor" aria-label="anchor" href="#import-data"><i class="fas fa-link"></i></a>
 </h2>
 <p>Let us import global mean surface temperature (GMST) from 1850 to 2024 provided by <a href="https://berkeleyearth.org/data/">Berkeley Earth</a>:</p>
-<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">year</span> <span class="op">&lt;-</span> <span class="fl">1850</span><span class="op">:</span><span class="fl">2024</span></span>
 <span></span>
 <span><span class="va">GMST</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span></span>
@@ -175,14 +175,14 @@
 <span class="header-section-number">1.6</span> Basic statistics<a class="anchor" aria-label="anchor" href="#basic-statistics"><i class="fas fa-link"></i></a>
 </h2>
 <p>Let’s calculate some basic statistics of the GMST data:</p>
-<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">GMST</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/Extremes.html">min</a></span><span class="op">(</span><span class="va">GMST</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/Extremes.html">max</a></span><span class="op">(</span><span class="va">GMST</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/stats/sd.html">sd</a></span><span class="op">(</span><span class="va">GMST</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">GMST</span><span class="op">)</span></span></code></pre></div>
 <p>The functions above calculate the mean, minimum, maximum, standard deviation, and number of observations, respectively. You can find out more about a function by typing a question mark followed by the function name:</p>
-<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="op">?</span><span class="va">sd</span></span></code></pre></div>
 <p><strong>Quiz Question 1:</strong> What is the difference in global mean surface temperature between the warmest and coldest years during the 1850–2024 period?</p>
 <p><strong>Quiz Question 2:</strong> How large is the global mean surface temperature standard deviation?</p>
@@ -192,19 +192,19 @@
 <span class="header-section-number">1.7</span> Data frames<a class="anchor" aria-label="anchor" href="#data-frames"><i class="fas fa-link"></i></a>
 </h2>
 <p>So far, year and GMST are separate vectors. It is often more convenient to combine related variables into a data frame, which is essentially a table of data. Let’s combine the two vectors:</p>
-<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">data</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span><span class="va">year</span>, <span class="va">GMST</span><span class="op">)</span></span></code></pre></div>
 <p>We can now explore the content of the data frame:</p>
-<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">data</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/str.html">str</a></span><span class="op">(</span><span class="va">data</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span><span class="op">(</span><span class="va">data</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span><span class="op">(</span><span class="va">data</span><span class="op">)</span></span></code></pre></div>
 <p>You can access an individual column using the $ symbol:</p>
-<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">data</span><span class="op">$</span><span class="va">GMST</span></span></code></pre></div>
 <p>For example, we can calculate the mean directly from the data frame:</p>
-<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">data</span><span class="op">$</span><span class="va">GMST</span><span class="op">)</span></span></code></pre></div>
 </div>
 <div id="selecting-data" class="section level2" number="1.8">
@@ -212,17 +212,17 @@
 <span class="header-section-number">1.8</span> Selecting data<a class="anchor" aria-label="anchor" href="#selecting-data"><i class="fas fa-link"></i></a>
 </h2>
 <p>One of the most important tasks when working with environmental data is selecting the observations that are relevant to a particular question. For example, let’s get all years with a global mean surface temperature exceeding 15 degrees Celsius:</p>
-<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">data</span><span class="op">[</span><span class="va">data</span><span class="op">$</span><span class="va">GMST</span> <span class="op">&gt;</span> <span class="fl">15</span>, <span class="op">]</span></span></code></pre></div>
 <p><strong>Quiz Question 3:</strong> How many years have a global mean surface temperature that exceed 15 degrees Celsius?</p>
 <p><strong>Quiz Question 4:</strong> How many years have a global mean surface temperature below 13.7 degrees Celsius?</p>
 <p><strong>Quiz Question 5:</strong> What was the average GMST during years when the temperature was below 13.7 degrees Celsius?</p>
 <p>We can combine two conditions using <code>&amp;</code>. For example, the following selects years when GMST was between 14.0 and 14.5 degrees Celsius:</p>
-<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">data</span><span class="op">[</span><span class="va">data</span><span class="op">$</span><span class="va">GMST</span> <span class="op">&gt;=</span> <span class="fl">14</span> <span class="op">&amp;</span> <span class="va">data</span><span class="op">$</span><span class="va">GMST</span> <span class="op">&lt;=</span> <span class="fl">14.5</span>, <span class="op">]</span></span></code></pre></div>
 <p><strong>Quiz Question 6:</strong> How many years had a GMST between 14.0 and 14.5 degrees Celsius?</p>
 <p>Let us now find which years were the four hottest years on record. To do this, we first sort the data frame by temperature using the <code><a href="https://rdrr.io/r/base/order.html">order()</a></code> function and get the 4 hottest years.</p>
-<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">data_sorted</span> <span class="op">&lt;-</span> <span class="va">data</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/order.html">order</a></span><span class="op">(</span><span class="va">data</span><span class="op">$</span><span class="va">GMST</span>, decreasing <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>, <span class="op">]</span></span>
 <span><span class="va">data_sorted</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">4</span>,<span class="op">]</span></span></code></pre></div>
 <p><strong>Quiz Question 7:</strong> Which years were the four hottest years on record?</p>
@@ -233,17 +233,17 @@
 <span class="header-section-number">1.9</span> Comparing time periods<a class="anchor" aria-label="anchor" href="#comparing-time-periods"><i class="fas fa-link"></i></a>
 </h2>
 <p>We can use the same approach to investigate changes between different periods. For example, the following selects observations from 1850 to 1900:</p>
-<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">early</span> <span class="op">&lt;-</span> <span class="va">data</span><span class="op">[</span><span class="va">data</span><span class="op">$</span><span class="va">year</span> <span class="op">&gt;=</span> <span class="fl">1850</span> <span class="op">&amp;</span> <span class="va">data</span><span class="op">$</span><span class="va">year</span> <span class="op">&lt;=</span> <span class="fl">1900</span>, <span class="op">]</span></span></code></pre></div>
 <p>We can then calculate the average GMST during this period:</p>
-<div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb18"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">early</span><span class="op">$</span><span class="va">GMST</span><span class="op">)</span></span></code></pre></div>
 <p><strong>Quiz Question 9:</strong> What was the average GMST between 1850 and 1900?</p>
 <p><strong>Quiz Question 10:</strong> What was the average GMST between 2000 and 2024?</p>
 <p><strong>Quiz Question 11:</strong> How much warmer was the 2000–2024 period than the 1850–1900 period?</p>
 <p><strong>Quiz Question 12:</strong> Which of the two periods had greater variability in GMST?</p>
 <p>We can directly compare the temperature in different years. For example, the following calculates the change between 1850 and 2024:</p>
-<div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb19"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">data</span><span class="op">$</span><span class="va">GMST</span><span class="op">[</span><span class="va">data</span><span class="op">$</span><span class="va">year</span> <span class="op">==</span> <span class="fl">2024</span><span class="op">]</span> <span class="op">-</span> <span class="va">data</span><span class="op">$</span><span class="va">GMST</span><span class="op">[</span><span class="va">data</span><span class="op">$</span><span class="va">year</span> <span class="op">==</span> <span class="fl">1850</span><span class="op">]</span></span></code></pre></div>
 <p><strong>Quiz Question 13:</strong> How much did GMST increase between 1850 and 2024?</p>
 <p><strong>Quiz Question 14:</strong> How much did GMST increase between 1950 and 2024?</p>
@@ -253,18 +253,18 @@
 <span class="header-section-number">1.10</span> El Nino<a class="anchor" aria-label="anchor" href="#el-nino"><i class="fas fa-link"></i></a>
 </h2>
 <p>El Nino events are associated with substantial changes in the climate system on a global scale. Let us mark the years that qualify as El Nino years. The following vector contains the El Nino years used for this exercise:</p>
-<div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb20"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">El_Nino</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span></span>
 <span>  <span class="fl">1897</span>, <span class="fl">1900</span>, <span class="fl">1903</span>, <span class="fl">1906</span>, <span class="fl">1915</span>, <span class="fl">1919</span>, <span class="fl">1926</span>, <span class="fl">1931</span>, <span class="fl">1941</span>,</span>
 <span>  <span class="fl">1942</span>, <span class="fl">1958</span>, <span class="fl">1966</span>, <span class="fl">1973</span>, <span class="fl">1978</span>, <span class="fl">1980</span>, <span class="fl">1983</span>, <span class="fl">1987</span>, <span class="fl">1988</span>,</span>
 <span>  <span class="fl">1992</span>, <span class="fl">1995</span>, <span class="fl">1998</span>, <span class="fl">2003</span>, <span class="fl">2007</span>, <span class="fl">2010</span>, <span class="fl">2016</span></span>
 <span><span class="op">)</span></span></code></pre></div>
 <p>We can determine whether each year in our GMST dataset is an El Nino year using <code>%in%</code>:</p>
-<div class="sourceCode" id="cb18"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb21"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">data</span><span class="op">$</span><span class="va">El_Nino</span> <span class="op">&lt;-</span> <span class="va">data</span><span class="op">$</span><span class="va">year</span> <span class="op"><a href="https://rdrr.io/r/base/match.html">%in%</a></span> <span class="va">El_Nino</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">data</span><span class="op">)</span></span></code></pre></div>
 <p>The new <code>El_Nino</code> column contains TRUE for El Nino years and FALSE for all other years. We can now select the El Nino years and non-El Nino years:</p>
-<div class="sourceCode" id="cb19"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb22"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">EN.yes</span> <span class="op">&lt;-</span> <span class="va">data</span><span class="op">[</span><span class="va">data</span><span class="op">$</span><span class="va">El_Nino</span> <span class="op">==</span> <span class="cn">TRUE</span>, <span class="op">]</span></span>
 <span><span class="va">EN.no</span> <span class="op">&lt;-</span> <span class="va">data</span><span class="op">[</span><span class="va">data</span><span class="op">$</span><span class="va">El_Nino</span> <span class="op">==</span> <span class="cn">FALSE</span>, <span class="op">]</span></span></code></pre></div>
 <p><strong>Quiz Question 15:</strong> How much warmer are El Nino years, on average, than non–El Nino years?</p>
@@ -275,17 +275,17 @@
 <span class="header-section-number">1.11</span> Plotting<a class="anchor" aria-label="anchor" href="#plotting"><i class="fas fa-link"></i></a>
 </h2>
 <p>We can visualize the GMST data using a simple line plot:</p>
-<div class="sourceCode" id="cb20"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb23"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">data</span><span class="op">$</span><span class="va">year</span>, y <span class="op">=</span> <span class="va">data</span><span class="op">$</span><span class="va">GMST</span>, type <span class="op">=</span> <span class="st">"l"</span>, xlab <span class="op">=</span> <span class="st">"Year"</span>, ylab <span class="op">=</span> <span class="st">"GMST (Degrees Celsius)"</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/grid.html">grid</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <p>The <code>type = "l"</code> argument tells R to connect the observations with lines. We can also add the El Niño years to the plot:</p>
-<div class="sourceCode" id="cb21"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb24"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">data</span><span class="op">$</span><span class="va">year</span>, y <span class="op">=</span> <span class="va">data</span><span class="op">$</span><span class="va">GMST</span>, type <span class="op">=</span> <span class="st">"l"</span>, xlab <span class="op">=</span> <span class="st">"Year"</span>, ylab <span class="op">=</span> <span class="st">"GMST (Degrees Celsius)"</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/grid.html">grid</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="va">EN</span> <span class="op">&lt;-</span> <span class="va">data</span><span class="op">[</span><span class="va">data</span><span class="op">$</span><span class="va">El_Nino</span> <span class="op">==</span> <span class="cn">TRUE</span>,<span class="op">]</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/points.html">points</a></span><span class="op">(</span><span class="va">EN</span><span class="op">$</span><span class="va">year</span>, <span class="va">EN</span><span class="op">$</span><span class="va">GMST</span>, pch <span class="op">=</span> <span class="fl">16</span>, col <span class="op">=</span> <span class="st">"red"</span><span class="op">)</span></span></code></pre></div>
 <p>Modify the x and y axis using <code>xlim</code> and <code>ylim</code>:</p>
-<div class="sourceCode" id="cb22"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb25"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">data</span><span class="op">$</span><span class="va">year</span>, y <span class="op">=</span> <span class="va">data</span><span class="op">$</span><span class="va">GMST</span>, type <span class="op">=</span> <span class="st">"l"</span>, xlab <span class="op">=</span> <span class="st">"Year"</span>, ylab <span class="op">=</span> <span class="st">"GMST (Degrees Celsius)"</span>, </span>
 <span>     xlim <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1980</span>, <span class="fl">2015</span><span class="op">)</span>, ylim <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">14</span>, <span class="fl">15</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/grid.html">grid</a></span><span class="op">(</span><span class="op">)</span></span>
@@ -297,14 +297,14 @@
 <span class="header-section-number">1.12</span> Quantifying the warming trend<a class="anchor" aria-label="anchor" href="#quantifying-the-warming-trend"><i class="fas fa-link"></i></a>
 </h2>
 <p>The plot shows that global mean surface temperature has increased substantially since 1850. We can use a simple linear model to quantify this trend. The following code fits a linear relationship between GMST and year:</p>
-<div class="sourceCode" id="cb23"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb26"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">model</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span><span class="op">(</span><span class="va">GMST</span> <span class="op">~</span> <span class="va">year</span>, data <span class="op">=</span> <span class="va">data</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span><span class="op">(</span><span class="va">model</span><span class="op">)</span></span></code></pre></div>
 <p>The coefficient associated with year represents the estimated change in GMST per year. We can extract the model coefficients using:</p>
-<div class="sourceCode" id="cb24"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb27"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/stats/coef.html">coef</a></span><span class="op">(</span><span class="va">model</span><span class="op">)</span></span></code></pre></div>
 <p>The second coefficient is the estimated change in GMST per year. We can multiply it by 100 to express the trend as degrees Celsius per century.</p>
-<div class="sourceCode" id="cb25"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb28"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/stats/coef.html">coef</a></span><span class="op">(</span><span class="va">model</span><span class="op">)</span><span class="op">[</span><span class="fl">2</span><span class="op">]</span> <span class="op">*</span> <span class="fl">100</span></span></code></pre></div>
 <p><strong>Quiz Question 17:</strong> What is the estimated rate of global warming in degrees Celsius per century over the entire 1850–2024 period?</p>
 </div>
@@ -313,7 +313,7 @@
 <span class="header-section-number">1.13</span> Has the rate of warming changed?<a class="anchor" aria-label="anchor" href="#has-the-rate-of-warming-changed"><i class="fas fa-link"></i></a>
 </h2>
 <p>A single trend over 175 years assumes that the rate of warming is constant. We can investigate whether this assumption is reasonable by calculating trends for different periods. First, create a dataset containing observations from 1850 to 1950 only</p>
-<div class="sourceCode" id="cb26"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb29"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">early</span> <span class="op">&lt;-</span> <span class="va">data</span><span class="op">[</span><span class="va">data</span><span class="op">$</span><span class="va">year</span> <span class="op">&gt;=</span> <span class="fl">1850</span> <span class="op">&amp;</span> <span class="va">data</span><span class="op">$</span><span class="va">year</span> <span class="op">&lt;=</span> <span class="fl">1950</span>, <span class="op">]</span></span>
 <span><span class="va">early_model</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span><span class="op">(</span><span class="va">GMST</span> <span class="op">~</span> <span class="va">year</span>, data <span class="op">=</span> <span class="va">early</span><span class="op">)</span></span>
 <span><span class="va">early_trend</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/coef.html">coef</a></span><span class="op">(</span><span class="va">early_model</span><span class="op">)</span><span class="op">[</span><span class="fl">2</span><span class="op">]</span> <span class="op">*</span> <span class="fl">100</span></span>
@@ -363,14 +363,14 @@
 <ul>
 <li>In R, you use the following syntax to assign a value to a variable.</li>
 </ul>
-<div class="sourceCode" id="cb27"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb30"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">x</span> <span class="op">&lt;-</span> <span class="fl">1</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span></code></pre></div>
 <ul>
 <li>The variable x used above is an example of an R object. The <code>print</code> statement prints the value of the object x.</li>
 <li>Once you assign values to R objects, you can use the following arithmetic operators to perform calculations.</li>
 </ul>
-<div class="sourceCode" id="cb28"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb31"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">a</span> <span class="op">&lt;-</span> <span class="fl">2</span></span>
 <span><span class="va">b</span> <span class="op">&lt;-</span> <span class="fl">3</span></span>
 <span></span>
@@ -407,7 +407,7 @@
 <li>The mode is the basic type of the elements of the object</li>
 <li>There are four main modes: numeric, character, complex, and logical (FALSE or TRUE)</li>
 </ul>
-<div class="sourceCode" id="cb29"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb32"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">a</span> <span class="op">&lt;-</span> <span class="fl">5</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/class.html">class</a></span><span class="op">(</span><span class="va">a</span><span class="op">)</span></span>
 <span></span>
@@ -422,7 +422,7 @@
 <ul>
 <li>The length of an object is the number of elements of the object</li>
 </ul>
-<div class="sourceCode" id="cb30"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb33"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">a</span> <span class="op">&lt;-</span> <span class="fl">2</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">a</span><span class="op">)</span></span>
 <span></span>
@@ -432,7 +432,7 @@
 <li><p>What is the length of <code>b &lt;- c(1:10)</code>?</p></li>
 <li><p>Next to mode and length, there are different types of objects, namely vector, data frame, matrix, array, and list</p></li>
 </ul>
-<div class="sourceCode" id="cb31"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb34"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Vector with one element</span></span>
 <span><span class="va">a</span> <span class="op">&lt;-</span> <span class="fl">2</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="va">a</span><span class="op">)</span></span>
@@ -474,7 +474,7 @@
 <li><p>Let’s learn how to subset vectors, data frames, matrices, arrays, and lists</p></li>
 <li><p>Example: Vector</p></li>
 </ul>
-<div class="sourceCode" id="cb32"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb35"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Create a vector</span></span>
 <span><span class="va">vector_data</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">10</span>, <span class="fl">20</span>, <span class="fl">30</span>, <span class="fl">40</span>, <span class="fl">50</span><span class="op">)</span></span>
 <span></span>
@@ -500,7 +500,7 @@
 <li><p>Change the code so that you subset the fourth and fifth element of the vector</p></li>
 <li><p>Example: data frame</p></li>
 </ul>
-<div class="sourceCode" id="cb33"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb36"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Create a data frame</span></span>
 <span><span class="va">data</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span></span>
 <span>  Name <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Alice"</span>, <span class="st">"Bob"</span>, <span class="st">"Charlie"</span>, <span class="st">"David"</span>, <span class="st">"Eve"</span><span class="op">)</span>,</span>
@@ -531,7 +531,7 @@
 <li><p>Change the code so that you only extract the Age. This can be done by writing <code>data$Age</code></p></li>
 <li><p>Example: matrix</p></li>
 </ul>
-<div class="sourceCode" id="cb34"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb37"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Create a matrix</span></span>
 <span><span class="va">matrix_data</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html">matrix</a></span><span class="op">(</span></span>
 <span>  <span class="fl">1</span><span class="op">:</span><span class="fl">12</span>,        <span class="co"># Data</span></span>
@@ -562,7 +562,7 @@
 <li><p>Change the code so that you only show the second column.</p></li>
 <li><p>Example: array</p></li>
 </ul>
-<div class="sourceCode" id="cb35"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb38"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Create an array</span></span>
 <span><span class="va">array_data</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/array.html">array</a></span><span class="op">(</span></span>
 <span>  <span class="fl">1</span><span class="op">:</span><span class="fl">24</span>,         <span class="co"># Data</span></span>
@@ -591,7 +591,7 @@
 <li><p>Change the code so that you only show the second slice</p></li>
 <li><p>Example: list</p></li>
 </ul>
-<div class="sourceCode" id="cb36"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb39"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Create a list</span></span>
 <span><span class="va">list_data</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span></span>
 <span>  Name <span class="op">=</span> <span class="st">"Alice"</span>,</span>
@@ -634,7 +634,7 @@
 <li><p>Control structures determine the order in which statements are executed in a program. Two important examples are loops and conditional statements</p></li>
 <li><p>Loop example</p></li>
 </ul>
-<div class="sourceCode" id="cb37"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb40"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># For loop to print numbers from 1 to 5</span></span>
 <span><span class="kw">for</span> <span class="op">(</span><span class="va">i</span> <span class="kw">in</span> <span class="fl">1</span><span class="op">:</span><span class="fl">5</span><span class="op">)</span> <span class="op">{</span></span>
 <span>  <span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="va">i</span><span class="op">)</span></span>
@@ -643,7 +643,7 @@
 <li><p>Change the code so that you loop over the strings apple, grape, and mango</p></li>
 <li><p>Conditional statement example</p></li>
 </ul>
-<div class="sourceCode" id="cb38"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb41"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Define a number</span></span>
 <span><span class="va">number</span> <span class="op">&lt;-</span> <span class="op">-</span><span class="fl">3</span></span>
 <span></span>
@@ -663,7 +663,7 @@
 <ul>
 <li>Many times you need to generate data, e.g. a sequence that ranges from 1 to 10. Instead of writing out each number, there are functions that do that for you.</li>
 </ul>
-<div class="sourceCode" id="cb39"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb42"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Sequence from 1 to 10 with step size 1</span></span>
 <span><span class="va">x</span> <span class="op">&lt;-</span> <span class="fl">1</span><span class="op">:</span><span class="fl">10</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span>
@@ -690,7 +690,7 @@
 <ul>
 <li>Often you need to execute the same operation many times. To do this efficiently you can define a function and then apply this function whenever you need it.</li>
 </ul>
-<div class="sourceCode" id="cb40"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb43"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Define a function to add two numbers</span></span>
 <span><span class="va">add_numbers</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">a</span>, <span class="va">b</span><span class="op">)</span> <span class="op">{</span></span>
 <span>  <span class="co"># Calculate the sum</span></span>
@@ -717,7 +717,7 @@
 <h3>
 <span class="header-section-number">1.15.6</span> Plotting data<a class="anchor" aria-label="anchor" href="#plotting-data"><i class="fas fa-link"></i></a>
 </h3>
-<div class="sourceCode" id="cb41"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb44"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">10</span><span class="op">)</span></span>
 <span><span class="va">y</span> <span class="op">&lt;-</span> <span class="va">x</span><span class="op">^</span><span class="fl">2</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">x</span>, <span class="va">y</span><span class="op">)</span></span></code></pre></div>
@@ -725,7 +725,7 @@
 <li>Add x and y labels using <code>xlab</code> and <code>ylab</code>
 </li>
 </ul>
-<div class="sourceCode" id="cb42"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb45"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">10</span><span class="op">)</span></span>
 <span><span class="va">y</span> <span class="op">&lt;-</span> <span class="va">x</span><span class="op">^</span><span class="fl">2</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">x</span>, <span class="va">y</span>, </span>
@@ -735,7 +735,7 @@
 <li>Make it a line plot using <code>type = "l"</code>
 </li>
 </ul>
-<div class="sourceCode" id="cb43"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb46"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">10</span><span class="op">)</span></span>
 <span><span class="va">y</span> <span class="op">&lt;-</span> <span class="va">x</span><span class="op">^</span><span class="fl">2</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">x</span>, <span class="va">y</span>, type <span class="op">=</span> <span class="st">"l"</span><span class="op">)</span></span></code></pre></div>
@@ -743,7 +743,7 @@
 <li>Add more lines using <code><a href="https://rdrr.io/r/graphics/lines.html">lines()</a></code>
 </li>
 </ul>
-<div class="sourceCode" id="cb44"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb47"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">10</span><span class="op">)</span></span>
 <span><span class="va">y1</span> <span class="op">&lt;-</span> <span class="va">x</span><span class="op">^</span><span class="fl">2</span></span>
 <span><span class="va">y2</span> <span class="op">&lt;-</span> <span class="va">x</span><span class="op">^</span><span class="fl">3</span></span>
@@ -753,7 +753,7 @@
 <li>Make each line a different color using <code>col</code>
 </li>
 </ul>
-<div class="sourceCode" id="cb45"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb48"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">10</span><span class="op">)</span></span>
 <span><span class="va">y1</span> <span class="op">&lt;-</span> <span class="va">x</span><span class="op">^</span><span class="fl">2</span></span>
 <span><span class="va">y2</span> <span class="op">&lt;-</span> <span class="va">x</span><span class="op">^</span><span class="fl">3</span></span>
@@ -763,7 +763,7 @@
 <li>Adjust x and y axis using <code>xlim</code> and <code>ylim</code>
 </li>
 </ul>
-<div class="sourceCode" id="cb46"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb49"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">10</span><span class="op">)</span></span>
 <span><span class="va">y1</span> <span class="op">&lt;-</span> <span class="va">x</span><span class="op">^</span><span class="fl">2</span></span>
 <span><span class="va">y2</span> <span class="op">&lt;-</span> <span class="va">x</span><span class="op">^</span><span class="fl">3</span></span>
@@ -774,7 +774,7 @@
 <li>Making square axis using <code>par(pty="s")</code> and <code>asp = 1</code>
 </li>
 </ul>
-<div class="sourceCode" id="cb47"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb50"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">10</span><span class="op">)</span></span>
 <span><span class="va">y1</span> <span class="op">&lt;-</span> <span class="va">x</span><span class="op">^</span><span class="fl">2</span></span>
 <span><span class="va">y2</span> <span class="op">&lt;-</span> <span class="va">x</span><span class="op">^</span><span class="fl">3</span></span>

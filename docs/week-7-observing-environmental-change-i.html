@@ -68,14 +68,14 @@
 </h1>
 <p>Today you will learn how to assess trends in ecosystem resilience from space. We will be using satellite data from the Moderate Resolution Imaging Spectroradiometer (MODIS) provided by <a href="https://www.earthdata.nasa.gov/">NASA Earth Data</a>. The specific MODIS product we are processing is the Vegetation Indices Monthly L3 Global 0.05 CMG (<a href="https://lpdaac.usgs.gov/products/mod13c2v061/">MOD13C2</a>). I have processed the complete dataset for you at a reduced spatial resolution of 0.25 degrees (approximately 25 km at the equator) to save you time. The dataset spans nearly 25 years, from February 2000 to September 2024, and is available for download <a href="https://drive.google.com/file/d/1-CCfBwO_P7eBuhqbcOuM5mhrxdjYuv3Z/view?usp=sharing">here</a>. I have added the file to our <code>shared_files</code> folder.</p>
 <p>Our analysis will focus on the Amazon Basin. Load the required libraries:</p>
-<div class="sourceCode" id="cb164"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb167"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/rm.html">rm</a></span><span class="op">(</span>list <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/ls.html">ls</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://rspatial.org/">terra</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://r-gis.net/">rts</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/adeckmyn/maps">maps</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/duncanobrien/EWSmethods">EWSmethods</a></span><span class="op">)</span></span></code></pre></div>
 <p>Open the file and plot annual mean values:</p>
-<div class="sourceCode" id="cb165"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb168"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">data</span> <span class="op">&lt;-</span> <span class="fu">terra</span><span class="fu">::</span><span class="fu"><a href="https://rspatial.github.io/terra/reference/rast.html">rast</a></span><span class="op">(</span><span class="st">"/global/teaching-project/sg51122000/shared_files/MOD13C2061-EVI-0.25deg.nc"</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># Let's subset Jan 2001 to Dec 2023</span></span>
@@ -87,9 +87,9 @@
 <span></span>
 <span><span class="fu"><a href="https://rspatial.github.io/terra/reference/plot.html">plot</a></span><span class="op">(</span><span class="va">evi.mean</span>, main <span class="op">=</span> <span class="st">"Annual Mean Enhanced Vegetation Index (EVI) (-)"</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/pkg/maps/man/map.html">map</a></span><span class="op">(</span><span class="st">"world2"</span>, add <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
-<div class="inline-figure"><img src="_main_files/figure-html/unnamed-chunk-161-1.png" alt="" width="672"></div>
+<div class="inline-figure"><img src="figure-html/unnamed-chunk-162-1.png" alt="" width="672"></div>
 <p>Next, we will need to convert the data to anomalies. You already know how to do this and we can use the code from the previous tutorial.</p>
-<div class="sourceCode" id="cb166"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb169"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Get the dates</span></span>
 <span><span class="va">dates</span> <span class="op">&lt;-</span> <span class="fu">terra</span><span class="fu">::</span><span class="fu"><a href="https://rspatial.github.io/terra/reference/time.html">time</a></span><span class="op">(</span><span class="va">data</span><span class="op">)</span></span>
 <span><span class="va">dates</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/format.html">format</a></span><span class="op">(</span><span class="va">dates</span>, <span class="st">"%Y-%m-%d"</span><span class="op">)</span></span>
@@ -103,9 +103,9 @@
 <span></span>
 <span><span class="co"># Plot 12 months of data</span></span>
 <span><span class="fu"><a href="https://rspatial.github.io/terra/reference/plot.html">plot</a></span><span class="op">(</span><span class="va">data.12</span><span class="op">)</span></span></code></pre></div>
-<div class="inline-figure"><img src="_main_files/figure-html/unnamed-chunk-162-1.png" alt="" width="672"></div>
+<div class="inline-figure"><img src="figure-html/unnamed-chunk-163-1.png" alt="" width="672"></div>
 <p>Calculate the anomalies by subtracting the 12-month climatologies from the monthly data. You already know how to do this from the previous tutorial.</p>
-<div class="sourceCode" id="cb167"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb170"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Get the number of years</span></span>
 <span><span class="va">n</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">dates</span><span class="op">)</span><span class="op">/</span><span class="fl">12</span></span>
 <span></span>
@@ -118,9 +118,9 @@
 <span><span class="co"># Have a look at the data</span></span>
 <span><span class="fu"><a href="https://rspatial.github.io/terra/reference/plot.html">plot</a></span><span class="op">(</span><span class="fu">terra</span><span class="fu">::</span><span class="fu"><a href="https://rspatial.github.io/terra/reference/subset.html">subset</a></span><span class="op">(</span><span class="va">data.anom</span>, <span class="fl">1</span><span class="op">:</span><span class="fl">1</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/pkg/maps/man/map.html">map</a></span><span class="op">(</span><span class="st">"world2"</span>, add <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
-<div class="inline-figure"><img src="_main_files/figure-html/unnamed-chunk-163-1.png" alt="" width="672"></div>
+<div class="inline-figure"><img src="figure-html/unnamed-chunk-164-1.png" alt="" width="672"></div>
 <p>Let us find out if there is a trend in the EVI anomalies.</p>
-<div class="sourceCode" id="cb168"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb171"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Define a function that calculates a linear trend</span></span>
 <span><span class="va">trend.fun</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="op">{</span></span>
 <span>  </span>
@@ -138,7 +138,7 @@
 <span><span class="co"># Apply function to each gridcell</span></span>
 <span><span class="va">trend</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rspatial.github.io/terra/reference/app.html">app</a></span><span class="op">(</span><span class="va">data.anom</span>, fun <span class="op">=</span> <span class="va">trend.fun</span><span class="op">)</span></span></code></pre></div>
 <p>Plot the trend:</p>
-<div class="sourceCode" id="cb169"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb172"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Set the desired range for the palette</span></span>
 <span><span class="va">min_val</span> <span class="op">&lt;-</span> <span class="op">-</span><span class="fl">0.0003</span></span>
 <span><span class="va">max_val</span> <span class="op">&lt;-</span> <span class="fl">0.0003</span></span>
@@ -153,12 +153,12 @@
 <span>  breaks <span class="op">=</span> <span class="va">breaks</span>,</span>
 <span>  main <span class="op">=</span> <span class="st">"Trend in EVI (2001-2023)"</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/pkg/maps/man/map.html">map</a></span><span class="op">(</span><span class="st">"world2"</span>, add <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
-<div class="inline-figure"><img src="_main_files/figure-html/unnamed-chunk-165-1.png" alt="" width="672"></div>
+<div class="inline-figure"><img src="figure-html/unnamed-chunk-166-1.png" alt="" width="672"></div>
 <ul>
 <li>Have a look at the region in Southern Brasil, along the northeastern border of Bolivia. What do you think is happening here? Compare the region with images from Google Maps.</li>
 </ul>
 <p>The next step is to detrend our time series. You already know how to do this and we can borrow code from the previous tutorial.</p>
-<div class="sourceCode" id="cb170"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb173"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Define a function that removes a linear trend</span></span>
 <span><span class="va">detrend.fun</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="op">{</span></span>
 <span>  <span class="va">time</span> <span class="op">&lt;-</span> <span class="fl">1</span><span class="op">:</span><span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span>
@@ -177,9 +177,9 @@
 <span></span>
 <span><span class="fu"><a href="https://rspatial.github.io/terra/reference/plot.html">plot</a></span><span class="op">(</span><span class="fu">terra</span><span class="fu">::</span><span class="fu"><a href="https://rspatial.github.io/terra/reference/subset.html">subset</a></span><span class="op">(</span><span class="va">data.anom.detrend</span>, <span class="fl">1</span><span class="op">:</span><span class="fl">1</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/pkg/maps/man/map.html">map</a></span><span class="op">(</span><span class="st">"world2"</span>, add <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
-<div class="inline-figure"><img src="_main_files/figure-html/unnamed-chunk-166-1.png" alt="" width="672"></div>
+<div class="inline-figure"><img src="figure-html/unnamed-chunk-167-1.png" alt="" width="672"></div>
 <p>As you may have figured out by now, there is a lot of land use change happening in the Amazon basin. For our analysis we need to exclude grid cells affected by land use change. You can do this by obtaining a map of land cover and masking all regions that don’t classify as forests. Alternatively, you can filter out all grid cells with low EVI values. Let’s create a mask that only shows grid cells with EVI values &gt; 0.4.</p>
-<div class="sourceCode" id="cb171"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb174"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">data</span> <span class="op">&lt;-</span> <span class="fu">terra</span><span class="fu">::</span><span class="fu"><a href="https://rspatial.github.io/terra/reference/rast.html">rast</a></span><span class="op">(</span><span class="st">"/global/teaching-project/sg51122000/shared_files/MOD13C2061-EVI-0.25deg.nc"</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># Let's focus on the Amazon basin</span></span>
@@ -192,21 +192,21 @@
 <span></span>
 <span><span class="fu"><a href="https://rspatial.github.io/terra/reference/plot.html">plot</a></span><span class="op">(</span><span class="va">mask</span>, main <span class="op">=</span> <span class="st">"Mask where min EVI &gt; 0.4 (-)"</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/pkg/maps/man/map.html">map</a></span><span class="op">(</span><span class="st">"world2"</span>, add <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
-<div class="inline-figure"><img src="_main_files/figure-html/unnamed-chunk-167-1.png" alt="" width="672"></div>
+<div class="inline-figure"><img src="figure-html/unnamed-chunk-168-1.png" alt="" width="672"></div>
 <p>Let’s apply the mask to our time series.</p>
-<div class="sourceCode" id="cb172"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb175"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">data.anom.detrend</span> <span class="op">&lt;-</span> <span class="va">data.anom.detrend</span> <span class="op">*</span> <span class="va">mask</span></span>
 <span><span class="fu"><a href="https://rspatial.github.io/terra/reference/plot.html">plot</a></span><span class="op">(</span><span class="fu">terra</span><span class="fu">::</span><span class="fu"><a href="https://rspatial.github.io/terra/reference/subset.html">subset</a></span><span class="op">(</span><span class="va">data.anom.detrend</span>, <span class="fl">1</span><span class="op">)</span>, main <span class="op">=</span> <span class="st">"Detrended EVI Anomalies (-)"</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/pkg/maps/man/map.html">map</a></span><span class="op">(</span><span class="st">"world2"</span>, add <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
-<div class="inline-figure"><img src="_main_files/figure-html/unnamed-chunk-168-1.png" alt="" width="672"></div>
+<div class="inline-figure"><img src="figure-html/unnamed-chunk-169-1.png" alt="" width="672"></div>
 <p>We are now ready to apply the early warning indicators for ecosystem resilience from the previous tutorial. These indicators will be applied to each grid cell. However, the analysis is computationally expensive. To make it feasible, we first need to reduce the grid’s spatial resolution using the <code>aggregate</code> function.</p>
-<div class="sourceCode" id="cb173"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb176"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">data.anom.detrend.coarse</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rspatial.github.io/terra/reference/aggregate.html">aggregate</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">data.anom.detrend</span>, fact<span class="op">=</span><span class="fl">2</span>, fun<span class="op">=</span><span class="st">"mean"</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rspatial.github.io/terra/reference/plot.html">plot</a></span><span class="op">(</span><span class="fu">terra</span><span class="fu">::</span><span class="fu"><a href="https://rspatial.github.io/terra/reference/subset.html">subset</a></span><span class="op">(</span><span class="va">data.anom.detrend.coarse</span>, <span class="fl">1</span><span class="op">)</span>, main <span class="op">=</span> <span class="st">"Detrended EVI Anomalies (-)"</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/pkg/maps/man/map.html">map</a></span><span class="op">(</span><span class="st">"world2"</span>, add <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
-<div class="inline-figure"><img src="_main_files/figure-html/unnamed-chunk-169-1.png" alt="" width="672"></div>
+<div class="inline-figure"><img src="figure-html/unnamed-chunk-170-1.png" alt="" width="672"></div>
 <p>To run the Univariate Early Warning Signal Assessment, execute the script below, which will run for a few minutes. Perfect time for a break!</p>
-<div class="sourceCode" id="cb174"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb177"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Define a function</span></span>
 <span><span class="va">ews.tau.ar1.fun</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="op">{</span></span>
 <span>  <span class="co"># If a grid cell contains NA, then set the result to NA</span></span>
@@ -230,7 +230,7 @@
 <span><span class="co"># Apply Univariate Early Warning Signal Assessment</span></span>
 <span><span class="va">ews.tau.ar1</span> <span class="op">&lt;-</span> <span class="fu">terra</span><span class="fu">::</span><span class="fu"><a href="https://rspatial.github.io/terra/reference/app.html">app</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">data.anom.detrend.coarse</span>, fun <span class="op">=</span> <span class="va">ews.tau.ar1.fun</span><span class="op">)</span></span></code></pre></div>
 <p>Plot Kendall’s Tau coefficient for Autocorrelation.</p>
-<div class="sourceCode" id="cb175"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb178"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Set the desired range for the palette</span></span>
 <span><span class="va">min_val</span> <span class="op">&lt;-</span> <span class="op">-</span><span class="fl">0.9</span></span>
 <span><span class="va">max_val</span> <span class="op">&lt;-</span> <span class="fl">0.9</span></span>
@@ -245,7 +245,7 @@
 <span>  breaks <span class="op">=</span> <span class="va">breaks</span>,</span>
 <span>  main <span class="op">=</span> <span class="st">"Tau AR1, EVI (2001-2023)"</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/pkg/maps/man/map.html">map</a></span><span class="op">(</span><span class="st">"world2"</span>, add <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
-<div class="inline-figure"><img src="_main_files/figure-html/unnamed-chunk-171-1.png" alt="" width="672"></div>
+<div class="inline-figure"><img src="figure-html/unnamed-chunk-172-1.png" alt="" width="672"></div>
 <ul>
 <li>What is your interpretation of the result?</li>
 </ul>
@@ -254,31 +254,31 @@
 <ul>
 <li>Plot EVI mean</li>
 </ul>
-<div class="inline-figure"><img src="_main_files/figure-html/unnamed-chunk-172-1.png" alt="" width="672"></div>
+<div class="inline-figure"><img src="figure-html/unnamed-chunk-173-1.png" alt="" width="672"></div>
 <ul>
 <li>Calculate 12-month climatological means</li>
 </ul>
-<div class="inline-figure"><img src="_main_files/figure-html/unnamed-chunk-173-1.png" alt="" width="672"></div>
+<div class="inline-figure"><img src="figure-html/unnamed-chunk-174-1.png" alt="" width="672"></div>
 <ul>
 <li>Calculate the anomalies by subtracting the 12-month climatologies from the monthly data.</li>
 </ul>
-<div class="inline-figure"><img src="_main_files/figure-html/unnamed-chunk-174-1.png" alt="" width="672"></div>
+<div class="inline-figure"><img src="figure-html/unnamed-chunk-175-1.png" alt="" width="672"></div>
 <ul>
 <li>Plot the trend in EVI anomalies.</li>
 </ul>
-<div class="inline-figure"><img src="_main_files/figure-html/unnamed-chunk-175-1.png" alt="" width="672"></div>
+<div class="inline-figure"><img src="figure-html/unnamed-chunk-176-1.png" alt="" width="672"></div>
 <ul>
 <li>Detrend the time series.</li>
 </ul>
-<div class="inline-figure"><img src="_main_files/figure-html/unnamed-chunk-176-1.png" alt="" width="672"></div>
+<div class="inline-figure"><img src="figure-html/unnamed-chunk-177-1.png" alt="" width="672"></div>
 <ul>
 <li>Reduce the spatial resolution.</li>
 </ul>
-<div class="inline-figure"><img src="_main_files/figure-html/unnamed-chunk-177-1.png" alt="" width="672"></div>
+<div class="inline-figure"><img src="figure-html/unnamed-chunk-178-1.png" alt="" width="672"></div>
 <ul>
 <li>Run the Univariate Early Warning Signal Assessment</li>
 </ul>
-<div class="inline-figure"><img src="_main_files/figure-html/unnamed-chunk-178-1.png" alt="" width="672"></div>
+<div class="inline-figure"><img src="figure-html/unnamed-chunk-179-1.png" alt="" width="672"></div>
 <ul>
 <li>Interpret your result.</li>
 </ul>

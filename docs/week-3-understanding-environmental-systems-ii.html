@@ -74,7 +74,7 @@
 <li>Convergent Cross Mapping (CCM)</li>
 </ul>
 <p>Load the required R packages:</p>
-<div class="sourceCode" id="cb59"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb62"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va">stats</span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://www.pfaffikus.de">vars</a></span><span class="op">)</span></span></code></pre></div>
 <pre><code>## Loading required package: MASS</code></pre>
@@ -88,7 +88,7 @@
 <pre><code>## Loading required package: sandwich</code></pre>
 <pre><code>## Loading required package: urca</code></pre>
 <pre><code>## Loading required package: lmtest</code></pre>
-<div class="sourceCode" id="cb68"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb71"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/tpetzoldt/deSolve/">deSolve</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://stscl.github.io/tEDM/">tEDM</a></span><span class="op">)</span></span></code></pre></div>
 <div id="autoregression" class="section level2" number="3.1">
@@ -101,17 +101,17 @@ The response variable in the previous time period (<span class="math inline">\(y
 <p><span class="math display">\[ y_t = \beta_0 + \beta_1y_{t-1} + \beta_2y_{t-2}+ \epsilon_t\]</span>
 More, generally, a <span class="math inline">\(p\)</span>-order autoregressive model is defined as:</p>
 <p><span class="math display">\[ y_t = \beta_0 + \beta_1y_{t-1} + \beta_2y_{t-2}+...+ \beta_py_{t-p} + \epsilon_t\]</span></p>
-<p>Let’s use a AR2 to forecast an oscillating function.</p>
-<div class="sourceCode" id="cb69"><pre class="downlit sourceCode r">
+<p>Let’s use an AR2 to forecast an oscillating function.</p>
+<div class="sourceCode" id="cb72"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Create a sinusoidal time series</span></span>
 <span><span class="va">t</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">20</span>, <span class="fl">0.1</span><span class="op">)</span> <span class="co"># time axis</span></span>
 <span><span class="va">n</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">t</span><span class="op">)</span> <span class="co"># number of time steps</span></span>
 <span><span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/Trig.html">sin</a></span><span class="op">(</span><span class="va">t</span><span class="op">)</span></span>
 <span><span class="va">time_series</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/ts.html">ts</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/plot.html">plot</a></span><span class="op">(</span><span class="va">time_series</span><span class="op">)</span></span></code></pre></div>
-<div class="inline-figure"><img src="_main_files/figure-html/unnamed-chunk-79-1.png" alt="" width="672"></div>
-<p>Next, fit an second-order autoregressive model using Ordinary Least Squares regression (OLS)</p>
-<div class="sourceCode" id="cb70"><pre class="downlit sourceCode r">
+<div class="inline-figure"><img src="figure-html/unnamed-chunk-80-1.png" alt="" width="672"></div>
+<p>Next, fit a second-order autoregressive model using Ordinary Least Squares regression (OLS)</p>
+<div class="sourceCode" id="cb73"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">ar_model</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/ar.ols.html">ar.ols</a></span><span class="op">(</span><span class="va">time_series</span>, order.max <span class="op">=</span> <span class="fl">2</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="va">ar_model</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## 
@@ -131,7 +131,7 @@ More, generally, a <span class="math inline">\(p\)</span>-order autoregressive m
 <ul>
 <li>Set parameters</li>
 </ul>
-<div class="sourceCode" id="cb72"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb75"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">beta0</span> <span class="op">&lt;-</span> <span class="op">-</span><span class="fl">0.0003167</span> <span class="co"># intercept</span></span>
 <span><span class="va">beta1</span> <span class="op">&lt;-</span> <span class="fl">1.99</span>    <span class="co"># Coefficient of y_{t-1}</span></span>
 <span><span class="va">beta2</span> <span class="op">&lt;-</span> <span class="op">-</span> <span class="fl">1.00</span> <span class="co"># Coefficient of y_{t-2}</span></span></code></pre></div>
@@ -140,7 +140,7 @@ More, generally, a <span class="math inline">\(p\)</span>-order autoregressive m
 <li>We will need two initial values because we are predicting <span class="math inline">\(y_t\)</span> from <span class="math inline">\(y_{t-1}\)</span> and <span class="math inline">\(y_{t-2}\)</span>
 </li>
 </ul>
-<div class="sourceCode" id="cb73"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb76"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">y</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/numeric.html">numeric</a></span><span class="op">(</span><span class="va">n</span><span class="op">)</span></span>
 <span><span class="va">y3</span> <span class="op">&lt;-</span> <span class="va">time_series</span><span class="op">[</span><span class="fl">3</span><span class="op">]</span></span>
 <span><span class="va">y2</span> <span class="op">&lt;-</span> <span class="va">time_series</span><span class="op">[</span><span class="fl">2</span><span class="op">]</span></span>
@@ -148,7 +148,7 @@ More, generally, a <span class="math inline">\(p\)</span>-order autoregressive m
 <ul>
 <li>Generate the time series using AR2</li>
 </ul>
-<div class="sourceCode" id="cb74"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb77"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw">for</span> <span class="op">(</span><span class="va">t</span> <span class="kw">in</span> <span class="fl">3</span><span class="op">:</span><span class="va">n</span><span class="op">)</span> <span class="op">{</span></span>
 <span>  <span class="va">epsilon_t</span> <span class="op">&lt;-</span> <span class="fl">0</span>  <span class="co"># Random error term</span></span>
 <span>  <span class="va">y</span><span class="op">[</span><span class="va">t</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="va">beta0</span> <span class="op">+</span> <span class="va">beta1</span> <span class="op">*</span> <span class="va">y</span><span class="op">[</span><span class="va">t</span><span class="op">-</span><span class="fl">1</span><span class="op">]</span> <span class="op">+</span> <span class="va">beta2</span> <span class="op">*</span> <span class="va">y</span><span class="op">[</span><span class="va">t</span><span class="op">-</span><span class="fl">2</span><span class="op">]</span> <span class="op">+</span> <span class="va">epsilon_t</span></span>
@@ -156,14 +156,14 @@ More, generally, a <span class="math inline">\(p\)</span>-order autoregressive m
 <ul>
 <li>Plot the generated time series</li>
 </ul>
-<div class="sourceCode" id="cb75"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb78"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/plot.html">plot</a></span><span class="op">(</span><span class="va">y</span>, type <span class="op">=</span> <span class="st">"l"</span>, col <span class="op">=</span> <span class="st">"blue"</span>, lwd <span class="op">=</span> <span class="fl">2</span>, </span>
 <span>     xlab <span class="op">=</span> <span class="st">"Time"</span>, ylab <span class="op">=</span> <span class="st">"Y_t"</span>, main <span class="op">=</span> <span class="st">"Time Series Generated with AR2"</span><span class="op">)</span></span></code></pre></div>
-<div class="inline-figure"><img src="_main_files/figure-html/unnamed-chunk-84-1.png" alt="" width="672"></div>
+<div class="inline-figure"><img src="figure-html/unnamed-chunk-85-1.png" alt="" width="672"></div>
 <ul>
 <li>You can reproduce a sinusoidal function using AR, amazing! Given that each <span class="math inline">\(y_t\)</span> depends on previous time steps (in our case <span class="math inline">\(y_{t-1}\)</span> and <span class="math inline">\(y_{t-2}\)</span>), we should be able to use AR to predict the future. Let’s try that next using the <code><a href="https://rdrr.io/r/stats/predict.html">stats::predict</a></code> function.</li>
 </ul>
-<div class="sourceCode" id="cb76"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb79"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Forecast the next 100 steps</span></span>
 <span><span class="va">forecast_length</span> <span class="op">&lt;-</span> <span class="fl">100</span></span>
 <span><span class="va">pred</span> <span class="op">&lt;-</span> <span class="fu">stats</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/r/stats/predict.html">predict</a></span><span class="op">(</span><span class="va">ar_model</span>, n.ahead <span class="op">=</span> <span class="va">forecast_length</span><span class="op">)</span></span>
@@ -191,7 +191,7 @@ More, generally, a <span class="math inline">\(p\)</span>-order autoregressive m
 <span>  col <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"black"</span>, <span class="st">"red"</span><span class="op">)</span>,</span>
 <span>  lwd <span class="op">=</span> <span class="fl">2</span></span>
 <span><span class="op">)</span></span></code></pre></div>
-<div class="inline-figure"><img src="_main_files/figure-html/unnamed-chunk-85-1.png" alt="" width="672"></div>
+<div class="inline-figure"><img src="figure-html/unnamed-chunk-86-1.png" alt="" width="672"></div>
 <p>The result matches what you would intuitively expect. Let’s now see how we can work with multiple variables.</p>
 </div>
 <div id="vector-autoregression-var" class="section level2" number="3.2">
@@ -202,7 +202,7 @@ More, generally, a <span class="math inline">\(p\)</span>-order autoregressive m
 <p><span class="math display">\[ x_{t} = \beta_{1} + \beta_{11}  x_{t-1} +  \beta_{12}  y_{t-1} + \epsilon_{1,t} \]</span>
 <span class="math display">\[ y_{t} = \beta_{2} + \beta_{21}  x_{t-1} +  \beta_{22}  y_{t-1} + \epsilon_{2,t} \]</span></p>
 <p>You can see that the variable <span class="math inline">\(x_t\)</span> depends on the 1-lag of itself (<span class="math inline">\(x_{t-1}\)</span>) and of the other variable (<span class="math inline">\(y_{t-1}\)</span>). As for AR, the order of VAR can be increased by including more time lags. Let’s apply VAR to two time series.</p>
-<div class="sourceCode" id="cb77"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb80"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/Random.html">set.seed</a></span><span class="op">(</span><span class="fl">1</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># Create two random time-series objects</span></span>
@@ -212,11 +212,11 @@ More, generally, a <span class="math inline">\(p\)</span>-order autoregressive m
 <span><span class="co"># Bind time series and plot them</span></span>
 <span><span class="va">tsDat</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/ts.union.html">ts.union</a></span><span class="op">(</span><span class="va">ts1</span>, <span class="va">ts2</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/plot.html">plot</a></span><span class="op">(</span><span class="va">tsDat</span><span class="op">)</span></span></code></pre></div>
-<div class="inline-figure"><img src="_main_files/figure-html/unnamed-chunk-86-1.png" alt="" width="672"></div>
+<div class="inline-figure"><img src="figure-html/unnamed-chunk-87-1.png" alt="" width="672"></div>
 <ul>
 <li>Calculate the coefficients for both time series using a time lag order of 1</li>
 </ul>
-<div class="sourceCode" id="cb78"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb81"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">tsVAR</span> <span class="op">&lt;-</span> <span class="fu">vars</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/vars/man/VAR.html">VAR</a></span><span class="op">(</span><span class="va">tsDat</span>, p <span class="op">=</span> <span class="fl">1</span><span class="op">)</span> <span class="co"># p gives the lag order</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="va">tsVAR</span><span class="op">)</span></span></code></pre></div>
 <ul>
@@ -258,7 +258,7 @@ More, generally, a <span class="math inline">\(p\)</span>-order autoregressive m
 <p><strong>Quiz Question 3:</strong> What is the difference between a restricted and an unrestricted model?
 <!-- A restricted model includes one variable only, while an unrestricted model contains multiple variables. --></p>
 <p>To conduct the Granger causality, we do:</p>
-<div class="sourceCode" id="cb79"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb82"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">vars</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/vars/man/causality.html">causality</a></span><span class="op">(</span><span class="va">tsVAR</span>, cause <span class="op">=</span> <span class="st">"ts1"</span><span class="op">)</span><span class="op">$</span><span class="va">Granger</span></span></code></pre></div>
 <pre><code>## 
 ##  Granger causality H0: ts1 do not Granger-cause ts2
@@ -277,7 +277,7 @@ More, generally, a <span class="math inline">\(p\)</span>-order autoregressive m
 <ul>
 <li>Create two sinusoidal time series that differ by random noise and that are lagged</li>
 </ul>
-<div class="sourceCode" id="cb81"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb84"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">t</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">20</span>, <span class="fl">0.1</span><span class="op">)</span> <span class="co"># time axis</span></span>
 <span><span class="va">n</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">t</span><span class="op">)</span> <span class="co"># number of time steps</span></span>
 <span></span>
@@ -295,11 +295,11 @@ More, generally, a <span class="math inline">\(p\)</span>-order autoregressive m
 <span></span>
 <span><span class="va">tsDat</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/ts.union.html">ts.union</a></span><span class="op">(</span><span class="va">x</span>, <span class="va">y</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/plot.html">plot</a></span><span class="op">(</span><span class="va">tsDat</span><span class="op">)</span></span></code></pre></div>
-<div class="inline-figure"><img src="_main_files/figure-html/unnamed-chunk-90-1.png" alt="" width="672"></div>
+<div class="inline-figure"><img src="figure-html/unnamed-chunk-91-1.png" alt="" width="672"></div>
 <ul>
 <li>Create a vector autoregression model and apply Granger causation</li>
 </ul>
-<div class="sourceCode" id="cb82"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb85"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">tsVAR</span> <span class="op">&lt;-</span> <span class="fu">vars</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/vars/man/VAR.html">VAR</a></span><span class="op">(</span><span class="va">tsDat</span>, p <span class="op">=</span> <span class="fl">2</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># Apply Granger </span></span>
@@ -309,7 +309,7 @@ More, generally, a <span class="math inline">\(p\)</span>-order autoregressive m
 ## 
 ## data:  VAR object tsVAR
 ## F-Test = 50.21, df1 = 2, df2 = 370, p-value &lt; 2.2e-16</code></pre>
-<div class="sourceCode" id="cb84"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb87"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">vars</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/vars/man/causality.html">causality</a></span><span class="op">(</span><span class="va">tsVAR</span>, cause <span class="op">=</span> <span class="st">"y"</span><span class="op">)</span><span class="op">$</span><span class="va">Granger</span></span></code></pre></div>
 <pre><code>## 
 ##  Granger causality H0: y do not Granger-cause x
@@ -321,7 +321,7 @@ More, generally, a <span class="math inline">\(p\)</span>-order autoregressive m
 <p><strong>Quiz Question 7:</strong> Does <span class="math inline">\(y\)</span> Granger-cause <span class="math inline">\(x\)</span>?
 <!-- No --></p>
 <p>Now let’s apply our new skills to the Lotka-Volterra model. Create two time series, one for predator, the other for prey</p>
-<div class="sourceCode" id="cb86"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb89"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/rm.html">rm</a></span><span class="op">(</span>list <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/ls.html">ls</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># (1) Create Predator-Prey time series</span></span>
@@ -347,11 +347,11 @@ More, generally, a <span class="math inline">\(p\)</span>-order autoregressive m
 <span><span class="va">prey</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/ts.html">ts</a></span><span class="op">(</span><span class="va">out</span><span class="op">$</span><span class="va">Y</span><span class="op">)</span></span>
 <span><span class="va">tsDat</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/ts.union.html">ts.union</a></span><span class="op">(</span><span class="va">predator</span>, <span class="va">prey</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/plot.html">plot</a></span><span class="op">(</span><span class="va">tsDat</span><span class="op">)</span></span></code></pre></div>
-<div class="inline-figure"><img src="_main_files/figure-html/unnamed-chunk-92-1.png" alt="" width="672"></div>
+<div class="inline-figure"><img src="figure-html/unnamed-chunk-93-1.png" alt="" width="672"></div>
 <ul>
 <li>Conduct Granger causality</li>
 </ul>
-<div class="sourceCode" id="cb87"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb90"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">tsVAR</span> <span class="op">&lt;-</span> <span class="fu">vars</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/vars/man/VAR.html">VAR</a></span><span class="op">(</span><span class="va">tsDat</span>, p <span class="op">=</span> <span class="fl">3</span><span class="op">)</span></span>
 <span><span class="fu">vars</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/vars/man/causality.html">causality</a></span><span class="op">(</span><span class="va">tsVAR</span>, cause <span class="op">=</span> <span class="st">"predator"</span><span class="op">)</span><span class="op">$</span><span class="va">Granger</span></span></code></pre></div>
 <pre><code>## 
@@ -359,7 +359,7 @@ More, generally, a <span class="math inline">\(p\)</span>-order autoregressive m
 ## 
 ## data:  VAR object tsVAR
 ## F-Test = 454.2, df1 = 3, df2 = 262, p-value &lt; 2.2e-16</code></pre>
-<div class="sourceCode" id="cb89"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb92"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">vars</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/vars/man/causality.html">causality</a></span><span class="op">(</span><span class="va">tsVAR</span>, cause <span class="op">=</span> <span class="st">"prey"</span><span class="op">)</span><span class="op">$</span><span class="va">Granger</span></span></code></pre></div>
 <pre><code>## 
 ##  Granger causality H0: prey do not Granger-cause predator
@@ -371,13 +371,13 @@ More, generally, a <span class="math inline">\(p\)</span>-order autoregressive m
 <p><strong>Quiz Question 9:</strong> Does the prey population Granger-cause the predator population?
 <!-- Yes --></p>
 <p>Let’s repeat the same exercise but using Convergent Cross Mapping (CCM). Recall that in CCM, if variable <span class="math inline">\(x\)</span> can be predicted using the reconstructed system based on the time-delay embedding of variable <span class="math inline">\(y\)</span>, then we know that <span class="math inline">\(x\)</span> had a causal effect on <span class="math inline">\(y\)</span>.</p>
-<div class="sourceCode" id="cb91"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb94"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">data</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span><span class="va">predator</span>, <span class="va">prey</span><span class="op">)</span></span>
 <span></span>
 <span><span class="va">result</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://stscl.github.io/tEDM/reference/ccm.html">ccm</a></span><span class="op">(</span><span class="va">data</span>, <span class="st">"predator"</span>,<span class="st">"prey"</span>,libsizes <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span><span class="op">(</span><span class="fl">10</span>,<span class="fl">50</span>,<span class="fl">5</span><span class="op">)</span>, E <span class="op">=</span> <span class="fl">10</span>, k <span class="op">=</span> <span class="fl">7</span>,threads <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## Computing: [========================================] 100% (done)                         
 ## Computing: [========================================] 100% (done)</code></pre>
-<div class="sourceCode" id="cb93"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb96"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">libs</span> <span class="op">&lt;-</span> <span class="va">result</span><span class="op">$</span><span class="va">xmap</span><span class="op">$</span><span class="va">libsizes</span></span>
 <span><span class="va">x_drives_y</span> <span class="op">&lt;-</span> <span class="va">result</span><span class="op">$</span><span class="va">xmap</span><span class="op">$</span><span class="va">x_xmap_y_mean</span></span>
 <span><span class="va">y_drives_x</span> <span class="op">&lt;-</span> <span class="va">result</span><span class="op">$</span><span class="va">xmap</span><span class="op">$</span><span class="va">y_xmap_x_mean</span></span>
@@ -395,7 +395,7 @@ More, generally, a <span class="math inline">\(p\)</span>-order autoregressive m
 <span><span class="co"># Add legend</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/legend.html">legend</a></span><span class="op">(</span><span class="st">"bottomright"</span>, legend <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Predator drives Prey"</span>, <span class="st">"Prey drives Predator"</span><span class="op">)</span>,</span>
 <span>       col <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"blue"</span>, <span class="st">"red"</span><span class="op">)</span>, lwd <span class="op">=</span> <span class="fl">2</span>, bty <span class="op">=</span> <span class="st">"n"</span><span class="op">)</span></span></code></pre></div>
-<div class="inline-figure"><img src="_main_files/figure-html/unnamed-chunk-94-1.png" alt="" width="672"></div>
+<div class="inline-figure"><img src="figure-html/unnamed-chunk-95-1.png" alt="" width="672"></div>
 <p><strong>Quiz Question 10:</strong> Does the prey population affect the predator population, and vice versa?
 <!-- Yes --></p>
 </div>
@@ -408,7 +408,7 @@ More, generally, a <span class="math inline">\(p\)</span>-order autoregressive m
 <p><span class="math inline">\(\frac{dy}{dt} = -10 (y - z)\)</span></p>
 <p><span class="math inline">\(\frac{dz}{dt} = -xy + 28y-z\)</span></p>
 <p>Set the initial conditions of <span class="math inline">\(x\)</span>, <span class="math inline">\(y\)</span>, and <span class="math inline">\(z\)</span> to a value of 1. Set the time axis to <code>times &lt;- seq(0, 1000, 0.1)</code>.</p>
-<div class="sourceCode" id="cb94"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb97"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">Lorenz</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">t</span>, <span class="va">state</span>, <span class="va">parameters</span><span class="op">)</span></span>
 <span><span class="op">{</span></span>
 <span>  <span class="fu"><a href="https://rdrr.io/r/base/with.html">with</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/list.html">as.list</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="va">state</span><span class="op">)</span><span class="op">)</span>, <span class="op">{</span></span>
@@ -427,8 +427,8 @@ More, generally, a <span class="math inline">\(p\)</span>-order autoregressive m
 <span><span class="va">z</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/ts.html">ts</a></span><span class="op">(</span><span class="va">out</span><span class="op">$</span><span class="va">z</span><span class="op">)</span></span>
 <span></span>
 <span><span class="va">tsDat</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/ts.union.html">ts.union</a></span><span class="op">(</span><span class="va">x</span>,<span class="va">y</span>,<span class="va">z</span><span class="op">)</span></span></code></pre></div>
-<p>Now apply Granger causality to each variable pair. For instance for <span class="math inline">\(x \rigtarrow y\)</span> you write:</p>
-<div class="sourceCode" id="cb95"><pre class="downlit sourceCode r">
+<p>Now apply Granger causality to each variable pair. For instance for <span class="math inline">\(x \rightarrow y\)</span> you write:</p>
+<div class="sourceCode" id="cb98"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">tsDat.xy</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/ts.union.html">ts.union</a></span><span class="op">(</span><span class="va">x</span>,<span class="va">y</span><span class="op">)</span></span>
 <span><span class="va">tsVAR.xy</span> <span class="op">&lt;-</span> <span class="fu">vars</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/vars/man/VAR.html">VAR</a></span><span class="op">(</span><span class="va">tsDat.xy</span>, p <span class="op">=</span> <span class="fl">3</span><span class="op">)</span></span>
 <span><span class="fu">vars</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/vars/man/causality.html">causality</a></span><span class="op">(</span><span class="va">tsVAR.xy</span>, cause <span class="op">=</span> <span class="st">"x"</span><span class="op">)</span><span class="op">$</span><span class="va">Granger</span></span></code></pre></div>
@@ -439,12 +439,12 @@ More, generally, a <span class="math inline">\(p\)</span>-order autoregressive m
 <span class="header-section-number">3.5</span> Convergent Cross Mapping (CCM)<a class="anchor" aria-label="anchor" href="#convergent-cross-mapping-ccm"><i class="fas fa-link"></i></a>
 </h2>
 <p>Evaluate the statistical association between <span class="math inline">\(x\)</span>, <span class="math inline">\(y\)</span>, and <span class="math inline">\(z\)</span> in the Lorenz equations using Convergent Cross Mapping (CCM) Granger causality is most appropriate for linear systems. For non-linear systems, we can use CCM. Assess the relationship between <span class="math inline">\(y\)</span> and <span class="math inline">\(z\)</span> using CCM. Let us begin by subsetting the time series to omit the initial transient part and to reduce computational time.</p>
-<div class="sourceCode" id="cb96"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb99"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">x</span> <span class="op">&lt;-</span> <span class="va">x</span><span class="op">[</span><span class="fl">1001</span><span class="op">:</span><span class="fl">1500</span><span class="op">]</span></span>
 <span><span class="va">y</span> <span class="op">&lt;-</span> <span class="va">y</span><span class="op">[</span><span class="fl">1001</span><span class="op">:</span><span class="fl">1500</span><span class="op">]</span></span>
 <span><span class="va">z</span> <span class="op">&lt;-</span> <span class="va">z</span><span class="op">[</span><span class="fl">1001</span><span class="op">:</span><span class="fl">1500</span><span class="op">]</span></span></code></pre></div>
 <p>Let us now assess the relationship between <span class="math inline">\(y\)</span> and <span class="math inline">\(z\)</span>.</p>
-<div class="sourceCode" id="cb97"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb100"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">data</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span><span class="va">y</span>, <span class="va">z</span><span class="op">)</span></span>
 <span></span>
 <span><span class="va">result</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://stscl.github.io/tEDM/reference/ccm.html">ccm</a></span><span class="op">(</span><span class="va">data</span>, <span class="st">"y"</span>, <span class="st">"z"</span>, libsizes <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span><span class="op">(</span><span class="fl">10</span>,<span class="fl">250</span>,<span class="fl">10</span><span class="op">)</span>, E <span class="op">=</span> <span class="fl">3</span>, k <span class="op">=</span> <span class="fl">7</span>,threads <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></span>
@@ -467,7 +467,7 @@ More, generally, a <span class="math inline">\(p\)</span>-order autoregressive m
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/legend.html">legend</a></span><span class="op">(</span><span class="st">"bottomright"</span>, legend <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"y drives z"</span>, <span class="st">"z drives y"</span><span class="op">)</span>,</span>
 <span>       col <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"blue"</span>, <span class="st">"red"</span><span class="op">)</span>, lwd <span class="op">=</span> <span class="fl">2</span>, bty <span class="op">=</span> <span class="st">"n"</span><span class="op">)</span></span></code></pre></div>
 <p>Let us now assess x and y:</p>
-<div class="sourceCode" id="cb98"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb101"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">data</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span><span class="va">x</span>, <span class="va">y</span><span class="op">)</span></span>
 <span></span>
 <span><span class="va">cause_x</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://stscl.github.io/tEDM/reference/ccm.html">ccm</a></span><span class="op">(</span><span class="va">data</span>, cause <span class="op">=</span> <span class="st">"x"</span>, effect <span class="op">=</span> <span class="st">"y"</span>, libsizes <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span><span class="op">(</span><span class="fl">10</span>,<span class="fl">250</span>,<span class="fl">10</span><span class="op">)</span>, E <span class="op">=</span> <span class="fl">3</span>, k <span class="op">=</span> <span class="fl">7</span>, threads <span class="op">=</span> <span class="fl">1</span>, bidirectional <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>

@@ -75,7 +75,7 @@
 </ul>
 <p>Please document all steps of this tutorial in your Tutorial Report</p>
 <p>Load the required R packages:</p>
-<div class="sourceCode" id="cb48"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb51"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/tpetzoldt/deSolve/">deSolve</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va">rootSolve</span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va">scatterplot3d</span><span class="op">)</span></span>
@@ -112,7 +112,7 @@ x = \exp(0.06 t) * \exp(c_1)
 x = c * \exp(0.06 t)
 \]</span></p>
 <p>where <span class="math inline">\(c\)</span> is the integration constant. This is called an analytically integration. Let’s plot <span class="math inline">\(x\)</span> as a function of <span class="math inline">\(t\)</span>:</p>
-<div class="sourceCode" id="cb49"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb52"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Define function inputs</span></span>
 <span><span class="va">state</span> <span class="op">&lt;-</span> <span class="fl">100</span> </span>
 <span><span class="va">times</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">50</span>, <span class="fl">1</span><span class="op">)</span> <span class="co"># Time steps</span></span>
@@ -124,12 +124,12 @@ x = c * \exp(0.06 t)
 <span>     type <span class="op">=</span> <span class="st">"l"</span>,</span>
 <span>     xlab <span class="op">=</span> <span class="st">"Time Step"</span>,</span>
 <span>     ylab <span class="op">=</span> <span class="st">"x"</span><span class="op">)</span></span></code></pre></div>
-<div class="inline-figure"><img src="_main_files/figure-html/unnamed-chunk-65-1.png" alt="" width="672"></div>
+<div class="inline-figure"><img src="figure-html/unnamed-chunk-66-1.png" alt="" width="672"></div>
 <p>Some equations are so complicated, that they cannot be integrated analytically. Instead, we can integrate them numerically. Let’s see how we can integrate the same equation numerically using the <code>ode</code> function. Have a look at the code.</p>
 <p><strong>Quiz Question 1:</strong> Which part of the code defines your initial value?
 <!-- state --></p>
 <p>Run this code in your markdown file:</p>
-<div class="sourceCode" id="cb50"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb53"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Define the function</span></span>
 <span><span class="va">ode_function</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">t</span>, <span class="va">state</span>, <span class="va">parameters</span><span class="op">)</span></span>
 <span><span class="op">{</span></span>
@@ -154,7 +154,7 @@ x = c * \exp(0.06 t)
 <span>     type <span class="op">=</span> <span class="st">"l"</span>,</span>
 <span>     xlab <span class="op">=</span> <span class="st">"Time Step"</span>,</span>
 <span>     ylab <span class="op">=</span> <span class="st">"x"</span><span class="op">)</span></span></code></pre></div>
-<div class="inline-figure"><img src="_main_files/figure-html/unnamed-chunk-66-1.png" alt="" width="672"></div>
+<div class="inline-figure"><img src="figure-html/unnamed-chunk-67-1.png" alt="" width="672"></div>
 <p><strong>Quiz Question 2:</strong> Which part of the code is your ODE?
 <!-- dx <- 0.06 * x --></p>
 </div>
@@ -166,11 +166,11 @@ x = c * \exp(0.06 t)
 <p><span class="math display">\[\frac{dY}{dt} = r_i * Y * (1 - Y / K) - \alpha * R * Y \]</span>
 <span class="math display">\[\frac{dR}{dt} = \alpha * \gamma * R * Y - m * R \]</span></p>
 <p>where <span class="math inline">\(Y\)</span> = prey, <span class="math inline">\(R\)</span> = predator, <span class="math inline">\(\alpha\)</span> = ingestion rate of predator (0.2), <span class="math inline">\(r_i\)</span> = rate of prey increase (1), <span class="math inline">\(m\)</span> = mortality rate (0.2), <span class="math inline">\(\gamma\)</span> = assimilation efficiency (0.5), <span class="math inline">\(K\)</span> = carrying capacity (10000). Adjust the code from your savings account above to reproduce the Figure below. Set your initial state to <span class="math inline">\(Y = 1\)</span> and <span class="math inline">\(R = 1\)</span> and your time axis to <code>times &lt;- seq(0, 70, 0.1)</code>.</p>
-<div class="inline-figure"><img src="_main_files/figure-html/unnamed-chunk-67-1.png" alt="" width="672"></div>
+<div class="inline-figure"><img src="figure-html/unnamed-chunk-68-1.png" alt="" width="672"></div>
 <p><strong>Quiz Question 3:</strong> What value do you get for <code>out$Y[100]</code>?
 <!-- 0.01434187 --></p>
 <p>Now adjust the code again to plot Predator versus Prey, reproducing the Figure below.</p>
-<p><img src="_main_files/figure-html/unnamed-chunk-68-1.png" alt="" width="672"><strong>Quiz Question 4:</strong> What does this Figure tell you?
+<p><img src="figure-html/unnamed-chunk-69-1.png" alt="" width="672"><strong>Quiz Question 4:</strong> What does this Figure tell you?
 <!-- Predator and prey are dynamically linked --></p>
 </div>
 </div>
@@ -181,7 +181,7 @@ x = c * \exp(0.06 t)
 <p>The spruce budworm (<span class="math inline">\(\textit{Choristoneura fumiferana}\)</span>) is an insect pest that consumes the leaves of coniferous trees in North America. In some years, their populations explode and the excessive consumption of pine buds and needles causes massive damage to the trees. The equation below describes the density of the spruce budworm (<span class="math inline">\(B\)</span>), as a function of density-dependent growth (first term) and predatory mortality (second term):</p>
 <p><span class="math display">\[ \frac{dB}{dt} = r_i B \left( 1 - \frac{B}{K}\right) - \beta \frac{B^2}{B^2+k_s^2}\]</span>
 where <span class="math inline">\(t\)</span> is the time, <span class="math inline">\(r_i\)</span> is the rate of increase, <span class="math inline">\(K\)</span> is the carrying capacity of the environment, <span class="math inline">\(\beta\)</span> is the maximum mortality rate, and <span class="math inline">\(k_s\)</span> is the half-saturation density at which mortality is half of the maximal rate. This is an ordinary differential equation (ODE). Let’s plot the species density (<span class="math inline">\(B\)</span>) as a function of time (<span class="math inline">\(t\)</span>). To do that we will integrate the function above with respect to time using the <code>ode</code> function below.</p>
-<div class="sourceCode" id="cb51"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb54"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Define the ODE function</span></span>
 <span><span class="va">ode_function</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">t</span>, <span class="va">B</span>, <span class="va">parameters</span><span class="op">)</span> <span class="op">{</span></span>
 <span>  <span class="fu"><a href="https://rdrr.io/r/base/with.html">with</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/list.html">as.list</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="va">parameters</span>, <span class="va">B</span><span class="op">)</span><span class="op">)</span>, <span class="op">{</span></span>
@@ -210,7 +210,7 @@ where <span class="math inline">\(t\)</span> is the time, <span class="math inli
 <ul>
 <li>Next, let’s plot the rate of change (<span class="math inline">\(\frac{dB}{dt}\)</span>) as a function of the population density (<span class="math inline">\(B\)</span>)</li>
 </ul>
-<div class="sourceCode" id="cb52"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb55"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Input values</span></span>
 <span> <span class="va">ri</span> <span class="op">&lt;-</span> <span class="fl">0.05</span></span>
 <span> <span class="va">K</span> <span class="op">&lt;-</span> <span class="fl">10</span></span>
@@ -230,7 +230,7 @@ where <span class="math inline">\(t\)</span> is the time, <span class="math inli
 <p><strong>Quiz Question 8:</strong> Are they stable or unstable?
 <!-- From left-to-right: unstable, stable, unstable, stable --></p>
 <p>Evaluate your answer by running the code below, trying different values for <span class="math inline">\(B\)</span> (e.g. 0, 1, 2, 5, 10) (<code>state &lt;- c(B = 10)</code>). Document your findings.</p>
-<div class="sourceCode" id="cb53"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb56"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">ri</span> <span class="op">&lt;-</span> <span class="fl">0.05</span></span>
 <span><span class="va">K</span> <span class="op">&lt;-</span> <span class="fl">10</span></span>
 <span><span class="va">beta</span> <span class="op">&lt;-</span> <span class="fl">0.1</span></span>
@@ -263,7 +263,7 @@ where <span class="math inline">\(t\)</span> is the time, <span class="math inli
 <ul>
 <li>Run the code below to plot the bifurcation diagram</li>
 </ul>
-<div class="sourceCode" id="cb54"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb57"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">ri</span> <span class="op">&lt;-</span> <span class="fl">0.05</span></span>
 <span><span class="va">K</span> <span class="op">&lt;-</span> <span class="fl">10</span></span>
 <span><span class="va">beta</span> <span class="op">&lt;-</span> <span class="fl">0.1</span></span>
@@ -319,7 +319,7 @@ where <span class="math inline">\(t\)</span> is the time, <span class="math inli
 <ul>
 <li>Run the code below to visualize the Lorenz Attractor</li>
 </ul>
-<div class="sourceCode" id="cb55"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb58"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">Lorenz</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">t</span>, <span class="va">state</span>, <span class="va">parameters</span><span class="op">)</span></span>
 <span><span class="op">{</span></span>
 <span>  <span class="fu"><a href="https://rdrr.io/r/base/with.html">with</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/list.html">as.list</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="va">state</span><span class="op">)</span><span class="op">)</span>, <span class="op">{</span></span>
@@ -357,7 +357,7 @@ where <span class="math inline">\(t\)</span> is the time, <span class="math inli
 <span class="header-section-number">2.4</span> Early warning signal (EWS) assessments<a class="anchor" aria-label="anchor" href="#early-warning-signal-ews-assessments"><i class="fas fa-link"></i></a>
 </h2>
 <p>Let’s see if we can detect a critical transition in the population of fish from a time series using the <code>EWSmethods</code> R package.</p>
-<div class="sourceCode" id="cb56"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb59"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/Random.html">set.seed</a></span><span class="op">(</span><span class="fl">123</span><span class="op">)</span> <span class="co"># Set seed to ensure reproducibility</span></span>
 <span></span>
 <span><span class="co"># Load data provided by the EWSmethods package</span></span>
@@ -381,7 +381,7 @@ where <span class="math inline">\(t\)</span> is the time, <span class="math inli
 <span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/abline.html">abline</a></span><span class="op">(</span>v <span class="op">=</span> <span class="fl">190</span>, col <span class="op">=</span> <span class="st">"red"</span><span class="op">)</span></span></code></pre></div>
 <p>The Figure above shows a critical transition of the population occurring at time step 190. Let’s see if we can predict this transition by only looking at the data prior to this moment in time. To do this, let’s truncate our data set, excluding all data after 190.</p>
-<div class="sourceCode" id="cb57"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb60"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Truncate data to prior inflection point</span></span>
 <span><span class="va">data</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/subset.html">subset</a></span><span class="op">(</span><span class="va">data</span> , <span class="va">time</span> <span class="op">&lt;</span> <span class="fl">191.5</span><span class="op">)</span></span>
 <span></span>
@@ -393,7 +393,7 @@ where <span class="math inline">\(t\)</span> is the time, <span class="math inli
 <span>  ylab <span class="op">=</span> <span class="st">"Population Density"</span></span>
 <span><span class="op">)</span></span></code></pre></div>
 <p>Next, apply the Univariate Early Warning Signal Assessment <code>uniEWS</code></p>
-<div class="sourceCode" id="cb58"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb61"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">rolling_ews_eg</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://duncanobrien.github.io/EWSmethods/reference/uniEWS.html">uniEWS</a></span><span class="op">(</span></span>
 <span>  data <span class="op">=</span> <span class="va">data</span>,</span>
 <span>  metrics <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"ar1"</span>, <span class="st">"SD"</span>, <span class="st">"skew"</span><span class="op">)</span>,</span>

@@ -73,28 +73,9 @@
 <p>In this tutorial we will learn the basics of processing and analyzing global climate model output data. This section demonstrates how you can gain access to climate model data. To get started, load the required R packages:</p>
 <div class="sourceCode" id="cb102"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/rm.html">rm</a></span><span class="op">(</span>list <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/ls.html">ls</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span>
-<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://rspatial.org/">terra</a></span><span class="op">)</span></span></code></pre></div>
-<pre><code>## terra 1.9.34</code></pre>
-<pre><code>## 
-## Attaching package: 'terra'</code></pre>
-<pre><code>## The following object is masked from 'package:zoo':
-## 
-##     time&lt;-</code></pre>
-<pre><code>## The following object is masked from 'package:MASS':
-## 
-##     area</code></pre>
-<div class="sourceCode" id="cb107"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/adeckmyn/maps">maps</a></span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://rspatial.org/">terra</a></span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/adeckmyn/maps">maps</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://gitlab.com/indecis-eu/indecis">ClimInd</a></span><span class="op">)</span></span></code></pre></div>
-<pre><code>## Loading required package: SPEI</code></pre>
-<pre><code>## # Package SPEI (1.8.1) loaded [try SPEINews()].</code></pre>
-<pre><code>## Loading required package: chron</code></pre>
-<pre><code>## 
-## Attaching package: 'chron'</code></pre>
-<pre><code>## The following objects are masked from 'package:terra':
-## 
-##     origin, origin&lt;-</code></pre>
-<pre><code>## Loading required package: weathermetrics</code></pre>
 <ul>
 <li>Next, visit the <a href="https://esgf.llnl.gov/">ESGF website</a>
 </li>
@@ -132,7 +113,7 @@ EOF--dataset.file.url.chksum_type.chksum
 <li><p>In your account, create a new folder called <code>data</code>. You can do this by clicking on <code>New Folder</code> on the right-hand-side panel of your posit R Studio.</p></li>
 <li><p>To download the netcdf files to your new <code>data</code> folder, use the <code>download.file</code> function in R, e.g.:</p></li>
 </ul>
-<div class="sourceCode" id="cb117"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb106"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Specify the URL of the file you want to download</span></span>
 <span><span class="va">url</span> <span class="op">&lt;-</span> <span class="st">"http://crd-esgf-drc.ec.gc.ca/thredds/fileServer/esgC_dataroot/AR6/CMIP6/CMIP/CCCma/CanESM5/historical/r10i1p1f1/Amon/pr/gn/v20190429/pr_Amon_CanESM5_historical_r10i1p1f1_gn_185001-201412.nc"</span></span>
 <span></span>
@@ -151,7 +132,7 @@ EOF--dataset.file.url.chksum_type.chksum
 <h2>
 <span class="header-section-number">4.2</span> Open, process, and plot netcdf files<a class="anchor" aria-label="anchor" href="#open-process-and-plot-netcdf-files"><i class="fas fa-link"></i></a>
 </h2>
-<div class="sourceCode" id="cb118"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb107"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/rm.html">rm</a></span><span class="op">(</span>list <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/ls.html">ls</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="va">data</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rspatial.github.io/terra/reference/rast.html">rast</a></span><span class="op">(</span><span class="st">"/global/teaching-project/sg51122000/shared_files/pr_Amon_CanESM5_historical_r10i1p1f1_gn_185001-201412.nc"</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="va">data</span><span class="op">)</span></span></code></pre></div>
@@ -160,7 +141,7 @@ EOF--dataset.file.url.chksum_type.chksum
 <li>Each layer is one time step, starting in Jan 1850</li>
 <li>Let’s calculate the mean value over all time steps and plot the data</li>
 </ul>
-<div class="sourceCode" id="cb119"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb108"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">data</span> <span class="op">&lt;-</span> <span class="fu">terra</span><span class="fu">::</span><span class="fu"><a href="https://rspatial.github.io/terra/reference/summarize-generics.html">mean</a></span><span class="op">(</span><span class="va">data</span><span class="op">)</span> <span class="co"># annual mean</span></span>
 <span><span class="fu">terra</span><span class="fu">::</span><span class="fu"><a href="https://rspatial.github.io/terra/reference/plot.html">plot</a></span><span class="op">(</span><span class="va">data</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/pkg/maps/man/map.html">map</a></span><span class="op">(</span><span class="st">"world2"</span>, add <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
@@ -168,7 +149,7 @@ EOF--dataset.file.url.chksum_type.chksum
 <ul>
 <li>The <code>terra</code> package comes with different colors (<code><a href="https://rspatial.github.io/terra/reference/mappal.html">?map.pal</a></code>), e.g.</li>
 </ul>
-<div class="sourceCode" id="cb120"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb109"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">my.col</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rspatial.github.io/terra/reference/mappal.html">map.pal</a></span><span class="op">(</span><span class="st">"blues"</span>, n <span class="op">=</span> <span class="fl">100</span><span class="op">)</span></span>
 <span><span class="fu">terra</span><span class="fu">::</span><span class="fu"><a href="https://rspatial.github.io/terra/reference/plot.html">plot</a></span><span class="op">(</span><span class="va">data</span>, col <span class="op">=</span> <span class="va">my.col</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/pkg/maps/man/map.html">map</a></span><span class="op">(</span><span class="st">"world2"</span>, add <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
@@ -177,7 +158,7 @@ EOF--dataset.file.url.chksum_type.chksum
 <li>Let’s plot how precipitation is projected to change between the 1995-2014 and 2081-2100 periods</li>
 <li>Download future precipitation projections:</li>
 </ul>
-<div class="sourceCode" id="cb121"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb110"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Get the URL for the SSP5-8.5 scenario</span></span>
 <span><span class="va">url</span> <span class="op">&lt;-</span> <span class="st">"http://crd-esgf-drc.ec.gc.ca/thredds/fileServer/esgD_dataroot/AR6/CMIP6/ScenarioMIP/CCCma/CanESM5/ssp585/r10i1p1f1/Amon/pr/gn/v20190429/pr_Amon_CanESM5_ssp585_r10i1p1f1_gn_201501-210012.nc"</span></span>
 <span></span>
@@ -188,7 +169,7 @@ EOF--dataset.file.url.chksum_type.chksum
 <span><span class="co"># Call the download.file() function, passing in the URL and file name/location as arguments</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/download.file.html">download.file</a></span><span class="op">(</span><span class="va">url</span>, <span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste</a></span><span class="op">(</span><span class="va">file_path</span>, <span class="va">file_name</span>, sep <span class="op">=</span> <span class="st">""</span><span class="op">)</span>, mode <span class="op">=</span> <span class="st">"wb"</span><span class="op">)</span></span></code></pre></div>
 <p>I have downloaded those files for you and stored them in our shared folder. To load, process, and plot the data, do:</p>
-<div class="sourceCode" id="cb122"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb111"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Read in data</span></span>
 <span><span class="va">hist</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rspatial.github.io/terra/reference/rast.html">rast</a></span><span class="op">(</span><span class="st">"/global/teaching-project/sg51122000/shared_files/pr_Amon_CanESM5_historical_r10i1p1f1_gn_185001-201412.nc"</span><span class="op">)</span></span>
 <span><span class="va">ssp5</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rspatial.github.io/terra/reference/rast.html">rast</a></span><span class="op">(</span><span class="st">"/global/teaching-project/sg51122000/shared_files/pr_Amon_CanESM5_ssp585_r10i1p1f1_gn_201501-210012.nc"</span><span class="op">)</span></span>
@@ -214,7 +195,7 @@ EOF--dataset.file.url.chksum_type.chksum
 <li>To achieve this, we need to define the breaks of the color palette</li>
 <li>Also, we will reverse the color, so that blue implies a projected increase in precipitation</li>
 </ul>
-<div class="sourceCode" id="cb123"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb112"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Set the desired range for the palette</span></span>
 <span><span class="va">min_val</span> <span class="op">&lt;-</span> <span class="op">-</span><span class="fl">8</span></span>
 <span><span class="va">max_val</span> <span class="op">&lt;-</span> <span class="fl">8</span></span>
@@ -236,7 +217,7 @@ EOF--dataset.file.url.chksum_type.chksum
 <li>To find out, let’s apply a t-test for each grid cell and mark all grid cells where the projected change is statistically significant at the 0.05-level</li>
 <li>Before we do that, let’s practice how to do a t-test in the first place</li>
 </ul>
-<div class="sourceCode" id="cb124"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb113"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Create two random data sets</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/Random.html">set.seed</a></span><span class="op">(</span><span class="fl">1</span><span class="op">)</span></span>
 <span><span class="va">a</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/Uniform.html">runif</a></span><span class="op">(</span>n <span class="op">=</span> <span class="fl">100</span>, min <span class="op">=</span> <span class="fl">10</span>, max <span class="op">=</span> <span class="fl">20</span><span class="op">)</span></span>
@@ -254,7 +235,7 @@ EOF--dataset.file.url.chksum_type.chksum
 <ul>
 <li>OK, let’s apply this to the projected change in precipitation</li>
 </ul>
-<div class="sourceCode" id="cb125"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb114"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Load data</span></span>
 <span><span class="va">hist</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rspatial.github.io/terra/reference/rast.html">rast</a></span><span class="op">(</span><span class="st">"/global/teaching-project/sg51122000/shared_files/pr_Amon_CanESM5_historical_r10i1p1f1_gn_185001-201412.nc"</span><span class="op">)</span></span>
 <span><span class="va">ssp5</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rspatial.github.io/terra/reference/rast.html">rast</a></span><span class="op">(</span><span class="st">"/global/teaching-project/sg51122000/shared_files/pr_Amon_CanESM5_ssp585_r10i1p1f1_gn_201501-210012.nc"</span><span class="op">)</span></span>
@@ -289,7 +270,7 @@ EOF--dataset.file.url.chksum_type.chksum
 <ul>
 <li>Now let’s create a mask where all grid cells with statistically significant changes have no value (NA) while all others have a value of one</li>
 </ul>
-<div class="sourceCode" id="cb126"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb115"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">pvalue.gridCell</span><span class="op">[</span><span class="va">pvalue.gridCell</span> <span class="op">&lt;</span> <span class="fl">0.05</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="cn">NA</span> <span class="co"># statistically significant changes = NA</span></span>
 <span><span class="va">mask</span> <span class="op">&lt;-</span> <span class="va">pvalue.gridCell</span> <span class="op">-</span> <span class="va">pvalue.gridCell</span> <span class="op">+</span> <span class="fl">1</span> <span class="co"># no statistically significant changes = 1</span></span>
 <span><span class="fu"><a href="https://rspatial.github.io/terra/reference/plot.html">plot</a></span><span class="op">(</span><span class="va">mask</span>, col <span class="op">=</span> <span class="st">"grey"</span><span class="op">)</span></span>
@@ -299,7 +280,7 @@ EOF--dataset.file.url.chksum_type.chksum
 <ul>
 <li>Great, now let’s plot our previous map that shows the projected change in precipitation and mask out all grid cells where the projected changes are not statistically significant</li>
 </ul>
-<div class="sourceCode" id="cb127"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb116"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rspatial.github.io/terra/reference/plot.html">plot</a></span><span class="op">(</span></span>
 <span>  <span class="va">delta</span>,</span>
 <span>  type <span class="op">=</span> <span class="st">"continuous"</span>,</span>
@@ -333,7 +314,7 @@ EOF--dataset.file.url.chksum_type.chksum
 <li>The package includes Temperature based indices (42), Precipitation based indices (22), Bioclimatic indices (21), Wind-based indices (5), Aridity/continentality indices (10), Snow-based indices (13), Cloud/radiation based indices (6), Drought indices (8), Fire indices (5), and Tourism indices (5)</li>
 <li>Let’s first practice a simple example using random data</li>
 </ul>
-<div class="sourceCode" id="cb128"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb117"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Generate random data with dates in month/day/year format</span></span>
 <span><span class="va">dates</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/as.Date.html">as.Date</a></span><span class="op">(</span><span class="st">"1990/1/1"</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/as.Date.html">as.Date</a></span><span class="op">(</span><span class="st">"1999/12/31"</span><span class="op">)</span>, <span class="st">"days"</span><span class="op">)</span></span>
 <span><span class="va">dates</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/format.html">format</a></span><span class="op">(</span><span class="va">dates</span>, <span class="st">"%m/%d/%Y"</span><span class="op">)</span></span>
@@ -349,7 +330,7 @@ EOF--dataset.file.url.chksum_type.chksum
 <p><strong>Quiz Question 6:</strong> How many consecutive dry days do you see in the year 1992?
 <!-- 5 --></p>
 <p>Great, now let’s apply our new skill to climate model data. Download future daily temperature and precipitation data (CanESM5, SSP5-8.5, r10i1p1f1)</p>
-<div class="sourceCode" id="cb129"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb118"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Daily future precipitation</span></span>
 <span><span class="va">file_path</span> <span class="op">&lt;-</span> <span class="st">"/global/home/hpcXXXX"</span></span>
 <span><span class="va">url</span> <span class="op">&lt;-</span> <span class="st">"http://crd-esgf-drc.ec.gc.ca/thredds/fileServer/esgD_dataroot/AR6/CMIP6/ScenarioMIP/CCCma/CanESM5/ssp585/r10i1p1f1/day/pr/gn/v20190429/pr_day_CanESM5_ssp585_r10i1p1f1_gn_20150101-21001231.nc"</span></span>
@@ -362,16 +343,16 @@ EOF--dataset.file.url.chksum_type.chksum
 <span><span class="va">file_name</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/basename.html">basename</a></span><span class="op">(</span><span class="va">url</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/download.file.html">download.file</a></span><span class="op">(</span><span class="va">url</span>, <span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste</a></span><span class="op">(</span><span class="va">file_path</span>, <span class="va">file_name</span>, sep <span class="op">=</span> <span class="st">""</span><span class="op">)</span>, mode <span class="op">=</span> <span class="st">"wb"</span><span class="op">)</span></span></code></pre></div>
 </div>
-<div id="consecutive-wet-days" class="section level2" number="4.4">
+<div id="consecutive-dry-days" class="section level2" number="4.4">
 <h2>
-<span class="header-section-number">4.4</span> Consecutive Wet Days<a class="anchor" aria-label="anchor" href="#consecutive-wet-days"><i class="fas fa-link"></i></a>
+<span class="header-section-number">4.4</span> Consecutive Dry Days<a class="anchor" aria-label="anchor" href="#consecutive-dry-days"><i class="fas fa-link"></i></a>
 </h2>
 <p>Again, I have downloaded those data sets for you as a backup in case something goes wrong.</p>
 <ul>
 <li><p>Compute consecutive dry days using the <code>cdd</code> function provided by the <a href="https://cran.r-project.org/web/packages/ClimInd/index.html">ClimInd</a> R-package</p></li>
 <li><p>Here you will learn something very important, namely how to apply a function to each grid cell using the function <code>app</code>. This line <code>cdd.gridCell &lt;- app(data, fun = cdd.fun)</code> applies the function <code>cdd.fun</code> to each grid cell. In other words, for each grid cell you calculate the number of consecutive dry days. Let us implement the approach below:</p></li>
 </ul>
-<div class="sourceCode" id="cb130"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb119"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Load daily precipitation data</span></span>
 <span><span class="va">pr</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rspatial.github.io/terra/reference/rast.html">rast</a></span><span class="op">(</span><span class="st">"/global/teaching-project/sg51122000/shared_files/pr_day_CanESM5_ssp585_r10i1p1f1_gn_20150101-21001231.nc"</span><span class="op">)</span></span>
 <span></span>
@@ -403,15 +384,15 @@ EOF--dataset.file.url.chksum_type.chksum
 <p><strong>Quiz Question 7:</strong> Comparing Antarctica and Australia, on which continent do you see more consecutive dry days?
 <!-- Antarctica --></p>
 </div>
-<div id="consecutive-wet-days-1" class="section level2" number="4.5">
+<div id="consecutive-wet-days" class="section level2" number="4.5">
 <h2>
-<span class="header-section-number">4.5</span> Consecutive Wet Days<a class="anchor" aria-label="anchor" href="#consecutive-wet-days-1"><i class="fas fa-link"></i></a>
+<span class="header-section-number">4.5</span> Consecutive Wet Days<a class="anchor" aria-label="anchor" href="#consecutive-wet-days"><i class="fas fa-link"></i></a>
 </h2>
 <ul>
 <li>Compute consecutive wet days using the <code>cwd</code> function provided by the <a href="https://cran.r-project.org/web/packages/ClimInd/index.html">ClimInd</a> R-package</li>
 <li>Use the script above as a template</li>
 </ul>
-<div class="sourceCode" id="cb131"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb120"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Load daily precipitation data</span></span>
 <span><span class="va">pr</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rspatial.github.io/terra/reference/rast.html">rast</a></span><span class="op">(</span><span class="st">"/global/teaching-project/sg51122000/shared_files/pr_day_CanESM5_ssp585_r10i1p1f1_gn_20150101-21001231.nc"</span><span class="op">)</span></span>
 <span></span>
@@ -451,7 +432,7 @@ EOF--dataset.file.url.chksum_type.chksum
 <li>Compute the linear trend in consecutive dry days from 2015 to 2100</li>
 <li>Before you start, let me briefly show you how you calculate the linear trend of a variable</li>
 </ul>
-<div class="sourceCode" id="cb132"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb121"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Sample time series data</span></span>
 <span><span class="va">time</span> <span class="op">&lt;-</span> <span class="fl">1</span><span class="op">:</span><span class="fl">10</span> <span class="co"># Independent variable (e.g., time in years)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/Random.html">set.seed</a></span><span class="op">(</span><span class="fl">1</span><span class="op">)</span></span>
@@ -476,7 +457,7 @@ EOF--dataset.file.url.chksum_type.chksum
 <li>To speed things up, let’s focus on one region</li>
 <li>Let’s first crop Australia and then perform the calculation for the region</li>
 </ul>
-<div class="sourceCode" id="cb133"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb122"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Load daily precipitation data</span></span>
 <span><span class="va">data</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rspatial.github.io/terra/reference/rast.html">rast</a></span><span class="op">(</span><span class="st">"/global/teaching-project/sg51122000/shared_files/pr_day_CanESM5_ssp585_r10i1p1f1_gn_20150101-21001231.nc"</span><span class="op">)</span></span>
 <span><span class="co"># Let's focus on Australia</span></span>
@@ -487,7 +468,7 @@ EOF--dataset.file.url.chksum_type.chksum
 <li>Apply this function to each grid cell</li>
 <li>Your results should look similar to the Figure below</li>
 </ul>
-<div class="sourceCode" id="cb134"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb123"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Load daily precipitation data</span></span>
 <span><span class="va">data</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rspatial.github.io/terra/reference/rast.html">rast</a></span><span class="op">(</span><span class="st">"/global/teaching-project/sg51122000/shared_files/pr_day_CanESM5_ssp585_r10i1p1f1_gn_20150101-21001231.nc"</span><span class="op">)</span></span>
 <span></span>
@@ -550,7 +531,7 @@ EOF--dataset.file.url.chksum_type.chksum
 <li>To do that, use the <code>global</code> function in the <code>terra</code> package</li>
 <li>Your results should look like the Figure below</li>
 </ul>
-<div class="sourceCode" id="cb135"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb124"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">cdd.mean</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rspatial.github.io/terra/reference/global.html">global</a></span><span class="op">(</span><span class="va">cdd.gridCell</span>, <span class="va">mean</span>, na.rm <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
 <span></span>
 <span><span class="va">years</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/colnames.html">rownames</a></span><span class="op">(</span><span class="va">cdd.mean</span><span class="op">)</span></span>
@@ -595,8 +576,8 @@ EOF--dataset.file.url.chksum_type.chksum
 <li><a class="nav-link" href="#earth-system-grid-federation-esgf"><span class="header-section-number">4.1</span> Earth System Grid Federation (ESGF)</a></li>
 <li><a class="nav-link" href="#open-process-and-plot-netcdf-files"><span class="header-section-number">4.2</span> Open, process, and plot netcdf files</a></li>
 <li><a class="nav-link" href="#climate-extremes"><span class="header-section-number">4.3</span> Climate Extremes</a></li>
-<li><a class="nav-link" href="#consecutive-wet-days"><span class="header-section-number">4.4</span> Consecutive Wet Days</a></li>
-<li><a class="nav-link" href="#consecutive-wet-days-1"><span class="header-section-number">4.5</span> Consecutive Wet Days</a></li>
+<li><a class="nav-link" href="#consecutive-dry-days"><span class="header-section-number">4.4</span> Consecutive Dry Days</a></li>
+<li><a class="nav-link" href="#consecutive-wet-days"><span class="header-section-number">4.5</span> Consecutive Wet Days</a></li>
 <li><a class="nav-link" href="#linear-trend-of-consecutive-dry-days"><span class="header-section-number">4.6</span> Linear trend of consecutive dry days</a></li>
 <li><a class="nav-link" href="#consecutive-dry-days-time-series"><span class="header-section-number">4.7</span> Consecutive dry days time series</a></li>
 <li><a class="nav-link" href="#analysis-of-an-extreme-climate-index-of-your-choice-and-region"><span class="header-section-number">4.8</span> Analysis of an extreme climate index of your choice and region</a></li>

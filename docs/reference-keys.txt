@@ -38,8 +38,8 @@ week-4-climate-projections-and-impacts-i
 earth-system-grid-federation-esgf
 open-process-and-plot-netcdf-files
 climate-extremes
+consecutive-dry-days
 consecutive-wet-days
-consecutive-wet-days-1
 linear-trend-of-consecutive-dry-days
 consecutive-dry-days-time-series
 analysis-of-an-extreme-climate-index-of-your-choice-and-region

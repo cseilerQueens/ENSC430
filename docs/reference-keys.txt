@@ -49,10 +49,10 @@ koeppen-geiger-climate-classification
 climate-change-metrics
 climate-metric-1-standardized-local-anomalies
 climate-metric-2-changes-in-probability-of-local-climate-extremes
-climate-metric-3-change-in-area-of-analogous-climates
-climate-metric-4-change-in-the-distance-to-analogous-climates
-climate-metric-5-novel-climates
+climate-metric-3-change-in-the-distance-to-analogous-climates
+climate-metric-4-novel-climates
 climate-metric-5-climate-change-velocity
+reflection-1
 week-6-climate-projections-and-impacts-iii
 week-7-observing-environmental-change-i
 week-8-observing-environmental-change-ii

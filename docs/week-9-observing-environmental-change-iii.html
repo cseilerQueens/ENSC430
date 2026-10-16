@@ -155,7 +155,7 @@
 <span></span>
 <span><span class="va">time.series</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/ts.union.html">ts.union</a></span><span class="op">(</span><span class="va">tas</span>, <span class="va">rsds</span>, <span class="va">rlds</span>, <span class="va">vpd</span>, <span class="va">pr</span>, <span class="va">ws</span>, <span class="va">hfls</span>, <span class="va">hfss</span>, <span class="va">nee</span>, <span class="va">gpp</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/plot.html">plot</a></span><span class="op">(</span><span class="va">time.series</span><span class="op">)</span></span></code></pre></div>
-<div class="inline-figure"><img src="figure-html/unnamed-chunk-211-1.png" alt="" width="672"></div>
+<div class="inline-figure"><img src="figure-html/unnamed-chunk-228-1.png" alt="" width="672"></div>
 </div>
 <div id="processing-data" class="section level2" number="9.2">
 <h2>
@@ -218,7 +218,7 @@
 <span></span>
 <span><span class="va">time.series</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/ts.union.html">ts.union</a></span><span class="op">(</span><span class="va">tas</span>, <span class="va">rsds</span>, <span class="va">rlds</span>, <span class="va">vpd</span>, <span class="va">pr</span>, <span class="va">ws</span>, <span class="va">hfls</span>, <span class="va">hfss</span>, <span class="va">nee</span>, <span class="va">gpp</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/plot.html">plot</a></span><span class="op">(</span><span class="va">time.series</span><span class="op">)</span></span></code></pre></div>
-<div class="inline-figure"><img src="figure-html/unnamed-chunk-213-1.png" alt="" width="672"></div>
+<div class="inline-figure"><img src="figure-html/unnamed-chunk-230-1.png" alt="" width="672"></div>
 </div>
 <div id="analysis" class="section level2" number="9.3">
 <h2>
@@ -259,7 +259,7 @@
 <span></span>
 <span><span class="va">time.series</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/ts.union.html">ts.union</a></span><span class="op">(</span><span class="va">tas.p</span>, <span class="va">rsds.p</span>, <span class="va">rlds.p</span>, <span class="va">vpd.p</span>, <span class="va">pr.p</span>, <span class="va">ws.p</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/plot.html">plot</a></span><span class="op">(</span><span class="va">time.series</span><span class="op">)</span></span></code></pre></div>
-<div class="inline-figure"><img src="figure-html/unnamed-chunk-215-1.png" alt="" width="672"></div>
+<div class="inline-figure"><img src="figure-html/unnamed-chunk-232-1.png" alt="" width="672"></div>
 <ul>
 <li>Get the minimum p-value and corresponding time lag:</li>
 </ul>
@@ -285,7 +285,7 @@
 <span><span class="va">hfls.gc.pr</span> <span class="op">&lt;-</span> <span class="fu">grangerPvaluesLags.fun</span><span class="op">(</span>x <span class="op">=</span> <span class="va">hfls</span>, y <span class="op">=</span> <span class="va">pr</span><span class="op">)</span></span>
 <span><span class="va">time.series</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/ts.union.html">ts.union</a></span><span class="op">(</span><span class="va">pr.gc.hfls</span>, <span class="va">hfls.gc.pr</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/plot.html">plot</a></span><span class="op">(</span><span class="va">time.series</span><span class="op">)</span></span></code></pre></div>
-<div class="inline-figure"><img src="figure-html/unnamed-chunk-217-1.png" alt="" width="672"></div>
+<div class="inline-figure"><img src="figure-html/unnamed-chunk-234-1.png" alt="" width="672"></div>
 <ul>
 <li>Judging from the figure above, are latent heat flux and precipitation dynamically linked? Verify your answer by calculating the minimum p-values of both variables:</li>
 </ul>
@@ -318,7 +318,7 @@
 <span><span class="va">n</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rspatial.github.io/terra/reference/dimensions.html">nrow</a></span><span class="op">(</span><span class="va">variance_decomp</span><span class="op">$</span><span class="va">nee</span><span class="op">)</span></span>
 <span><span class="va">y</span> <span class="op">&lt;-</span> <span class="va">variance_decomp</span><span class="op">$</span><span class="va">nee</span><span class="op">[</span><span class="va">n</span>, <span class="op">]</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/pie.html">pie</a></span><span class="op">(</span><span class="va">y</span><span class="op">)</span></span></code></pre></div>
-<div class="inline-figure"><img src="figure-html/unnamed-chunk-219-1.png" alt="" width="672"></div>
+<div class="inline-figure"><img src="figure-html/unnamed-chunk-236-1.png" alt="" width="672"></div>
 <ul>
 <li>What does this pie chart tell you?</li>
 </ul>
@@ -344,7 +344,7 @@
 <span>  winsize <span class="op">=</span> <span class="fl">50</span></span>
 <span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/plot.html">plot</a></span><span class="op">(</span><span class="va">rolling_ews_eg</span>, y_lab <span class="op">=</span> <span class="st">"Density"</span><span class="op">)</span></span></code></pre></div>
-<div class="inline-figure"><img src="figure-html/unnamed-chunk-220-1.png" alt="" width="672"></div>
+<div class="inline-figure"><img src="figure-html/unnamed-chunk-237-1.png" alt="" width="672"></div>
 <ul>
 <li>Interpret your result</li>
 </ul>
@@ -359,15 +359,15 @@
 </ul>
 <div class="sourceCode" id="cb201"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">data</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/utils/read.table.html">read.csv</a></span><span class="op">(</span><span class="st">"/global/teaching-project/sg51122000/shared_files/FLX_AU-GWW_FLUXNET2015_SUBSET_2013-2014_1-4/FLX_AU-GWW_FLUXNET2015_SUBSET_DD_2013-2014_1-4.csv"</span><span class="op">)</span></span></code></pre></div>
-<div class="inline-figure"><img src="figure-html/unnamed-chunk-222-1.png" alt="" width="672"></div>
+<div class="inline-figure"><img src="figure-html/unnamed-chunk-239-1.png" alt="" width="672"></div>
 <ul>
 <li>Compute detrended anomalies.</li>
 </ul>
-<div class="inline-figure"><img src="figure-html/unnamed-chunk-224-1.png" alt="" width="672"></div>
+<div class="inline-figure"><img src="figure-html/unnamed-chunk-241-1.png" alt="" width="672"></div>
 <ul>
 <li>Conduct a Granger causality test that evaluates what meteorological variables drive net ecosystem exchange.</li>
 </ul>
-<div class="inline-figure"><img src="figure-html/unnamed-chunk-226-1.png" alt="" width="672"></div>
+<div class="inline-figure"><img src="figure-html/unnamed-chunk-243-1.png" alt="" width="672"></div>
 <ul>
 <li>Get the minimum p-value and corresponding time lag:</li>
 </ul>
@@ -382,7 +382,7 @@
 <li><p>Are there any meteorological variables that do not Granger-cause net ecosystem exchange?</p></li>
 <li><p>Using Granger causality, explore to what extent precipitation (pr) and latent heat flux (hfls) are dynamically coupled:</p></li>
 </ul>
-<div class="inline-figure"><img src="figure-html/unnamed-chunk-228-1.png" alt="" width="672"></div>
+<div class="inline-figure"><img src="figure-html/unnamed-chunk-245-1.png" alt="" width="672"></div>
 <ul>
 <li>Judging from the figure above, are latent heat flux and precipitation dynamically linked? Verify your answer by calculating the minimum p-values of both variables:</li>
 </ul>
@@ -392,12 +392,12 @@
 <ul>
 <li>Let’s decompose the variance and see which variable has the most influential one</li>
 </ul>
-<div class="inline-figure"><img src="figure-html/unnamed-chunk-230-1.png" alt="" width="672"></div>
+<div class="inline-figure"><img src="figure-html/unnamed-chunk-247-1.png" alt="" width="672"></div>
 <ul>
 <li><p>What does this pie chart tell you?</p></li>
 <li><p>Run the Univariate Early Warning Signal Assessment for GPP to evaluate how ecosystem resilience is changing.</p></li>
 </ul>
-<div class="inline-figure"><img src="figure-html/unnamed-chunk-231-1.png" alt="" width="672"></div>
+<div class="inline-figure"><img src="figure-html/unnamed-chunk-248-1.png" alt="" width="672"></div>
 <ul>
 <li>Interpret your result</li>
 </ul>

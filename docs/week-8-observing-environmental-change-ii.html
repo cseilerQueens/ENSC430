@@ -185,7 +185,7 @@
 <span><span class="co"># Plot 12 months of data</span></span>
 <span><span class="va">my.col</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rspatial.github.io/terra/reference/flip.html">rev</a></span><span class="op">(</span><span class="fu"><a href="https://rspatial.github.io/terra/reference/mappal.html">map.pal</a></span><span class="op">(</span><span class="st">"magma"</span>, n <span class="op">=</span> <span class="fl">100</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rspatial.github.io/terra/reference/plot.html">plot</a></span><span class="op">(</span><span class="va">data.12</span>, col <span class="op">=</span> <span class="va">my.col</span><span class="op">)</span></span></code></pre></div>
-<div class="inline-figure"><img src="figure-html/unnamed-chunk-184-1.png" alt="" width="672"></div>
+<div class="inline-figure"><img src="figure-html/unnamed-chunk-201-1.png" alt="" width="672"></div>
 <ul>
 <li>Calculate precipitation anomalies</li>
 </ul>
@@ -203,7 +203,7 @@
 <span><span class="va">my.col</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rspatial.github.io/terra/reference/flip.html">rev</a></span><span class="op">(</span><span class="fu"><a href="https://rspatial.github.io/terra/reference/mappal.html">map.pal</a></span><span class="op">(</span><span class="st">"magma"</span>, n <span class="op">=</span> <span class="fl">100</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rspatial.github.io/terra/reference/plot.html">plot</a></span><span class="op">(</span><span class="fu"><a href="https://rspatial.github.io/terra/reference/subset.html">subset</a></span><span class="op">(</span><span class="va">data.anom</span>, <span class="fl">1</span><span class="op">:</span><span class="fl">1</span><span class="op">)</span>, col <span class="op">=</span> <span class="va">my.col</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/pkg/maps/man/map.html">map</a></span><span class="op">(</span><span class="st">"world2"</span>, add <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
-<div class="inline-figure"><img src="figure-html/unnamed-chunk-185-1.png" alt="" width="672"></div>
+<div class="inline-figure"><img src="figure-html/unnamed-chunk-202-1.png" alt="" width="672"></div>
 <ul>
 <li>Detrend precipitation anomalies</li>
 </ul>
@@ -229,7 +229,7 @@
 <span><span class="va">my.col</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rspatial.github.io/terra/reference/flip.html">rev</a></span><span class="op">(</span><span class="fu"><a href="https://rspatial.github.io/terra/reference/mappal.html">map.pal</a></span><span class="op">(</span><span class="st">"magma"</span>, n <span class="op">=</span> <span class="fl">100</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rspatial.github.io/terra/reference/plot.html">plot</a></span><span class="op">(</span><span class="fu"><a href="https://rspatial.github.io/terra/reference/subset.html">subset</a></span><span class="op">(</span><span class="va">data.anom.detrend</span>, <span class="fl">1</span><span class="op">:</span><span class="fl">1</span><span class="op">)</span>, col <span class="op">=</span> <span class="va">my.col</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/pkg/maps/man/map.html">map</a></span><span class="op">(</span><span class="st">"world2"</span>, add <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
-<div class="inline-figure"><img src="figure-html/unnamed-chunk-186-1.png" alt="" width="672"></div>
+<div class="inline-figure"><img src="figure-html/unnamed-chunk-203-1.png" alt="" width="672"></div>
 <p>Now we need to do the same for the other variables (near-surface air temperature, net surface radiation, and EVI). We will do each variable in a single chunk. We will not plot any intermediate outputs.</p>
 </div>
 <div id="near-surface-air-temperature" class="section level3" number="8.4.2">
@@ -280,7 +280,7 @@
 <span><span class="va">my.col</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rspatial.github.io/terra/reference/flip.html">rev</a></span><span class="op">(</span><span class="fu"><a href="https://rspatial.github.io/terra/reference/mappal.html">map.pal</a></span><span class="op">(</span><span class="st">"magma"</span>, n <span class="op">=</span> <span class="fl">100</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rspatial.github.io/terra/reference/plot.html">plot</a></span><span class="op">(</span><span class="fu"><a href="https://rspatial.github.io/terra/reference/subset.html">subset</a></span><span class="op">(</span><span class="va">data.anom.detrend</span>, <span class="fl">1</span><span class="op">:</span><span class="fl">1</span><span class="op">)</span>, col <span class="op">=</span> <span class="va">my.col</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/pkg/maps/man/map.html">map</a></span><span class="op">(</span><span class="st">"world2"</span>, add <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
-<div class="inline-figure"><img src="figure-html/unnamed-chunk-187-1.png" alt="" width="672"></div>
+<div class="inline-figure"><img src="figure-html/unnamed-chunk-204-1.png" alt="" width="672"></div>
 </div>
 <div id="downwelling-solar-radiation" class="section level3" number="8.4.3">
 <h3>
@@ -334,7 +334,7 @@
 <span><span class="va">my.col</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rspatial.github.io/terra/reference/flip.html">rev</a></span><span class="op">(</span><span class="fu"><a href="https://rspatial.github.io/terra/reference/mappal.html">map.pal</a></span><span class="op">(</span><span class="st">"magma"</span>, n <span class="op">=</span> <span class="fl">100</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rspatial.github.io/terra/reference/plot.html">plot</a></span><span class="op">(</span><span class="fu"><a href="https://rspatial.github.io/terra/reference/subset.html">subset</a></span><span class="op">(</span><span class="va">data.anom.detrend</span>, <span class="fl">1</span><span class="op">:</span><span class="fl">1</span><span class="op">)</span>, col <span class="op">=</span> <span class="va">my.col</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/pkg/maps/man/map.html">map</a></span><span class="op">(</span><span class="st">"world2"</span>, add <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
-<div class="inline-figure"><img src="figure-html/unnamed-chunk-188-1.png" alt="" width="672"></div>
+<div class="inline-figure"><img src="figure-html/unnamed-chunk-205-1.png" alt="" width="672"></div>
 </div>
 <div id="enhanced-vegetation-index" class="section level3" number="8.4.4">
 <h3>
@@ -384,7 +384,7 @@
 <span><span class="va">my.col</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rspatial.github.io/terra/reference/flip.html">rev</a></span><span class="op">(</span><span class="fu"><a href="https://rspatial.github.io/terra/reference/mappal.html">map.pal</a></span><span class="op">(</span><span class="st">"magma"</span>, n <span class="op">=</span> <span class="fl">100</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rspatial.github.io/terra/reference/plot.html">plot</a></span><span class="op">(</span><span class="fu"><a href="https://rspatial.github.io/terra/reference/subset.html">subset</a></span><span class="op">(</span><span class="va">data.anom.detrend</span>, <span class="fl">1</span><span class="op">:</span><span class="fl">1</span><span class="op">)</span>, col <span class="op">=</span> <span class="va">my.col</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/pkg/maps/man/map.html">map</a></span><span class="op">(</span><span class="st">"world2"</span>, add <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
-<div class="inline-figure"><img src="figure-html/unnamed-chunk-189-1.png" alt="" width="672"></div>
+<div class="inline-figure"><img src="figure-html/unnamed-chunk-206-1.png" alt="" width="672"></div>
 </div>
 </div>
 <div id="causal-inference" class="section level2" number="8.5">
@@ -428,17 +428,17 @@
 <span></span>
 <span><span class="fu"><a href="https://rspatial.github.io/terra/reference/plot.html">plot</a></span><span class="op">(</span><span class="va">p.value</span>, col <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"white"</span>, <span class="st">"orange"</span><span class="op">)</span>, main <span class="op">=</span> <span class="st">"Precipitation Granger-causes EVI Anomalies"</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/pkg/maps/man/map.html">map</a></span><span class="op">(</span><span class="st">"world2"</span>, add <span class="op">=</span> <span class="cn">TRUE</span>, interior <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></code></pre></div>
-<div class="inline-figure"><img src="figure-html/unnamed-chunk-191-1.png" alt="" width="672"></div>
+<div class="inline-figure"><img src="figure-html/unnamed-chunk-208-1.png" alt="" width="672"></div>
 <p>Adjust the code above to check whether temperature Granger-causes EVI anomalies.</p>
-<div class="inline-figure"><img src="figure-html/unnamed-chunk-192-1.png" alt="" width="672"></div>
+<div class="inline-figure"><img src="figure-html/unnamed-chunk-209-1.png" alt="" width="672"></div>
 <p>Adjust the code above to check whether downwelling solar radiation Granger-causes EVI anomalies.</p>
-<div class="inline-figure"><img src="figure-html/unnamed-chunk-193-1.png" alt="" width="672"></div>
+<div class="inline-figure"><img src="figure-html/unnamed-chunk-210-1.png" alt="" width="672"></div>
 <p>Sum up the previous three results to identify gridcells where all three variables granger-cause EVI. What does the yellow color tell you?</p>
 <div class="sourceCode" id="cb175"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">p.value</span> <span class="op">&lt;-</span> <span class="va">p.value.pr</span> <span class="op">+</span> <span class="va">p.value.tas</span> <span class="op">+</span> <span class="va">p.value.rsds</span></span>
 <span><span class="fu"><a href="https://rspatial.github.io/terra/reference/plot.html">plot</a></span><span class="op">(</span><span class="va">p.value</span>, main <span class="op">=</span> <span class="st">"PR, TAS, and RSDS Granger-causes EVI Anomalies"</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/pkg/maps/man/map.html">map</a></span><span class="op">(</span><span class="st">"world2"</span>, add <span class="op">=</span> <span class="cn">TRUE</span>, interior <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></code></pre></div>
-<div class="inline-figure"><img src="figure-html/unnamed-chunk-194-1.png" alt="" width="672"></div>
+<div class="inline-figure"><img src="figure-html/unnamed-chunk-211-1.png" alt="" width="672"></div>
 </div>
 <div id="cross-correlation" class="section level2" number="8.6">
 <h2>
@@ -454,7 +454,7 @@
 <span><span class="fu"><a href="https://rspatial.github.io/terra/reference/plot.html">plot</a></span><span class="op">(</span><span class="va">p.value</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/pkg/maps/man/map.html">map</a></span><span class="op">(</span><span class="st">"world2"</span>, add <span class="op">=</span> <span class="cn">TRUE</span>, interior <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rspatial.github.io/terra/reference/lines.html">points</a></span><span class="op">(</span><span class="va">location</span>, col <span class="op">=</span> <span class="st">"red"</span>, pch <span class="op">=</span> <span class="fl">16</span>, cex <span class="op">=</span> <span class="fl">1.0</span><span class="op">)</span></span></code></pre></div>
-<div class="inline-figure"><img src="figure-html/unnamed-chunk-195-1.png" alt="" width="672"></div>
+<div class="inline-figure"><img src="figure-html/unnamed-chunk-212-1.png" alt="" width="672"></div>
 <p>Extract the values for this location and convert them to a time series.</p>
 <div class="sourceCode" id="cb177"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Extract data for the location</span></span>
@@ -486,7 +486,7 @@
 <span></span>
 <span><span class="co"># Plot time series</span></span>
 <span><span class="fu"><a href="https://rspatial.github.io/terra/reference/plot.html">plot</a></span><span class="op">(</span><span class="va">tsDat</span><span class="op">)</span></span></code></pre></div>
-<div class="inline-figure"><img src="figure-html/unnamed-chunk-196-1.png" alt="" width="672"></div>
+<div class="inline-figure"><img src="figure-html/unnamed-chunk-213-1.png" alt="" width="672"></div>
 <p>Cross correlation gives the correlation coefficients for different time lags. There are positive lags and negative lags:</p>
 <ul>
 <li>Positive lags: series1 is correlated with past values of series 2</li>
@@ -497,14 +497,14 @@
 <code class="sourceCode R"><span><span class="co"># Compute cross-correlation</span></span>
 <span><span class="va">ccf_result</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/acf.html">ccf</a></span><span class="op">(</span><span class="va">evi.ts</span>, <span class="va">pr.ts</span>, lag.max <span class="op">=</span> <span class="fl">12</span>, plot <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rspatial.github.io/terra/reference/plot.html">plot</a></span><span class="op">(</span><span class="va">ccf_result</span><span class="op">)</span></span></code></pre></div>
-<div class="inline-figure"><img src="figure-html/unnamed-chunk-197-1.png" alt="" width="672"></div>
+<div class="inline-figure"><img src="figure-html/unnamed-chunk-214-1.png" alt="" width="672"></div>
 <ul>
 <li>For what time lag is the correlation coefficient largest?</li>
 <li>Does this time lag apply to EVI or precipitation?</li>
 </ul>
 <p>Make a similar Figure but for temperature and then for downwelling shortwave radiation</p>
-<div class="inline-figure"><img src="figure-html/unnamed-chunk-198-1.png" alt="" width="672"></div>
-<div class="inline-figure"><img src="figure-html/unnamed-chunk-199-1.png" alt="" width="672"></div>
+<div class="inline-figure"><img src="figure-html/unnamed-chunk-215-1.png" alt="" width="672"></div>
+<div class="inline-figure"><img src="figure-html/unnamed-chunk-216-1.png" alt="" width="672"></div>
 <p>We now aim to create two figures: the first shows the time lags with the highest correlation coefficients, and the second displays the corresponding correlation coefficients. For our specific location, the results are as follows for precipitation:</p>
 <div class="sourceCode" id="cb179"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Compute cross-correlation</span></span>
@@ -633,10 +633,10 @@
 <span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/pkg/maps/man/map.html">map</a></span><span class="op">(</span><span class="st">"world2"</span>, add <span class="op">=</span> <span class="cn">TRUE</span>, interior <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rspatial.github.io/terra/reference/lines.html">points</a></span><span class="op">(</span><span class="va">location</span>, pch <span class="op">=</span> <span class="fl">1</span>, cex <span class="op">=</span> <span class="fl">1.0</span><span class="op">)</span></span></code></pre></div>
-<div class="inline-figure"><img src="figure-html/unnamed-chunk-203-1.png" alt="" width="672"></div>
+<div class="inline-figure"><img src="figure-html/unnamed-chunk-220-1.png" alt="" width="672"></div>
 <p>Copy the code from above and modify it as needed for temperature and downwelling solar radiation.</p>
-<div class="inline-figure"><img src="figure-html/unnamed-chunk-204-1.png" alt="" width="672"></div>
-<div class="inline-figure"><img src="figure-html/unnamed-chunk-205-1.png" alt="" width="672"></div>
+<div class="inline-figure"><img src="figure-html/unnamed-chunk-221-1.png" alt="" width="672"></div>
+<div class="inline-figure"><img src="figure-html/unnamed-chunk-222-1.png" alt="" width="672"></div>
 <p>The final step is to evaluate what meteorological variable has a dominatig influence on driving EVI anomalies in each grid cell. For this purpose we will combine the results from our Granger causality test and cross correlation.</p>
 <div class="sourceCode" id="cb184"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">maxR2.pr</span> <span class="op">&lt;-</span> <span class="va">maxCorr.pr</span><span class="op">^</span><span class="fl">2</span> <span class="op">*</span> <span class="va">p.value.pr</span></span>
@@ -655,7 +655,7 @@
 <span><span class="co"># Plot the result to visualize the highest value index for each cell</span></span>
 <span><span class="fu"><a href="https://rspatial.github.io/terra/reference/plot.html">plot</a></span><span class="op">(</span><span class="va">highest_index</span>, main <span class="op">=</span> <span class="st">"Met variables that dominate EVI anomaly variability"</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/pkg/maps/man/map.html">map</a></span><span class="op">(</span><span class="st">"world2"</span>, add <span class="op">=</span> <span class="cn">TRUE</span>, interior <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></code></pre></div>
-<div class="inline-figure"><img src="figure-html/unnamed-chunk-206-1.png" alt="" width="672"></div>
+<div class="inline-figure"><img src="figure-html/unnamed-chunk-223-1.png" alt="" width="672"></div>
 <p>What does this Figure tell you? Have a look at the code above. Explain how exactly we are combining our results from the Granger causality test and cross correlation. In your answers focus on the two lines:</p>
 <ul>
 <li><code>maxR2.pr &lt;- maxCorr.pr^2 * p.value.pr</code></li>

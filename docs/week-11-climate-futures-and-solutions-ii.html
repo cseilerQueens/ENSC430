@@ -127,7 +127,7 @@ To run Hector you need to initialize a Hector core. The core is a self-contained
 <span>  <span class="co"># Plot data</span></span>
 <span>  <span class="fu"><a href="https://rdrr.io/r/base/plot.html">plot</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">data</span><span class="op">$</span><span class="va">year</span>, y <span class="op">=</span> <span class="va">data</span><span class="op">$</span><span class="va">value</span>, ylab <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste</a></span><span class="op">(</span><span class="va">categories</span><span class="op">[</span><span class="va">i</span><span class="op">]</span>, <span class="va">unit</span><span class="op">)</span>, xlab <span class="op">=</span> <span class="st">"Year"</span>, type <span class="op">=</span> <span class="st">"l"</span><span class="op">)</span></span>
 <span><span class="op">}</span></span></code></pre></div>
-<div class="inline-figure"><img src="figure-html/unnamed-chunk-245-1.png" alt="" width="576"></div>
+<div class="inline-figure"><img src="figure-html/unnamed-chunk-262-1.png" alt="" width="576"></div>
 <p>Hector is configured via an input file, which defines run metadata, inputs (e.g. emissions scenarios), and parameters. Let’s find out where this file is located:</p>
 <div class="sourceCode" id="cb218"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="va">ini_file</span><span class="op">)</span></span></code></pre></div>
@@ -207,7 +207,7 @@ To run Hector you need to initialize a Hector core. The core is a self-contained
 <span>  <span class="fu"><a href="https://rdrr.io/r/graphics/abline.html">abline</a></span><span class="op">(</span>v <span class="op">=</span> <span class="fl">2100</span><span class="op">)</span></span>
 <span>  <span class="fu"><a href="https://rdrr.io/r/graphics/legend.html">legend</a></span><span class="op">(</span><span class="st">"bottomright"</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"beta = 0.53"</span>, <span class="st">"beta = 0.8"</span><span class="op">)</span>, col <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"black"</span>, <span class="st">"red"</span><span class="op">)</span>, pch <span class="op">=</span> <span class="fl">16</span>, bty <span class="op">=</span> <span class="st">"n"</span><span class="op">)</span></span>
 <span><span class="op">}</span></span></code></pre></div>
-<div class="inline-figure"><img src="figure-html/unnamed-chunk-247-1.png" alt="" width="576"></div>
+<div class="inline-figure"><img src="figure-html/unnamed-chunk-264-1.png" alt="" width="576"></div>
 <ul>
 <li>How does the increase in <span class="math inline">\(\beta_i\)</span> affect the atmospheric CO<sub>2</sub> concentration, radiative forcing, and global mean surface temperature?</li>
 </ul>
@@ -232,7 +232,7 @@ To run Hector you need to initialize a Hector core. The core is a self-contained
 ## End date:    2300
 ## Current date:    2300
 ## Input file:  /global/home/hpc5112/ENSC430/Rlib/hector/input/hector_ssp585.ini</code></pre>
-<div class="inline-figure"><img src="figure-html/unnamed-chunk-248-1.png" alt="" width="576"></div>
+<div class="inline-figure"><img src="figure-html/unnamed-chunk-265-1.png" alt="" width="576"></div>
 <ul>
 <li>Interpret your result.</li>
 </ul>
@@ -343,7 +343,7 @@ To run Hector you need to initialize a Hector core. The core is a self-contained
 <span>  <span class="fu"><a href="https://rdrr.io/r/graphics/abline.html">abline</a></span><span class="op">(</span>v <span class="op">=</span> <span class="fl">2100</span><span class="op">)</span></span>
 <span>  <span class="fu"><a href="https://rdrr.io/r/graphics/legend.html">legend</a></span><span class="op">(</span><span class="st">"topleft"</span>, col <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"red"</span>, <span class="st">"blue"</span>, <span class="st">"green"</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"SSP5-8.5"</span>, <span class="st">"SSP3-7.0"</span>, <span class="st">"SSP1-1.9"</span><span class="op">)</span>, pch <span class="op">=</span> <span class="fl">16</span>, bty <span class="op">=</span> <span class="st">"n"</span><span class="op">)</span></span>
 <span><span class="op">}</span></span></code></pre></div>
-<div class="inline-figure"><img src="figure-html/unnamed-chunk-249-1.png" alt="" width="576"></div>
+<div class="inline-figure"><img src="figure-html/unnamed-chunk-266-1.png" alt="" width="576"></div>
 <ul>
 <li>Which of the scenarios is consistent with the goal of the 2015 Paris Agreement?</li>
 <li>How do the radiative forcings and temperature change after the year 100?</li>
@@ -388,7 +388,7 @@ To run Hector you need to initialize a Hector core. The core is a self-contained
 <span><span class="fu"><a href="https://rspatial.github.io/terra/reference/lines.html">lines</a></span><span class="op">(</span><span class="va">data</span><span class="op">$</span><span class="va">Date</span>, <span class="va">data</span><span class="op">$</span><span class="va">luc_uptake</span>, col <span class="op">=</span> <span class="st">"green"</span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/legend.html">legend</a></span><span class="op">(</span><span class="st">"topright"</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"FFI emissions"</span>, <span class="st">"LUC emissions"</span>, <span class="st">"DACCS"</span>, <span class="st">"LUC uptake"</span><span class="op">)</span>, col <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"black"</span>, <span class="st">"red"</span>, <span class="st">"blue"</span>, <span class="st">"green"</span><span class="op">)</span>, pch <span class="op">=</span> <span class="fl">16</span>, bty <span class="op">=</span> <span class="st">"n"</span><span class="op">)</span></span></code></pre></div>
-<div class="inline-figure"><img src="figure-html/unnamed-chunk-251-1.png" alt="" width="384"></div>
+<div class="inline-figure"><img src="figure-html/unnamed-chunk-268-1.png" alt="" width="384"></div>
 <ul>
 <li>Let’s compare the amount of direct air carbon capture and storage (DACCS) required in 2100 with today’s fossil fuel and industrial (FFI) emissions, which are about 10 PgC per year. What fraction of current emissions does the maximum DACCS represent?</li>
 </ul>
@@ -446,7 +446,7 @@ To run Hector you need to initialize a Hector core. The core is a self-contained
 <span>  xlab <span class="op">=</span> <span class="st">"Year"</span>,</span>
 <span>  ylab <span class="op">=</span> <span class="st">"PgC per year"</span></span>
 <span><span class="op">)</span></span></code></pre></div>
-<div class="inline-figure"><img src="figure-html/unnamed-chunk-252-1.png" alt="" width="576"></div>
+<div class="inline-figure"><img src="figure-html/unnamed-chunk-269-1.png" alt="" width="576"></div>
 <ul>
 <li>Interpret your results</li>
 </ul>
@@ -461,7 +461,7 @@ To run Hector you need to initialize a Hector core. The core is a self-contained
 ## End date:    2300
 ## Current date:    2300
 ## Input file:  /global/teaching-project/sg51122000/shared_files/input/hector_ssp370-zero.ini</code></pre>
-<div class="inline-figure"><img src="figure-html/unnamed-chunk-253-1.png" alt="" width="576"></div>
+<div class="inline-figure"><img src="figure-html/unnamed-chunk-270-1.png" alt="" width="576"></div>
 
 </div>
 </div>

@@ -54,6 +54,7 @@ climate-metric-4-novel-climates
 climate-metric-5-climate-change-velocity
 reflection-1
 week-6-climate-projections-and-impacts-iii
+reflection-2
 week-7-observing-environmental-change-i
 week-8-observing-environmental-change-ii
 download-reanalysis-data-provided-by-the-european-centre-for-medium-range-weather-forecasts-ecmwf

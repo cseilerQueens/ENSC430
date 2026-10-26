@@ -76,7 +76,7 @@
 <li>Conduct Granger causality test</li>
 </ul>
 <p>Load libraries</p>
-<div class="sourceCode" id="cb137"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb127"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/rm.html">rm</a></span><span class="op">(</span>list <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/ls.html">ls</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://rspatial.org/">terra</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/adeckmyn/maps">maps</a></span><span class="op">)</span></span>
@@ -90,33 +90,45 @@
 <li><p><a href="http://crd-esgf-drc.ec.gc.ca/thredds/fileServer/esgC_dataroot/AR6/CMIP6/CMIP/CCCma/CanESM5/historical/r1i1p1f1/Amon/rsds/gn/v20190429/rsds_Amon_CanESM5_historical_r1i1p1f1_gn_185001-201412.nc">Monthly Surface downwelling shortwave radiation (rsds), CanESM5, SSP5-8.5</a></p></li>
 <li><p><a href="http://esgf.nci.org.au/thredds/fileServer/replica/CMIP6/CMIP/CCCma/CanESM5/historical/r1i1p1f1/Amon/rsus/gn/v20190429/rsus_Amon_CanESM5_historical_r1i1p1f1_gn_185001-201412.nc">Monthly Surface upwelling shortwave radiation (rsus), CanESM5, SSP5-8.5</a></p></li>
 </ul>
-<p>I have added those files to our <code>shared_files</code> folder. In the Winter term you will need to download your own data sets. Here is how you would download the files to your home directory:</p>
-<p>Read in data</p>
-<div class="sourceCode" id="cb138"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">tas</span> <span class="op">&lt;-</span> <span class="fu">terra</span><span class="fu">::</span><span class="fu"><a href="https://rspatial.github.io/terra/reference/rast.html">rast</a></span><span class="op">(</span><span class="st">"/global/teaching-project/sg51122000/shared_files/tas_Amon_CanESM5_historical_r1i1p1f1_gn_185001-201412.nc"</span><span class="op">)</span></span>
+<p>I have added those files to our <code>shared_files</code> folder. In the Winter term you will need to download your own data sets. Here is how you would download the files to your home directory (don’t run this chunk, this is just fo ryour future reference):</p>
+<div class="sourceCode" id="cb128"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">file_path</span> <span class="op">&lt;-</span> <span class="st">"/global/home/hpcXXXX/"</span></span>
+<span></span>
+<span><span class="co"># Monthly near-surface air temperature, CanESM5, historical</span></span>
+<span><span class="va">url</span> <span class="op">&lt;-</span> <span class="st">"http://crd-esgf-drc.ec.gc.ca/thredds/fileServer/esgC_dataroot/AR6/CMIP6/CMIP/CCCma/CanESM5/historical/r1i1p1f1/Amon/tas/gn/v20190429/tas_Amon_CanESM5_historical_r1i1p1f1_gn_185001-201412.nc"</span></span>
+<span><span class="va">file_name</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/basename.html">basename</a></span><span class="op">(</span><span class="va">url</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/utils/download.file.html">download.file</a></span><span class="op">(</span><span class="va">url</span>, <span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste</a></span><span class="op">(</span><span class="va">file_path</span>, <span class="va">file_name</span>, sep <span class="op">=</span> <span class="st">""</span><span class="op">)</span>, mode <span class="op">=</span> <span class="st">"wb"</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Monthly Surface downwelling shortwave radiation (rsds), CanESM5, historical</span></span>
+<span><span class="va">url</span> <span class="op">&lt;-</span> <span class="st">"http://crd-esgf-drc.ec.gc.ca/thredds/fileServer/esgC_dataroot/AR6/CMIP6/CMIP/CCCma/CanESM5/historical/r1i1p1f1/Amon/rsds/gn/v20190429/rsds_Amon_CanESM5_historical_r1i1p1f1_gn_185001-201412.nc"</span></span>
+<span><span class="va">file_name</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/basename.html">basename</a></span><span class="op">(</span><span class="va">url</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/utils/download.file.html">download.file</a></span><span class="op">(</span><span class="va">url</span>, <span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste</a></span><span class="op">(</span><span class="va">file_path</span>, <span class="va">file_name</span>, sep <span class="op">=</span> <span class="st">""</span><span class="op">)</span>, mode <span class="op">=</span> <span class="st">"wb"</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Monthly Surface upwelling shortwave radiation (rsus), CanESM5, historical</span></span>
+<span><span class="va">url</span> <span class="op">&lt;-</span> <span class="st">"http://esgf.nci.org.au/thredds/fileServer/replica/CMIP6/CMIP/CCCma/CanESM5/historical/r1i1p1f1/Amon/rsus/gn/v20190429/rsus_Amon_CanESM5_historical_r1i1p1f1_gn_185001-201412.nc"</span></span>
+<span><span class="va">file_name</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/basename.html">basename</a></span><span class="op">(</span><span class="va">url</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/utils/download.file.html">download.file</a></span><span class="op">(</span><span class="va">url</span>, <span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste</a></span><span class="op">(</span><span class="va">file_path</span>, <span class="va">file_name</span>, sep <span class="op">=</span> <span class="st">""</span><span class="op">)</span>, mode <span class="op">=</span> <span class="st">"wb"</span><span class="op">)</span></span></code></pre></div>
+<p>OK, let’s say you have downloaded the data. Now you can load the data into R like this:</p>
+<div class="sourceCode" id="cb129"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># historical</span></span>
+<span><span class="va">tas</span> <span class="op">&lt;-</span> <span class="fu">terra</span><span class="fu">::</span><span class="fu"><a href="https://rspatial.github.io/terra/reference/rast.html">rast</a></span><span class="op">(</span><span class="st">"/global/teaching-project/sg51122000/shared_files/tas_Amon_CanESM5_historical_r1i1p1f1_gn_185001-201412.nc"</span><span class="op">)</span></span>
 <span><span class="va">rsus</span> <span class="op">&lt;-</span> <span class="fu">terra</span><span class="fu">::</span><span class="fu"><a href="https://rspatial.github.io/terra/reference/rast.html">rast</a></span><span class="op">(</span><span class="st">"/global/teaching-project/sg51122000/shared_files/rsus_Amon_CanESM5_historical_r1i1p1f1_gn_185001-201412.nc"</span><span class="op">)</span></span>
 <span><span class="va">rsds</span> <span class="op">&lt;-</span> <span class="fu">terra</span><span class="fu">::</span><span class="fu"><a href="https://rspatial.github.io/terra/reference/rast.html">rast</a></span><span class="op">(</span><span class="st">"/global/teaching-project/sg51122000/shared_files/rsds_Amon_CanESM5_historical_r1i1p1f1_gn_185001-201412.nc"</span><span class="op">)</span></span>
-<span><span class="va">albs</span> <span class="op">&lt;-</span> <span class="va">rsus</span> <span class="op">/</span> <span class="va">rsds</span></span>
-<span></span>
-<span><span class="co"># tas &lt;- terra::rast("/global/teaching-project/sg51122000/shared_files/tas_Amon_CanESM5_ssp585_r1i1p1f1_gn_201501-210012.nc")</span></span>
-<span><span class="co"># rsds &lt;- terra::rast("/global/teaching-project/sg51122000/shared_files/rsds_Amon_CanESM5_ssp585_r1i1p1f1_gn_201501-210012.nc")</span></span>
-<span><span class="co"># rsus &lt;- terra::rast("/global/teaching-project/sg51122000/shared_files/rsus_Amon_CanESM5_ssp585_r1i1p1f1_gn_201501-210012.nc")</span></span>
-<span><span class="co"># albs &lt;- rsus/rsds</span></span>
-<span></span>
-<span><span class="co"># Plot first time step of tas and albedo to see if they look OK</span></span>
-<span><span class="va">tas1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rspatial.github.io/terra/reference/subset.html">subset</a></span><span class="op">(</span><span class="va">tas</span>, <span class="fl">1</span><span class="op">)</span></span>
+<span><span class="va">albs</span> <span class="op">&lt;-</span> <span class="va">rsus</span> <span class="op">/</span> <span class="va">rsds</span></span></code></pre></div>
+<p>Plot first time step of tas and albedo to see if they look OK</p>
+<div class="sourceCode" id="cb130"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">tas1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rspatial.github.io/terra/reference/subset.html">subset</a></span><span class="op">(</span><span class="va">tas</span>, <span class="fl">1</span><span class="op">)</span></span>
 <span><span class="va">albs1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rspatial.github.io/terra/reference/subset.html">subset</a></span><span class="op">(</span><span class="va">albs</span>, <span class="fl">1</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/par.html">par</a></span><span class="op">(</span>mfrow <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">2</span>, <span class="fl">1</span><span class="op">)</span><span class="op">)</span></span>
-<span><span class="fu"><a href="https://rspatial.github.io/terra/reference/plot.html">plot</a></span><span class="op">(</span><span class="va">tas1</span>, main <span class="op">=</span> <span class="st">"Near-surface Air Temperature (K)"</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rspatial.github.io/terra/reference/plot.html">plot</a></span><span class="op">(</span><span class="va">tas1</span>, main <span class="op">=</span> <span class="st">"Near-surface Air Temperature in January (K)"</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/pkg/maps/man/map.html">map</a></span><span class="op">(</span><span class="st">"world2"</span>, add <span class="op">=</span> <span class="cn">TRUE</span>, interior <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
-<span><span class="fu"><a href="https://rspatial.github.io/terra/reference/plot.html">plot</a></span><span class="op">(</span><span class="va">albs1</span>, main <span class="op">=</span> <span class="st">"Surface Albedo (-)"</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rspatial.github.io/terra/reference/plot.html">plot</a></span><span class="op">(</span><span class="va">albs1</span>, main <span class="op">=</span> <span class="st">"Surface Albedo in January (-)"</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/pkg/maps/man/map.html">map</a></span><span class="op">(</span><span class="st">"world2"</span>, add <span class="op">=</span> <span class="cn">TRUE</span>, interior <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></code></pre></div>
-<div class="inline-figure"><img src="figure-html/unnamed-chunk-164-1.png" alt="" width="672"></div>
-<ul>
-<li>You can see that there are no values in the Arctic in the first time step (January). How come? The Granger causality test will fail if there is NA. We will need to exclude this region from our analysis as Granger causality cannot deal with missing values.</li>
-</ul>
-<p>Next, calculate 12-month climatologies.</p>
-<div class="sourceCode" id="cb139"><pre class="downlit sourceCode r">
+<div class="inline-figure"><img src="figure-html/unnamed-chunk-150-1.png" alt="" width="672"></div>
+<p><strong>Quiz Question 1:</strong> Why are there no albedo values in the Arctic in January?
+<!-- Because the incoming shortwave radiation equals zero --></p>
+<p>The Granger causality test will fail if there is NA. We will need to exclude this region from our analysis as Granger causality cannot deal with missing values. Next, calculate 12-month climatologies:</p>
+<div class="sourceCode" id="cb131"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://r-gis.net/">climetrics</a></span><span class="op">)</span></span>
 <span><span class="co"># Get the dates</span></span>
 <span><span class="va">dates</span> <span class="op">&lt;-</span> <span class="fu">terra</span><span class="fu">::</span><span class="fu"><a href="https://rspatial.github.io/terra/reference/time.html">time</a></span><span class="op">(</span><span class="va">tas</span><span class="op">)</span></span>
@@ -131,11 +143,11 @@
 <span><span class="va">tas.12</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/climetrics/man/applyMonths.html">apply.months</a></span><span class="op">(</span><span class="va">tas.ts</span>, <span class="st">"mean"</span><span class="op">)</span></span>
 <span><span class="va">albs.12</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/climetrics/man/applyMonths.html">apply.months</a></span><span class="op">(</span><span class="va">albs.ts</span>, <span class="st">"mean"</span><span class="op">)</span></span>
 <span></span>
-<span><span class="fu"><a href="https://rspatial.github.io/terra/reference/plot.html">plot</a></span><span class="op">(</span><span class="va">albs.12</span><span class="op">)</span></span>
-<span><span class="fu"><a href="https://rdrr.io/pkg/maps/man/map.html">map</a></span><span class="op">(</span><span class="st">"world2"</span>, add <span class="op">=</span> <span class="cn">TRUE</span>, interior <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></code></pre></div>
-<div class="inline-figure"><img src="figure-html/unnamed-chunk-165-1.png" alt="" width="672"></div>
-<p>Calculate the anomalies. This is done by subtracting the 12-month climatologies from the monthly data.</p>
-<div class="sourceCode" id="cb140"><pre class="downlit sourceCode r">
+<span><span class="fu"><a href="https://rspatial.github.io/terra/reference/plot.html">plot</a></span><span class="op">(</span><span class="va">albs.12</span><span class="op">)</span></span></code></pre></div>
+<p><strong>Quiz Question 2:</strong> In what region are albedo values missing in June?
+<!-- Antarctic --></p>
+<p>Next we will calculate the anomalies. This is done by subtracting the 12-month climatologies from the monthly data.</p>
+<div class="sourceCode" id="cb132"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Get the number of years</span></span>
 <span><span class="va">n</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">dates</span><span class="op">)</span> <span class="op">/</span> <span class="fl">12</span></span>
 <span></span>
@@ -148,11 +160,11 @@
 <span><span class="va">albs.anom</span> <span class="op">&lt;-</span> <span class="va">albs</span> <span class="op">-</span> <span class="va">albs.clim</span></span>
 <span></span>
 <span><span class="co"># Have a look at the data</span></span>
-<span><span class="fu"><a href="https://rspatial.github.io/terra/reference/plot.html">plot</a></span><span class="op">(</span><span class="va">albs.anom</span><span class="op">)</span></span>
-<span><span class="fu"><a href="https://rdrr.io/pkg/maps/man/map.html">map</a></span><span class="op">(</span><span class="st">"world2"</span>, add <span class="op">=</span> <span class="cn">TRUE</span>, interior <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></code></pre></div>
-<div class="inline-figure"><img src="figure-html/unnamed-chunk-166-1.png" alt="" width="672"></div>
-<p>Detrend your time series by defining a function that calculates and removes the linear trend from your monthly anomalies. Before we do this for our globally gridded data set, let’s first practice using a random time series.</p>
-<div class="sourceCode" id="cb141"><pre class="downlit sourceCode r">
+<span><span class="fu"><a href="https://rspatial.github.io/terra/reference/plot.html">plot</a></span><span class="op">(</span><span class="va">albs.anom</span><span class="op">)</span></span></code></pre></div>
+<p><strong>Quiz Question 3:</strong> What do negative albedo anomalies mean?
+<!-- Negative values imply that the albedo calculated for the given time step is less than the mean value for that month -->
+Detrend your time series by defining a function that calculates and removes the linear trend from your monthly anomalies. Before we do this for our globally gridded data set, let’s first practice using a random time series.</p>
+<div class="sourceCode" id="cb133"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Define a function that removes a linear trend</span></span>
 <span><span class="va">detrend.fun</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="op">{</span></span>
 <span>  <span class="va">time</span> <span class="op">&lt;-</span> <span class="fl">1</span><span class="op">:</span><span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span>
@@ -171,17 +183,18 @@
 <span></span>
 <span><span class="fu"><a href="https://rspatial.github.io/terra/reference/plot.html">plot</a></span><span class="op">(</span><span class="va">time.series</span>, ylim <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="op">-</span><span class="fl">20</span>, <span class="fl">120</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rspatial.github.io/terra/reference/lines.html">lines</a></span><span class="op">(</span><span class="va">detrended.time.series</span>, col <span class="op">=</span> <span class="st">"red"</span><span class="op">)</span></span></code></pre></div>
-<div class="inline-figure"><img src="figure-html/unnamed-chunk-167-1.png" alt="" width="672"></div>
+<p><strong>Quiz Question 4:</strong> Which of the two lines is the detrended line?
+<!-- The red line is the detrended line --></p>
 <p>With the detrending confirmed to work, let’s apply it to our gridded temperature and albedo datasets.</p>
-<div class="sourceCode" id="cb142"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb134"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">tas.anom.detrend</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rspatial.github.io/terra/reference/app.html">app</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">tas.anom</span>, fun <span class="op">=</span> <span class="va">detrend.fun</span><span class="op">)</span></span>
 <span><span class="va">albs.anom.detrend</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rspatial.github.io/terra/reference/app.html">app</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">albs.anom</span>, fun <span class="op">=</span> <span class="va">detrend.fun</span><span class="op">)</span></span>
 <span></span>
-<span><span class="fu"><a href="https://rspatial.github.io/terra/reference/plot.html">plot</a></span><span class="op">(</span><span class="va">tas.anom.detrend</span><span class="op">)</span></span>
-<span><span class="fu"><a href="https://rdrr.io/pkg/maps/man/map.html">map</a></span><span class="op">(</span><span class="st">"world2"</span>, add <span class="op">=</span> <span class="cn">TRUE</span>, interior <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></code></pre></div>
-<div class="inline-figure"><img src="figure-html/unnamed-chunk-168-1.png" alt="" width="672"></div>
+<span><span class="fu"><a href="https://rspatial.github.io/terra/reference/plot.html">plot</a></span><span class="op">(</span><span class="va">tas.anom.detrend</span><span class="op">)</span></span></code></pre></div>
+<p><strong>Quiz Question 5:</strong> What does the function <code>app</code> do in the code chunk above?
+<!-- The function app applies the function detrend.fun to each grid cell. --></p>
 <p>Now that you have created detrended anomalies of surface albedo and near-surface air temperature, you can assess the statistical association between both time series using Granger causality. Start by defining a Granger causality function that we can apply to each gridcell.</p>
-<div class="sourceCode" id="cb143"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb135"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">granger.fun</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="op">{</span></span>
 <span>  <span class="va">n</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span>
 <span>  <span class="co"># Get first (a) and second (b) variable</span></span>
@@ -196,8 +209,8 @@
 <span>  <span class="va">p.value</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fu">vars</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/vars/man/causality.html">causality</a></span><span class="op">(</span><span class="va">tsVAR</span>, cause <span class="op">=</span> <span class="st">"a"</span><span class="op">)</span><span class="op">$</span><span class="va">Granger</span><span class="op">[</span><span class="fl">3</span><span class="op">]</span><span class="op">$</span><span class="va">p.value</span><span class="op">)</span></span>
 <span>  <span class="kw"><a href="https://rdrr.io/r/base/function.html">return</a></span><span class="op">(</span><span class="va">p.value</span><span class="op">)</span></span>
 <span><span class="op">}</span></span></code></pre></div>
-<p>Check whether albedo Granger-causes temperature anomalies.</p>
-<div class="sourceCode" id="cb144"><pre class="downlit sourceCode r">
+<p>Have a close look at the function. There is only one input variable called <span class="math inline">\(x\)</span>. This is because the function <code>app</code>, which will apply the function to each grid cell, only accepts one input variable. However, Granger requires two inputs as it calculates the statistical association between two variables. We therefore have to merge the two variables into one single variable. So the variable <span class="math inline">\(x\)</span> contains two time series, one for each variable. In the function, I call those two variables (a) and (b). So we read in <span class="math inline">\(x\)</span>, and then we spit <span class="math inline">\(x\)</span> into <span class="math inline">\(a\)</span> and <span class="math inline">\(b\)</span>. Then we apply the Granger causality test. the function returns the p-value of the F-test. Let us now check whether albedo Granger-causes temperature anomalies.</p>
+<div class="sourceCode" id="cb136"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Stack your raster objects, where the first part is the cause and the second the response</span></span>
 <span><span class="va">data</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="va">albs.anom.detrend</span>, <span class="va">tas.anom.detrend</span><span class="op">)</span></span>
 <span></span>
@@ -213,9 +226,11 @@
 <span><span class="va">albedoCausesTas</span> <span class="op">&lt;-</span> <span class="va">p.value</span></span>
 <span><span class="fu"><a href="https://rspatial.github.io/terra/reference/plot.html">plot</a></span><span class="op">(</span><span class="va">albedoCausesTas</span>, col <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"white"</span>, <span class="st">"orange"</span><span class="op">)</span>, main <span class="op">=</span> <span class="st">"Albedo Granger-causes Temperature Anomalies"</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/pkg/maps/man/map.html">map</a></span><span class="op">(</span><span class="st">"world2"</span>, add <span class="op">=</span> <span class="cn">TRUE</span>, interior <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></code></pre></div>
-<div class="inline-figure"><img src="figure-html/unnamed-chunk-170-1.png" alt="" width="672"></div>
+<p>The grid cells that are colored in orange are grid cells albedo Granger-causes temperature.</p>
+<p><strong>Quiz Question 6:</strong> Is albedo Granger-causing temperature in Northern Quebec?
+<!-- Yes --></p>
 <p>Next, check whether temperature Granger-causes albedo anomalies</p>
-<div class="sourceCode" id="cb145"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb137"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Stack your raster objects, where the first part is the cause and the second the response</span></span>
 <span><span class="va">data</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="va">tas.anom.detrend</span>, <span class="va">albs.anom.detrend</span><span class="op">)</span></span>
 <span></span>
@@ -231,18 +246,21 @@
 <span><span class="va">tasCausesAlbedo</span> <span class="op">&lt;-</span> <span class="va">p.value</span></span>
 <span><span class="fu"><a href="https://rspatial.github.io/terra/reference/plot.html">plot</a></span><span class="op">(</span><span class="va">tasCausesAlbedo</span>, col <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"white"</span>, <span class="st">"orange"</span><span class="op">)</span>, main <span class="op">=</span> <span class="st">"Temperature Granger-causes Albedo Anomalies"</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/pkg/maps/man/map.html">map</a></span><span class="op">(</span><span class="st">"world2"</span>, add <span class="op">=</span> <span class="cn">TRUE</span>, interior <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></code></pre></div>
-<div class="inline-figure"><img src="figure-html/unnamed-chunk-171-1.png" alt="" width="672"></div>
+<p><strong>Quiz Question 7:</strong> Is temperature Granger-causing albedo in Northern Quebec?
+<!-- Yes --></p>
 <p>Let’s combine both maps to identify regions with a dynamic albedo-temperature feedback</p>
-<div class="sourceCode" id="cb146"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb138"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">feedback</span> <span class="op">&lt;-</span> <span class="va">albedoCausesTas</span> <span class="op">+</span> <span class="va">tasCausesAlbedo</span></span>
 <span></span>
 <span><span class="va">feedback</span><span class="op">[</span><span class="va">feedback</span> <span class="op">!=</span> <span class="fl">2</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="cn">NA</span></span>
 <span><span class="va">feedback</span> <span class="op">&lt;-</span> <span class="va">feedback</span> <span class="op">-</span> <span class="va">feedback</span> <span class="op">+</span> <span class="fl">1</span></span>
 <span><span class="fu"><a href="https://rspatial.github.io/terra/reference/plot.html">plot</a></span><span class="op">(</span><span class="va">feedback</span>, col <span class="op">=</span> <span class="st">"orange"</span>, main <span class="op">=</span> <span class="st">"Albedo-Temperature Feedback"</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/pkg/maps/man/map.html">map</a></span><span class="op">(</span><span class="st">"world2"</span>, add <span class="op">=</span> <span class="cn">TRUE</span>, interior <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></code></pre></div>
-<div class="inline-figure"><img src="figure-html/unnamed-chunk-172-1.png" alt="" width="672"></div>
-<p>Next you will verify your results for a single gridcell. Let’s choose a place in the Canadian Arctic (longitude = 260, latitude = 60).</p>
-<div class="sourceCode" id="cb147"><pre class="downlit sourceCode r">
+<div class="inline-figure"><img src="figure-html/unnamed-chunk-158-1.png" alt="" width="672"></div>
+<p><strong>Quiz Question 8:</strong> Are temperature and albedo dynamically linked in Northern Quebec?
+<!-- Yes --></p>
+<p>Next you will verify your results for a single grid cell. Let’s choose a place in the Canadian Arctic (longitude = 260, latitude = 60). The code simply plots the location of the grid cell we want to investigate.</p>
+<div class="sourceCode" id="cb139"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">lon</span> <span class="op">&lt;-</span> <span class="fl">260</span></span>
 <span><span class="va">lat</span> <span class="op">&lt;-</span> <span class="fl">62</span></span>
 <span><span class="va">coords</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html">matrix</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="va">lon</span>, <span class="va">lat</span><span class="op">)</span>, ncol <span class="op">=</span> <span class="fl">2</span>, byrow <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
@@ -251,9 +269,8 @@
 <span><span class="fu"><a href="https://rspatial.github.io/terra/reference/plot.html">plot</a></span><span class="op">(</span><span class="va">feedback</span>, col <span class="op">=</span> <span class="st">"orange"</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/pkg/maps/man/map.html">map</a></span><span class="op">(</span><span class="st">"world2"</span>, add <span class="op">=</span> <span class="cn">TRUE</span>, interior <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rspatial.github.io/terra/reference/lines.html">points</a></span><span class="op">(</span><span class="va">location</span>, col <span class="op">=</span> <span class="st">"red"</span>, pch <span class="op">=</span> <span class="fl">16</span>, cex <span class="op">=</span> <span class="fl">1.0</span><span class="op">)</span></span></code></pre></div>
-<div class="inline-figure"><img src="figure-html/unnamed-chunk-173-1.png" alt="" width="672"></div>
 <p>Extract the values for this location</p>
-<div class="sourceCode" id="cb148"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb140"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Extract data for the location</span></span>
 <span><span class="va">albs.anom.detrend.gc</span> <span class="op">&lt;-</span> <span class="fu">terra</span><span class="fu">::</span><span class="fu"><a href="https://rspatial.github.io/terra/reference/extract.html">extract</a></span><span class="op">(</span><span class="va">albs.anom.detrend</span>, <span class="va">location</span><span class="op">)</span></span>
 <span><span class="va">tas.anom.detrend.gc</span> <span class="op">&lt;-</span> <span class="fu">terra</span><span class="fu">::</span><span class="fu"><a href="https://rspatial.github.io/terra/reference/extract.html">extract</a></span><span class="op">(</span><span class="va">tas.anom.detrend</span>, <span class="va">location</span><span class="op">)</span></span>
@@ -274,9 +291,9 @@
 <span></span>
 <span><span class="co"># Plot time series</span></span>
 <span><span class="fu"><a href="https://rspatial.github.io/terra/reference/plot.html">plot</a></span><span class="op">(</span><span class="va">tsDat</span><span class="op">)</span></span></code></pre></div>
-<div class="inline-figure"><img src="figure-html/unnamed-chunk-174-1.png" alt="" width="672"></div>
+<div class="inline-figure"><img src="figure-html/unnamed-chunk-160-1.png" alt="" width="672"></div>
 <p>Run Granger causality again just for this dataset to verify your results</p>
-<div class="sourceCode" id="cb149"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb141"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">tsVAR</span> <span class="op">&lt;-</span> <span class="fu">vars</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/vars/man/VAR.html">VAR</a></span><span class="op">(</span><span class="va">tsDat</span>, p <span class="op">=</span> <span class="fl">6</span><span class="op">)</span></span>
 <span><span class="fu">vars</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/vars/man/causality.html">causality</a></span><span class="op">(</span><span class="va">tsVAR</span>, cause <span class="op">=</span> <span class="st">"albs"</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## $Granger
@@ -293,7 +310,7 @@
 ## 
 ## data:  VAR object tsVAR
 ## Chi-squared = 68.392, df = 1, p-value &lt; 2.2e-16</code></pre>
-<div class="sourceCode" id="cb151"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb143"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">vars</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/vars/man/causality.html">causality</a></span><span class="op">(</span><span class="va">tsVAR</span>, cause <span class="op">=</span> <span class="st">"tas"</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## $Granger
 ## 
@@ -309,22 +326,45 @@
 ## 
 ## data:  VAR object tsVAR
 ## Chi-squared = 68.392, df = 1, p-value &lt; 2.2e-16</code></pre>
-<p>Repeat the same exercise with CanESM for the future period using SSP5-8.5 and evaluate how this feedback mechanism changes. You can download the corresponding files below.</p>
-<ul>
-<li><p><a href="http://esgf.nci.org.au/thredds/fileServer/replica/CMIP6/ScenarioMIP/CCCma/CanESM5/ssp585/r1i1p1f1/Amon/tas/gn/v20190429/tas_Amon_CanESM5_ssp585_r1i1p1f1_gn_201501-210012.nc">Monthly near-surface air temperature, CanESM5, SSP5-8.5</a></p></li>
-<li><p><a href="http://esgf.nci.org.au/thredds/fileServer/replica/CMIP6/ScenarioMIP/CCCma/CanESM5/ssp585/r1i1p1f1/Amon/rsds/gn/v20190429/rsds_Amon_CanESM5_ssp585_r1i1p1f1_gn_201501-210012.nc">Monthly Surface downwelling shortwave radiation (rsds), CanESM5, SSP5-8.5</a></p></li>
-<li><p><a href="http://esgf.nci.org.au/thredds/fileServer/replica/CMIP6/ScenarioMIP/CCCma/CanESM5/ssp585/r1i1p1f1/Amon/rsus/gn/v20190429/rsus_Amon_CanESM5_ssp585_r1i1p1f1_gn_201501-210012.nc">Monthly Surface upwelling shortwave radiation (rsus), CanESM5, SSP5-8.5</a></p></li>
-</ul>
-<p>I have added those files to our <code>shared_files</code> folder. Your results should look like the figure below. What does this figure tell you of how climate change affects the relationship between temperature and albedo?</p>
-<div class="inline-figure"><img src="figure-html/unnamed-chunk-177-1.png" alt="" width="672"></div>
+<p><strong>Quiz Question 9:</strong> What is the p-value of the F-test on whether temperature Granger-causes albedo?
+<!-- 0.01686 --></p>
+<p><strong>Quiz Question 10:</strong> Does this p-value indicate that temperature Granger-causes albedo?
+<!-- Yes --></p>
+<p>Repeat the same exercise with data from the earth system model CanESM5 for the future period using SSP5-8.5. Evaluate how the albedo-temperature feedback is affected by climate change. You can find the SSP5 files in our <code>shared_files</code> folder.</p>
+<!--
+* [Monthly near-surface air temperature, CanESM5, SSP5-8.5](http://esgf.nci.org.au/thredds/fileServer/replica/CMIP6/ScenarioMIP/CCCma/CanESM5/ssp585/r1i1p1f1/Amon/tas/gn/v20190429/tas_Amon_CanESM5_ssp585_r1i1p1f1_gn_201501-210012.nc)
 
+* [Monthly Surface downwelling shortwave radiation (rsds), CanESM5, SSP5-8.5](http://esgf.nci.org.au/thredds/fileServer/replica/CMIP6/ScenarioMIP/CCCma/CanESM5/ssp585/r1i1p1f1/Amon/rsds/gn/v20190429/rsds_Amon_CanESM5_ssp585_r1i1p1f1_gn_201501-210012.nc)
+
+* [Monthly Surface upwelling shortwave radiation (rsus), CanESM5, SSP5-8.5](http://esgf.nci.org.au/thredds/fileServer/replica/CMIP6/ScenarioMIP/CCCma/CanESM5/ssp585/r1i1p1f1/Amon/rsus/gn/v20190429/rsus_Amon_CanESM5_ssp585_r1i1p1f1_gn_201501-210012.nc)
+
+
+-->
+<div class="sourceCode" id="cb145"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">tas</span> <span class="op">&lt;-</span> <span class="fu">terra</span><span class="fu">::</span><span class="fu"><a href="https://rspatial.github.io/terra/reference/rast.html">rast</a></span><span class="op">(</span><span class="st">"/global/teaching-project/sg51122000/shared_files/tas_Amon_CanESM5_ssp585_r1i1p1f1_gn_201501-210012.nc"</span><span class="op">)</span></span>
+<span><span class="va">rsds</span> <span class="op">&lt;-</span> <span class="fu">terra</span><span class="fu">::</span><span class="fu"><a href="https://rspatial.github.io/terra/reference/rast.html">rast</a></span><span class="op">(</span><span class="st">"/global/teaching-project/sg51122000/shared_files/rsds_Amon_CanESM5_ssp585_r1i1p1f1_gn_201501-210012.nc"</span><span class="op">)</span></span>
+<span><span class="va">rsus</span> <span class="op">&lt;-</span> <span class="fu">terra</span><span class="fu">::</span><span class="fu"><a href="https://rspatial.github.io/terra/reference/rast.html">rast</a></span><span class="op">(</span><span class="st">"/global/teaching-project/sg51122000/shared_files/rsus_Amon_CanESM5_ssp585_r1i1p1f1_gn_201501-210012.nc"</span><span class="op">)</span></span></code></pre></div>
+<p>Your figure should look like this:</p>
+<p><img src="figure-html/unnamed-chunk-164-1.png" alt="" width="672"><strong>Quiz Question 11:</strong> How does climate change affect albedo-temperature feedback in Northern Canada?
+<!-- Climate change enhances the albedo-temperature feedback in Northern Canada --></p>
+<div id="reflection-2" class="section level2" number="6.1">
+<h2>
+<span class="header-section-number">6.1</span> Reflection<a class="anchor" aria-label="anchor" href="#reflection-2"><i class="fas fa-link"></i></a>
+</h2>
+<p><strong>Quiz Reflection 1</strong>: What are the main things you learned in this tutorial?</p>
+<p><strong>Quiz Reflection 2</strong>: What concepts are you still struggling to understand?</p>
+
+</div>
 </div>
   <div class="chapter-nav">
 <div class="prev"><a href="week-5-climate-projections-and-impacts-ii.html"><span class="header-section-number">5</span> Week 5: Climate Projections and Impacts (II)</a></div>
 <div class="next"><a href="week-7-observing-environmental-change-i.html"><span class="header-section-number">7</span> Week 7: Observing Environmental Change (I)</a></div>
 </div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
     <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
-      <ul class="nav navbar-nav"><li><a class="nav-link" href="#week-6-climate-projections-and-impacts-iii"><span class="header-section-number">6</span> Week 6: Climate Projections and Impacts (III)</a></li></ul>
+      <ul class="nav navbar-nav">
+<li><a class="nav-link" href="#week-6-climate-projections-and-impacts-iii"><span class="header-section-number">6</span> Week 6: Climate Projections and Impacts (III)</a></li>
+<li><a class="nav-link" href="#reflection-2"><span class="header-section-number">6.1</span> Reflection</a></li>
+</ul>
 
       <div class="book-extra">
         <ul class="list-unstyled">

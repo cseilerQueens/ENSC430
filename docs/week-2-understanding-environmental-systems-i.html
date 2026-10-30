@@ -75,7 +75,7 @@
 </ul>
 <p>Please document all steps of this tutorial in your Tutorial Report</p>
 <p>Load the required R packages:</p>
-<div class="sourceCode" id="cb49"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb51"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/tpetzoldt/deSolve/">deSolve</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va">rootSolve</span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va">scatterplot3d</span><span class="op">)</span></span>
@@ -112,7 +112,7 @@ x = \exp(0.06 t) * \exp(c_1)
 x = c * \exp(0.06 t)
 \]</span></p>
 <p>where <span class="math inline">\(c\)</span> is the integration constant. This is called an analytically integration. Let’s plot <span class="math inline">\(x\)</span> as a function of <span class="math inline">\(t\)</span>:</p>
-<div class="sourceCode" id="cb50"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb52"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Define function inputs</span></span>
 <span><span class="va">state</span> <span class="op">&lt;-</span> <span class="fl">100</span></span>
 <span><span class="va">times</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">50</span>, <span class="fl">1</span><span class="op">)</span> <span class="co"># Time steps</span></span>
@@ -120,7 +120,7 @@ x = c * \exp(0.06 t)
 <span></span>
 <span><span class="co"># Plot output</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/par.html">par</a></span><span class="op">(</span>pty <span class="op">=</span> <span class="st">"s"</span><span class="op">)</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/base/plot.html">plot</a></span><span class="op">(</span><span class="va">times</span>, <span class="va">x</span>,</span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">times</span>, <span class="va">x</span>,</span>
 <span>  type <span class="op">=</span> <span class="st">"l"</span>,</span>
 <span>  xlab <span class="op">=</span> <span class="st">"Time Step"</span>,</span>
 <span>  ylab <span class="op">=</span> <span class="st">"x"</span></span>
@@ -130,10 +130,10 @@ x = c * \exp(0.06 t)
 <p><strong>Quiz Question 1:</strong> Which part of the code defines your initial value?
 <!-- state --></p>
 <p>Run this code in your markdown file:</p>
-<div class="sourceCode" id="cb51"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb53"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Define the function</span></span>
 <span><span class="va">ode_function</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">t</span>, <span class="va">state</span>, <span class="va">parameters</span><span class="op">)</span> <span class="op">{</span></span>
-<span>  <span class="fu"><a href="https://rdrr.io/r/base/with.html">with</a></span><span class="op">(</span><span class="fu"><a href="https://rspatial.github.io/terra/reference/as.list.html">as.list</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="va">state</span><span class="op">)</span><span class="op">)</span>, <span class="op">{</span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/base/with.html">with</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/list.html">as.list</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="va">state</span><span class="op">)</span><span class="op">)</span>, <span class="op">{</span></span>
 <span>    <span class="va">dx</span> <span class="op">&lt;-</span> <span class="fl">0.06</span> <span class="op">*</span> <span class="va">x</span></span>
 <span></span>
 <span>    <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="va">dx</span><span class="op">)</span><span class="op">)</span></span>
@@ -145,11 +145,11 @@ x = c * \exp(0.06 t)
 <span><span class="va">times</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">50</span>, <span class="fl">1</span><span class="op">)</span> <span class="co"># Time steps</span></span>
 <span></span>
 <span><span class="co"># Run function</span></span>
-<span><span class="va">out</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rspatial.github.io/terra/reference/as.data.frame.html">as.data.frame</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/deSolve/man/ode.html">ode</a></span><span class="op">(</span><span class="va">state</span>, <span class="va">times</span>, <span class="va">ode_function</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="va">out</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/as.data.frame.html">as.data.frame</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/deSolve/man/ode.html">ode</a></span><span class="op">(</span><span class="va">state</span>, <span class="va">times</span>, <span class="va">ode_function</span><span class="op">)</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># Plot output</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/par.html">par</a></span><span class="op">(</span>pty <span class="op">=</span> <span class="st">"s"</span><span class="op">)</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/base/plot.html">plot</a></span><span class="op">(</span><span class="va">out</span><span class="op">$</span><span class="va">time</span>,</span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">out</span><span class="op">$</span><span class="va">time</span>,</span>
 <span>  <span class="va">out</span><span class="op">$</span><span class="va">x</span>,</span>
 <span>  type <span class="op">=</span> <span class="st">"l"</span>,</span>
 <span>  xlab <span class="op">=</span> <span class="st">"Time Step"</span>,</span>
@@ -182,10 +182,10 @@ x = c * \exp(0.06 t)
 <p>The spruce budworm (<span class="math inline">\(\textit{Choristoneura fumiferana}\)</span>) is an insect pest that consumes the leaves of coniferous trees in North America. In some years, their populations explode and the excessive consumption of pine buds and needles causes massive damage to the trees. The equation below describes the density of the spruce budworm (<span class="math inline">\(B\)</span>), as a function of density-dependent growth (first term) and predatory mortality (second term):</p>
 <p><span class="math display">\[ \frac{dB}{dt} = r_i B \left( 1 - \frac{B}{K}\right) - \beta \frac{B^2}{B^2+k_s^2}\]</span>
 where <span class="math inline">\(t\)</span> is the time, <span class="math inline">\(r_i\)</span> is the rate of increase, <span class="math inline">\(K\)</span> is the carrying capacity of the environment, <span class="math inline">\(\beta\)</span> is the maximum mortality rate, and <span class="math inline">\(k_s\)</span> is the half-saturation density at which mortality is half of the maximal rate. This is an ordinary differential equation (ODE). Let’s plot the species density (<span class="math inline">\(B\)</span>) as a function of time (<span class="math inline">\(t\)</span>). To do that we will integrate the function above with respect to time using the <code>ode</code> function below.</p>
-<div class="sourceCode" id="cb52"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb54"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Define the ODE function</span></span>
 <span><span class="va">ode_function</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">t</span>, <span class="va">B</span>, <span class="va">parameters</span><span class="op">)</span> <span class="op">{</span></span>
-<span>  <span class="fu"><a href="https://rdrr.io/r/base/with.html">with</a></span><span class="op">(</span><span class="fu"><a href="https://rspatial.github.io/terra/reference/as.list.html">as.list</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="va">parameters</span>, <span class="va">B</span><span class="op">)</span><span class="op">)</span>, <span class="op">{</span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/base/with.html">with</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/list.html">as.list</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="va">parameters</span>, <span class="va">B</span><span class="op">)</span><span class="op">)</span>, <span class="op">{</span></span>
 <span>    <span class="va">dBdt</span> <span class="op">&lt;-</span> <span class="va">ri</span> <span class="op">*</span> <span class="va">B</span> <span class="op">*</span> <span class="op">(</span><span class="fl">1</span> <span class="op">-</span> <span class="va">B</span> <span class="op">/</span> <span class="va">K</span><span class="op">)</span> <span class="op">-</span> <span class="va">beta</span> <span class="op">*</span> <span class="va">B</span><span class="op">^</span><span class="fl">2</span> <span class="op">/</span> <span class="op">(</span><span class="va">B</span><span class="op">^</span><span class="fl">2</span> <span class="op">+</span> <span class="va">ks</span><span class="op">^</span><span class="fl">2</span><span class="op">)</span></span>
 <span>    <span class="kw"><a href="https://rdrr.io/r/base/function.html">return</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="va">dBdt</span><span class="op">)</span><span class="op">)</span></span>
 <span>  <span class="op">}</span><span class="op">)</span></span>
@@ -203,7 +203,7 @@ where <span class="math inline">\(t\)</span> is the time, <span class="math inli
 <span></span>
 <span><span class="co"># Plot the solution</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/par.html">par</a></span><span class="op">(</span>pty <span class="op">=</span> <span class="st">"s"</span><span class="op">)</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/base/plot.html">plot</a></span><span class="op">(</span><span class="va">solution</span>, type <span class="op">=</span> <span class="st">"l"</span>, xlab <span class="op">=</span> <span class="st">"Time"</span>, ylab <span class="op">=</span> <span class="st">"B"</span>, main <span class="op">=</span> <span class="cn">NA</span><span class="op">)</span></span></code></pre></div>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">solution</span>, type <span class="op">=</span> <span class="st">"l"</span>, xlab <span class="op">=</span> <span class="st">"Time"</span>, ylab <span class="op">=</span> <span class="st">"B"</span>, main <span class="op">=</span> <span class="cn">NA</span><span class="op">)</span></span></code></pre></div>
 <p><strong>Quiz Question 5:</strong> Is the system in dynamic equilibrium?
 <!-- Yes, growth = mortality after about 300 time steps --></p>
 <p><strong>Quiz Question 6:</strong> What happens if you increase the rate of increase (<span class="math inline">\(r_i\)</span>) from 0.05 to 0.08?
@@ -211,7 +211,7 @@ where <span class="math inline">\(t\)</span> is the time, <span class="math inli
 <ul>
 <li>Next, let’s plot the rate of change (<span class="math inline">\(\frac{dB}{dt}\)</span>) as a function of the population density (<span class="math inline">\(B\)</span>)</li>
 </ul>
-<div class="sourceCode" id="cb53"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb55"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Input values</span></span>
 <span><span class="va">ri</span> <span class="op">&lt;-</span> <span class="fl">0.05</span></span>
 <span><span class="va">K</span> <span class="op">&lt;-</span> <span class="fl">10</span></span>
@@ -224,21 +224,21 @@ where <span class="math inline">\(t\)</span> is the time, <span class="math inli
 <span></span>
 <span><span class="co"># Plot</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/par.html">par</a></span><span class="op">(</span>pty <span class="op">=</span> <span class="st">"s"</span><span class="op">)</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/base/plot.html">plot</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">B</span>, y <span class="op">=</span> <span class="va">dBdt</span>, type <span class="op">=</span> <span class="st">"l"</span>, xlab <span class="op">=</span> <span class="st">"B"</span>, ylab <span class="op">=</span> <span class="st">"dBdt"</span>, main <span class="op">=</span> <span class="cn">NA</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">B</span>, y <span class="op">=</span> <span class="va">dBdt</span>, type <span class="op">=</span> <span class="st">"l"</span>, xlab <span class="op">=</span> <span class="st">"B"</span>, ylab <span class="op">=</span> <span class="st">"dBdt"</span>, main <span class="op">=</span> <span class="cn">NA</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/abline.html">abline</a></span><span class="op">(</span>h <span class="op">=</span> <span class="fl">0</span>, col <span class="op">=</span> <span class="st">"grey"</span><span class="op">)</span></span></code></pre></div>
 <p><strong>Quiz Question 7:</strong> How many equilibrium points are there?
 <!-- There are four equilibrium points (dB/dt = 0) --></p>
 <p><strong>Quiz Question 8:</strong> Are they stable or unstable?
 <!-- From left-to-right: unstable, stable, unstable, stable --></p>
 <p>Evaluate your answer by running the code below, trying different values for <span class="math inline">\(B\)</span> (e.g. 0, 1, 2, 5, 10) (<code>state &lt;- c(B = 10)</code>). Document your findings.</p>
-<div class="sourceCode" id="cb54"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb56"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">ri</span> <span class="op">&lt;-</span> <span class="fl">0.05</span></span>
 <span><span class="va">K</span> <span class="op">&lt;-</span> <span class="fl">10</span></span>
 <span><span class="va">beta</span> <span class="op">&lt;-</span> <span class="fl">0.1</span></span>
 <span><span class="va">ks</span> <span class="op">&lt;-</span> <span class="fl">1</span></span>
 <span></span>
 <span><span class="va">rate</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">t</span>, <span class="va">state</span>, <span class="va">parameters</span><span class="op">)</span> <span class="op">{</span></span>
-<span>  <span class="fu"><a href="https://rdrr.io/r/base/with.html">with</a></span><span class="op">(</span><span class="fu"><a href="https://rspatial.github.io/terra/reference/as.list.html">as.list</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="va">state</span><span class="op">)</span><span class="op">)</span>, <span class="op">{</span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/base/with.html">with</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/list.html">as.list</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="va">state</span><span class="op">)</span><span class="op">)</span>, <span class="op">{</span></span>
 <span>    <span class="va">ri</span> <span class="op">&lt;-</span> <span class="fl">0.05</span></span>
 <span>    <span class="va">K</span> <span class="op">&lt;-</span> <span class="fl">10</span></span>
 <span>    <span class="va">beta</span> <span class="op">&lt;-</span> <span class="fl">0.1</span></span>
@@ -252,10 +252,10 @@ where <span class="math inline">\(t\)</span> is the time, <span class="math inli
 <span></span>
 <span><span class="va">state</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span>B <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></span>
 <span><span class="va">times</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">500</span>, <span class="fl">1</span><span class="op">)</span></span>
-<span><span class="va">out</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rspatial.github.io/terra/reference/as.data.frame.html">as.data.frame</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/deSolve/man/ode.html">ode</a></span><span class="op">(</span><span class="va">state</span>, <span class="va">times</span>, <span class="va">rate</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="va">out</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/as.data.frame.html">as.data.frame</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/deSolve/man/ode.html">ode</a></span><span class="op">(</span><span class="va">state</span>, <span class="va">times</span>, <span class="va">rate</span><span class="op">)</span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/par.html">par</a></span><span class="op">(</span>pty <span class="op">=</span> <span class="st">"s"</span><span class="op">)</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/base/plot.html">plot</a></span><span class="op">(</span><span class="va">out</span><span class="op">$</span><span class="va">time</span>,</span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">out</span><span class="op">$</span><span class="va">time</span>,</span>
 <span>  <span class="va">out</span><span class="op">$</span><span class="va">B</span>,</span>
 <span>  type <span class="op">=</span> <span class="st">"l"</span>,</span>
 <span>  xlab <span class="op">=</span> <span class="st">"Time Step"</span>,</span>
@@ -264,7 +264,7 @@ where <span class="math inline">\(t\)</span> is the time, <span class="math inli
 <ul>
 <li>Run the code below to plot the bifurcation diagram</li>
 </ul>
-<div class="sourceCode" id="cb55"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb57"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">ri</span> <span class="op">&lt;-</span> <span class="fl">0.05</span></span>
 <span><span class="va">K</span> <span class="op">&lt;-</span> <span class="fl">10</span></span>
 <span><span class="va">beta</span> <span class="op">&lt;-</span> <span class="fl">0.1</span></span>
@@ -289,7 +289,7 @@ where <span class="math inline">\(t\)</span> is the time, <span class="math inli
 <span><span class="va">rseq</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span><span class="op">(</span><span class="fl">0.01</span>, <span class="fl">0.07</span>, by <span class="op">=</span> <span class="fl">0.0001</span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/par.html">par</a></span><span class="op">(</span>pty <span class="op">=</span> <span class="st">"s"</span><span class="op">)</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/base/plot.html">plot</a></span><span class="op">(</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span></span>
 <span>  <span class="fl">0</span>,</span>
 <span>  xlim <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/range.html">range</a></span><span class="op">(</span><span class="va">rseq</span><span class="op">)</span>,</span>
 <span>  ylim <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">10</span><span class="op">)</span>,</span>
@@ -299,7 +299,7 @@ where <span class="math inline">\(t\)</span> is the time, <span class="math inli
 <span><span class="op">)</span></span>
 <span><span class="kw">for</span> <span class="op">(</span><span class="va">ri</span> <span class="kw">in</span> <span class="va">rseq</span><span class="op">)</span> <span class="op">{</span></span>
 <span>  <span class="va">eq</span> <span class="op">&lt;-</span> <span class="fu">equilibrium</span><span class="op">(</span><span class="va">ri</span><span class="op">)</span></span>
-<span>  <span class="fu"><a href="https://rspatial.github.io/terra/reference/lines.html">points</a></span><span class="op">(</span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/graphics/points.html">points</a></span><span class="op">(</span></span>
 <span>    <span class="fu"><a href="https://rdrr.io/r/base/rep.html">rep</a></span><span class="op">(</span><span class="va">ri</span>, <span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">eq</span><span class="op">$</span><span class="va">x</span><span class="op">)</span><span class="op">)</span>,</span>
 <span>    <span class="va">eq</span><span class="op">$</span><span class="va">x</span></span>
 <span>  <span class="op">)</span></span>
@@ -320,9 +320,9 @@ where <span class="math inline">\(t\)</span> is the time, <span class="math inli
 <ul>
 <li>Run the code below to visualize the Lorenz Attractor</li>
 </ul>
-<div class="sourceCode" id="cb56"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb58"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">Lorenz</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">t</span>, <span class="va">state</span>, <span class="va">parameters</span><span class="op">)</span> <span class="op">{</span></span>
-<span>  <span class="fu"><a href="https://rdrr.io/r/base/with.html">with</a></span><span class="op">(</span><span class="fu"><a href="https://rspatial.github.io/terra/reference/as.list.html">as.list</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="va">state</span><span class="op">)</span><span class="op">)</span>, <span class="op">{</span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/base/with.html">with</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/list.html">as.list</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="va">state</span><span class="op">)</span><span class="op">)</span>, <span class="op">{</span></span>
 <span>    <span class="va">dx</span> <span class="op">&lt;-</span> <span class="op">-</span><span class="fl">8</span> <span class="op">/</span> <span class="fl">3</span> <span class="op">*</span> <span class="va">x</span> <span class="op">+</span> <span class="va">y</span> <span class="op">*</span> <span class="va">z</span></span>
 <span>    <span class="va">dy</span> <span class="op">&lt;-</span> <span class="op">-</span><span class="fl">10</span> <span class="op">*</span> <span class="op">(</span><span class="va">y</span> <span class="op">-</span> <span class="va">z</span><span class="op">)</span></span>
 <span>    <span class="va">dz</span> <span class="op">&lt;-</span> <span class="op">-</span><span class="va">x</span> <span class="op">*</span> <span class="va">y</span> <span class="op">+</span> <span class="fl">28</span> <span class="op">*</span> <span class="va">y</span> <span class="op">-</span> <span class="va">z</span></span>
@@ -331,7 +331,7 @@ where <span class="math inline">\(t\)</span> is the time, <span class="math inli
 <span><span class="op">}</span></span>
 <span><span class="va">state</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span>x <span class="op">=</span> <span class="fl">1.01</span>, y <span class="op">=</span> <span class="fl">1</span>, z <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></span>
 <span><span class="va">times</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">50</span>, <span class="fl">0.01</span><span class="op">)</span></span>
-<span><span class="va">out</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rspatial.github.io/terra/reference/as.data.frame.html">as.data.frame</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/deSolve/man/ode.html">ode</a></span><span class="op">(</span><span class="va">state</span>, <span class="va">times</span>, <span class="va">Lorenz</span>, <span class="fl">0</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="va">out</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/as.data.frame.html">as.data.frame</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/deSolve/man/ode.html">ode</a></span><span class="op">(</span><span class="va">state</span>, <span class="va">times</span>, <span class="va">Lorenz</span>, <span class="fl">0</span><span class="op">)</span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/par.html">par</a></span><span class="op">(</span>pty <span class="op">=</span> <span class="st">"s"</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/pkg/scatterplot3d/man/scatterplot3d.html">scatterplot3d</a></span><span class="op">(</span></span>
@@ -357,7 +357,7 @@ where <span class="math inline">\(t\)</span> is the time, <span class="math inli
 <span class="header-section-number">2.4</span> Early warning signal (EWS) assessments<a class="anchor" aria-label="anchor" href="#early-warning-signal-ews-assessments"><i class="fas fa-link"></i></a>
 </h2>
 <p>Let’s see if we can detect a critical transition in the population of fish from a time series using the <code>EWSmethods</code> R package.</p>
-<div class="sourceCode" id="cb57"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb59"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/Random.html">set.seed</a></span><span class="op">(</span><span class="fl">123</span><span class="op">)</span> <span class="co"># Set seed to ensure reproducibility</span></span>
 <span></span>
 <span><span class="co"># Load data provided by the EWSmethods package</span></span>
@@ -372,7 +372,7 @@ where <span class="math inline">\(t\)</span> is the time, <span class="math inli
 <span></span>
 <span><span class="va">data</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span><span class="va">time</span>, <span class="va">population</span><span class="op">)</span></span>
 <span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/base/plot.html">plot</a></span><span class="op">(</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span></span>
 <span>  <span class="va">data</span><span class="op">$</span><span class="va">time</span>,</span>
 <span>  <span class="va">data</span><span class="op">$</span><span class="va">population</span>,</span>
 <span>  type <span class="op">=</span> <span class="st">"l"</span>,</span>
@@ -381,11 +381,11 @@ where <span class="math inline">\(t\)</span> is the time, <span class="math inli
 <span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/abline.html">abline</a></span><span class="op">(</span>v <span class="op">=</span> <span class="fl">190</span>, col <span class="op">=</span> <span class="st">"red"</span><span class="op">)</span></span></code></pre></div>
 <p>The Figure above shows a critical transition of the population occurring at time step 190. Let’s see if we can predict this transition by only looking at the data prior to this moment in time. To do this, let’s truncate our data set, excluding all data after 190.</p>
-<div class="sourceCode" id="cb58"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb60"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Truncate data to prior inflection point</span></span>
-<span><span class="va">data</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rspatial.github.io/terra/reference/subset.html">subset</a></span><span class="op">(</span><span class="va">data</span>, <span class="va">time</span> <span class="op">&lt;</span> <span class="fl">191.5</span><span class="op">)</span></span>
+<span><span class="va">data</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/subset.html">subset</a></span><span class="op">(</span><span class="va">data</span>, <span class="va">time</span> <span class="op">&lt;</span> <span class="fl">191.5</span><span class="op">)</span></span>
 <span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/base/plot.html">plot</a></span><span class="op">(</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span></span>
 <span>  <span class="va">data</span><span class="op">$</span><span class="va">time</span>,</span>
 <span>  <span class="va">data</span><span class="op">$</span><span class="va">population</span>,</span>
 <span>  type <span class="op">=</span> <span class="st">"l"</span>,</span>
@@ -393,14 +393,14 @@ where <span class="math inline">\(t\)</span> is the time, <span class="math inli
 <span>  ylab <span class="op">=</span> <span class="st">"Population Density"</span></span>
 <span><span class="op">)</span></span></code></pre></div>
 <p>Next, apply the Univariate Early Warning Signal Assessment <code>uniEWS</code></p>
-<div class="sourceCode" id="cb59"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb61"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">rolling_ews_eg</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://duncanobrien.github.io/EWSmethods/reference/uniEWS.html">uniEWS</a></span><span class="op">(</span></span>
 <span>  data <span class="op">=</span> <span class="va">data</span>,</span>
 <span>  metrics <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"ar1"</span>, <span class="st">"SD"</span>, <span class="st">"skew"</span><span class="op">)</span>,</span>
 <span>  method <span class="op">=</span> <span class="st">"rolling"</span>,</span>
 <span>  winsize <span class="op">=</span> <span class="fl">50</span></span>
 <span><span class="op">)</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/base/plot.html">plot</a></span><span class="op">(</span><span class="va">rolling_ews_eg</span>, y_lab <span class="op">=</span> <span class="st">"Density"</span><span class="op">)</span></span></code></pre></div>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">rolling_ews_eg</span>, y_lab <span class="op">=</span> <span class="st">"Density"</span><span class="op">)</span></span></code></pre></div>
 <p><strong>Quiz Question 13:</strong> What does the behavior of the EWS indicators lag1 Autocorrelation (ar1) and Standard deviation (SD) tell you?</p>
 <!-- 
 * Autocorrelation at lag1   Autocorrelation (ar1): increases approaching a transition

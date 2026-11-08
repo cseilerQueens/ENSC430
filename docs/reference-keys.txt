@@ -56,8 +56,8 @@ reflection-1
 week-6-climate-projections-and-impacts-iii
 reflection-2
 week-7-observing-environmental-change-i
-ecosystem-resilinece-in-the-amazon
-ecosystem-resilinece-in-autralia
+ecosystem-resilience-in-the-amazon
+ecosystem-resilience-in-autralia
 reflection-3
 week-8-observing-environmental-change-ii
 download-reanalysis-data-provided-by-the-european-centre-for-medium-range-weather-forecasts-ecmwf
@@ -71,6 +71,9 @@ enhanced-vegetation-index
 causal-inference
 cross-correlation
 precipitation-1
+temperature
+incoming-solar-radiation
+all-three-variables-combined
 week-9-observing-environmental-change-iii
 downloading-data
 processing-data

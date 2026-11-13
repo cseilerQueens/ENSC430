@@ -18,9 +18,9 @@
     
     div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
   </style>
-<meta name="description" content="In this tutorial, we will focus on analyzing eddy covariance data provided by FLUXNET. You will download and process meteorological and carbon flux observations to address key questions,...">
-<meta property="og:description" content="In this tutorial, we will focus on analyzing eddy covariance data provided by FLUXNET. You will download and process meteorological and carbon flux observations to address key questions,...">
-<meta name="twitter:description" content="In this tutorial, we will focus on analyzing eddy covariance data provided by FLUXNET. You will download and process meteorological and carbon flux observations to address key questions,...">
+<meta name="description" content="In this tutorial, we will focus on analyzing eddy covariance data provided by FLUXNET. You will learn how to download and process meteorological and carbon flux observations to address key...">
+<meta property="og:description" content="In this tutorial, we will focus on analyzing eddy covariance data provided by FLUXNET. You will learn how to download and process meteorological and carbon flux observations to address key...">
+<meta name="twitter:description" content="In this tutorial, we will focus on analyzing eddy covariance data provided by FLUXNET. You will learn how to download and process meteorological and carbon flux observations to address key...">
 </head>
 <body data-spy="scroll" data-target="#toc">
 
@@ -66,14 +66,14 @@
 <h1>
 <span class="header-section-number">9</span> Week 9: Observing Environmental Change (III)<a class="anchor" aria-label="anchor" href="#week-9-observing-environmental-change-iii"><i class="fas fa-link"></i></a>
 </h1>
-<p>In this tutorial, we will focus on analyzing eddy covariance data provided by <a href="https://fluxnet.org/">FLUXNET</a>. You will download and process meteorological and carbon flux observations to address key questions, including:</p>
+<p>In this tutorial, we will focus on analyzing eddy covariance data provided by <a href="https://fluxnet.org/">FLUXNET</a>. You will learn how to download and process meteorological and carbon flux observations to address key questions, including:</p>
 <ul>
 <li>Which meteorological variables drive the variability in net ecosystem exchange?</li>
 <li>What are the characteristic time lags involved?</li>
 <li>Are evapotranspiration and precipitation dynamically linked?</li>
 <li>Are there any trends in ecosystem resilience?</li>
 </ul>
-<p>The analysis will first be conducted for a site in the Amazon Basin, followed by a site in Australia.</p>
+<p>The analysis will first be conducted for a site in the Amazon Basin, followed by a site in Australia. The subsection below shows you how to access those data sets. If for whatever reason you cannot download the data, you can use the data sets that I have downloaded for you and stored in our shared directory, instead.</p>
 <div id="downloading-data" class="section level2" number="9.1">
 <h2>
 <span class="header-section-number">9.1</span> Downloading data<a class="anchor" aria-label="anchor" href="#downloading-data"><i class="fas fa-link"></i></a>
@@ -91,16 +91,16 @@
 <li>Download, unzip, and move folder to a data folder in your working directory.</li>
 <li>The files that you downloaded are in CSV format. You can open them in R like this:</li>
 </ul>
-<div class="sourceCode" id="cb181"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb178"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://www.pfaffikus.de">vars</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/duncanobrien/EWSmethods">EWSmethods</a></span><span class="op">)</span></span></code></pre></div>
-<div class="sourceCode" id="cb182"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb179"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">data.sa3</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/utils/read.table.html">read.csv</a></span><span class="op">(</span><span class="st">"/global/teaching-project/sg51122000/shared_files/FLX_BR-Sa3_FLUXNET2015_SUBSET_2000-2004_1-4/FLX_BR-Sa3_FLUXNET2015_SUBSET_DD_2000-2004_1-4.csv"</span><span class="op">)</span></span>
 <span><span class="va">data</span> <span class="op">&lt;-</span> <span class="va">data.sa3</span><span class="op">[</span><span class="fl">250</span><span class="op">:</span><span class="fl">1500</span>, <span class="op">]</span> <span class="co"># We will use a subset that excludes dates with unreasonable values</span></span></code></pre></div>
 <ul>
 <li>Have a look at the column names:</li>
 </ul>
-<div class="sourceCode" id="cb183"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb180"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/colnames.html">colnames</a></span><span class="op">(</span><span class="va">data</span><span class="op">)</span></span></code></pre></div>
 <pre><code>##  [1] "TIMESTAMP"           "TA_F"                "TA_F_QC"             "SW_IN_POT"           "SW_IN_F"            
 ##  [6] "SW_IN_F_QC"          "LW_IN_F"             "LW_IN_F_QC"          "VPD_F"               "VPD_F_QC"           
@@ -140,8 +140,8 @@
 <li>RECO = Ecosystem Respiration (<span class="math inline">\(\mu\)</span>mol CO<sub>2</sub> m<sup>-2</sup> s<sup>-1</sup>)</li>
 <li>NEE = Net Ecosystem Exchange (NEE = RECO - GPP) (<span class="math inline">\(\mu\)</span>mol CO<sub>2</sub> m<sup>-2</sup> s<sup>-1</sup>)</li>
 </ul>
-<p>Observed time series may contain gaps. To address this, missing data can be filled using proxy datasets (e.g., ERA reanalysis) or statistical methods. The subscript <span class="math inline">\(F\)</span> (e.g. <code>TA_F</code>) indicates that the data have been gap-filled. Data collection and gap-filling methods vary across sites, so not all columns contain data. Let’s read in the available variables and create a time series.</p>
-<div class="sourceCode" id="cb185"><pre class="downlit sourceCode r">
+<p>The data are recorded using daily time steps. Observed time series may contain gaps. To address this, missing data can be filled using proxy datasets (e.g., ERA reanalysis) or statistical methods. The subscript <span class="math inline">\(F\)</span> (e.g. <code>TA_F</code>) indicates that the data have been gap-filled. Data collection and gap-filling methods vary across sites, so not all columns contain data. Let’s read in the available variables and create a time series.</p>
+<div class="sourceCode" id="cb182"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">tas</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/ts.html">ts</a></span><span class="op">(</span><span class="va">data</span><span class="op">$</span><span class="va">TA_F</span><span class="op">)</span></span>
 <span><span class="va">rsds</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/ts.html">ts</a></span><span class="op">(</span><span class="va">data</span><span class="op">$</span><span class="va">SW_IN_F</span><span class="op">)</span></span>
 <span><span class="va">rlds</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/ts.html">ts</a></span><span class="op">(</span><span class="va">data</span><span class="op">$</span><span class="va">LW_IN_F</span><span class="op">)</span></span>
@@ -155,16 +155,14 @@
 <span></span>
 <span><span class="va">time.series</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/ts.union.html">ts.union</a></span><span class="op">(</span><span class="va">tas</span>, <span class="va">rsds</span>, <span class="va">rlds</span>, <span class="va">vpd</span>, <span class="va">pr</span>, <span class="va">ws</span>, <span class="va">hfls</span>, <span class="va">hfss</span>, <span class="va">nee</span>, <span class="va">gpp</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/plot.html">plot</a></span><span class="op">(</span><span class="va">time.series</span><span class="op">)</span></span></code></pre></div>
-<div class="inline-figure"><img src="figure-html/unnamed-chunk-243-1.png" alt="" width="672"></div>
+<div class="inline-figure"><img src="figure-html/unnamed-chunk-246-1.png" alt="" width="672"></div>
 </div>
 <div id="processing-data" class="section level2" number="9.2">
 <h2>
 <span class="header-section-number">9.2</span> Processing data<a class="anchor" aria-label="anchor" href="#processing-data"><i class="fas fa-link"></i></a>
 </h2>
-<ul>
-<li>Compute detrended anomalies. To do this efficiently, we define a function that we can apply to each variable.</li>
-</ul>
-<div class="sourceCode" id="cb186"><pre class="downlit sourceCode r">
+<p>Compute detrended anomalies. To do this efficiently, we define a function that we can apply to each variable.</p>
+<div class="sourceCode" id="cb183"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">detrend.anomalies.fun</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">dates</span>, <span class="va">values</span><span class="op">)</span> <span class="op">{</span></span>
 <span>  <span class="va">df</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span><span class="va">dates</span>, <span class="va">values</span><span class="op">)</span></span>
 <span></span>
@@ -199,10 +197,8 @@
 <span>  <span class="va">result</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/ts.html">ts</a></span><span class="op">(</span><span class="va">detr.anom</span><span class="op">)</span></span>
 <span>  <span class="kw"><a href="https://rdrr.io/r/base/function.html">return</a></span><span class="op">(</span><span class="va">result</span><span class="op">)</span></span>
 <span><span class="op">}</span></span></code></pre></div>
-<ul>
-<li>Apply this function to the different variables and put them all into a single time series</li>
-</ul>
-<div class="sourceCode" id="cb187"><pre class="downlit sourceCode r">
+<p>Apply this function to the different variables and put them all into a single time series</p>
+<div class="sourceCode" id="cb184"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">dates</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/as.Date.html">as.Date</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/character.html">as.character</a></span><span class="op">(</span><span class="va">data</span><span class="op">$</span><span class="va">TIMESTAMP</span><span class="op">)</span>, format <span class="op">=</span> <span class="st">"%Y%m%d"</span><span class="op">)</span></span>
 <span></span>
 <span><span class="va">tas</span> <span class="op">&lt;-</span> <span class="fu">detrend.anomalies.fun</span><span class="op">(</span><span class="va">dates</span>, <span class="va">tas</span><span class="op">)</span></span>
@@ -218,7 +214,7 @@
 <span></span>
 <span><span class="va">time.series</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/ts.union.html">ts.union</a></span><span class="op">(</span><span class="va">tas</span>, <span class="va">rsds</span>, <span class="va">rlds</span>, <span class="va">vpd</span>, <span class="va">pr</span>, <span class="va">ws</span>, <span class="va">hfls</span>, <span class="va">hfss</span>, <span class="va">nee</span>, <span class="va">gpp</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/plot.html">plot</a></span><span class="op">(</span><span class="va">time.series</span><span class="op">)</span></span></code></pre></div>
-<div class="inline-figure"><img src="figure-html/unnamed-chunk-245-1.png" alt="" width="672"></div>
+<div class="inline-figure"><img src="figure-html/unnamed-chunk-248-1.png" alt="" width="672"></div>
 </div>
 <div id="analysis" class="section level2" number="9.3">
 <h2>
@@ -228,10 +224,8 @@
 <h3>
 <span class="header-section-number">9.3.1</span> Granger causality<a class="anchor" aria-label="anchor" href="#granger-causality-1"><i class="fas fa-link"></i></a>
 </h3>
-<ul>
-<li>Conduct a Granger causality test that evaluates what meteorological variables drive net ecosystem exchange. To do this efficiently, we will create a function that shows how the p-value of a Granger causality test varies with increasing time lag:</li>
-</ul>
-<div class="sourceCode" id="cb188"><pre class="downlit sourceCode r">
+<p>Conduct a Granger causality test that evaluates what meteorological variables drive net ecosystem exchange. To do this efficiently, we will create a function that shows how the p-value of a Granger causality test varies with increasing time lag:</p>
+<div class="sourceCode" id="cb185"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">grangerPvaluesLags.fun</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">x</span>, <span class="va">y</span><span class="op">)</span> <span class="op">{</span></span>
 <span>  <span class="va">tsDat</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/ts.union.html">ts.union</a></span><span class="op">(</span><span class="va">x</span>, <span class="va">y</span><span class="op">)</span></span>
 <span>  <span class="co"># Set the maximum lag to test</span></span>
@@ -246,10 +240,8 @@
 <span>  <span class="op">}</span></span>
 <span>  <span class="kw"><a href="https://rdrr.io/r/base/function.html">return</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/ts.html">ts</a></span><span class="op">(</span><span class="va">p_values</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="op">}</span></span></code></pre></div>
-<ul>
-<li>Let’s apply this function to evaluate how the Granger-causality p-values change as time lags increase</li>
-</ul>
-<div class="sourceCode" id="cb189"><pre class="downlit sourceCode r">
+<p>Let’s apply this function to evaluate how the Granger-causality p-values change as time lags increase</p>
+<div class="sourceCode" id="cb186"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">tas.p</span> <span class="op">&lt;-</span> <span class="fu">grangerPvaluesLags.fun</span><span class="op">(</span>x <span class="op">=</span> <span class="va">tas</span>, y <span class="op">=</span> <span class="va">nee</span><span class="op">)</span></span>
 <span><span class="va">rsds.p</span> <span class="op">&lt;-</span> <span class="fu">grangerPvaluesLags.fun</span><span class="op">(</span>x <span class="op">=</span> <span class="va">rsds</span>, y <span class="op">=</span> <span class="va">nee</span><span class="op">)</span></span>
 <span><span class="va">rlds.p</span> <span class="op">&lt;-</span> <span class="fu">grangerPvaluesLags.fun</span><span class="op">(</span>x <span class="op">=</span> <span class="va">rlds</span>, y <span class="op">=</span> <span class="va">nee</span><span class="op">)</span></span>
@@ -259,11 +251,13 @@
 <span></span>
 <span><span class="va">time.series</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/ts.union.html">ts.union</a></span><span class="op">(</span><span class="va">tas.p</span>, <span class="va">rsds.p</span>, <span class="va">rlds.p</span>, <span class="va">vpd.p</span>, <span class="va">pr.p</span>, <span class="va">ws.p</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/plot.html">plot</a></span><span class="op">(</span><span class="va">time.series</span><span class="op">)</span></span></code></pre></div>
-<div class="inline-figure"><img src="figure-html/unnamed-chunk-247-1.png" alt="" width="672"></div>
-<ul>
-<li>Get the minimum p-value and corresponding time lag:</li>
-</ul>
-<div class="sourceCode" id="cb190"><pre class="downlit sourceCode r">
+<div class="inline-figure"><img src="figure-html/unnamed-chunk-250-1.png" alt="" width="672"></div>
+<p><strong>Quiz Question 1</strong> What is the lowest p-value for near-surface air temperature?
+<!-- 0.1858128 --></p>
+<p><strong>Quiz Question 2</strong> What does this p-value tell you?
+<!-- Temperature anomalies do not Granger-cause NEE anomalies --></p>
+<p>Get the minimum p-value and corresponding time lag:</p>
+<div class="sourceCode" id="cb187"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">min.p</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/apply.html">apply</a></span><span class="op">(</span><span class="va">time.series</span>, <span class="fl">2</span>, <span class="va">min</span><span class="op">)</span></span>
 <span><span class="va">lag.p</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/apply.html">apply</a></span><span class="op">(</span><span class="va">time.series</span>, <span class="fl">2</span>, <span class="va">which.min</span><span class="op">)</span></span>
 <span><span class="va">df</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span><span class="va">min.p</span>, <span class="va">lag.p</span><span class="op">)</span></span>
@@ -276,61 +270,33 @@
 ## vpd.p  0.03524258    11
 ## tas.p  0.18581284    11
 ## rlds.p 0.29179068    14</code></pre>
-<ul>
-<li><p>Are there any meteorological variables that do not Granger-cause net ecosystem exchange?</p></li>
-<li><p>Using Granger causality, explore to what extent precipitation (pr) and latent heat flux (hfls) are dynamically coupled:</p></li>
-</ul>
-<div class="sourceCode" id="cb192"><pre class="downlit sourceCode r">
+<p><strong>Quiz Question 3:</strong> Which meteorological variables Granger-cause net ecosystem exchange when using a p-value threshold of 0.05?
+<!-- Incoming solar radiation, precipitation, wind speed, vapor pressure deficit --></p>
+<p>Using Granger causality, explore to what extent precipitation (pr) and latent heat flux (hfls) are dynamically coupled:</p>
+<div class="sourceCode" id="cb189"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">pr.gc.hfls</span> <span class="op">&lt;-</span> <span class="fu">grangerPvaluesLags.fun</span><span class="op">(</span>x <span class="op">=</span> <span class="va">pr</span>, y <span class="op">=</span> <span class="va">hfls</span><span class="op">)</span></span>
 <span><span class="va">hfls.gc.pr</span> <span class="op">&lt;-</span> <span class="fu">grangerPvaluesLags.fun</span><span class="op">(</span>x <span class="op">=</span> <span class="va">hfls</span>, y <span class="op">=</span> <span class="va">pr</span><span class="op">)</span></span>
 <span><span class="va">time.series</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/ts.union.html">ts.union</a></span><span class="op">(</span><span class="va">pr.gc.hfls</span>, <span class="va">hfls.gc.pr</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/plot.html">plot</a></span><span class="op">(</span><span class="va">time.series</span><span class="op">)</span></span></code></pre></div>
-<div class="inline-figure"><img src="figure-html/unnamed-chunk-249-1.png" alt="" width="672"></div>
-<ul>
-<li>Judging from the figure above, are latent heat flux and precipitation dynamically linked? Verify your answer by calculating the minimum p-values of both variables:</li>
-</ul>
-<div class="sourceCode" id="cb193"><pre class="downlit sourceCode r">
+<div class="inline-figure"><img src="figure-html/unnamed-chunk-252-1.png" alt="" width="672"></div>
+<p>Calculate the minimum p-values of both variables:</p>
+<div class="sourceCode" id="cb190"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">min.p</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/apply.html">apply</a></span><span class="op">(</span><span class="va">time.series</span>, <span class="fl">2</span>, <span class="va">min</span><span class="op">)</span></span>
 <span><span class="va">lag.p</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/apply.html">apply</a></span><span class="op">(</span><span class="va">time.series</span>, <span class="fl">2</span>, <span class="va">which.min</span><span class="op">)</span></span>
 <span><span class="va">df</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span><span class="va">min.p</span>, <span class="va">lag.p</span><span class="op">)</span></span>
 <span><span class="va">df</span> <span class="op">&lt;-</span> <span class="va">df</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/order.html">order</a></span><span class="op">(</span><span class="va">df</span><span class="op">$</span><span class="va">min.p</span><span class="op">)</span>, <span class="op">]</span> <span class="co"># Sort by p-value</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="va">df</span><span class="op">)</span></span></code></pre></div>
-<pre><code>##                   min.p lag.p
-## pr.gc.hfls 1.377210e-08     3
-## hfls.gc.pr 3.012185e-02     7</code></pre>
+<p><strong>Quiz Question 4:</strong> Are latent heat flux and precipitation dynamically linked at the 5%-level?
+<!-- Yes --></p>
 </div>
-<div id="variance-decomposition" class="section level3" number="9.3.2">
+<div id="ecosystem-resilience" class="section level3" number="9.3.2">
 <h3>
-<span class="header-section-number">9.3.2</span> Variance decomposition<a class="anchor" aria-label="anchor" href="#variance-decomposition"><i class="fas fa-link"></i></a>
-</h3>
-<ul>
-<li>Let’s decompose the variance and see which variable has the most influential one</li>
-</ul>
-<div class="sourceCode" id="cb195"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">tsDat</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/ts.union.html">ts.union</a></span><span class="op">(</span><span class="va">tas</span>, <span class="va">rsds</span>, <span class="va">rlds</span>, <span class="va">vpd</span>, <span class="va">pr</span>, <span class="va">ws</span>, <span class="va">nee</span><span class="op">)</span></span>
-<span></span>
-<span><span class="va">var_model</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/vars/man/VAR.html">VAR</a></span><span class="op">(</span><span class="va">tsDat</span>, p <span class="op">=</span> <span class="fl">7</span><span class="op">)</span></span>
-<span></span>
-<span><span class="co"># Perform variance decomposition</span></span>
-<span><span class="va">variance_decomp</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/vars/man/fevd.html">fevd</a></span><span class="op">(</span><span class="va">var_model</span>, n.ahead <span class="op">=</span> <span class="fl">7</span><span class="op">)</span></span>
-<span></span>
-<span><span class="co"># Plot</span></span>
-<span><span class="va">n</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rspatial.github.io/terra/reference/dimensions.html">nrow</a></span><span class="op">(</span><span class="va">variance_decomp</span><span class="op">$</span><span class="va">nee</span><span class="op">)</span></span>
-<span><span class="va">y</span> <span class="op">&lt;-</span> <span class="va">variance_decomp</span><span class="op">$</span><span class="va">nee</span><span class="op">[</span><span class="va">n</span>, <span class="op">]</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/graphics/pie.html">pie</a></span><span class="op">(</span><span class="va">y</span><span class="op">)</span></span></code></pre></div>
-<div class="inline-figure"><img src="figure-html/unnamed-chunk-251-1.png" alt="" width="672"></div>
-<ul>
-<li>What does this pie chart tell you?</li>
-</ul>
-</div>
-<div id="ecosystem-resilience" class="section level3" number="9.3.3">
-<h3>
-<span class="header-section-number">9.3.3</span> Ecosystem Resilience<a class="anchor" aria-label="anchor" href="#ecosystem-resilience"><i class="fas fa-link"></i></a>
+<span class="header-section-number">9.3.2</span> Ecosystem Resilience<a class="anchor" aria-label="anchor" href="#ecosystem-resilience"><i class="fas fa-link"></i></a>
 </h3>
 <ul>
 <li>Run the Univariate Early Warning Signal Assessment for GPP to evaluate how ecosystem resilience is changing.</li>
 </ul>
-<div class="sourceCode" id="cb196"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb191"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/duncanobrien/EWSmethods">EWSmethods</a></span><span class="op">)</span></span>
 <span></span>
 <span><span class="va">data</span> <span class="op">&lt;-</span> <span class="va">gpp</span></span>
@@ -343,33 +309,40 @@
 <span>  method <span class="op">=</span> <span class="st">"rolling"</span>,</span>
 <span>  winsize <span class="op">=</span> <span class="fl">50</span></span>
 <span><span class="op">)</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/base/plot.html">plot</a></span><span class="op">(</span><span class="va">rolling_ews_eg</span>, y_lab <span class="op">=</span> <span class="st">"Density"</span><span class="op">)</span></span></code></pre></div>
-<div class="inline-figure"><img src="figure-html/unnamed-chunk-252-1.png" alt="" width="672"></div>
-<ul>
-<li>Interpret your result</li>
-</ul>
+<span><span class="fu"><a href="https://rdrr.io/r/base/plot.html">plot</a></span><span class="op">(</span><span class="va">rolling_ews_eg</span>, y_lab <span class="op">=</span> <span class="st">"NEE anomaly"</span><span class="op">)</span></span></code></pre></div>
+<div class="inline-figure"><img src="figure-html/unnamed-chunk-254-1.png" alt="" width="672"></div>
+<p><strong>Quiz Question 5:</strong> What does a positive trend in 1-lag autocorrelation tell you?
+<!-- An increase in 1-lag autocorrelation suggests that the response time is decreasing. This could mean that ecosystem resilience is decreasing --></p>
+<p><strong>Quiz Question 6:</strong> What does a positive trend standard deviation tell you?
+<!-- An increase in NEE variability is another indicator for decreasing ecosystem resilience.--></p>
+<p><strong>Quiz question 7:</strong> Do increasing trends in lag-1 autocorrelation and standard deviation of NEE prove that ecosystem resilience is declining?
+<!-- No. These trends are consistent with declining resilience, but can also result from changes in the magnitude, frequency, or persistence of environmental perturbations. --></p>
 </div>
 </div>
 <div id="australia" class="section level2" number="9.4">
 <h2>
 <span class="header-section-number">9.4</span> Australia<a class="anchor" aria-label="anchor" href="#australia"><i class="fas fa-link"></i></a>
 </h2>
+<p>Next, repeat the same analysis as above but for the Australian site <code>AU-GWW</code>.</p>
 <ul>
-<li>Next, repeat the same analysis for the Australian site <code>AU-GWW</code>.</li>
+<li>Read in the data:</li>
 </ul>
-<div class="sourceCode" id="cb197"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb192"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">data</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/utils/read.table.html">read.csv</a></span><span class="op">(</span><span class="st">"/global/teaching-project/sg51122000/shared_files/FLX_AU-GWW_FLUXNET2015_SUBSET_2013-2014_1-4/FLX_AU-GWW_FLUXNET2015_SUBSET_DD_2013-2014_1-4.csv"</span><span class="op">)</span></span></code></pre></div>
-<div class="inline-figure"><img src="figure-html/unnamed-chunk-254-1.png" alt="" width="672"></div>
 <ul>
-<li>Compute detrended anomalies.</li>
+<li>Extract the time series</li>
 </ul>
 <div class="inline-figure"><img src="figure-html/unnamed-chunk-256-1.png" alt="" width="672"></div>
 <ul>
-<li>Conduct a Granger causality test that evaluates what meteorological variables drive net ecosystem exchange.</li>
+<li>Compute detrended anomalies</li>
 </ul>
 <div class="inline-figure"><img src="figure-html/unnamed-chunk-258-1.png" alt="" width="672"></div>
 <ul>
-<li>Get the minimum p-value and corresponding time lag:</li>
+<li>Conduct a Granger causality test that evaluates what meteorological variables drive net ecosystem exchange</li>
+</ul>
+<div class="inline-figure"><img src="figure-html/unnamed-chunk-260-1.png" alt="" width="672"></div>
+<ul>
+<li>Get the minimum p-value and corresponding time lag</li>
 </ul>
 <pre><code>##               min.p lag.p
 ## tas.p  0.000000e+00     2
@@ -378,29 +351,26 @@
 ## ws.p   2.726486e-11     1
 ## rsds.p 1.115607e-08    14
 ## rlds.p 8.828086e-06    14</code></pre>
-<ul>
-<li><p>Are there any meteorological variables that do not Granger-cause net ecosystem exchange?</p></li>
-<li><p>Using Granger causality, explore to what extent precipitation (pr) and latent heat flux (hfls) are dynamically coupled:</p></li>
-</ul>
-<div class="inline-figure"><img src="figure-html/unnamed-chunk-260-1.png" alt="" width="672"></div>
-<ul>
-<li>Judging from the figure above, are latent heat flux and precipitation dynamically linked? Verify your answer by calculating the minimum p-values of both variables:</li>
-</ul>
+<p><strong>Quiz Question 8:</strong> Are there any meteorological variables that do not Granger-cause net ecosystem exchange?
+<!-- No --></p>
+<p>Using Granger causality, explore to what extent precipitation (pr) and latent heat flux (hfls) are dynamically coupled</p>
+<div class="inline-figure">
+<img src="figure-html/unnamed-chunk-262-1.png" alt="" width="672">
+Calculate the corresponding minimum p-values:</div>
 <pre><code>##                 min.p lag.p
 ## pr.gc.hfls 0.00000000     4
 ## hfls.gc.pr 0.04107451     7</code></pre>
+<p><strong>Quiz Question 9:</strong> Are latent heat flux and precipitation dynamically linked?
+<!-- Yes --></p>
 <ul>
-<li>Let’s decompose the variance and see which variable has the most influential one</li>
+<li>Run the Univariate Early Warning Signal Assessment for GPP to evaluate how ecosystem resilience is changing.</li>
 </ul>
-<div class="inline-figure"><img src="figure-html/unnamed-chunk-262-1.png" alt="" width="672"></div>
-<ul>
-<li><p>What does this pie chart tell you?</p></li>
-<li><p>Run the Univariate Early Warning Signal Assessment for GPP to evaluate how ecosystem resilience is changing.</p></li>
-</ul>
-<div class="inline-figure"><img src="figure-html/unnamed-chunk-263-1.png" alt="" width="672"></div>
-<ul>
-<li>Interpret your result</li>
-</ul>
+<div class="inline-figure"><img src="figure-html/unnamed-chunk-264-1.png" alt="" width="672"></div>
+<p><strong>Quiz Question 10:</strong> Do these trends in lag-1 autocorrelation and standard deviation suggest a decrease in ecosystem resilience?
+<!-- No --></p>
+<p><strong>Quiz Reflection 1:</strong> What are the main things you learned in this tutorial?</p>
+<p><strong>Quiz Reflection 2:</strong> What concepts are you still struggling to understand?</p>
+
 </div>
 </div>
   <div class="chapter-nav">
@@ -415,8 +385,7 @@
 <li>
 <a class="nav-link" href="#analysis"><span class="header-section-number">9.3</span> Analysis</a><ul class="nav navbar-nav">
 <li><a class="nav-link" href="#granger-causality-1"><span class="header-section-number">9.3.1</span> Granger causality</a></li>
-<li><a class="nav-link" href="#variance-decomposition"><span class="header-section-number">9.3.2</span> Variance decomposition</a></li>
-<li><a class="nav-link" href="#ecosystem-resilience"><span class="header-section-number">9.3.3</span> Ecosystem Resilience</a></li>
+<li><a class="nav-link" href="#ecosystem-resilience"><span class="header-section-number">9.3.2</span> Ecosystem Resilience</a></li>
 </ul>
 </li>
 <li><a class="nav-link" href="#australia"><span class="header-section-number">9.4</span> Australia</a></li>

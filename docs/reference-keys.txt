@@ -79,7 +79,6 @@ downloading-data
 processing-data
 analysis
 granger-causality-1
-variance-decomposition
 ecosystem-resilience
 australia
 week-10-climate-futures-and-solutions-i
